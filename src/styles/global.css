@@ -1,0 +1,124 @@
+body {
+    font-family: "Plus Jakarta Sans";
+    color: #6c757d;
+    line-height: 1.6666;
+    font-weight: 400;
+  }
+
+
+  
+
+.btn {
+    
+    color: #353f4f!important;
+    background-color: transparent!important;
+    border-color: #353f4f!important;
+    font-size: 1rem;
+    line-height: 1;
+    font-weight: 500;
+    padding: 0.8rem 1.7rem;
+    border: 2px solid transparent;
+    -webkit-transition: all 400ms ease-in-out;
+    -moz-transition: all 400ms ease-in-out;
+    -o-transition: all 400ms ease-in-out;
+    -ms-transition: all 400ms ease-in-out;
+    transition: all 400ms ease-in-out;
+}
+.btn:hover {
+    
+    color: #fff!important;
+    border-color: #cdb05a!important;
+    background-color: #cdb05a!important;
+}
+
+p.p-lg {
+    font-size: 1.225rem !Important;
+}
+h1{
+    font-size: 3.375rem;
+    color:#353f4f;
+    font-weight: 700;
+}  
+
+main {
+        background-image: linear-gradient(180deg, #fbf6e2, #fffcee);
+        padding-top: 130px;
+        padding-bottom: 80px;
+        z-index: 1;
+        position: relative;
+}
+
+main:after {
+    position: absolute;
+    content: '';
+    width: 43%;
+    z-index: -1;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: #fff;
+    -moz-box-shadow: 0 0 55px 35px #fff;
+    -webkit-box-shadow: 0 0 35px 35px #fff;
+    box-shadow: 0 0 35px 35px #fff;
+}
+
+.header{
+    position: fixed;
+    width: 100%;
+    top: 0px;
+    padding: 20px 0px 10px 0px;
+    backdrop-filter: blur(20px);
+}
+
+.mainbanner p{
+        display: block;
+        font-size: 0.95rem;
+        letter-spacing: 1.5px;
+        margin-bottom: 35px;
+}
+
+/* nav styles */
+
+.nav-links {
+    width: 100%;
+    top: 5rem;
+    left: 48px;
+    background-color: #ff9776;
+    display: none;
+    margin: 0;
+  }
+  
+  .nav-links a {
+    display: block;
+    text-align: center;
+    color:#000;
+    font-weight: 600;
+    padding: 10px 0;
+    text-decoration: none;
+    font-size: 1rem;
+  }
+  
+  .nav-links a:hover,
+  .nav-links a:focus {
+    color:#bb892f;
+  }
+  
+  .expanded {
+    display: unset;
+  }
+  
+  @media screen and (min-width: 636px) {
+    .nav-links {
+      margin-left: 5em;
+      display: block;
+      position: static;
+      width: auto;
+      background: none;
+    }
+  
+    .nav-links a {
+      display: inline-block;
+      padding: 15px 20px;
+    }
+  
+  }
