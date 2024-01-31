@@ -43,7 +43,7 @@ import { Image } from 'astro:assets';
 						</div>
 						
 						<div class="col-auto">
-							<a class="btn">Book  Now</a>
+							<a class="btn hidden">Book  Now</a>
 							
 						<MenuIcon class="mobilemenu hiddenmenuicon" />
 						</div>
@@ -64,6 +64,7 @@ import { Image } from 'astro:assets';
 						<h1>Disney World & Resort Area Transportation </h1>
 						<p class="p-lg mt-5"> We will pick you up from any location and drop at any place in the Disney World</p>
 		<a class="btn">Book  Now</a>
+		
 					</div>
 					
 					<div class="col-sm-12 col-md text-center">
@@ -78,13 +79,18 @@ import { Image } from 'astro:assets';
 
 	<div class="fixbtn">
 		<div class="row">
-		<div class="col">
-				<a class="btn" href="#">Book  Now</a>
+		<div class="col pe-0">
+				<a class="btn" href="tel:4076976002"><span>Call Now</span>407 697 6002</a>
 			</div>
+			<div class="col pe-0">
+				<a class="btn" href="#"><span>Click here to</span>Book  Now</a>
+			</div>
+			
 			<div class="col-auto">
-				<a class="" href="#">	<Image src={"/whatsappicon.png"}  alt="whatsapp" style={{objectFit: "contain"}}  width="48" height="48"/>
+				<a class="" href="#"><Image src={"/whatsappicon.png"}  alt="whatsapp" style={{objectFit: "contain"}}  width="48" height="48"/>
 				</a>
 			</div>
+			
 			
 			
 		</div>

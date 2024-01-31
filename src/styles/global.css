@@ -31,6 +31,13 @@ body {
     background-color: #cdb05a!important;
 }
 
+
+.btn span{
+    display: block;
+    font-size: 0.7rem;
+    padding-bottom: 5px;
+}
+
 p.p-lg {
     font-size: 1.225rem !Important;
 }
@@ -127,14 +134,20 @@ main:after {
   }
 
   .fixbtn{
+    display: none;
     position: fixed;
     bottom: 15px;
     right:15px;
     z-index: 1;
   }
   .fixbtn .btn{
+    
+    -webkit-box-shadow:1px 2px 5px 0px rgba(0,0,0,0.15);
+    -moz-box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.15);
+    box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.15);
     background-color: #fff !important;
     width: 100% !Important;
+    padding: 7.5px 0px !important;
   }
   
   .fixbtn .btn:hover {
@@ -168,13 +181,21 @@ main:after {
     h1{
         font-size: 2.775rem;
     }  
+    .mainbanner {
+        text-align: center;
+       }
+       .mainbanner p{
+        margin-top: 10px !important;
+        margin-bottom: 10px 
+       }
+
     .mainbanner img{
         width: 90%;
         margin-top:20px;
         height: auto;
        }
        .mainbanner .btn{
-        width: 100%;
+        display: none;
        }
     .hidden {
         display: none;
@@ -198,10 +219,9 @@ main:after {
         text-align: center;
         position: fixed;
         background: white;
-        backdrop-filter: blur(20px);
-        -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
--moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+        -webkit-box-shadow: 10px 5px 5px 0px rgba(0,0,0,0.15);
+-moz-box-shadow: 10px 5px 5px 0px rgba(0,0,0,0.15);
+box-shadow: 10px 5px 5px 0px rgba(0,0,0,0.15);
         left: 0px;
         right: 0;
         top: 100px;
@@ -224,6 +244,7 @@ box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
 
     
   .fixbtn {
+    display: block;
     position: fixed;
     bottom: 15px;
     right: 15px;
