@@ -48,8 +48,8 @@ body {
 }
 .secondary-btn:hover {
     
-    color: #353f4f !important;
-    background-color: transparent !important;
+    color: #fff !important;
+    background-color: #353f4f !important;
     border-color: #353f4f !important;
 }
 
@@ -182,12 +182,7 @@ main:after {
     padding: 7.5px 0px !important;
   }
   
-  .fixbtn .btn:hover {
-    
-    color: #fff!important;
-    border-color: #cdb05a!important;
-    background-color: #cdb05a!important;
-}
+
   
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
