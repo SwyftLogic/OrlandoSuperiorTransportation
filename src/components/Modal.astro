@@ -1,0 +1,27 @@
+---
+const {id, open} = Astro.props;
+---
+<style >
+dialog {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+</style>
+
+<button onclick={`window.${id}.showModal()`} class="btn primary-btn"><span>click here to</span>{open}</button>
+
+<dialog id=`${id}`>
+
+   <main slot="main">
+      <p>asd Some extra content you would like here</p>
+      <hr />
+    </main>
+    
+    <form method="dialog">
+      <button slot="close">Close modal</button>
+    </form>
+
+</dialog>
+
