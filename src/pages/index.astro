@@ -7,6 +7,7 @@ import "@fontsource/plus-jakarta-sans"; // Defaults to weight 400
 import "@fontsource/plus-jakarta-sans/600.css"; // Specify weight
 import "@fontsource/plus-jakarta-sans/700.css"; // Specify weight
 import '../styles/global.css';
+import { StickyHeader, Astronav, MenuItems, MenuIcon, Dropdown, DropdownItems, DropdownSubmenu } from "astro-navbar";
 
 import { Image } from 'astro:assets';
 ---
@@ -14,26 +15,44 @@ import { Image } from 'astro:assets';
 <Layout title="Welcome to Astro.">
 	<main>
 
-		<div class="header">
-			<div class="container">
-			
-			<div class="row d-flex align-items-center">
-				<div class="col-2" >
-					<Image src={"/logo.png"}  alt="Orlando Transportations Service" style={{objectFit: "contain"}}  width="140" height="70"/>
-				</div>
-				
-				<div class="col">
-					<Navigation />
-				</div>
-				
-				<div class="col-auto">
-					<a class="btn">Book  Now</a>
-				</div>
-			</div>
 
 
-			</div>
-		</div>
+		<StickyHeader class="header transition-all" scrollY={50} 
+		defaultClass="border-transparent" activeClass="headersml">
+  
+					<div class="container">
+					
+					<div class="row d-flex align-items-center">
+						<div class="col-2" >
+							<Image src={"/logo.png"}  alt="Orlando Transportations Service" style={{objectFit: "contain"}} class="logo"  width="140" height="70"/>
+						</div>
+						
+						<div class="col">
+						<Astronav>
+							<MenuItems class="hidden lg:flex ">
+							<ul class="nav-links">
+								<li> <a href="/">Home</a></li>
+								<li> <a href="/about">About</a></li>
+								<li> <a href="/blog">Service</a></li>
+								<li> <a href="/blog">Rates</a></li>
+								<li> <a href="/blog">Contact</a></li>
+								<li> <a href="/blog">FAQ</a></li>
+							</ul>
+							</MenuItems>
+						</Astronav>
+						</div>
+						
+						<div class="col-auto">
+							<a class="btn">Book  Now</a>
+							
+						<MenuIcon class="mobilemenu hiddenmenuicon" />
+						</div>
+					</div>
+
+
+					</div>
+				
+		</StickyHeader>
 
 
 		<div class="container">
@@ -54,6 +73,20 @@ import { Image } from 'astro:assets';
 			
 			</div>
 		</div>
-		
+
 	</main>
+
+	<div class="fixbtn">
+		<div class="row">
+		<div class="col">
+				<a class="btn" href="#">Book  Now</a>
+			</div>
+			<div class="col-auto">
+				<a class="" href="#">	<Image src={"/whatsappicon.png"}  alt="whatsapp" style={{objectFit: "contain"}}  width="48" height="48"/>
+				</a>
+			</div>
+			
+			
+		</div>
+	</div>
 </Layout>
