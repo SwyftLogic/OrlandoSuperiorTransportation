@@ -1,27 +1,65 @@
 ---
 const {id, open} = Astro.props;
 ---
-<style >
-dialog {
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
-</style>
+
 
 <button onclick={`window.${id}.showModal()`} class="btn primary-btn"><span>click here to</span>{open}</button>
 
 <dialog id=`${id}`>
 
-   <main slot="main">
-      <p>asd Some extra content you would like here</p>
-      <hr />
-    </main>
-    
-    <form method="dialog">
-      <button slot="close">Close modal</button>
+   <div slot="main" class="formholder">
+      <h2 class="text-center">Book Your Private <span>Transportation</span> In Orlando!
+      
+      <form method="dialog">
+      <button slot="close" class="closebtn">x</button>
     </form>
+    
+    </h2>
+      <h5 class="text-center">Booking Online With Orlando Transportations Service Is Fast, Easy, & Secure.</h5>
+      
+      <ol class="steps">
+        <li class="current">Booking Details</li>
+        <li>Select Vehicle</li>
+        <li>Personal Details</li>
+        <li>Thank You</li>
+      </ol>
+
+
+    <div class="formholdermobile">
+      <div class="row">
+        <div class="col-sm-12 col-md-7 mt-2">
+          <label>Select Service Type</label>
+          <select class="form-select" aria-label="Default select example">
+            <option selected>Point-to-Point</option>
+            <option value="1">Hourly/As Directed</option>
+            <option value="2">Airport Pick Up</option>
+            <option value="3">Airport Departure</option>
+            <option value="4">Charter</option>
+            <option value="5">Tour</option>
+            <option value="6">To Port Canaveral</option>
+            <option value="7">From Port Canaveral</option>
+            
+          </select>
+        </div>
+
+        <div class="col-sm-6 col-md-5 mt-2">
+          <label>Pick-Up Date & Time</label>
+          <input type="datetime-local" class="form-control" id="birthdaytime" name="birthdaytime">
+        </div>
+      
+      </div>
+
+
+      
+    </div>
+    <div class="row formfooter p-2">
+      <div class="col-6"></div>
+      <div class="col-6 text-end"><a href="#" class="btn secondary-btn">Select Vehicle</a></div>
+    </div>
+    
+    </div>
+    
+    
 
 </dialog>
 
