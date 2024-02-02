@@ -1,5 +1,15 @@
 ---
 const {id, open} = Astro.props;
+
+import suv from '../assets/SUV.png';
+import town from '../assets/Town.png';
+import Van from '../assets/Van.png';
+import Limousine from '../assets/Limousine.png';
+
+
+
+
+import { Image } from 'astro:assets';
 ---
 
 
@@ -25,9 +35,10 @@ const {id, open} = Astro.props;
       </ol>
 
 
-    <div class="formholdermobile">
+    <!--location details-->
+     <div class="formholdermobile  d-none">
       <div class="row">
-        <div class="col-sm-12 col-md-7 mt-2">
+        <div class="col-sm-12 col-md-6 mt-2">
           <label>Select Service Type</label>
           <select class="form-select" aria-label="Default select example">
             <option selected>Point-to-Point</option>
@@ -42,16 +53,344 @@ const {id, open} = Astro.props;
           </select>
         </div>
 
-        <div class="col-sm-6 col-md-5 mt-2">
+        <div class="col-sm-12 col-md-6 mt-2">
           <label>Pick-Up Date & Time</label>
           <input type="datetime-local" class="form-control" id="birthdaytime" name="birthdaytime">
         </div>
       
       </div>
+      
+      <div class="row">
+        <div class="col-sm-12 col-md mt-2">
+          <label>Pick-Up Location</label>
+          <input type="text" class="form-control" placeholder="Your pick-up location">
+        </div>
+        <div class="col-sm-12 col-md-auto mt-2" style="padding-top:2px">
+          <a href="#" class="btn primary-btn-sml mt-md-4">+ Add Stop</a>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12 mt-2">
+         <input type="checkbox" class="" > Return at different location
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-6 col-md-4 mt-2">
+        No of Passengers
+        <input type="Number" class="form-control" placeholder="">
+        </div>
+
+        
+        <div class="col-6 col-md-4 mt-2">
+        Luggage Count
+        <input type="Number" class="form-control" placeholder="">
+        </div>
+        
+        
+        <div class="col-6 col-md-4 mt-2">
+        No of Hours
+        <input type="Number" class="form-control" placeholder="">
+        </div>
+
+        <div class="col-6  mt-4 pt-2 mt-md-2">
+          <a href="#" class="btn primary-btn-sml d-inline-block" >+ Add Child Seat</a>
+        </div>
+
+      </div>
+      <div class="row">
+        
+      </div>
+    </div>
+    
+    
+
+    <!--select vehicle-->
+   <div class="formholdermobile  d-none">
+      <div class="row border">
+        <div class="col-auto mt-2 d-flex align-items-center">
+
+         <input type="radio" selectd class="" >
+        </div>
+        
+        <div class="col mt-2">
+          <div class="row">
+            <div class="col-auto ps-0 d-flex align-items-center">
+              <Image src={suv}  alt="Orlando Transportations Service" style={{objectFit: "contain"}} width="88" height="68"/>
+				    </div>
+            
+            <div class="col d-flex align-items-center">
+              <div class="row">
+                <div class="col-12 col-md d-flex align-items-center">
+                  <h5>SUV</h5>
+                </div>
+
+                <div class="col-12 col-md-8 d-flex align-items-center">
+                  <div class="row f-sml">
+                    <div class="col-auto d-flex align-items-center">
+                    <svg height="15px" version="1.1" viewBox="0 0 18 15" width="18px" xmlns="http://www.w3.org/2000/svg" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns" xmlns:xlink="http://www.w3.org/1999/xlink"><title/><desc/><defs/><g fill="none" fill-rule="evenodd" id="Page-1" stroke="none" stroke-width="1"><g fill="#000000" id="Core" transform="translate(-423.000000, -47.000000)"><g id="check" transform="translate(423.000000, 47.500000)"><path d="M6,10.2 L1.8,6 L0.4,7.4 L6,13 L18,1 L16.6,-0.4 L6,10.2 Z" id="Shape"/></g></g></g></svg>
+                    &nbsp; 6 Passengers
+                    </div>
+
+                    <div class="col-auto d-flex align-items-center">
+                    <svg height="15px" version="1.1" viewBox="0 0 18 15" width="18px" xmlns="http://www.w3.org/2000/svg" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns" xmlns:xlink="http://www.w3.org/1999/xlink"><title/><desc/><defs/><g fill="none" fill-rule="evenodd" id="Page-1" stroke="none" stroke-width="1"><g fill="#000000" id="Core" transform="translate(-423.000000, -47.000000)"><g id="check" transform="translate(423.000000, 47.500000)"><path d="M6,10.2 L1.8,6 L0.4,7.4 L6,13 L18,1 L16.6,-0.4 L6,10.2 Z" id="Shape"/></g></g></g></svg>
+                    &nbsp; 6 Suitcases
+                    </div>
+
+                    <div class="col-auto d-flex align-items-center">
+                    <svg height="15px" version="1.1" viewBox="0 0 18 15" width="18px" xmlns="http://www.w3.org/2000/svg" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns" xmlns:xlink="http://www.w3.org/1999/xlink"><title/><desc/><defs/><g fill="none" fill-rule="evenodd" id="Page-1" stroke="none" stroke-width="1"><g fill="#000000" id="Core" transform="translate(-423.000000, -47.000000)"><g id="check" transform="translate(423.000000, 47.500000)"><path d="M6,10.2 L1.8,6 L0.4,7.4 L6,13 L18,1 L16.6,-0.4 L6,10.2 Z" id="Shape"/></g></g></g></svg>
+                    &nbsp; 2 Booster Seats
+                    </div>
+
+                    <div class="col-auto d-flex align-items-center">
+                    <svg height="15px" version="1.1" viewBox="0 0 18 15" width="18px" xmlns="http://www.w3.org/2000/svg" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns" xmlns:xlink="http://www.w3.org/1999/xlink"><title/><desc/><defs/><g fill="none" fill-rule="evenodd" id="Page-1" stroke="none" stroke-width="1"><g fill="#000000" id="Core" transform="translate(-423.000000, -47.000000)"><g id="check" transform="translate(423.000000, 47.500000)"><path d="M6,10.2 L1.8,6 L0.4,7.4 L6,13 L18,1 L16.6,-0.4 L6,10.2 Z" id="Shape"/></g></g></g></svg>
+                    &nbsp; 2 Car Seat
+                    </div>
+
+                  </div>
+
+                </div>
+
+
+
+              </div>
+
+
+            </div>
+
+          </div>
+          
+        </div>
+      
+      </div>
+
+
+
+
+
+
+
+      <div class="row border">
+        <div class="col-auto mt-2 d-flex align-items-center">
+
+         <input type="radio" selectd class="" >
+        </div>
+        
+        <div class="col mt-2">
+          <div class="row">
+            <div class="col-auto ps-0 d-flex align-items-center">
+              <Image src={town}  alt="Orlando Transportations Service" style={{objectFit: "contain"}} width="88" height="68"/>
+				    </div>
+            
+            <div class="col d-flex align-items-center">
+              <div class="row">
+                <div class="col-12 col-md d-flex align-items-center">
+                  <h5>Town Car</h5>
+                </div>
+
+                
+                <div class="col-12 col-md-8 d-flex align-items-center">
+                  <div class="row f-sml">
+                    <div class="col-auto d-flex align-items-center">
+                    <svg height="15px" version="1.1" viewBox="0 0 18 15" width="18px" xmlns="http://www.w3.org/2000/svg" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns" xmlns:xlink="http://www.w3.org/1999/xlink"><title/><desc/><defs/><g fill="none" fill-rule="evenodd" id="Page-1" stroke="none" stroke-width="1"><g fill="#000000" id="Core" transform="translate(-423.000000, -47.000000)"><g id="check" transform="translate(423.000000, 47.500000)"><path d="M6,10.2 L1.8,6 L0.4,7.4 L6,13 L18,1 L16.6,-0.4 L6,10.2 Z" id="Shape"/></g></g></g></svg>
+                    &nbsp; 4 Passengers
+                    </div>
+
+                    <div class="col-auto d-flex align-items-center">
+                    <svg height="15px" version="1.1" viewBox="0 0 18 15" width="18px" xmlns="http://www.w3.org/2000/svg" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns" xmlns:xlink="http://www.w3.org/1999/xlink"><title/><desc/><defs/><g fill="none" fill-rule="evenodd" id="Page-1" stroke="none" stroke-width="1"><g fill="#000000" id="Core" transform="translate(-423.000000, -47.000000)"><g id="check" transform="translate(423.000000, 47.500000)"><path d="M6,10.2 L1.8,6 L0.4,7.4 L6,13 L18,1 L16.6,-0.4 L6,10.2 Z" id="Shape"/></g></g></g></svg>
+                    &nbsp; 4 Suitcases
+                    </div>
+
+                    <div class="col-auto d-flex align-items-center">
+                    <svg height="15px" version="1.1" viewBox="0 0 18 15" width="18px" xmlns="http://www.w3.org/2000/svg" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns" xmlns:xlink="http://www.w3.org/1999/xlink"><title/><desc/><defs/><g fill="none" fill-rule="evenodd" id="Page-1" stroke="none" stroke-width="1"><g fill="#000000" id="Core" transform="translate(-423.000000, -47.000000)"><g id="check" transform="translate(423.000000, 47.500000)"><path d="M6,10.2 L1.8,6 L0.4,7.4 L6,13 L18,1 L16.6,-0.4 L6,10.2 Z" id="Shape"/></g></g></g></svg>
+                    &nbsp; 1 Booster Seat
+                    </div>
+
+                    <div class="col-auto d-flex align-items-center">
+                    <svg height="15px" version="1.1" viewBox="0 0 18 15" width="18px" xmlns="http://www.w3.org/2000/svg" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns" xmlns:xlink="http://www.w3.org/1999/xlink"><title/><desc/><defs/><g fill="none" fill-rule="evenodd" id="Page-1" stroke="none" stroke-width="1"><g fill="#000000" id="Core" transform="translate(-423.000000, -47.000000)"><g id="check" transform="translate(423.000000, 47.500000)"><path d="M6,10.2 L1.8,6 L0.4,7.4 L6,13 L18,1 L16.6,-0.4 L6,10.2 Z" id="Shape"/></g></g></g></svg>
+                    &nbsp; 1 Car Seat
+                    </div>
+
+                  </div>
+
+                </div>
+
+
+
+              </div>
+
+
+            </div>
+
+          </div>
+          
+        </div>
+      
+      </div>
+
+
+
+
+      <div class="row border">
+        <div class="col-auto mt-2 d-flex align-items-center">
+
+         <input type="radio" selectd class="" >
+        </div>
+        
+        <div class="col mt-2">
+          <div class="row">
+            <div class="col-auto ps-0 d-flex align-items-center">
+              <Image src={Van}  alt="Orlando Transportations Service" style={{objectFit: "contain"}} width="88" height="68"/>
+				    </div>
+            
+            <div class="col d-flex align-items-center">
+              <div class="row">
+                <div class="col-12 col-md d-flex align-items-center">
+                  <h5>Van</h5>
+                </div>
+
+                <div class="col-12 col-md-8 d-flex align-items-center">
+                  <div class="row f-sml">
+                    <div class="col-auto d-flex align-items-center">
+                    <svg height="15px" version="1.1" viewBox="0 0 18 15" width="18px" xmlns="http://www.w3.org/2000/svg" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns" xmlns:xlink="http://www.w3.org/1999/xlink"><title/><desc/><defs/><g fill="none" fill-rule="evenodd" id="Page-1" stroke="none" stroke-width="1"><g fill="#000000" id="Core" transform="translate(-423.000000, -47.000000)"><g id="check" transform="translate(423.000000, 47.500000)"><path d="M6,10.2 L1.8,6 L0.4,7.4 L6,13 L18,1 L16.6,-0.4 L6,10.2 Z" id="Shape"/></g></g></g></svg>
+                    &nbsp; 10 Passengers
+                    </div>
+
+                    <div class="col-auto d-flex align-items-center">
+                    <svg height="15px" version="1.1" viewBox="0 0 18 15" width="18px" xmlns="http://www.w3.org/2000/svg" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns" xmlns:xlink="http://www.w3.org/1999/xlink"><title/><desc/><defs/><g fill="none" fill-rule="evenodd" id="Page-1" stroke="none" stroke-width="1"><g fill="#000000" id="Core" transform="translate(-423.000000, -47.000000)"><g id="check" transform="translate(423.000000, 47.500000)"><path d="M6,10.2 L1.8,6 L0.4,7.4 L6,13 L18,1 L16.6,-0.4 L6,10.2 Z" id="Shape"/></g></g></g></svg>
+                    &nbsp; 12 Suitcases
+                    </div>
+
+                    <div class="col-auto d-flex align-items-center">
+                    <svg height="15px" version="1.1" viewBox="0 0 18 15" width="18px" xmlns="http://www.w3.org/2000/svg" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns" xmlns:xlink="http://www.w3.org/1999/xlink"><title/><desc/><defs/><g fill="none" fill-rule="evenodd" id="Page-1" stroke="none" stroke-width="1"><g fill="#000000" id="Core" transform="translate(-423.000000, -47.000000)"><g id="check" transform="translate(423.000000, 47.500000)"><path d="M6,10.2 L1.8,6 L0.4,7.4 L6,13 L18,1 L16.6,-0.4 L6,10.2 Z" id="Shape"/></g></g></g></svg>
+                    &nbsp; 2 Booster Seat
+                    </div>
+
+                    <div class="col-auto d-flex align-items-center">
+                    <svg height="15px" version="1.1" viewBox="0 0 18 15" width="18px" xmlns="http://www.w3.org/2000/svg" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns" xmlns:xlink="http://www.w3.org/1999/xlink"><title/><desc/><defs/><g fill="none" fill-rule="evenodd" id="Page-1" stroke="none" stroke-width="1"><g fill="#000000" id="Core" transform="translate(-423.000000, -47.000000)"><g id="check" transform="translate(423.000000, 47.500000)"><path d="M6,10.2 L1.8,6 L0.4,7.4 L6,13 L18,1 L16.6,-0.4 L6,10.2 Z" id="Shape"/></g></g></g></svg>
+                    &nbsp; 2 Car Seat
+                    </div>
+
+                  </div>
+
+                </div>
+
+
+
+              </div>
+
+
+            </div>
+
+          </div>
+          
+        </div>
+      
+      </div>
+
+       <div class="row border">
+        <div class="col-auto mt-2 d-flex align-items-center">
+
+         <input type="radio" selectd class="" >
+        </div>
+        
+        <div class="col mt-2">
+          <div class="row">
+            <div class="col-auto ps-0 d-flex align-items-center">
+              <Image src={Limousine}  alt="Orlando Transportations Service" style={{objectFit: "contain"}} width="88" height="68"/>
+				    </div>
+            
+            <div class="col d-flex align-items-center">
+              <div class="row">
+                <div class="col-12 col-md d-flex align-items-center">
+                  <h5>Limousine</h5>
+                </div>
+
+                <div class="col-12 col-md-8 d-flex align-items-center">
+                  <div class="row f-sml">
+                    <div class="col-auto d-flex align-items-center">
+                    <svg height="15px" version="1.1" viewBox="0 0 18 15" width="18px" xmlns="http://www.w3.org/2000/svg" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns" xmlns:xlink="http://www.w3.org/1999/xlink"><title/><desc/><defs/><g fill="none" fill-rule="evenodd" id="Page-1" stroke="none" stroke-width="1"><g fill="#000000" id="Core" transform="translate(-423.000000, -47.000000)"><g id="check" transform="translate(423.000000, 47.500000)"><path d="M6,10.2 L1.8,6 L0.4,7.4 L6,13 L18,1 L16.6,-0.4 L6,10.2 Z" id="Shape"/></g></g></g></svg>
+                    &nbsp; 10 Passengers
+                    </div>
+
+                    <div class="col-auto d-flex align-items-center">
+                    <svg height="15px" version="1.1" viewBox="0 0 18 15" width="18px" xmlns="http://www.w3.org/2000/svg" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns" xmlns:xlink="http://www.w3.org/1999/xlink"><title/><desc/><defs/><g fill="none" fill-rule="evenodd" id="Page-1" stroke="none" stroke-width="1"><g fill="#000000" id="Core" transform="translate(-423.000000, -47.000000)"><g id="check" transform="translate(423.000000, 47.500000)"><path d="M6,10.2 L1.8,6 L0.4,7.4 L6,13 L18,1 L16.6,-0.4 L6,10.2 Z" id="Shape"/></g></g></g></svg>
+                    &nbsp; 6 Suitcases
+                    </div>
+
+                    <div class="col-auto d-flex align-items-center">
+                    <svg height="15px" version="1.1" viewBox="0 0 18 15" width="18px" xmlns="http://www.w3.org/2000/svg" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns" xmlns:xlink="http://www.w3.org/1999/xlink"><title/><desc/><defs/><g fill="none" fill-rule="evenodd" id="Page-1" stroke="none" stroke-width="1"><g fill="#000000" id="Core" transform="translate(-423.000000, -47.000000)"><g id="check" transform="translate(423.000000, 47.500000)"><path d="M6,10.2 L1.8,6 L0.4,7.4 L6,13 L18,1 L16.6,-0.4 L6,10.2 Z" id="Shape"/></g></g></g></svg>
+                    &nbsp; 1 Booster Seat
+                    </div>
+
+                    <div class="col-auto d-flex align-items-center">
+                    <svg height="15px" version="1.1" viewBox="0 0 18 15" width="18px" xmlns="http://www.w3.org/2000/svg" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns" xmlns:xlink="http://www.w3.org/1999/xlink"><title/><desc/><defs/><g fill="none" fill-rule="evenodd" id="Page-1" stroke="none" stroke-width="1"><g fill="#000000" id="Core" transform="translate(-423.000000, -47.000000)"><g id="check" transform="translate(423.000000, 47.500000)"><path d="M6,10.2 L1.8,6 L0.4,7.4 L6,13 L18,1 L16.6,-0.4 L6,10.2 Z" id="Shape"/></g></g></g></svg>
+                    &nbsp; 1 Car Seat
+                    </div>
+
+                  </div>
+
+                </div>
+
+
+
+              </div>
+
+
+            </div>
+
+          </div>
+          
+        </div>
+      
+      </div>
+      
+
 
 
       
     </div>
+
+
+
+
+  <!--Personal  details-->
+     <div class="formholdermobile  ">
+      <div class="row">
+        <div class="col-sm-6 mt-2">
+          <label>First Name</label>
+          <input type="text" class="form-control" >
+        </div>
+
+        <div class="col-sm-6 mt-2">
+          <label>Last Name</label>
+          <input type="text" class="form-control" >
+        </div>
+        
+      </div>
+      
+      <div class="row">
+        <div class="col-sm-6 mt-2">
+          <label>Phone</label>
+          <input type="Phone" class="form-control" >
+        </div>
+
+        <div class="col-sm-6 mt-2">
+          <label>Email</label>
+          <input type="Email" class="form-control" >
+        </div>
+        
+      </div>
+
+
+    </div>
+
+
+
+
+
+
     <div class="row formfooter p-2">
       <div class="col-6"></div>
       <div class="col-6 text-end"><a href="#" class="btn secondary-btn">Select Vehicle</a></div>

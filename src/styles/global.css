@@ -11,25 +11,48 @@ html{
   
 
 .primary-btn {
-    color: #353f4f!important;
-    background-color: transparent!important;
-    border-color: #353f4f!important;
-    font-size: 1rem;
-    line-height: 1;
-    font-weight: 500;
-    padding: 0.8rem 1.7rem;
-    border: 2px solid transparent;
-    -webkit-transition: all 400ms ease-in-out;
-    -moz-transition: all 400ms ease-in-out;
-    -o-transition: all 400ms ease-in-out;
-    -ms-transition: all 400ms ease-in-out;
-    transition: all 400ms ease-in-out;
+  color: #353f4f!important;
+  background-color: transparent!important;
+  border-color: #353f4f!important;
+  font-size: 1rem;
+  line-height: 1;
+  font-weight: 500;
+  padding: 0.8rem 1.7rem;
+  border: 2px solid transparent;
+  -webkit-transition: all 400ms ease-in-out;
+  -moz-transition: all 400ms ease-in-out;
+  -o-transition: all 400ms ease-in-out;
+  -ms-transition: all 400ms ease-in-out;
+  transition: all 400ms ease-in-out;
 }
 .primary-btn:hover {
-    
-    color: #fff !important;
-    border-color: #cdb05a !important;
-    background-color: #cdb05a !important;
+  
+  color: #fff !important;
+  border-color: #cdb05a !important;
+  background-color: #cdb05a !important;
+}
+
+
+.primary-btn-sml {
+  color: #fff!important;
+  background-color: #56aa0b !important;
+  border-color: #56aa0b !important;
+  font-size: 1rem;
+  line-height: 1;
+  font-weight: 500;
+  padding: 0.65rem 1.7rem;
+  border: 1px solid transparent;
+  -webkit-transition: all 400ms ease-in-out;
+  -moz-transition: all 400ms ease-in-out;
+  -o-transition: all 400ms ease-in-out;
+  -ms-transition: all 400ms ease-in-out;
+  transition: all 400ms ease-in-out;
+}
+.primary-btn-sml:hover {
+  
+  color: #fff !important;
+  border-color: #cdb05a !important;
+  background-color: #cdb05a !important;
 }
 
 
@@ -175,10 +198,10 @@ main:after {
   }
   .nav-links li a {
     display: block;
-    text-align: center;
+    text-align: left;
     color:#000;
     font-weight: 600;
-    padding: 10px 10px;
+    padding: 11px 20px;
     text-decoration: none;
     font-size: 1rem;
   }
@@ -212,14 +235,16 @@ main:after {
     -moz-box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.15);
     box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.15);
     width: 100% !Important;
-    padding: 7.5px 0px !important;
+    padding: 7.5px 0px ;
   }
-  
+  .f-sml{
+    font-size: 0.8rem !important;
+  }
 
   dialog {
     position: fixed;
     left: 50%;
-    width:600px;
+    width:630px;
     top: 20px;
     transform: translate(-50%, 0%);
   }
@@ -338,6 +363,7 @@ main:after {
 
   /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
+ 
   dialog {
     position: fixed;
     left: 10px;
@@ -384,6 +410,7 @@ main:after {
        .mainbanner .btn, .header .btn{
         display: none;
        }
+      
     .hidden {
         display: none;
       }
@@ -402,10 +429,11 @@ main:after {
       }
 
       .nav-links {
+        height: 100vh;
         margin: 0px auto;
         text-align: center;
         position: fixed;
-        background: white;
+        background: black;
         -webkit-box-shadow: 10px 5px 5px 0px rgba(0,0,0,0.15);
 -moz-box-shadow: 10px 5px 5px 0px rgba(0,0,0,0.15);
 box-shadow: 10px 5px 5px 0px rgba(0,0,0,0.15);
@@ -423,16 +451,18 @@ box-shadow: 10px 5px 5px 0px rgba(0,0,0,0.15);
     .nav-links li {
         display: block;
         text-align: center;
+        border-bottom: rgba(255, 255, 255, 0.3) solid 1px;
     }
     .nav-links li a{
-        font-size: 20px;
+        font-size: 18px;
+        color:white;
+        text-transform: uppercase;
         width: 100%;
     }
 
     
   .fixbtn {
     background: #353f4f;
-    border-top:#ccc solid 1px;
     box-shadow: 0.375rem 0 1.5rem #6f747921;
     display: block;
     position: fixed;
@@ -447,21 +477,6 @@ box-shadow: 10px 5px 5px 0px rgba(0,0,0,0.15);
 }
 
 
-.fixbtn {
-    background: #353f4f;
-    border-top:#353f4f solid 1px;
-    box-shadow: 0.375rem 0 1.5rem #92969c;
-    display: block;
-    position: fixed;
-    bottom: 7px;
-    padding: 7px;
-    border-radius: 5px;
-    right: 7px;
-    z-index: 1;
-    left: 7px;
-    
-    backdrop-filter: blur(20px);
-}
 .fixbtn .primary-btn{
     
     color: #fff !important;
@@ -485,6 +500,13 @@ box-shadow: 10px 5px 5px 0px rgba(0,0,0,0.15);
     bottom: 80px;
     right: 7px;
 }
-
+dialog .btn{
+  display: unset;
+  font-size: 0.9rem;
+  padding: 0.5rem 1rem !Important;
+ }
+dialog{
+  line-height: 1.5em;
+ }
 }
 
