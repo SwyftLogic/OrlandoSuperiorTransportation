@@ -331,7 +331,7 @@ main:after {
     background-color: #ccc;
   }
   .formholder input, .formholder select{
-  border:#000 solid 1px;
+  border:#000 solid 2px;
 }
 .formholdermobile{
   height: 30vh;
@@ -363,7 +363,9 @@ main:after {
 
   /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
- 
+ main{
+  background: white !Important;
+ }
   dialog {
     position: fixed;
     left: 10px;
@@ -433,7 +435,7 @@ main:after {
         margin: 0px auto;
         text-align: center;
         position: fixed;
-        background: black;
+        background: white;
         -webkit-box-shadow: 10px 5px 5px 0px rgba(0,0,0,0.15);
 -moz-box-shadow: 10px 5px 5px 0px rgba(0,0,0,0.15);
 box-shadow: 10px 5px 5px 0px rgba(0,0,0,0.15);
@@ -451,11 +453,11 @@ box-shadow: 10px 5px 5px 0px rgba(0,0,0,0.15);
     .nav-links li {
         display: block;
         text-align: center;
-        border-bottom: rgba(255, 255, 255, 0.3) solid 1px;
+        border-bottom: rgba(0, 0, 0, 0.3) solid 1px;
     }
     .nav-links li a{
         font-size: 18px;
-        color:white;
+        color:black;
         text-transform: uppercase;
         width: 100%;
     }
