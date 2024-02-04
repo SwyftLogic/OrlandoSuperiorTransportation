@@ -1,28 +1,21 @@
 ---
-const {id, open} = Astro.props;
+import Layout from '../layouts/Layout.astro';
 
+import { Image } from 'astro:assets';
 import suv from '../assets/SUV.png';
 import town from '../assets/Town.png';
 import Van from '../assets/Van.png';
 import Limousine from '../assets/Limousine.png';
 
 
-
-
-import { Image } from 'astro:assets';
 ---
 
+<Layout title="Orlando Transportatation Book Luxury Vechicle">
+  <div class="container">
 
-<button onclick={`window.${id}.showModal()`} class="btn primary-btn"><span>click here to</span>{open}</button>
+    <h1 class="text-center">Book Your Private <span>Transportation</span> In Orlando!</h1>
 
-<dialog id=`${id}`>
-
-   <div slot="main" class="formholder">
-      <h2 class="text-center">Book Your Private <span>Transportation</span> In Orlando!
-      
-      <form method="dialog">
-      <button slot="close" class="closebtn">x</button>
-    </form>
+    <div  class="formholder">
     
     </h2>
       <h5 class="text-center">Booking Online With Orlando Transportations Service Is Fast, Easy, & Secure.</h5>
@@ -79,19 +72,19 @@ import { Image } from 'astro:assets';
       <div class="row">
         <div class="col-6 col-md-4 mt-2">
         No of Passengers
-        <input type="Number" class="form-control" placeholder="">
+        <input type="number" class="form-control" placeholder="">
         </div>
 
         
         <div class="col-6 col-md-4 mt-2">
         Luggage Count
-        <input type="Number" class="form-control" placeholder="">
+        <input type="number" class="form-control" placeholder="">
         </div>
         
         
         <div class="col-6 col-md-4 mt-2">
         No of Hours
-        <input type="Number" class="form-control" placeholder="">
+        <input type="number" class="form-control" placeholder="">
         </div>
 
         <div class="col-6  mt-4 pt-2 mt-md-2">
@@ -111,7 +104,7 @@ import { Image } from 'astro:assets';
       <div class="row border">
         <div class="col-auto mt-2 d-flex align-items-center">
 
-         <input type="radio" selectd class="" >
+         <input type="radio" class="" >
         </div>
         
         <div class="col mt-2">
@@ -174,7 +167,7 @@ import { Image } from 'astro:assets';
       <div class="row border">
         <div class="col-auto mt-2 d-flex align-items-center">
 
-         <input type="radio" selectd class="" >
+         <input type="radio" class="" >
         </div>
         
         <div class="col mt-2">
@@ -397,8 +390,5 @@ import { Image } from 'astro:assets';
     </div>
     
     </div>
-    
-    
-
-</dialog>
-
+  </div>
+</Layout>

@@ -1,0 +1,44 @@
+---
+import { StickyHeader, Astronav, MenuItems, MenuIcon} from "astro-navbar";
+
+
+import { Image } from 'astro:assets';
+import logo from '../assets/logo.png';
+
+---	
+
+		<StickyHeader class="header transition-all" scrollY={50} 
+		defaultClass="border-transparent" activeClass="headersml">
+  
+					<div class="container">
+					
+					<div class="row d-flex align-items-center">
+						<div class="col-2" >
+							<Image src={logo}  alt="Orlando Transportations Service" style={{objectFit: "contain"}} class="logo" width="140" height="70"/>
+						</div>
+						
+						<div class="col">
+						<Astronav>
+							<MenuItems class="hidden lg:flex ">
+							<ul class="nav-links">
+								<li> <a href="/">Home</a></li>
+								<li> <a href="/about">About</a></li>
+								<li> <a href="/services">Service</a></li>
+								<li> <a href="/rates">Rates</a></li>
+								<li> <a href="/book">Contact</a></li>
+								<li> <a href="/faq">FAQ</a></li>
+							</ul>
+							</MenuItems>
+						</Astronav>
+						</div>
+						
+						<div class="col-auto">
+							<a href="/book" />
+						<MenuIcon class="mobilemenu hiddenmenuicon" />
+						</div>
+					</div>
+
+
+					</div>
+				
+		</StickyHeader>

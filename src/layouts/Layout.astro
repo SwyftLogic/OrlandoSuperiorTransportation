@@ -1,9 +1,21 @@
 ---
+
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+
+import "bootstrap/dist/css/bootstrap.min.css";
+import "@fontsource/plus-jakarta-sans"; // Defaults to weight 400
+import "@fontsource/plus-jakarta-sans/600.css"; // Specify weight
+import "@fontsource/plus-jakarta-sans/700.css"; // Specify weight
+import "@fontsource/plus-jakarta-sans/800.css"; // Specify weight
+import '../styles/global.css';
+
 interface Props {
 	title: string;
 }
 
 const { title } = Astro.props;
+
 ---
 
 <!doctype html>
@@ -14,10 +26,15 @@ const { title } = Astro.props;
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
+		<link rel="sitemap" href="/sitemap-index.xml" />
 		<title>{title}</title>
 	</head>
 	<body>
+	<main>
+		<BaseHead />	
 		<slot />
+		<Footer/>
+	</main>
 	</body>
 </html>
 <style is:global>
@@ -33,9 +50,7 @@ const { title } = Astro.props;
 		);
 	}
 	html {
-		font-family: system-ui, sans-serif;
-		background: #13151a;
-		background-size: 224px;
+
 	}
 	code {
 		font-family:

@@ -1,64 +1,13 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Card from '../components/Card.astro';
-import Modal from '../components/Modal.astro';
-import Navigation from '../components/Navigation.astro';
-import 'bootstrap/dist/css/bootstrap.css'
-import "@fontsource/plus-jakarta-sans"; // Defaults to weight 400
-import "@fontsource/plus-jakarta-sans/600.css"; // Specify weight
-import "@fontsource/plus-jakarta-sans/700.css"; // Specify weight
-import "@fontsource/plus-jakarta-sans/800.css"; // Specify weight
-import '../styles/global.css';
-import { StickyHeader, Astronav, MenuItems, MenuIcon, Dropdown, DropdownItems, DropdownSubmenu } from "astro-navbar";
 
 import { Image } from 'astro:assets';
-import logo from '../assets/logo.png';
 import banner1 from '../assets/img-09.png';
 import whatsapp from '../assets//whatsappicon.png';
 
 ---
 
-<Layout title="Welcome to Astro.">
-	<main>
-	
-
-		<StickyHeader class="header transition-all" scrollY={50} 
-		defaultClass="border-transparent" activeClass="headersml">
-  
-					<div class="container">
-					
-					<div class="row d-flex align-items-center">
-						<div class="col-2" >
-							<Image src={logo}  alt="Orlando Transportations Service" style={{objectFit: "contain"}} class="logo"  width="140" height="70"/>
-						</div>
-						
-						<div class="col">
-						<Astronav>
-							<MenuItems class="hidden lg:flex ">
-							<ul class="nav-links">
-								<li> <a href="/">Home</a></li>
-								<li> <a href="/about">About</a></li>
-								<li> <a href="/blog">Service</a></li>
-								<li> <a href="/blog">Rates</a></li>
-								<li> <a href="/blog">Contact</a></li>
-								<li> <a href="/blog">FAQ</a></li>
-							</ul>
-							</MenuItems>
-						</Astronav>
-						</div>
-						
-						<div class="col-auto">
-							<Modal id="dialog" open="Book Now" />
-						<MenuIcon class="mobilemenu hiddenmenuicon" />
-						</div>
-					</div>
-
-
-					</div>
-				
-		</StickyHeader>
-
-		
+<Layout title="Orlando Transportation Services">
 
 		<div class="container">
 			<div class="mainbanner">
@@ -70,7 +19,7 @@ import whatsapp from '../assets//whatsappicon.png';
 						<p class="p-lg mt-5"> We will pick you up from any location and drop at any place in the Disney World</p>
 		
 		
-							<Modal id="dialog2" open="Book Now" />
+						<a class="btn primary-btn" href="/book"><span>Orlando Transportation</span>Book a Reservation</a>
 					</div>
 					
 					<div class="col-sm-12 col-md text-center">
@@ -81,8 +30,6 @@ import whatsapp from '../assets//whatsappicon.png';
 			
 			</div>
 		</div>
-
-	</main>
 
 	<div class="fixbtn">
 				<a class="whatsappbtn" href="#">
@@ -96,7 +43,7 @@ import whatsapp from '../assets//whatsappicon.png';
 				<a class="btn secondary-btn" href="tel:4076976002"><span>Call Now</span>407 697 6002</a>
 			</div>
 			<div class="col ">
-				<Modal id="dialog3" open="Book Now" />
+				<a class="btn secondary-btn" href="/book"><span>Orlando Transportation</span>Book a Reservation</a>
 			</div>
 			
 			
