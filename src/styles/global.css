@@ -10,24 +10,11 @@
   );
 }
 html {
-  font-family: system-ui, sans-serif;
   background-color: #fff;
   background-size: 224px;
 }
-code {
-  font-family:
-    Menlo,
-    Monaco,
-    Lucida Console,
-    Liberation Mono,
-    DejaVu Sans Mono,
-    Bitstream Vera Sans Mono,
-    Courier New,
-    monospace;
-}
 
 body {
-    font-family: "Plus Jakarta Sans";
     color: #6c757d;
     line-height: 1.6666;
     font-weight: 400;
