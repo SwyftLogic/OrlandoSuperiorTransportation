@@ -1,10 +1,7 @@
 ---
 
 import BaseHead from '../components/BaseHead.astro';
-import services from '../components/services.astro';
 import Footer from '../components/Footer.astro';
-
-import "bootstrap/dist/css/bootstrap.min.css";
 import '../styles/global.css';
 
 interface Props {
@@ -31,7 +28,7 @@ const { title } = Astro.props;
 	<main>
 		<BaseHead />	
 		<slot />
-		<services />
+		
 		<Footer/>
 		
 	</main>

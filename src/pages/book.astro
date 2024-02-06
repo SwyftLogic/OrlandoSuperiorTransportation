@@ -13,7 +13,7 @@ import Limousine from '../assets/Limousine.png';
 <Layout title="Orlando Transportatation Book Luxury Vechicle">
 <!-- component -->
   <div class="container max-w-screen-lg mx-auto">
-    <h1 class="text-center">Book Your Private <span>Transportation</span> In Orlando!</h1>
+    <h1 class="text-center pt-4 pb-3">Book Your Private <span>Transportation</span> In Orlando!</h1>
 
       <div class="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6 max-w-4xl" style="margin:0px auto;" >
           <div class="text-gray-600 text-center">
@@ -21,29 +21,30 @@ import Limousine from '../assets/Limousine.png';
             <p>Booking Online With Orlando Transportations Service Is Fast, Easy, & Secure.</p>
           </div>
          
-            <div class="row">
+            <div class="flex flex-col grid grid-cols-6 gap-4">
 
-              <div class="col-6 col-md-4 mt-3">
+              <div class="col-span-6 lg:col-span-2 mt-2">
                 <label for="full_name">Full Name</label>
                 <input type="text" name="full_name" id="full_name" class="h-10 border mt-1 rounded w-full bg-gray-50" value="" />
               </div>
 
-              <div class="col-6 col-md-4 mt-3">
+              <div class="col-span-3 lg:col-span-2 mt-2">
                 <label for="email">Email Address</label>
                 <input type="text" name="email" id="email" class="h-10 border mt-1 rounded  w-full bg-gray-50" value="" placeholder="email@domain.com" />
               </div>
 
-              <div class="col-sm-6 col-md-4 mt-3">
+              <div class="col-span-3 lg:col-span-2 mt-2">
                 <label for="Phone">Phone No.</label>
                 <input type="tel" name="phone" id="phone" class="h-10 border mt-1 rounded  w-full bg-gray-50" value="" />
               </div>
 
-              <div class="col-sm-6 col-md-8 mt-3">
+              <div class="col-span-6 lg:col-span-4 mt-2">
                 <label for="pickup-address">Pick Up Address</label>
                 <input type="text" name="pickup-address" id="pickup-address" class="h-10 border mt-1 rounded  w-full bg-gray-50" value="" placeholder="" />
               </div>
 
-              <div class="col-sm-6 col-md-4 mt-3">
+
+              <div class="col-span-6 lg:col-span-2 mt-2">
                 <label for="pickup-date">Pick Up Date Time</label>
                 <input type="datetime-local" name="pickup-date" id="pickup-date" class="h-10 border mt-1 rounded  w-full bg-gray-50" value={(function () {
                   const currentDate = new Date();
@@ -52,12 +53,12 @@ import Limousine from '../assets/Limousine.png';
                 })()} placeholder="" />
               </div>
 
-              <div class="col-sm-6 col-md-8 mt-3">
+              <div class="col-span-6 lg:col-span-4 mt-2">
                 <label for="dropoff-address">Drop Off Address</label>
                 <input type="text" name="dropoff-address" id="dropoff-address" class="h-10 border mt-1 rounded  w-full bg-gray-50" value="" placeholder="" />
               </div>
 
-              <div class="col-6 col-md-2 mt-3">
+              <div class="col-span-3 lg:col-span-1 mt-2">
                 <label for="passengers">Passengers</label>
                 <div class="h-10 w-33 bg-gray-50 flex border border-gray-200 rounded items-center mt-1">
                   <button tabindex="-1" for="show_more" class="cursor-pointer outline-none focus:outline-none border-r border-gray-200 transition-all text-gray-500 hover:text-blue-600">
@@ -74,7 +75,7 @@ import Limousine from '../assets/Limousine.png';
                 </div>
               </div>
 
-              <div class="col-6 col-md-2 mt-3">
+              <div class="col-span-3 lg:col-span-1 mt-2">
                 <label for="bags">Bags</label>
                 <div class="h-10 w-33 bg-gray-50 flex border border-gray-200 rounded items-center mt-1">
                   <button tabindex="-1" for="show_more" class="cursor-pointer outline-none focus:outline-none border-r border-gray-200 transition-all text-gray-500 hover:text-blue-600">
@@ -91,7 +92,7 @@ import Limousine from '../assets/Limousine.png';
                 </div>
               </div>
 
-              <div class="col-sm-6 col-md-4 mt-3">
+              <div class="col-span-3 lg:col-span-2 mt-2">
                 <label for="pickup-address">Preferred Vehicle</label>
                 <select name="preferred-vehicle" id="preferred-vehicle" class="h-10 border mt-1 rounded  w-full bg-gray-50" value="">
                   <option value="Town Car">Town Car</option>
@@ -104,37 +105,37 @@ import Limousine from '../assets/Limousine.png';
               </div>
 
 
-              <div class="col-sm-6 col-md-4 mt-3">
+              <div class="col-span-3 lg:col-span-2 mt-2">
                 <label for="flightnumber">Flight Number</label>
                 <input type="text" name="flightnumber" id="flightnumber" class="transition-all flex items-center h-10 border mt-1 rounded  w-full bg-gray-50" placeholder="" value="" />
               </div>
 
-              <div class="col-sm-6 col-md-2 flex align-item-center mt-3">
+              <div class="col-span-3 lg:col-span-1 flex align-item-end mt-2">
                 <div class="inline-flex items-center">
                   <input type="checkbox" name="childseat" id="childseat" class="form-checkbox" />
                   <label for="childseat" class="ml-2">Child Seat</label>
                 </div>
               </div>
 
-              <div class="col-sm-6 col-md-2 flex align-item-center mt-3">
+              <div class="col-span-3 lg:col-span-1 flex align-item-center mt-2">
                 <div class="inline-flex items-center">
                   <input type="checkbox" name="boosterseat" id="boosterseat" class="form-checkbox" />
                   <label for="boosterseat" class="ml-2">Booster Seat</label>
                 </div>
               </div>
 
-              <div class="col-sm-12 mt-3">
+              <div class="col-span-6 mt-2">
                 <label for="comments">Customer Comments Or Special Requests</label>
                 <textarea type="text" name="comments" id="comments" class="h-30 border mt-1 rounded  w-full bg-gray-50" value="" placeholder="" />
               </div>
 
       
-              <div class="md:col-span-5 text-right">
+              <div class="col-span-6 text-right">
                 <div class="inline-flex items-end">
-                  <button class="btn primary-btn">Submit</button>
+                  <button class="btn primary-btn rounded">Submit</button>
                 </div>
               </div>
-
+             
             </div>
           
        

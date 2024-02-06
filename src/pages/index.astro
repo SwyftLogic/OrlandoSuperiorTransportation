@@ -1,5 +1,7 @@
 ---
+import services from '../components/services.astro';
 import Layout from '../layouts/Layout.astro';
+
 import { Image } from 'astro:assets';
 import banner1 from '../assets/img-09.png';
 import whatsapp from '../assets//whatsappicon.png';
@@ -8,20 +10,20 @@ import whatsapp from '../assets//whatsappicon.png';
 
 <Layout title="Orlando Transportation Services">
 
-		<div class="container">
+					<div class="container mx-auto md:lg:xl:px-20">
 			<div class="mainbanner">
 				
-				<div class="row d-flex align-items-center">
-					<div class="col-sm-12 col-md-5">
+				<div class="grid grid-cols-1 md:lg:xl:grid-cols-2 items-center">
+						<div class="grid sm:w-12/12  md:w-5/12" >
 						<p class="text-uppercase">Airport Transfers</p>
 						<h1>Disney World & Resort Area <span>Transportation</span></h1>
 						<p class="p-lg mt-5"> We will pick you up from any location and drop at any place in the Disney World</p>
 		
 		
-						<a class="btn primary-btn" href="/book"><span>Orlando Transportation</span>Book a Reservation</a>
+						<a class="btn primary-btn rounded" href="/book"><span>Orlando Transportation</span>Book a Reservation</a>
 					</div>
 					
-					<div class="col-sm-12 col-md text-center">
+					<div class="w-full  grid justify-items-end sm:justify-items-center" >
 						<Image src={banner1}  alt="Orlando Transportations Service" style={{objectFit: "contain"}}  width="640" height="670"/>
 						
 					</div>
@@ -31,9 +33,9 @@ import whatsapp from '../assets//whatsappicon.png';
 
 
 
+<services />
 
-
-<div class="px-3 md:lg:xl:px-40   border-t border-b py-20 bg-opacity-10" >
+<div class="px-3 border-t border-b py-20 bg-opacity-10" >
         <div class="grid grid-cols-1 md:lg:xl:grid-cols-3 group bg-white shadow-xl shadow-neutral-100 border ">
 
 
@@ -121,9 +123,9 @@ import whatsapp from '../assets//whatsappicon.png';
 
         </div>
 
-        <div class="w-full   bg-indigo-600 shadow-xl shadow-indigo-200 py-10 px-20 flex justify-between items-center">
-            <p class=" text-white"> <span class="text-4xl font-medium">Still Confused ?</span> <br> <span class="text-lg">Book For Free Career Consultation Today ! </span></p>
-            <button class="px-5 py-3  font-medium text-slate-700 shadow-xl  hover:bg-white duration-150  bg-yellow-400">BOOK AN APPOINTMENT </button>
+        <div class="grid grid-cols-1 md:lg:xl:grid-cols-2  bg-indigo-600 shadow-xl shadow-indigo-200 py-10 px-20 flex justify-between items-center">
+            <p class=" text-white w-100"> <span class="text-4xl font-medium">Still Confused ?</span> <br> <span class="text-lg">Book For Free Career Consultation Today ! </span></p>
+            <button class="w-auto px-5 py-3  font-medium text-slate-700 shadow-xl  hover:bg-white duration-150  bg-yellow-400">BOOK AN APPOINTMENT </button>
         </div>
 
     </div>
@@ -141,13 +143,13 @@ import whatsapp from '../assets//whatsappicon.png';
 						</a>
 			
 
-		<div class="row">
-		<div class="col pe-0">
-				<a class="btn secondary-btn" href="tel:4076976002"><span>Call Now</span>407 697 6002</a>
-			</div>
-			<div class="col ">
-				<a class="btn secondary-btn" href="/book"><span>Orlando Transportation</span>Book a Reservation</a>
-			</div>
+		<div class="grid grid-cols-2 gap-2 items-center">
+		
+				<a class="btn rounded primary-btn grid sm:w-6/12" href="tel:4076976002"><span>Call Now</span>407 697 6002</a>
+			
+		
+				<a class="btn rounded secondary-btn grid sm:w-6/12" href="/book"><span>Orlando Transportation</span>Book a Reservation</a>
+			
 			
 			
 			
