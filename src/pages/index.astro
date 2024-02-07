@@ -1,6 +1,10 @@
 ---
-import services from '../components/services.astro';
+
 import Layout from '../layouts/Layout.astro';
+import Services from '../components/Services.astro';
+import About from '../components/About.astro';
+import Rates from '../components/Rates.astro';
+import Faq from '../components/Faq.astro';
 
 import { Image } from 'astro:assets';
 import banner1 from '../assets/img-09.png';
@@ -8,136 +12,132 @@ import whatsapp from '../assets//whatsappicon.png';
 
 ---
 
-<Layout title="Orlando Transportation Services">
+<Layout title="Transportation services - Orlando Superior Transportation">
 
-					<div class="container mx-auto md:lg:xl:px-20">
+		<div class="container mx-auto md:lg:xl:px-20">
 			<div class="mainbanner">
-				
-				<div class="grid grid-cols-1 md:lg:xl:grid-cols-2 items-center">
-						<div class="grid sm:w-12/12  md:w-5/12" >
-						<p class="text-uppercase">Airport Transfers</p>
-						<h1>Disney World & Resort Area <span>Transportation</span></h1>
-						<p class="p-lg mt-5"> We will pick you up from any location and drop at any place in the Disney World</p>
-		
-		
-						<a class="btn primary-btn rounded" href="/book"><span>Orlando Transportation</span>Book a Reservation</a>
-					</div>
+				<div id="default-carousel" class="relative " data-carousel="static" >
+
 					
-					<div class="w-full  grid justify-items-end sm:justify-items-center" >
-						<Image src={banner1}  alt="Orlando Transportations Service" style={{objectFit: "contain"}}  width="640" height="670"/>
+						<!-- Carousel wrapper -->
+						<div class="relative grid grid-cols-1 md:lg:xl:grid-cols-2 items-center h-dvh">
+							<!-- Item 1 -->
+							
+							<div class="hidden duration-700 ease-in-out w-full bg-gradient-to-r from-white to-amber-50" data-carousel-item>
+								
+
+								<div class="grid grid-cols-1 md:lg:xl:grid-cols-2 items-center">
+									<div class="grid sm:w-12/12  md:w-5/12" >
+										<p class="text-uppercase">Orlando's Best Transportation Service</p>
+										<h1>Disney World & Resort Area <span class="text-yellow-700">Transportation</span></h1>
+										<p class="p-lg mt-5"> We will pick you up from any location and drop at any place in the Disney World</p>
 						
-					</div>
+						
+										<a class="hidden md:block max-w-max leading-4 py-3 text-2lg bg-transparent hover:bg-yellow-600 border-2 border-black  px-6 text-center rounded text-black hover:text-white" href="/book">
+										<span class="block text-xs ">Orlando Transportation</span>
+										Book a Reservation</a>
+									</div>
+									
+									<div class="w-full  grid justify-items-end sm:justify-items-center" >
+										<Image src={banner1}  alt="Orlando Transportations Service" style={{objectFit: "contain"}}  width="640" height="670"/>
+										
+									</div>
+								</div>
+
+
+							</div>
+							<!-- Item 2 -->
+							<div class="hidden duration-700 ease-in-out w-full bg-gradient-to-r from-white to-amber-50" data-carousel-item>
+								
+
+								<div class="grid grid-cols-1 md:lg:xl:grid-cols-2 items-center">
+									<div class="grid sm:w-12/12  md:w-5/12" >
+										<p class="text-uppercase">Orlando's Best Transportation Service</p>
+										<h1>2 Disney World & Resort Area <span>Transportation</span></h1>
+										<p class="p-lg mt-5"> We will pick you up from any location and drop at any place in the Disney World</p>
+						
+						
+										<a class="hidden md:block max-w-max leading-4 py-3 text-2lg bg-transparent hover:bg-yellow-600 border-2 border-black  px-6 text-center rounded text-black hover:text-white" href="/book">
+										<span class="block text-xs ">Orlando Transportation</span>
+										Book a Reservation</a>
+									</div>
+									
+									<div class="w-full  grid justify-items-end sm:justify-items-center" >
+										<Image src={banner1}  alt="Orlando Transportations Service" style={{objectFit: "contain"}}  width="640" height="670"/>
+										
+									</div>
+								</div>
+
+
+							</div>
+							<!-- Item 3 -->
+							<div class="hidden duration-700 ease-in-out w-full bg-gradient-to-r from-white to-amber-50" data-carousel-item>
+								
+
+								<div class="grid grid-cols-1 md:lg:xl:grid-cols-2 items-center">
+									<div class="grid sm:w-12/12  md:w-5/12" >
+										<p class="text-uppercase">Airport Transfers</p>
+										<h1>Disney World & Resort Area <span>Transportation</span></h1>
+										<p class="p-lg mt-5"> We will pick you up from any location and drop at any place in the Disney World</p>
+						
+						
+										<a class="hidden md:block max-w-max leading-4 py-3 text-2lg bg-transparent hover:bg-yellow-600 border-2 border-black  px-6 text-center rounded text-black hover:text-white" href="/book">
+										<span class="block text-xs ">Orlando Transportation</span>
+										Book a Reservation</a>
+									</div>
+									
+									<div class="w-full  grid justify-items-end sm:justify-items-center" >
+										<Image src={banner1}  alt="Orlando Transportations Service" style={{objectFit: "contain"}}  width="640" height="670"/>
+										
+									</div>
+								</div>
+
+
+							</div>
+						</div>
+						<div class="flex mx-auto w-auto space-x-2 mb-5 bg-gray-800 rounded p-2">
+							<button type="button" class="w-3 h-3 rounded-full border-2" aria-current="false" aria-label="Slide 1" data-carousel-slide-to="0"></button>
+							<button type="button" class="w-3 h-3 rounded-full border-2" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
+							<button type="button" class="w-3 h-3 rounded-full border-2" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
+						</div>
+						<!-- Slider controls -->
+						<button type="button" class="flex absolute top-0 bottom-0 left-0 z-30 justify-center items-center px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
+							<span class="inline-flex justify-center items-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-black/30  group-hover:bg-black/50 group-focus:ring-4 group-focus:ring-white  group-focus:outline-none">
+								<svg class="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+								<span class="hidden">Previous</span>
+							</span>
+						</button>
+						<button type="button" class="flex absolute top-0 bottom-0 right-0 z-30 justify-center items-center px-4 cursor-pointer group focus:outline-none" data-carousel-next>
+							<span class="inline-flex justify-center items-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-black/30 group-hover:bg-black/50 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+								<svg class="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+								<span class="hidden">Next</span>
+							</span>
+						</button>
+					
+
 				</div>
+
+
+
+
 			
 			</div>
 
 
 
-<services />
+<Services />
 
-<div class="px-3 border-t border-b py-20 bg-opacity-10" >
-        <div class="grid grid-cols-1 md:lg:xl:grid-cols-3 group bg-white shadow-xl shadow-neutral-100 border ">
+<About />
 
-
-            <div
-                class="p-10 flex flex-col items-center text-center group md:lg:xl:border-r md:lg:xl:border-b hover:bg-slate-50 cursor-pointer">
-                <span class="p-5 rounded-full bg-red-500 text-white shadow-lg shadow-red-200"><svg
-                        xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor" stroke-width="1.5">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-                    </svg></span>
-                <p class="text-xl font-medium text-slate-700 mt-3">Most Experienced Team</p>
-                <p class="mt-2 text-sm text-slate-500">Team BrainEdge education is a bunch of highly focused, energetic
-                    set of people.</p>
-            </div>
-
-            <div
-                class="p-10 flex flex-col items-center text-center group md:lg:xl:border-r md:lg:xl:border-b hover:bg-slate-50 cursor-pointer">
-                <span class="p-5 rounded-full bg-orange-500 text-white shadow-lg shadow-orange-200"><svg
-                        xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor" stroke-width="1.5">
-                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                        <polyline points="14 2 14 8 20 8"></polyline>
-                        <line x1="16" y1="13" x2="8" y2="13"></line>
-                        <line x1="16" y1="17" x2="8" y2="17"></line>
-                        <polyline points="10 9 9 9 8 9"></polyline>
-                    </svg></span>
-                <p class="text-xl font-medium text-slate-700 mt-3">Best
-                    Test preparation</p>
-                <p class="mt-2 text-sm text-slate-500">Know where you stand and what next to do to succeed .</p>
-            </div>
-
-            <div class="p-10 flex flex-col items-center text-center group   md:lg:xl:border-b hover:bg-slate-50 cursor-pointer">
-                <span class="p-5 rounded-full bg-yellow-500 text-white shadow-lg shadow-yellow-200"><svg
-                        xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor" stroke-width="1.5">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" />
-                    </svg></span>
-                <p class="text-xl font-medium text-slate-700 mt-3">Admission process Guidance</p>
-                <p class="mt-2 text-sm text-slate-500">Professional Advice for higher education abroad and select the
-                    top institutions worldwide.</p>
-            </div>
-
-
-            <div class="p-10 flex flex-col items-center text-center group   md:lg:xl:border-r hover:bg-slate-50 cursor-pointer">
-                <span class="p-5 rounded-full bg-lime-500 text-white shadow-lg shadow-lime-200"><svg
-                        xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor" stroke-width="1.5">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                    </svg></span>
-                <p class="text-xl font-medium text-slate-700 mt-3">Best
-                    Track Record</p>
-                <p class="mt-2 text-sm text-slate-500">Yet another year ! Yet another jewel in our crown!</p>
-            </div>
-
-            <div class="p-10 flex flex-col items-center text-center group    md:lg:xl:border-r hover:bg-slate-50 cursor-pointer">
-                <span class="p-5 rounded-full bg-teal-500 text-white shadow-lg shadow-teal-200"><svg
-                        xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor" stroke-width="1.5">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                    </svg></span>
-                <p class="text-xl font-medium text-slate-700 mt-3">Free
-                    Mock Exams</p>
-                <p class="mt-2 text-sm text-slate-500">Get Topic-Wise Tests, Section- Wise and mock tests for your
-                    preparation.</p>
-            </div>
-
-            <div class="p-10 flex flex-col items-center text-center group     hover:bg-slate-50 cursor-pointer">
-                <span class="p-5 rounded-full bg-indigo-500 text-white shadow-lg shadow-indigo-200"><svg
-                        xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor" stroke-width="1.5">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                    </svg></span>
-                <p class="text-xl font-medium text-slate-700 mt-3">Genuine
-                    Visa Advice</p>
-                <p class="mt-2 text-sm text-slate-500">Visa process by helping you create the necessary documentation
-                </p>
-            </div>
-
-
-
-
-        </div>
-
-        <div class="grid grid-cols-1 md:lg:xl:grid-cols-2  bg-indigo-600 shadow-xl shadow-indigo-200 py-10 px-20 flex justify-between items-center">
-            <p class=" text-white w-100"> <span class="text-4xl font-medium">Still Confused ?</span> <br> <span class="text-lg">Book For Free Career Consultation Today ! </span></p>
-            <button class="w-auto px-5 py-3  font-medium text-slate-700 shadow-xl  hover:bg-white duration-150  bg-yellow-400">BOOK AN APPOINTMENT </button>
-        </div>
-
-    </div>
+<Rates />
+<Faq />
 
 
 
 
 
-
-
-	<div class="fixbtn">
-				<a class="whatsappbtn" href="#">
+	<div class="block md:hidden fixed w-full px-2 bg-black py-2 bottom-0 z-50">
+				<a class="fixed bottom-20 right-2" href="#">
 				<Image src={whatsapp}  alt="Orlando Transportations Service" style={{objectFit: "contain"}} width="48" height="48"/>
 						
 						</a>
@@ -145,10 +145,10 @@ import whatsapp from '../assets//whatsappicon.png';
 
 		<div class="grid grid-cols-2 gap-2 items-center">
 		
-				<a class="btn rounded primary-btn grid sm:w-6/12" href="tel:4076976002"><span>Call Now</span>407 697 6002</a>
+				<a class="leading-5 py-2 text-2lg bg-transparent hover:bg-white border-2 border-white  px-6 text-center rounded text-white hover:text-black grid sm:w-12/12" href="tel:4076976002"><span class="block text-xs ">Call Now</span>407 697 6002</a>
 			
 		
-				<a class="btn rounded secondary-btn grid sm:w-6/12" href="/book"><span>Orlando Transportation</span>Book a Reservation</a>
+				<a class="leading-5 py-2 text-2lg bg-yellow-600 hover:bg-yellow-500 border-2 border-yellow-500  px-3 text-center rounded text-white hover:text-white grid sm:w-6/12" href="/book"><span class="block text-xs ">Orlando Transportation</span>Book a Reservation</a>
 			
 			
 			
@@ -162,7 +162,6 @@ import whatsapp from '../assets//whatsappicon.png';
 
 
 		</div>
-
 
 
 

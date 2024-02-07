@@ -9,281 +9,64 @@
     white 60%
   );
 }
-html {
-  background-color: #fff;
-  background-size: 224px;
+
+h1 {
+  font-size: 3.375rem;
+  color: #353f4f;
+  line-height: 1.1em;
+  font-weight: 800;
 }
 
-
-body {
-    color: #6c757d;
-    line-height: 1.6666;
-    font-weight: 400;
-  }
-
-.primary-btn {
-  color: #353f4f!important;
-  background-color: transparent!important;
-  border-color: #353f4f!important;
-  font-size: 1rem;
-  max-width: fit-content;
-  line-height: 1;
-  font-weight: 500;
-  padding: 0.8rem 1.7rem;
-  border: 2px solid transparent;
-  -webkit-transition: all 400ms ease-in-out;
-  -moz-transition: all 400ms ease-in-out;
-  -o-transition: all 400ms ease-in-out;
-  -ms-transition: all 400ms ease-in-out;
-  transition: all 400ms ease-in-out;
+h2 {
+  font-size: 2.375rem;
+  color: #353f4f;
+  font-weight: 800;
 }
-.primary-btn:hover {
-  
-  color: #fff !important;
-  border-color: #cdb05a !important;
-  background-color: #cdb05a !important;
+h5 {
+  color: #000;
 }
 
-
-.primary-btn-sml {
-  color: #fff!important;
-  background-color: #56aa0b !important;
-  border-color: #56aa0b !important;
-  font-size: 1rem;
-  line-height: 1;
-  font-weight: 500;
-  padding: 0.65rem 1.7rem;
-  border: 1px solid transparent;
-  -webkit-transition: all 400ms ease-in-out;
-  -moz-transition: all 400ms ease-in-out;
-  -o-transition: all 400ms ease-in-out;
-  -ms-transition: all 400ms ease-in-out;
-  transition: all 400ms ease-in-out;
+.mainbanner p {
+  display: block;
+  font-size: 0.95rem;
+  letter-spacing: 1.5px;
+  margin-bottom: 35px;
 }
-.primary-btn-sml:hover {
-  
-  color: #fff !important;
-  border-color: #cdb05a !important;
-  background-color: #cdb05a !important;
-}
-
-
-.secondary-btn {
-    color: #fff !important;
-    border-color: #cdb05a !important;
-    background-color: #cdb05a !important;
-    font-size: 1rem;
-    line-height: 1;
-    font-weight: 500;
-    padding: 0.8rem 1.7rem;
-    border: 2px solid transparent;
-    -webkit-transition: all 400ms ease-in-out;
-    -moz-transition: all 400ms ease-in-out;
-    -o-transition: all 400ms ease-in-out;
-    -ms-transition: all 400ms ease-in-out;
-    transition: all 400ms ease-in-out;
-}
-.secondary-btn:hover {
-    
-    color: #fff !important;
-    background-color: #353f4f !important;
-    border-color: #353f4f !important;
-}
-
-
-.btn-white {
-    color: #fff !important;
-    border-color: #fff !important;
-    background-color: #fff !important;
-    font-size: 1rem;
-    line-height: 1;
-    font-weight: 500;
-    padding: 0.8rem 1.7rem;
-    border: 2px solid transparent;
-    -webkit-transition: all 400ms ease-in-out;
-    -moz-transition: all 400ms ease-in-out;
-    -o-transition: all 400ms ease-in-out;
-    -ms-transition: all 400ms ease-in-out;
-    transition: all 400ms ease-in-out;
-}
-.btn-white:hover {
-    
-    color: #cdb05a !important;
-    background-color: #cdb05a !important;
-    border-color: #cdb05a !important;
-}
-
-
-.btn span{
-    display: block;
-    font-size: 0.7rem;
-    padding-bottom: 5px;
-}
-
-p.p-lg {
-    font-size: 1.225rem !Important;
-}
-
-h1{
-    font-size: 3.375rem;
-    color:#353f4f;
-    line-height: 1.1em;
-    font-weight: 800;
-}  
-
-h1 span, h2 span{ 
-    background: -webkit-radial-gradient(#c38e31, #916a23) !important;
-    -webkit-background-clip: text !important;
-    -webkit-text-fill-color: transparent 
-    }
-  
-    h2{
-      font-size: 2.375rem;
-      color:#353f4f;
-      font-weight: 800;
-  } 
-  h5{
-    color:#000;
-  }
-main {
-        background-image: linear-gradient(180deg, #fbf6e2, #fffcee);
-        
-        z-index: 1;
-        position: relative;
-}
-
-main:after {
-    position: absolute;
-    content: '';
-    width: 43%;
-    z-index: -1;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background-color: #fff;
-    -moz-box-shadow: 0 0 55px 35px #fff;
-    -webkit-box-shadow: 0 0 35px 35px #fff;
-    box-shadow: 0 0 35px 35px #fff;
-}
-
-
-.mainbanner p{
-        display: block;
-        font-size: 0.95rem;
-        letter-spacing: 1.5px;
-        margin-bottom: 35px;
-}
-
-  
-
-  .fixbtn{
-    display: none;
-    position: fixed;
-    bottom: 15px;
-    right:15px;
-    z-index: 1;
-  }
-  .fixbtn .btn{
-    
-    -webkit-box-shadow:1px 2px 5px 0px rgba(0,0,0,0.15);
-    -moz-box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.15);
-    box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.15);
-    width: 100% !Important;
-    padding: 7.5px 0px ;
-  }
-  .f-sml{
-    font-size: 0.8rem !important;
-  }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (max-width: 1200px) {
-    .mainbanner img{
-        width: 90%;
-        margin-top:20px;
-        height: auto;
-       }
+  .mainbanner img {
+    width: 90%;
+    margin-top: 20px;
+    height: auto;
+  }
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (max-width: 992px) {
-    
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (max-width: 768px) {}
+@media only screen and (max-width: 768px) {
+}
 
-
-  /* Extra small devices (phones, 600px and down) */
+/* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
-  
- main{
-  background: white !Important;
- }
+  h1 {
+    font-size: 2.775rem;
+  }
+  .mainbanner {
+    text-align: center;
+  }
+  .mainbanner p {
+    margin-top: 10px !important;
+    margin-bottom: 10px;
+  }
+  .mainbanner {
+    text-align: center;
+  }
 
-
-    h1{
-        font-size: 2.775rem;
-    }  
-    .mainbanner {
-        text-align: center;
-       }
-       .mainbanner p{
-        margin-top: 10px !important;
-        margin-bottom: 10px 
-       }
-
-    .mainbanner img{
-        width: 100%;
-       }
-       .mainbanner .btn, .header .btn{
-        display: none;
-       }
-      
-    
-
-    
-  .fixbtn {
-    background: #353f4f;
-    box-shadow: 0.375rem 0 1.5rem #6f747921;
-    display: block;
-    position: fixed;
-    bottom: 7px;
-    padding: 7px;
-    border-radius: 5px;
-    right: 7px;
-    z-index: 1;
-    left: 7px;
-    
-    backdrop-filter: blur(20px);
+  .mainbanner img {
+    width: 100%;
+  }
 }
-.fixbtn .btn{
-    
-  text-align: center;
-  min-width: 100%;
-}
-
-.fixbtn .primary-btn{
-    
-    color: #fff !important;
-    border-color: #fff !important;
-    background-color: transparent !important;
-}
-.fixbtn .primary-btn:hover{
-    
-    color: #000 !important;
-    border-color: #fff !important;
-    background-color: #fff !important;
-}
-.fixbtn .secondary-btn:hover{
-    
-    color: #000 !important;
-    border-color: #fff !important;
-    background-color: #fff !important;
-}
-.whatsappbtn{
-    position: fixed;
-    bottom: 80px;
-    right: 7px;
-}
-}
-
