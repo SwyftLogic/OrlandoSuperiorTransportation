@@ -7,10 +7,13 @@ import town from '../assets/Town.png';
 import Van from '../assets/Van.png';
 import Limousine from '../assets/Limousine.png';
 
-
+const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
 ---
 
 <Layout title="Orlando Transportatation Book Luxury Vechicle">
+  <svelte:head>
+      <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+ </svelte:head>
 <!-- component -->
   <div class="container max-w-screen-lg mx-auto">
     <h1 class="text-center pt-4 pb-3 mt-3">Book Your Private <span class="text-yellow-700">Transportation</span> In Orlando!</h1>
@@ -129,7 +132,8 @@ import Limousine from '../assets/Limousine.png';
                 <textarea type="text" name="comments" id="comments" class="h-30 border mt-1 rounded  w-full bg-gray-50" value="" placeholder="" />
               </div>
 
-      
+              <div class="cf-turnstile" data-sitekey={turnstileSiteKey} data-size="compact" />     
+
               <div class="col-span-6 text-right">
                 <div class="inline-flex items-end">
                   <button class="max-w-max leading-4 py-3 text-2lg bg-transparent hover:bg-yellow-600 border-2 border-black  px-6 text-center rounded text-black hover:text-white">Submit</button>
