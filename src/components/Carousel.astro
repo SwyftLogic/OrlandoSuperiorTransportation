@@ -14,7 +14,7 @@ import { Image } from 'astro:assets';
 
 					
 						<!-- Carousel wrapper -->
-						<div class="relative grid grid-cols-1 md:lg:xl:grid-cols-2 items-center h-svh">
+						<div class="relative grid grid-cols-1 md:lg:xl:grid-cols-2 items-center customheight">
 							<!-- Item 1 -->
 							<div class="hidden duration-900 ease-linear w-full bg-gradient-to-r from-white to-amber-50" data-carousel-item>
 								
@@ -22,7 +22,7 @@ import { Image } from 'astro:assets';
 								<div class="grid grid-cols-1 md:lg:xl:grid-cols-2 items-center">
 									<div class="grid sm:w-12/12  md:w-12/12" >
 										<p class="text-uppercase">Orlando Airport Transportation</p>
-										<h1>Airport <span class="text-yellow-700">Transportation</span> Made Easy!</h1>
+										<h2 class="text-5xl md:text-7xl">Airport <span class="text-yellow-700">Transportation</span> Made Easy!</h2>
 										<p class="p-lg mt-5"> Providing smooth rides and ensuring on-time arrivals with our reliable airport transportation services
 				</p>
 						
@@ -48,7 +48,7 @@ import { Image } from 'astro:assets';
 								<div class="grid grid-cols-1 md:lg:xl:grid-cols-2 items-center">
 									<div class="grid sm:w-12/12  md:w-12/12" >
 										<p class="text-uppercase">Disney world and nearby resorts transportation</p>
-										<h1>From Doorstep to  <span class="text-yellow-700">Disney</span> Magic!</h1>
+										<h2 class="text-5xl md:text-7xl">From Doorstep to  <span class="text-yellow-700">Disney</span> Magic!</h2>
 										<p class="p-lg mt-5"> Ensuring a secure and enjoyable travel moment of your visit with our secure & enjoyable transport services
 				</p>
 						
@@ -73,7 +73,7 @@ import { Image } from 'astro:assets';
 								<div class="grid grid-cols-1 md:lg:xl:grid-cols-2 items-center">
 									<div class="grid sm:w-12/12  md:w-12/12" >
 										<p class="text-uppercase">Universal studios and nearby resorts transportation</p>
-										<h1>Universal Thrills <span class="text-yellow-700">Await! </span></h1>
+										<h2 class="text-5xl md:text-7xl">Universal Thrills <span class="text-yellow-700">Await! </span></h2>
 										<p class="p-lg mt-5"> Unleash adventure with our seamless transportation to Universal Studios Orlando!
 						</p>
 						
@@ -99,8 +99,8 @@ import { Image } from 'astro:assets';
 
 								<div class="grid grid-cols-1 md:lg:xl:grid-cols-2 items-center">
 									<div class="grid sm:w-12/12  md:w-12/12" >
-										<p class="text-uppercase">Executive Transportation</p>
-										<h1>Arrive like a <span class="text-yellow-700">Boss! </span></h1>
+										<p class="text-uppercase">Executive Transportation </p>
+										<h2 class="text-5xl md:text-7xl">Arrive like a <span class="text-yellow-700">Boss! </span></h2>
 										<p class="p-lg mt-5"> Elevate your business travel experience with our executive transportation services.
 						</p>
 						
@@ -127,7 +127,7 @@ import { Image } from 'astro:assets';
 								<div class="grid grid-cols-1 md:lg:xl:grid-cols-2 items-center">
 									<div class="grid sm:w-12/12  md:w-12/12" >
 										<p class="text-uppercase">Wedding Limo</p>
-										<h1>Your Dream <span class="text-yellow-700">Wedding</span>  Ride!</h1>
+										<h2 class="text-5xl md:text-7xl">Your Dream <span class="text-yellow-700">Wedding</span>  Ride!</h2>
 										<p class="p-lg mt-5"> Make your special day even more memorable with our exquisite wedding limo services. 
 
 										</p>
@@ -155,7 +155,7 @@ import { Image } from 'astro:assets';
 								<div class="grid grid-cols-1 md:lg:xl:grid-cols-2 items-center">
 									<div class="grid sm:w-12/12  md:w-12/12" >
 										<p class="text-uppercase">Cruise Transportation </p>
-										<h1>Wave Goodbye to  <span class="text-yellow-700">Travel </span>Stress! </h1>
+										<h2 class="text-5xl md:text-7xl">Wave Goodbye to  <span class="text-yellow-700">Travel </span>Stress! </h2>
 										<p class="p-lg mt-5"> Let us navigate you to your cruise adventure with our reliable transportation services.</p>
 						
 						
@@ -173,27 +173,7 @@ import { Image } from 'astro:assets';
 
 							</div>
 						</div>
-						<div class="hidden md:block absolute left-00 bottom-10 z-40 flex mx-auto w-25 space-x-2  rounded-full py-0 px-2 bg-gray-200">
-							<button type="button" class="w-3 h-3 rounded-full border border-gray-400" aria-current="false" aria-label="Slide 1" data-carousel-slide-to="0"></button>
-							<button type="button" class="w-3 h-3 rounded-full border border-gray-400" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
-							<button type="button" class="w-3 h-3 rounded-full border border-gray-400" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
-							<button type="button" class="w-3 h-3 rounded-full border border-gray-400" aria-current="false" aria-label="Slide 4" data-carousel-slide-to="3"></button>
-							<button type="button" class="w-3 h-3 rounded-full border border-gray-400" aria-current="false" aria-label="Slide 5" data-carousel-slide-to="4"></button>
-							<button type="button" class="w-3 h-3 rounded-full border border-gray-400" aria-current="false" aria-label="Slide 6" data-carousel-slide-to="5"></button>
-						</div>
-						<!-- Slider controls -->
-						<button type="button" class="block md:hidden flex absolute top-0 bottom-0 left-0 z-30 justify-center items-center px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
-							<span class="inline-flex justify-center items-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-black/30  group-hover:bg-black/50 group-focus:ring-4 group-focus:ring-white  group-focus:outline-none">
-								<svg class="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
-								<span class="hidden">Previous</span>
-							</span>
-						</button>
-						<button type="button" class="block md:hidden flex absolute top-0 bottom-0 right-0 z-30 justify-center items-center px-4 cursor-pointer group focus:outline-none" data-carousel-next>
-							<span class="inline-flex justify-center items-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-black/30 group-hover:bg-black/50 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-								<svg class="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-								<span class="hidden">Next</span>
-							</span>
-						</button>
+						
 					
 
 				</div>
