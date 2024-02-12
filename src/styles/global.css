@@ -33,9 +33,6 @@ h5 {
   margin-bottom: 35px;
 }
 
-.customheight{
-  height: 650px;
-}
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (max-width: 1200px) {
   .mainbanner img {
@@ -55,9 +52,6 @@ h5 {
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
-  .customheight{
-    height: 750px;
-  }
   .mainbanner {
     text-align: center;
   }
