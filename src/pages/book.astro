@@ -23,7 +23,7 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
             <p class="font-medium text-2xl">Make a Reservation</p>
             <p class="pb-4">Booking Online With Orlando Transportations Service Is Fast, Easy, & Secure.</p>
           </div>
-          <form data-static-form-name="contact" method="post" class="contact-form" action="/api/submit">
+          <form data-static-form-name="contact" method="post" class="contact-form">
             <div class="flex flex-col grid grid-cols-6 gap-4">
 
               <div class="col-span-6 lg:col-span-2 mt-2">
@@ -148,7 +148,7 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
 
 </div>
 
-<script>
+<!-- <script>
   var contactForms = document.querySelectorAll(".contact-form");
 contactForms.forEach(form => {
     form.addEventListener('submit', async (event) => {
@@ -167,5 +167,5 @@ debugger;
         });
     });
 });
-</script>
+</script> -->
 </Layout>
