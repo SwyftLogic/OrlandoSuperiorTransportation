@@ -39,6 +39,9 @@ if (Astro.request.method === 'POST') {
 }
 
 async function sendEmail(data) {
+    const dateObject = new Date(data.get("pickup-date"));
+    const options = { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', timeZone: 'UTC' };
+    const formattedDate = dateObject.toLocaleString(undefined, options);
   const message = `
   <html>
     <body>
@@ -46,7 +49,7 @@ async function sendEmail(data) {
       <p><strong>Email:</strong> ${data.get("email")}</p>
       <p><strong>Phone:</strong> ${data.get("phone")}</p>
       <p><strong>Pickup Address:</strong> ${data.get("pickup-address")}</p>
-      <p><strong>Pickup Date:</strong> ${new Date(data.get("pickup-date")).toISOString()}</p>
+      <p><strong>Pickup Date:</strong> ${formattedDate}</p>
       <p><strong>Drop-off Address:</strong> ${data.get("dropoff-address")}</p>
       <p><strong>Passengers:</strong> ${data.get("passengers")}</p>
       <p><strong>Bags:</strong> ${data.get("bags")}</p>
