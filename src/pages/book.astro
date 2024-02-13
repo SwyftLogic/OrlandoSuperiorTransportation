@@ -274,7 +274,7 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
     };
 
     // Set POST request method to our netlify function
-    xhr.open("POST", "functions/contact");
+    xhr.open("POST", "/contact");
 
     // Set the request headers
     xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
