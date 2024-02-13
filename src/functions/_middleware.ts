@@ -1,4 +1,4 @@
-// import mailChannelsPlugin from "@cloudflare/pages-plugin-mailchannels";
+import mailChannelsPlugin from "@cloudflare/pages-plugin-mailchannels";
 
 const handleMailChannelsPlugin = async (context) => {
   //Turnstile
@@ -12,7 +12,7 @@ const handleMailChannelsPlugin = async (context) => {
 
   // Validate the token by calling the "/siteverify" API.
   let formData = new FormData();
-  formData.append("secret", "0x4AAAAAAARyPZqHibq-LKtF");
+  formData.append("secret", "0x4AAAAAAARyPTQ7VAXpuw53CHh-idHnfZ0");
   formData.append("response", token);
   formData.append("remoteip", ip);
 
@@ -40,7 +40,7 @@ const handleMailChannelsPlugin = async (context) => {
   //     ],
   //     from: {
   //         name: "Info",
-  //         email: "info@orlandotransportationsservice.com",
+  //         email: "info@orlandosuperiortransportation.com",
   //     },
   //     subject: "New Contact",
   //     respondWith: () => {

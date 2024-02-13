@@ -8,39 +8,39 @@ import Van from '../assets/Van.png';
 import Limousine from '../assets/Limousine.png';
 
 const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
-var fullname = "";
-if (Astro.request.method === 'POST') {
-  try{
-    // Getting posted data from our contact form
-    const data = await Astro.request.formData();
-    const token = data.get("cf-turnstile-response");
+// var fullname = "";
+// if (Astro.request.method === 'POST') {
+//   try{
+//     // Getting posted data from our contact form
+//     const data = await Astro.request.formData();
+//     const token = data.get("cf-turnstile-response");
 
-  // Validate the token by calling the "/siteverify" API.
-  let formData = new FormData();
-  formData.append("secret", "0x4AAAAAAARyPTQ7VAXpuw53CHh-idHnfZ0");
-  formData.append("response", token);
+//   // Validate the token by calling the "/siteverify" API.
+//   let formData = new FormData();
+//   formData.append("secret", "0x4AAAAAAARyPTQ7VAXpuw53CHh-idHnfZ0");
+//   formData.append("response", token);
 
-  const result = await fetch(
-    "https://challenges.cloudflare.com/turnstile/v0/siteverify",
-    {
-      body: formData,
-      method: "POST",
-    }
-  );
-  const outcome = await result.json();
+//   const result = await fetch(
+//     "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+//     {
+//       body: formData,
+//       method: "POST",
+//     }
+//   );
+//   const outcome = await result.json();
   
-  if (!outcome.success) {
-    console.log("turnstile invalid");
-    fullname = 'invalid';
-    // return new Response("The provided Turnstile token was not valid!");
-  } else {
-    fullname = 'valid';
-    // return new Response("Valid");
-  }
-  } catch (error) {
-    console.error(error);
-  }
-}
+//   if (!outcome.success) {
+//     console.log("turnstile invalid");
+//     fullname = 'invalid';
+//     // return new Response("The provided Turnstile token was not valid!");
+//   } else {
+//     fullname = 'valid';
+//     // return new Response("Valid");
+//   }
+//   } catch (error) {
+//     console.error(error);
+//   }
+// }
 ---
 
 <Layout title="Orlando Transportatation Book Luxury Vechicle">
@@ -56,8 +56,7 @@ if (Astro.request.method === 'POST') {
             <p class="font-medium text-2xl">Make a Reservation</p>
             <p class="pb-4">Booking Online With Orlando Transportations Service Is Fast, Easy, & Secure.</p>
           </div>
-          <form method="POST">
-            {fullname}
+          <form method="POST" data-static-form-name="contact">
             <div class="flex flex-col grid grid-cols-6 gap-4">
               <div class="col-span-6 lg:col-span-2 mt-2">
                 <label for="full_name">Full Name</label>
