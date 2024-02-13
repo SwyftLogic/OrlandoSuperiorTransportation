@@ -8,80 +8,81 @@ import Van from '../assets/Van.png';
 import Limousine from '../assets/Limousine.png';
 
 const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
-// var responseMessage = '';
-// if (Astro.request.method === 'POST') {
-//   try {
-//     const data = await Astro.request.formData();
-//     const token = data.get("cf-turnstile-response");
+var responseMessage = '';
+if (Astro.request.method === 'POST') {
+  try{
+    const data = await Astro.request.formData();
+    const token = data.get("cf-turnstile-response");
 
-//     let formData = new FormData();
-//     formData.append("secret", '0x4AAAAAAARyPTQ7VAXpuw53CHh-idHnfZ0');
-//     formData.append("response", token);
+  let formData = new FormData();
+  formData.append("secret", '0x4AAAAAAARyPTQ7VAXpuw53CHh-idHnfZ0');
+  formData.append("response", token);
 
-//     const result = await fetch(
-//       "https://challenges.cloudflare.com/turnstile/v0/siteverify",
-//       {
-//         body: formData,
-//         method: "POST",
-//       }
-//     );
-//     const outcome = await result.json();
+  const result = await fetch(
+    "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+    {
+      body: formData,
+      method: "POST",
+    }
+  );
+  const outcome = await result.json();
   
-//     if (!outcome.success) {
-//       responseMessage = "Turnstile verification failed. Please try again.";
-//     } else {
-//       await sendEmail(data);
-//       responseMessage = "Thanks for reaching out.";
-//     }
-//   } catch (error) {
-//     responseMessage = "An error occurred. Please try again later.";
-//   }
-// }
+  if (!outcome.success) {
+    responseMessage = "Turnstile verification failed. Please try again.";
+  } else {
+    await sendEmail(data);
+    responseMessage = "Thanks for reaching out.";
+  }
+  } catch (error) {
+    responseMessage = "An error occurred. Please try again later.";
+  }
+}
 
-// async function sendEmail(data) {
-//   const message = `
-//   <html>
-//     <body>
-//       <p><strong>Full Name:</strong> ${data.get("full_name")}</p>
-//       <p><strong>Email:</strong> ${data.get("email")}</p>
-//       <p><strong>Phone:</strong> ${data.get("phone")}</p>
-//       <p><strong>Pickup Address:</strong> ${data.get("pickup-address")}</p>
-//       <p><strong>Pickup Date:</strong> ${data.get("pickup-date")}</p>
-//       <p><strong>Drop-off Address:</strong> ${data.get("dropoff-address")}</p>
-//       <p><strong>Passengers:</strong> ${data.get("passengers")}</p>
-//       <p><strong>Bags:</strong> ${data.get("bags")}</p>
-//       <p><strong>Preferred Vehicle:</strong> ${data.get("preferred-vehicle")}</p>
-//       <p><strong>Flight Number:</strong> ${data.get("flightnumber")}</p>
-//       <p><strong>Child Seat:</strong> ${data.get("childseat") == null ? 'No' : 'Yes'}</p>
-//       <p><strong>Booster Seat:</strong> ${data.get("boosterseat") == null ? 'No' : 'Yes'}</p>
-//       <p><strong>Comments:</strong> ${data.get("comments")}</p>
-//     </body>
-//   </html>`;
-//   const response = await fetch("https://api.mailchannels.net/tx/v1/send", {
-//         method: "POST",
-//         headers: {
-//             'content-type': 'application/json',
-//         },
-//         body: JSON.stringify({
-//             personalizations: [
-//                 {
-//                     to: [{ email: 'hassaan@swyftlogic.org', name: 'Hassaan' }],
-//                 },
-//             ],
-//             from: {
-//                 email: 'info@orlandosuperiortransportation.com',
-//                 name: "Website",
-//             },
-//             subject: 'Website Inquiry',
-//             content: [
-//                 {
-//                     type: 'text/html',
-//                     value: message,
-//                 },
-//             ],
-//         }),
-//     })
-// }
+async function sendEmail(data) {
+  const message = `
+  <html>
+    <body>
+      <p><strong>Full Name:</strong> ${data.get("full_name")}</p>
+      <p><strong>Email:</strong> ${data.get("email")}</p>
+      <p><strong>Phone:</strong> ${data.get("phone")}</p>
+      <p><strong>Pickup Address:</strong> ${data.get("pickup-address")}</p>
+      <p><strong>Pickup Date:</strong> ${data.get("pickup-date")}</p>
+      <p><strong>Drop-off Address:</strong> ${data.get("dropoff-address")}</p>
+      <p><strong>Passengers:</strong> ${data.get("passengers")}</p>
+      <p><strong>Bags:</strong> ${data.get("bags")}</p>
+      <p><strong>Preferred Vehicle:</strong> ${data.get("preferred-vehicle")}</p>
+      <p><strong>Flight Number:</strong> ${data.get("flightnumber")}</p>
+      <p><strong>Child Seat:</strong> ${data.get("childseat") == null ? 'No' : 'Yes'}</p>
+      <p><strong>Booster Seat:</strong> ${data.get("boosterseat") == null ? 'No' : 'Yes'}</p>
+      <p><strong>Comments:</strong> ${data.get("comments")}</p>
+    </body>
+  </html>`;
+  const response = await fetch("https://api.mailchannels.net/tx/v1/send", {
+        method: "POST",
+        headers: {
+            'content-type': 'application/json',
+        },
+        body: JSON.stringify({
+            personalizations: [
+                {
+                    to: [{ email: 'hassaan@swyftlogic.org', name: 'Hassaan' }],
+                    cc: [{ email: 'umair@swyftlogic.com', name: 'Umair' }],
+                },
+            ],
+            from: {
+                email: 'info@orlandosuperiortransportation.com',
+                name: "Orlando Superior Transportation",
+            },
+            subject: 'Orlando Superior Transportation',
+            content: [
+                {
+                    type: 'text/html',
+                    value: message,
+                },
+            ],
+        }),
+    })
+}
 ---
 
 <Layout title="Orlando Transportatation Book Luxury Vechicle">
@@ -98,7 +99,7 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
             <p class="pb-4">Booking Online With Orlando Transportations Service Is Fast, Easy, & Secure.</p>
           </div>
           <div id='alertTemplate' class='space-y-4'></div>
-          <form method="POST" id="contact" name="contact" method="GET">
+          <form method="POST">
             <div class="flex flex-col grid grid-cols-6 gap-4">
               <div class="col-span-6 lg:col-span-2 mt-2">
                 <label for="full_name">Full Name</label>
@@ -207,7 +208,7 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
               </div>
 
               <div class="cf-turnstile" data-sitekey={turnstileSiteKey} data-size="compact" />     
-              <!-- {responseMessage} -->
+              {responseMessage}
               <div class="col-span-6 text-right">
                 <div class="inline-flex items-end">
                   <input type="submit" class="max-w-max leading-4 py-3 text-2lg bg-transparent hover:bg-yellow-600 border-2 border-black  px-6 text-center rounded text-black hover:text-white" value="Submit" />
@@ -257,45 +258,4 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
   incrementButtons.forEach(btn => {
     btn.addEventListener("click", increment);
   });
-  
-  const form = document.getElementById("contact");
-  var xhr = new XMLHttpRequest();
-
-  const handleFormSubmission = (event) => {
-    debugger;
-    // prevent page from reloading
-    event.preventDefault();
-
-    const data = event.target.elements;
-
-    // put into JSON object
-    const formData = {
-      fname: '',
-    };
-
-    // Set POST request method to our netlify function
-    xhr.open("POST", "/contact");
-
-    // Set the request headers
-    xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
-
-    // Send the data as JSON to our netlify function
-    xhr.send(JSON.stringify(formData));
-
-    // Handle the response
-    xhr.onload = function () {
-      const response = JSON.parse(xhr.responseText);
-
-      if (xhr.status === 200) {
-        // The request was successful
-        console.log("success");
-      } else {
-        // The request failed
-        console.log("fail");
-      }
-    };
-  };
-
-  // add the submission event listener
-  form.addEventListener("submit", handleFormSubmission, true);
 </script>
