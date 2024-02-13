@@ -59,9 +59,9 @@ async function sendEmail(data) {
     message += '<br />';
     message += 'Flight Number: ' + data.get("flightnumber");
     message += '<br />';
-    message += 'Child Seat: ' + data.get("childseat");
+    message += 'Child Seat: ' + (data.get("childseat") == null ? 'No' : 'Yes');
     message += '<br />';
-    message += 'Booster Seat: ' + data.get("boosterseat");
+    message += 'Booster Seat: ' + (data.get("boosterseat") == null ? 'No' : 'Yes');
     message += '<br />';
     message += 'Comments: ' + data.get("comments");
   const response = await fetch("https://api.mailchannels.net/tx/v1/send", {
