@@ -40,8 +40,15 @@ if (Astro.request.method === 'POST') {
 
 async function sendEmail(data) {
     const dateObject = new Date(data.get("pickup-date"));
-    const options = { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', timeZone: 'UTC' };
-    const formattedDate = dateObject.toLocaleString(undefined, options);
+    const formattedDate = new Intl.DateTimeFormat('en-US', {
+  year: 'numeric',
+  month: 'numeric',
+  day: 'numeric',
+  hour: 'numeric',
+  minute: 'numeric',
+  second: 'numeric',
+  timeZone: 'UTC'
+}).format(dateObject);
   const message = `
   <html>
     <body>
@@ -69,7 +76,7 @@ async function sendEmail(data) {
             personalizations: [
                 {
                     to: [{ email: 'hassaan@swyftlogic.org', name: 'Hassaan' }],
-                    cc: [{ email: 'umair@swyftlogic.com', name: 'Umair' }],
+                    // cc: [{ email: 'umair@swyftlogic.com', name: 'Umair' }],
                 },
             ],
             from: {
