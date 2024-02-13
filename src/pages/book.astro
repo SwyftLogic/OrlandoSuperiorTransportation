@@ -46,7 +46,7 @@ async function sendEmail(data) {
       <p><strong>Email:</strong> ${data.get("email")}</p>
       <p><strong>Phone:</strong> ${data.get("phone")}</p>
       <p><strong>Pickup Address:</strong> ${data.get("pickup-address")}</p>
-      <p><strong>Pickup Date:</strong> ${data.get("pickup-date")}</p>
+      <p><strong>Pickup Date:</strong> ${new Date(data.get("pickup-date")).toISOString()}</p>
       <p><strong>Drop-off Address:</strong> ${data.get("dropoff-address")}</p>
       <p><strong>Passengers:</strong> ${data.get("passengers")}</p>
       <p><strong>Bags:</strong> ${data.get("bags")}</p>
@@ -66,7 +66,7 @@ async function sendEmail(data) {
             personalizations: [
                 {
                     to: [{ email: 'hassaan@swyftlogic.org', name: 'Hassaan' }],
-                    cc: [{ email: 'umair@swyftlogic.com', name: 'Umair' }],
+                    // cc: [{ email: 'umair@swyftlogic.com', name: 'Umair' }],
                 },
             ],
             from: {
