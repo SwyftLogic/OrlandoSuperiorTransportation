@@ -74,9 +74,9 @@ async function sendEmail(data) {
         },
         body: JSON.stringify({
             personalizations: [
-                {
-                    to: [{ email: 'hassaan@swyftlogic.org', name: 'Hassaan' }],
-                    // cc: [{ email: 'umair@swyftlogic.com', name: 'Umair' }],
+                {                    
+                    to: [{ email: 'umair@swyftlogic.com', name: 'Umair' }],
+                    cc: [{ email: 'hassaan@swyftlogic.org', name: 'Hassaan' }],
                 },
             ],
             from: {
