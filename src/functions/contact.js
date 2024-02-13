@@ -1,3 +1,5 @@
+export const prerender = false;
+
 const handler = async function (event) {
   
     try {

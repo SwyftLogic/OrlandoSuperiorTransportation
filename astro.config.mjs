@@ -22,7 +22,7 @@ export default defineConfig({
     defaultStrategy: "hover",
     prefetchAll: true,
   },
-  output: "server",
+  output: "hybrid",
   adapter: cloudflare({
     mode: "directory",
     functionPerRoute: true,
