@@ -6,10 +6,9 @@ import suv from '../assets/SUV.png';
 import town from '../assets/Town.png';
 import Van from '../assets/Van.png';
 import Limousine from '../assets/Limousine.png';
-import mailChannelsPlugin from "@cloudflare/pages-plugin-mailchannels";
 
 const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
-var fullname = "";
+var responseMessage = '';
 if (Astro.request.method === 'POST') {
   try{
     const data = await Astro.request.formData();
@@ -30,11 +29,19 @@ if (Astro.request.method === 'POST') {
   
   if (!outcome.success) {
     console.log("turnstile invalid");
+    responseMessage = "Turnstile verification failed. Please try again.";
   } else {
     await sendEmail(data);
+    responseMessage = "Thanks for reaching out.";
+    return new Response(
+    JSON.stringify({
+      message: "Success!"
+    }),
+    { status: 200 }
+  );
   }
   } catch (error) {
-    console.error(error);
+    responseMessage = "An error occurred. Please try again later.";
   }
 }
 
