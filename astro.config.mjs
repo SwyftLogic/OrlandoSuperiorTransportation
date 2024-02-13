@@ -4,7 +4,6 @@ import tailwind from "@astrojs/tailwind";
 
 // https://astro.build/config
 export default defineConfig({
-  output: 'hybrid',
   site: 'https://new-custom-template.orlandosuperiortransportation.pages.dev',
   integrations: [sitemap(), tailwind()],
   prefetch: {
