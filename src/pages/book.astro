@@ -39,31 +39,24 @@ if (Astro.request.method === 'POST') {
 }
 
 async function sendEmail(data) {
-  let message = 'Full Name: ' + data.get("full_name");
-    message += '<br />';
-    message += 'Email: ' + data.get("email");
-    message += '<br />';
-    message += 'Phone: ' + data.get("phone");
-    message += '<br />';
-    message += 'Pickup Address: ' + data.get("pickup-address");
-    message += '<br />';
-    message += 'Pickup Date: ' + data.get("pickup-date");
-    message += '<br />';
-    message += 'Drop-off Address: ' + data.get("dropoff-address");
-    message += '<br />';
-    message += 'Passengers: ' + data.get("passengers");
-    message += '<br />';
-    message += 'Bags: ' + data.get("bags");
-    message += '<br />';
-    message += 'Preferred Vehicle: ' + data.get("preferred-vehicle");
-    message += '<br />';
-    message += 'Flight Number: ' + data.get("flightnumber");
-    message += '<br />';
-    message += 'Child Seat: ' + (data.get("childseat") == null ? 'No' : 'Yes');
-    message += '<br />';
-    message += 'Booster Seat: ' + (data.get("boosterseat") == null ? 'No' : 'Yes');
-    message += '<br />';
-    message += 'Comments: ' + data.get("comments");
+  const htmlMessage = `
+  <html>
+    <body>
+      <p><strong>Full Name:</strong> ${data.get("full_name")}</p>
+      <p><strong>Email:</strong> ${data.get("email")}</p>
+      <p><strong>Phone:</strong> ${data.get("phone")}</p>
+      <p><strong>Pickup Address:</strong> ${data.get("pickup-address")}</p>
+      <p><strong>Pickup Date:</strong> ${data.get("pickup-date")}</p>
+      <p><strong>Drop-off Address:</strong> ${data.get("dropoff-address")}</p>
+      <p><strong>Passengers:</strong> ${data.get("passengers")}</p>
+      <p><strong>Bags:</strong> ${data.get("bags")}</p>
+      <p><strong>Preferred Vehicle:</strong> ${data.get("preferred-vehicle")}</p>
+      <p><strong>Flight Number:</strong> ${data.get("flightnumber")}</p>
+      <p><strong>Child Seat:</strong> ${data.get("childseat") == null ? 'No' : 'Yes'}</p>
+      <p><strong>Booster Seat:</strong> ${data.get("boosterseat") == null ? 'No' : 'Yes'}</p>
+      <p><strong>Comments:</strong> ${data.get("comments")}</p>
+    </body>
+  </html>`;
   const response = await fetch("https://api.mailchannels.net/tx/v1/send", {
         method: "POST",
         headers: {
