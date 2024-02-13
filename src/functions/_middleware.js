@@ -4,7 +4,6 @@ const handleMailChannelsPlugin = async (context) => {
   //Turnstile
   debugger;
   const request = context.request;
-  console.log("enter hmp");
   const body = await request.formData();
   // Turnstile injects a token in "cf-turnstile-response".
   const token = body.get("cf-turnstile-response");
