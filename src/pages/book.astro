@@ -39,7 +39,7 @@ if (Astro.request.method === 'POST') {
 }
 
 async function sendEmail(data) {
-  const htmlMessage = `
+  const message = `
   <html>
     <body>
       <p><strong>Full Name:</strong> ${data.get("full_name")}</p>
