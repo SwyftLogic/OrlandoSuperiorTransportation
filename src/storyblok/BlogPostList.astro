@@ -1,0 +1,51 @@
+---
+import { storyblokEditable } from "@storyblok/astro";
+import { useStoryblokApi } from "@storyblok/astro";
+import { Image } from 'astro:assets';
+
+const storyblokApi = useStoryblokApi();
+
+const { data } = await storyblokApi.get("cdn/stories", {
+  version: import.meta.env.DEV ? "draft" : "published",
+  content_type: "blogPost",
+});
+
+const posts = data.stories.map((story) => {
+  return {
+    title: story.content.title,
+    date: new Date(story.published_at).toLocaleDateString("en-US", {
+      dateStyle: "full",
+    }),
+    description: story.content.description,
+    slug: story.full_slug,
+    image: story.content.image
+  };
+});
+
+const { blok } = Astro.props;
+---
+
+<ul {...storyblokEditable(blok)}>
+  {
+    
+    posts.map((post) => (
+      <li
+        style={{
+          marginBottom: "20px",
+          padding: "10px",
+          border: "1px solid #ccc",
+          borderRadius: "5px",
+        }}
+      >
+        <p style={{ fontWeight: "bold" }}>
+          <time>{post.date}</time>
+        </p>
+        <p style={{ fontSize: "1.2em", margin: "5px 0" }}>
+          <a href={`/blog/${post.slug}`}>{post.title}</a>
+        </p>
+        <Image src={post.image} alt={post.title} width="640" height="670" />
+        <p style={{ color: "#666" }}>{post.description}</p>
+      </li>
+    ))
+  }
+</ul>

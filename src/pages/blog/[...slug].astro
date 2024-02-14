@@ -1,0 +1,23 @@
+---
+export const prerender = false;
+import Layout from "../../layouts/Layout.astro";
+import { useStoryblokApi } from '@storyblok/astro'
+import StoryblokComponent from '@storyblok/astro/StoryblokComponent.astro'
+
+const storyblokApi = useStoryblokApi()
+const slug = Astro.params.slug;
+let content;
+try {
+  const { data } = await storyblokApi.get(`cdn/stories/${slug}`, {
+    version: import.meta.env.DEV ? "draft" : "published"
+  });
+  content = data.story.content
+} catch (error) {
+  return Astro.redirect('/404')
+}
+---
+<Layout title="Transportation services - Orlando Superior Transportation">
+    <div class="container mx-auto md:lg:xl:px-20">
+    <StoryblokComponent blok={content} />
+</div>
+</Layout>
