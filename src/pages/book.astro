@@ -9,7 +9,8 @@ import town from '../assets/Town.png';
 import Van from '../assets/Van.png';
 import Limousine from '../assets/Limousine.png';
 
-const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
+const turnstileSiteKey = import.meta.env.TURNSTILE_SITE_KEY;
+const turnstileSecretKey = import.meta.env.TURNSTILE_SECRET_KEY;
 var responseMessage = '';
 if (Astro.request.method === 'POST') {
   try{
@@ -17,7 +18,7 @@ if (Astro.request.method === 'POST') {
     const token = data.get("cf-turnstile-response");
 
   let formData = new FormData();
-  formData.append("secret", '0x4AAAAAAARyPTQ7VAXpuw53CHh-idHnfZ0');
+  formData.append("secret", turnstileSecretKey);
   formData.append("response", token);
 
   const result = await fetch(
@@ -77,13 +78,12 @@ async function sendEmail(data) {
         body: JSON.stringify({
             personalizations: [
                 {                    
-                    to: [{ email: 'umair@swyftlogic.com', name: 'Umair' }],
-                    cc: [{ email: 'hassaan@swyftlogic.org', name: 'Hassaan' }],
+                    to: [{ email: import.meta.env.EMAIL_TO, name: import.meta.env.NAME_TO }]
                 },
             ],
             from: {
-                email: 'info@orlandosuperiortransportation.com',
-                name: "Orlando Superior Transportation",
+                email: import.meta.env.EMAIL_FROM,
+                name:  import.meta.env.NAME_FROM,
             },
             subject: 'Orlando Superior Transportation',
             content: [
