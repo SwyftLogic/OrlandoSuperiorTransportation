@@ -1,7 +1,7 @@
 ---
 import { storyblokEditable } from "@storyblok/astro";
 import { useStoryblokApi } from "@storyblok/astro";
-import { Image } from 'astro:assets';
+import { Image } from "astro:assets";
 
 const storyblokApi = useStoryblokApi();
 
@@ -18,7 +18,7 @@ const posts = data.stories.map((story) => {
     }),
     description: story.content.description,
     slug: story.full_slug,
-    image: story.content.image
+    image: story.content.image,
   };
 });
 
@@ -27,7 +27,6 @@ const { blok } = Astro.props;
 
 <ul {...storyblokEditable(blok)}>
   {
-    
     posts.map((post) => (
       <li
         style={{
@@ -45,6 +44,15 @@ const { blok } = Astro.props;
         </p>
         <Image src={post.image} alt={post.title} width="640" height="670" />
         <p style={{ color: "#666" }}>{post.description}</p>
+
+        <div style={{ margin: "10px 0" }}>
+          <a
+            href={`/blog/${post.slug}`}
+            class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
+          >
+            Read More
+          </a>
+        </div>
       </li>
     ))
   }
