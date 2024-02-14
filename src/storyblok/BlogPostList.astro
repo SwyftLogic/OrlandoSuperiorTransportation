@@ -25,35 +25,36 @@ const posts = data.stories.map((story) => {
 const { blok } = Astro.props;
 ---
 
-<ul {...storyblokEditable(blok)}>
-  {
+
+
+<div {...storyblokEditable(blok)}>
+{
     posts.map((post) => (
-      <li
-        style={{
-          marginBottom: "20px",
-          padding: "10px",
-          border: "1px solid #ccc",
-          borderRadius: "5px",
-        }}
-      >
-        <p style={{ fontWeight: "bold" }}>
+
+<div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
+    <a href="#">
+        <Image src={post.image} alt={post.title} width="640" height="670" class="rounded-t-lg" />
+    </a>
+    <div class="p-5">
+        <a href="#">
+            <h1 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{post.title}
+</h1>
+        </a>
+ <p style={{ fontWeight: "bold" }}>
           <time>{post.date}</time>
         </p>
-        <p style={{ fontSize: "1.2em", margin: "5px 0" }}>
-          <a href={`/blog/${post.slug}`}>{post.title}</a>
-        </p>
-        <Image src={post.image} alt={post.title} width="640" height="670" />
-        <p style={{ color: "#666" }}>{post.description}</p>
+        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{post.description}
+</p>
+        <a href={`/blog/${post.slug}`} class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            Read more
+            <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+            </svg>
+        </a>
+    </div>
+</div>
 
-        <div style={{ margin: "10px 0" }}>
-          <a
-            href={`/blog/${post.slug}`}
-            class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
-          >
-            Read More
-          </a>
-        </div>
-      </li>
-    ))
+))
   }
-</ul>
+</div>
+
