@@ -1,14 +1,28 @@
 ---
 export const prerender = false;
-import Layout from '../../layouts/Layout.astro';
+import Layout from "../../layouts/Layout.astro";
+import { Image } from "astro:assets";
 
 const { slug } = Astro.params;
 
-let res = await fetch(`${import.meta.env.BLOG_SITE}/wp-json/wp/v2/posts?slug=${slug}&_embed`);
+let res = await fetch(
+  `${import.meta.env.BLOG_SITE}/wp-json/wp/v2/posts?slug=${slug}&_fields=title,date,content,_links&_embed`
+);
 let [post] = await res.json();
-
 ---
 <Layout title="Transportation services - Orlando Superior Transportation">
-  <h1 set:html={post.title.rendered} style={{ marginBottom: "5px", padding: "10px" }} />
+  <h1
+    set:html={post.title.rendered}
+    style={{ marginBottom: "5px", padding: "10px" }}
+  />
+  <Image
+    src={post._embedded["wp:featuredmedia"]['0'].media_details.sizes.full
+      .source_url}
+    alt={post.title.rendered}
+    width="640"
+    height="670"
+    class="rounded-t-lg"
+  />
+  <p>Author: {post._embedded["author"]['0'].name}</p>
   <Fragment set:html={post.content.rendered} />
 </Layout>
