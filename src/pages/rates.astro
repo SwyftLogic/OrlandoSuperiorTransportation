@@ -15,42 +15,2251 @@ import { Image } from 'astro:assets';
 
     
 
-<div class="mb-4 border-b border-gray-200 dark:border-gray-700">
+<div class="mb-2 mt-3 ">
     <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="default-tab" data-tabs-toggle="#default-tab-content" role="tablist">
         <li class="me-2" role="presentation">
-            <button class="inline-block p-4 border-b-2 rounded-t-lg" id="profile-tab" data-tabs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Town Car</button>
+            <button class="inline-block p-3 md:p-6 py-1 md:py-2 text-sm md:text-1xl border-2 rounded-full mb-2" id="Towncar-tab" data-tabs-target="#Towncar" type="button" role="tab" aria-controls="Towncar" aria-selected="false">Town Car</button>
         </li>
         <li class="me-2" role="presentation">
-            <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="dashboard-tab" data-tabs-target="#dashboard" type="button" role="tab" aria-controls="dashboard" aria-selected="false">Suv</button>
+            <button class="inline-block p-3 md:p-6 py-1 md:py-2 text-sm md:text-1xl border-2 rounded-full mb-2" id="Suvcar-tab" data-tabs-target="#Suvcar" type="button" role="tab" aria-controls="Suvcar" aria-selected="false">Suv</button>
         </li>
         <li class="me-2" role="presentation">
-            <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="settings-tab" data-tabs-target="#settings" type="button" role="tab" aria-controls="settings" aria-selected="false">Van</button>
+            <button class="inline-block p-3 md:p-6 py-1 md:py-2 text-sm md:text-1xl border-2 rounded-full mb-2" id="van-tab" data-tabs-target="#van" type="button" role="tab" aria-controls="van" aria-selected="false">Van</button>
         </li>
         <li class="me-2" role="presentation">
-            <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="settings-tab" data-tabs-target="#settings2" type="button" role="tab" aria-controls="settings2" aria-selected="false">Mini Wan</button>
+            <button class="inline-block p-3 md:p-6 py-1 md:py-2 text-sm md:text-1xl border-2 rounded-full mb-2" id="miniwan-tab" data-tabs-target="#miniwan" type="button" role="tab" aria-controls="miniwan" aria-selected="false">Mini Wan</button>
         </li>
         <li role="presentation">
-            <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="contacts-tab" data-tabs-target="#contacts" type="button" role="tab" aria-controls="contacts" aria-selected="false">Limousine</button>
+            <button class="inline-block p-3 md:p-6 py-1 md:py-2 text-sm md:text-1xl border-2 rounded-full mb-2" id="limousine-tab" data-tabs-target="#limousine" type="button" role="tab" aria-controls="limousine" aria-selected="false">Limousine</button>
         </li>
     </ul>
 </div>
-<div id="default-tab-content">
-    <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-        <p class="text-sm text-gray-500 dark:text-gray-400">This is some placeholder content the <strong class="font-medium text-gray-800 dark:text-white">Profile tab's associated content</strong>. Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling.</p>
-    </div>
-    <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
-        <p class="text-sm text-gray-500 dark:text-gray-400">This is some placeholder content the <strong class="font-medium text-gray-800 dark:text-white">Dashboard tab's associated content</strong>. Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling.</p>
-    </div>
-    <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="settings" role="tabpanel" aria-labelledby="settings-tab">
-        <p class="text-sm text-gray-500 dark:text-gray-400">This is some placeholder content the <strong class="font-medium text-gray-800 dark:text-white">Settings tab's associated content</strong>. Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling.</p>
-    </div>
+<div id="default-tab-content" class="pb-3">
 
-    <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="settings2" role="tabpanel" aria-labelledby="settings-tab">
-        <p class="text-sm text-gray-500 dark:text-gray-400">This is some placeholder content the <strong class="font-medium text-gray-800 dark:text-white">Settings tab's associated content</strong>. Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling.</p>
+
+    <div class="hidden" id="Towncar" role="tabpanel" aria-labelledby="Towncar-tab">
+       
+<div class='flex '>
+    <div class="min-w-full">
+       
+ 
+         <div class="grid grid-cols-1 sm:grid-cols-3 gap-[20px]">
+             <div class="w-full bg-[#fff] rounded-[10px] shadow-[0px 1px 2px #E1E3E5] border border-[#E1E3E5] divide-y">
+                 <div class="pt-[15px] px-[25px] pb-[25px]">
+                    
+                    
+                     <div>
+                         <p class="mt-3 text-[#00153B] text-[19px] leading-[24px] font-bold">
+                            From Orlando International Airport To Hotels & Resorts
+
+                         </p>
+                        
+                     </div>
+ 
+                    
+                 </div>
+ 
+                 <div class="pt-[25px] px-[25px] pb-[35px]">
+                     <div class=" text-[14px] leading-[24px] font-medium">
+                        
+                            <div class="flex  mx-auto mb-1 pb-1">
+                                <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                                <div class="flex flex-col ps-2 leading-4">All WDW Disney Property Resorts</div>
+                            </div>
+
+                            <div class="flex  mx-auto mb-1 pb-1">
+                                <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                                <div class="flex flex-col ps-2 leading-4">Universal Studios Area Hotels</div>
+                            </div>
+
+                            <div class="flex  mx-auto mb-1 pb-1">
+                                <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                                <div class="flex flex-col ps-2 leading-4">International Drive Hotels</div>
+                            </div>
+
+                            <div class="flex  mx-auto mb-1 pb-1">
+                                <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                                <div class="flex flex-col ps-2 leading-4">Disney Springs Hotels</div>
+                            </div>
+
+                            <div class="flex  mx-auto mb-1 pb-1">
+                                <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                                <div class="flex flex-col ps-2 leading-4">Kissimmee 192 Area Hotels</div>
+                            </div>
+
+                            <div class="flex  mx-auto mb-1 pb-1">
+                                <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                                <div class="flex flex-col ps-2 leading-4">Omni Championsgate / Reunion</div>
+                            </div>   
+                            
+                                
+                            <div class="grid grid-cols-2 gap-[10px] mt-3">
+                                <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                    <p class="text-[#00153B] text-[12px] font-bold">
+                                        <b>One Way</b><br> $95 +20% da
+                                    </p>
+                                </div>
+                                <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                    <p class="text-[#00153B] text-[12px] font-bold">
+                                        <b>Round Trip</b><br>$95 +20%
+                                    </p>
+                                </div>
+                            </div>
+                        
+
+
+                        
+                     </div>
+ 
+                     <div class="mt-[25px]">
+                        <a href="/book" class="block p-1 w-full text-center rounded-full from-rose-400 via-fuchsia-500 to-indigo-500 bg-gradient-to-r">
+                            <span class="block text-black px-4 py-2 font-semibold rounded-full bg-white hover:bg-transparent hover:text-white transition">Book Now</span>
+                          </a>
+                         </div>
+                 </div>
+             </div>
+ 
+             <div class="w-full bg-[#fff] rounded-[10px] shadow-[0px 1px 2px #E1E3E5] border border-[#E1E3E5] divide-y">
+                <div class="pt-[15px] px-[25px] pb-[25px]">
+                   
+                   
+                    <div>
+                        <p class="mt-3 text-[#00153B] text-[19px] leading-[24px] font-bold">
+                            Port Canaveral Transportation Rates
+                        </p>
+                       
+                    </div>
+
+                   
+                </div>
+
+                <div class="pt-[25px] px-[25px] pb-[35px]">
+                    <div class=" text-[14px] leading-[24px] font-medium">
+                       
+                           <div class="flex  mx-auto">
+                               <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                               <div class="flex flex-col ps-2 leading-4">Port Canaveral (From Orlando Airport)</div>
+                           </div>
+
+                           
+                           
+                               
+                           <div class="grid grid-cols-2 gap-[10px] mt-3">
+                               <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                   <p class="text-[#00153B] text-[12px] font-bold">
+                                       <b>One Way</b><br> $155 +20%
+                                   </p>
+                               </div>
+                               <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                   <p class="text-[#00153B] text-[12px] font-bold">
+                                       <b>Round Trip</b><br>$290 +20%
+                                   </p>
+                               </div>
+                           </div>
+<hr class="mt-3">
+                           <div class="flex  mx-auto mt-2 pt-1">
+                            
+                            <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                            <div class="flex flex-col ps-2 leading-4">Port Canaveral (From Disney Area Hotels)
+                            </div>
+                        </div>
+
+                        
+                        
+                            
+                        <div class="grid grid-cols-2 gap-[10px] mt-3">
+                            <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                <p class="text-[#00153B] text-[12px] font-bold">
+                                    <b>One Way</b><br> $185 +20%
+                                </p>
+                            </div>
+                            <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                <p class="text-[#00153B] text-[12px] font-bold">
+                                    <b>Round Trip</b><br>$345 +20%
+                                </p>
+                            </div>
+                        </div>
+                       
+
+
+                       
+                    </div>
+
+
+
+                    
+
+                    <div class="mt-[25px] pt-0 md:pt-4">
+                       <a href="/book" class="block p-1 w-full text-center rounded-full from-rose-400 via-fuchsia-500 to-indigo-500 bg-gradient-to-r">
+                           <span class="block text-black px-4 py-2 font-semibold rounded-full bg-white hover:bg-transparent hover:text-white transition">Book Now</span>
+                         </a>
+                        </div>
+                </div>
+            </div>
+ 
+            <div class="w-full bg-[#fff] rounded-[10px] shadow-[0px 1px 2px #E1E3E5] border border-[#E1E3E5] divide-y">
+                <div class="pt-[15px] px-[25px] pb-[25px]">
+                   
+                   
+                    <div>
+                        <p class="mt-3 text-[#00153B] text-[19px] leading-[24px] font-bold">
+                            Universal Studios Rates
+
+                        </p>
+                       
+                    </div>
+
+                   
+                </div>
+
+                <div class="pt-[25px] px-[25px] pb-[35px]">
+                    <div class=" text-[14px] leading-[24px] font-medium">
+                       
+                           <div class="flex  mx-auto">
+                               <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                               <div class="flex flex-col ps-2 leading-4">All WDW Disney Property Resorts
+
+                            </div>
+                           </div>
+
+                           
+                           
+                               
+                           <div class="grid grid-cols-2 gap-[10px] mt-3">
+                               <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                   <p class="text-[#00153B] text-[12px] font-bold">
+                                       <b>One Way</b><br> $90 +20%
+                                   </p>
+                               </div>
+                               <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                   <p class="text-[#00153B] text-[12px] font-bold">
+                                       <b>Round Trip</b><br>$175 +20%
+                                   </p>
+                               </div>
+                           </div>
+
+
+                           <hr class="mt-3">
+                           <div class="flex  mx-auto mt-2 pt-1">
+                            <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                            <div class="flex flex-col ps-2 leading-4">Kissimmee 192 Area Hotels
+
+                            </div>
+                        </div>
+
+                        
+                        
+                            
+                        <div class="grid grid-cols-2 gap-[10px] mt-3">
+                            <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                <p class="text-[#00153B] text-[12px] font-bold">
+                                    <b>One Way</b><br> $95 +20%
+                                </p>
+                            </div>
+                            <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                <p class="text-[#00153B] text-[12px] font-bold">
+                                    <b>Round Trip</b><br>$185 +20%
+                                </p>
+                            </div>
+                        </div>
+                       
+
+
+                       
+                    </div>
+
+
+
+                    <br class="hidden md:block">
+                    <br class="hidden md:block">
+
+                    <div class="mt-[25px] pt-0 md:pt-2">
+                       <a href="/book" class="block p-1 w-full text-center rounded-full from-rose-400 via-fuchsia-500 to-indigo-500 bg-gradient-to-r">
+                           <span class="block text-black px-4 py-2 font-semibold rounded-full bg-white hover:bg-transparent hover:text-white transition">Book Now</span>
+                         </a>
+                        </div>
+                </div>
+            </div>
+
+
+            <div class="w-full bg-[#fff] rounded-[10px] shadow-[0px 1px 2px #E1E3E5] border border-[#E1E3E5] divide-y">
+                <div class="pt-[15px] px-[25px] pb-[25px]">
+                   
+                   
+                    <div>
+                        <p class="mt-3 text-[#00153B] text-[19px] leading-[24px] font-bold">
+                            Sea World Rates
+
+
+                        </p>
+                       
+                    </div>
+
+                   
+                </div>
+
+                <div class="pt-[25px] px-[25px] pb-[35px]">
+                    <div class=" text-[14px] leading-[24px] font-medium">
+                       
+                           <div class="flex  mx-auto">
+                               <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                               <div class="flex flex-col ps-2 leading-4">All WDW Disney Property Resorts
+
+
+                            </div>
+                           </div>
+
+                           
+                           
+                               
+                           <div class="grid grid-cols-2 gap-[10px] mt-3">
+                               <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                   <p class="text-[#00153B] text-[12px] font-bold">
+                                       <b>One Way</b><br> $65 +20%
+                                   </p>
+                               </div>
+                               <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                   <p class="text-[#00153B] text-[12px] font-bold">
+                                       <b>Round Trip</b><br>$120 +20%
+                                   </p>
+                               </div>
+                           </div>
+
+
+                           <hr class="mt-3">
+                           <div class="flex  mx-auto mt-2 pt-1">
+                            <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                            <div class="flex flex-col ps-2 leading-4">Kissimmee 192 Area Hotels
+
+
+                            </div>
+                        </div>
+
+                        
+                        
+                            
+                        <div class="grid grid-cols-2 gap-[10px] mt-3">
+                            <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                <p class="text-[#00153B] text-[12px] font-bold">
+                                    <b>One Way</b><br> $80 +20%
+                                </p>
+                            </div>
+                            <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                <p class="text-[#00153B] text-[12px] font-bold">
+                                    <b>Round Trip</b><br>$150 +20%
+                                </p>
+                            </div>
+                        </div>
+                       
+
+
+                       
+                    </div>
+
+
+
+
+                    <div class="mt-[25px] pt-0 md:pt-2">
+                       <a href="/book" class="block p-1 w-full text-center rounded-full from-rose-400 via-fuchsia-500 to-indigo-500 bg-gradient-to-r">
+                           <span class="block text-black px-4 py-2 font-semibold rounded-full bg-white hover:bg-transparent hover:text-white transition">Book Now</span>
+                         </a>
+                        </div>
+                </div>
+            </div>
+
+
+            <div class="w-full bg-[#fff] rounded-[10px] shadow-[0px 1px 2px #E1E3E5] border border-[#E1E3E5] divide-y">
+                <div class="pt-[15px] px-[25px] pb-[25px]">
+                   
+                   
+                    <div>
+                        <p class="mt-3 text-[#00153B] text-[19px] leading-[24px] font-bold">
+                            Sanford Int'l Airport (SFB)
+
+
+                        </p>
+                       
+                    </div>
+
+                   
+                </div>
+
+                <div class="pt-[25px] px-[25px] pb-[35px]">
+                    <div class=" text-[14px] leading-[24px] font-medium">
+                       
+                        <div class="flex  mx-auto mb-1 pb-1">
+                            <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                            <div class="flex flex-col ps-2 leading-4">All WDW Disney Property Resorts
+                            </div>
+                        </div>
+
+                        <div class="flex  mx-auto mb-1 pb-1">
+                            <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                            <div class="flex flex-col ps-2 leading-4">Universal Studios Area Hotels
+                            </div>
+                        </div>   
+                        
+
+                           
+                           
+                               
+                           <div class="grid grid-cols-2 gap-[10px] mt-3">
+                               <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                   <p class="text-[#00153B] text-[12px] font-bold">
+                                       <b>One Way</b><br> $155 +20%
+                                   </p>
+                               </div>
+                               <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                   <p class="text-[#00153B] text-[12px] font-bold">
+                                       <b>Round Trip</b><br>$285 +20%
+                                   </p>
+                               </div>
+                           </div>
+
+
+                       
+                    </div>
+
+
+
+                    <br class="hidden md:block">
+                    <br class="hidden md:block">
+                    <br class="hidden md:block">
+
+                    <div class="mt-[25px] ">
+                       <a href="/book" class="block p-1 w-full text-center rounded-full from-rose-400 via-fuchsia-500 to-indigo-500 bg-gradient-to-r">
+                           <span class="block text-black px-4 py-2 font-semibold rounded-full bg-white hover:bg-transparent hover:text-white transition">Book Now</span>
+                         </a>
+                        </div>
+                </div>
+            </div>
+
+         </div>
     </div>
-    <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="contacts" role="tabpanel" aria-labelledby="contacts-tab">
-        <p class="text-sm text-gray-500 dark:text-gray-400">This is some placeholder content the <strong class="font-medium text-gray-800 dark:text-white">Contacts tab's associated content</strong>. Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling.</p>
+ </div>
+
+
+
+
+
+
+
+</div>
+    
+
+
+
+<div class="hidden" id="Suvcar" role="tabpanel" aria-labelledby="Suvcar-tab">
+       
+    <!-- This is an example component -->
+<div class='flex '>
+    <div class="min-w-full">
+       
+ 
+         <div class="grid grid-cols-1 sm:grid-cols-3 gap-[20px]">
+             <div class="w-full bg-[#fff] rounded-[10px] shadow-[0px 1px 2px #E1E3E5] border border-[#E1E3E5] divide-y">
+                 <div class="pt-[15px] px-[25px] pb-[25px]">
+                    
+                    
+                     <div>
+                         <p class="mt-3 text-[#00153B] text-[19px] leading-[24px] font-bold">
+                            From Orlando International Airport To Hotels & Resorts
+
+                         </p>
+                        
+                     </div>
+ 
+                    
+                 </div>
+ 
+                 <div class="pt-[25px] px-[25px] pb-[35px]">
+                     <div class=" text-[14px] leading-[24px] font-medium">
+                        
+                            <div class="flex  mx-auto mb-1 pb-1">
+                                <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                                <div class="flex flex-col ps-2 leading-4">All WDW Disney Property Resorts</div>
+                            </div>
+
+                            <div class="flex  mx-auto mb-1 pb-1">
+                                <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                                <div class="flex flex-col ps-2 leading-4">Universal Studios Area Hotels</div>
+                            </div>
+
+                            <div class="flex  mx-auto mb-1 pb-1">
+                                <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                                <div class="flex flex-col ps-2 leading-4">International Drive Hotels</div>
+                            </div>
+
+                            <div class="flex  mx-auto mb-1 pb-1">
+                                <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                                <div class="flex flex-col ps-2 leading-4">Disney Springs Hotels</div>
+                            </div>
+ 
+                            
+                                
+                            <div class="grid grid-cols-2 gap-[10px] mt-3">
+                                <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                    <p class="text-[#00153B] text-[12px] font-bold">
+                                        <b>One Way</b><br> $135 +20%
+                                    </p>
+                                </div>
+                                <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                    <p class="text-[#00153B] text-[12px] font-bold">
+                                        <b>Round Trip</b><br>$265 +20%
+                                    </p>
+                                </div>
+                            </div>
+
+
+                            <hr class="mt-3">
+                            <div class="flex  mx-auto mt-2 pt-1">
+                                <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                                <div class="flex flex-col ps-2 leading-4">Kissimmee 192 Area Hotels                           </div>
+                            </div>   
+                            
+                                
+                            <div class="grid grid-cols-2 gap-[10px] mt-3">
+                                <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                    <p class="text-[#00153B] text-[12px] font-bold">
+                                        <b>One Way</b><br> $150 +20%
+                                    </p>
+                                </div>
+                                <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                    <p class="text-[#00153B] text-[12px] font-bold">
+                                        <b>Round Trip</b><br>$290 +20%
+                                    </p>
+                                </div>
+                            </div>
+
+                            <hr class="mt-3">
+                            <div class="flex  mx-auto mt-2 pt-1">
+                                <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                                <div class="flex flex-col ps-2 leading-4">Omni Championsgate / Reunion</div>
+                            </div>   
+                            
+                                
+                            <div class="grid grid-cols-2 gap-[10px] mt-3">
+                                <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                    <p class="text-[#00153B] text-[12px] font-bold">
+                                        <b>One Way</b><br> $160 +20%
+                                    </p>
+                                </div>
+                                <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                    <p class="text-[#00153B] text-[12px] font-bold">
+                                        <b>Round Trip</b><br>$310 +20%
+                                    </p>
+                                </div>
+                            </div>
+                        
+
+
+                        
+                     </div>
+ 
+                     <div class="mt-[25px]">
+                        <a href="/book" class="block p-1 w-full text-center rounded-full from-rose-400 via-fuchsia-500 to-indigo-500 bg-gradient-to-r">
+                            <span class="block text-black px-4 py-2 font-semibold rounded-full bg-white hover:bg-transparent hover:text-white transition">Book Now</span>
+                          </a>
+                         </div>
+                 </div>
+             </div>
+ 
+             <div class="w-full bg-[#fff] rounded-[10px] shadow-[0px 1px 2px #E1E3E5] border border-[#E1E3E5] divide-y">
+                <div class="pt-[15px] px-[25px] pb-[25px]">
+                   
+                   
+                    <div>
+                        <p class="mt-3 text-[#00153B] text-[19px] leading-[24px] font-bold">
+                            Port Canaveral Transportation Rates
+                        </p>
+                       
+                    </div>
+
+                   
+                </div>
+
+                <div class="pt-[25px] px-[25px] pb-[35px]">
+                    <div class=" text-[14px] leading-[24px] font-medium">
+                       
+                           <div class="flex  mx-auto">
+                               <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                               <div class="flex flex-col ps-2 leading-4">Port Canaveral (From Orlando Airport)</div>
+                           </div>
+
+                           
+                           
+                               
+                           <div class="grid grid-cols-2 gap-[10px] mt-3">
+                               <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                   <p class="text-[#00153B] text-[12px] font-bold">
+                                       <b>One Way</b><br> $195 +20%
+                                   </p>
+                               </div>
+                               <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                   <p class="text-[#00153B] text-[12px] font-bold">
+                                       <b>Round Trip</b><br>$375 +20%
+                                   </p>
+                               </div>
+                           </div>
+
+
+                           <hr class="mt-3">
+                           <div class="flex  mx-auto mt-2 pt-1">
+                            <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                            <div class="flex flex-col ps-2 leading-4">Port Canaveral (From Disney Area Hotels)
+                            </div>
+                        </div>
+
+                        
+                        
+                            
+                        <div class="grid grid-cols-2 gap-[10px] mt-3">
+                            <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                <p class="text-[#00153B] text-[12px] font-bold">
+                                    <b>One Way</b><br> $230 +20%
+                                </p>
+                            </div>
+                            <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                <p class="text-[#00153B] text-[12px] font-bold">
+                                    <b>Round Trip</b><br>$430 +20%
+                                </p>
+                            </div>
+                        </div>
+                       
+
+
+                       
+                    </div>
+                    
+                    
+                    <br class="hidden md:block">
+                    <br class="hidden md:block">
+                    <br class="hidden md:block">
+                    <br class="hidden md:block">
+                    <br class="hidden md:block">
+                    <br class="hidden md:block">
+
+                    <div class="mt-[25px] pt-0 md:pt-2">
+                       <a href="/book" class="block p-1 w-full text-center rounded-full from-rose-400 via-fuchsia-500 to-indigo-500 bg-gradient-to-r">
+                           <span class="block text-black px-4 py-2 font-semibold rounded-full bg-white hover:bg-transparent hover:text-white transition">Book Now</span>
+                         </a>
+                        </div>
+                </div>
+            </div>
+ 
+            <div class="w-full bg-[#fff] rounded-[10px] shadow-[0px 1px 2px #E1E3E5] border border-[#E1E3E5] divide-y">
+                <div class="pt-[15px] px-[25px] pb-[25px]">
+                   
+                   
+                    <div>
+                        <p class="mt-3 text-[#00153B] text-[19px] leading-[24px] font-bold">
+                            Universal Studios Rates
+
+                        </p>
+                       
+                    </div>
+
+                   
+                </div>
+
+                <div class="pt-[25px] px-[25px] pb-[35px]">
+                    <div class=" text-[14px] leading-[24px] font-medium">
+                       
+                           <div class="flex  mx-auto">
+                               <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                               <div class="flex flex-col ps-2 leading-4">All WDW Disney Property Resorts
+
+                            </div>
+                           </div>
+
+                           
+                           
+                               
+                           <div class="grid grid-cols-2 gap-[10px] mt-3">
+                               <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                   <p class="text-[#00153B] text-[12px] font-bold">
+                                       <b>One Way</b><br> $100 +20%
+                                   </p>
+                               </div>
+                               <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                   <p class="text-[#00153B] text-[12px] font-bold">
+                                       <b>Round Trip</b><br>$195 +20%
+                                   </p>
+                               </div>
+                           </div>
+
+                           <hr class="mt-3">
+                           <div class="flex  mx-auto mt-2 pt-1">
+                            <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                            <div class="flex flex-col ps-2 leading-4">Kissimmee 192 Area Hotels
+
+                            </div>
+                        </div>
+
+                        
+                        
+                            
+                        <div class="grid grid-cols-2 gap-[10px] mt-3">
+                            <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                <p class="text-[#00153B] text-[12px] font-bold">
+                                    <b>One Way</b><br> $105 +20%
+                                </p>
+                            </div>
+                            <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                <p class="text-[#00153B] text-[12px] font-bold">
+                                    <b>Round Trip</b><br>$205 +20%
+                                </p>
+                            </div>
+                        </div>
+                       
+
+
+                       
+                    </div>
+
+
+                    <br class="hidden md:block">
+                    <br class="hidden md:block">
+                    <br class="hidden md:block">
+                    <br class="hidden md:block">
+                    <br class="hidden md:block">
+                    <br class="hidden md:block">
+                    <br class="hidden md:block">
+                    <br class="hidden md:block">
+
+                    <div class="mt-[25px] ">
+                       <a href="/book" class="block p-1 w-full text-center rounded-full from-rose-400 via-fuchsia-500 to-indigo-500 bg-gradient-to-r">
+                           <span class="block text-black px-4 py-2 font-semibold rounded-full bg-white hover:bg-transparent hover:text-white transition">Book Now</span>
+                         </a>
+                        </div>
+                </div>
+            </div>
+
+
+            <div class="w-full bg-[#fff] rounded-[10px] shadow-[0px 1px 2px #E1E3E5] border border-[#E1E3E5] divide-y">
+                <div class="pt-[15px] px-[25px] pb-[25px]">
+                   
+                   
+                    <div>
+                        <p class="mt-3 text-[#00153B] text-[19px] leading-[24px] font-bold">
+                            Sea World Rates
+
+
+                        </p>
+                       
+                    </div>
+
+                   
+                </div>
+
+                <div class="pt-[25px] px-[25px] pb-[35px]">
+                    <div class=" text-[14px] leading-[24px] font-medium">
+                       
+                           <div class="flex  mx-auto">
+                               <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                               <div class="flex flex-col ps-2 leading-4">All WDW Disney Property Resorts
+
+
+                            </div>
+                           </div>
+
+                           
+                           
+                               
+                           <div class="grid grid-cols-2 gap-[10px] mt-3">
+                               <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                   <p class="text-[#00153B] text-[12px] font-bold">
+                                       <b>One Way</b><br> $85 +20%
+                                   </p>
+                               </div>
+                               <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                   <p class="text-[#00153B] text-[12px] font-bold">
+                                       <b>Round Trip</b><br>$165 +20%
+                                   </p>
+                               </div>
+                           </div>
+
+                           <hr class="mt-3">
+                           <div class="flex  mx-auto mt-2 pt-1">
+                            <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                            <div class="flex flex-col ps-2 leading-4">Kissimmee 192 Area Hotels
+
+
+                            </div>
+                        </div>
+
+                        
+                        
+                            
+                        <div class="grid grid-cols-2 gap-[10px] mt-3">
+                            <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                <p class="text-[#00153B] text-[12px] font-bold">
+                                    <b>One Way</b><br> $95 +20%
+                                </p>
+                            </div>
+                            <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                <p class="text-[#00153B] text-[12px] font-bold">
+                                    <b>Round Trip</b><br>$185 +20%
+                                </p>
+                            </div>
+                        </div>
+                       
+
+
+                       
+                    </div>
+
+
+
+
+                    <div class="mt-[25px] pt-0 md:pt-2">
+                       <a href="/book" class="block p-1 w-full text-center rounded-full from-rose-400 via-fuchsia-500 to-indigo-500 bg-gradient-to-r">
+                           <span class="block text-black px-4 py-2 font-semibold rounded-full bg-white hover:bg-transparent hover:text-white transition">Book Now</span>
+                         </a>
+                        </div>
+                </div>
+            </div>
+
+
+            <div class="w-full bg-[#fff] rounded-[10px] shadow-[0px 1px 2px #E1E3E5] border border-[#E1E3E5] divide-y">
+                <div class="pt-[15px] px-[25px] pb-[25px]">
+                   
+                   
+                    <div>
+                        <p class="mt-3 text-[#00153B] text-[19px] leading-[24px] font-bold">
+                            Sanford Int'l Airport (SFB)
+
+
+                        </p>
+                       
+                    </div>
+
+                   
+                </div>
+
+                <div class="pt-[25px] px-[25px] pb-[35px]">
+                    <div class=" text-[14px] leading-[24px] font-medium">
+                       
+                        <div class="flex  mx-auto mb-1 pb-1">
+                            <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                            <div class="flex flex-col ps-2 leading-4">All WDW Disney Property Resorts
+                            </div>
+                        </div>
+
+                        <div class="flex  mx-auto mb-1 pb-1">
+                            <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                            <div class="flex flex-col ps-2 leading-4">Universal Studios Area Hotels
+                            </div>
+                        </div>   
+                        
+
+                           
+                           
+                               
+                           <div class="grid grid-cols-2 gap-[10px] mt-3">
+                               <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                   <p class="text-[#00153B] text-[12px] font-bold">
+                                       <b>One Way</b><br> $195 +20%
+                                   </p>
+                               </div>
+                               <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                   <p class="text-[#00153B] text-[12px] font-bold">
+                                       <b>Round Trip</b><br>$360 +20%
+                                   </p>
+                               </div>
+                           </div>
+
+
+                       
+                    </div>
+
+
+
+                    <br class="hidden md:block">
+                    <br class="hidden md:block">
+                    <br class="hidden md:block">
+
+                    <div class="mt-[25px] ">
+                       <a href="/book" class="block p-1 w-full text-center rounded-full from-rose-400 via-fuchsia-500 to-indigo-500 bg-gradient-to-r">
+                           <span class="block text-black px-4 py-2 font-semibold rounded-full bg-white hover:bg-transparent hover:text-white transition">Book Now</span>
+                         </a>
+                        </div>
+                </div>
+            </div>
+
+         </div>
     </div>
+ </div>
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+<div class="hidden" id="van" role="tabpanel" aria-labelledby="van-tab">
+       
+    <!-- This is an example component -->
+<div class='flex '>
+    <div class="min-w-full">
+       
+ 
+         <div class="grid grid-cols-1 sm:grid-cols-3 gap-[20px]">
+             <div class="w-full bg-[#fff] rounded-[10px] shadow-[0px 1px 2px #E1E3E5] border border-[#E1E3E5] divide-y">
+                 <div class="pt-[15px] px-[25px] pb-[25px]">
+                    
+                    
+                     <div>
+                         <p class="mt-3 text-[#00153B] text-[19px] leading-[24px] font-bold">
+                            From Orlando International Airport To Hotels & Resorts
+
+                         </p>
+                        
+                     </div>
+ 
+                    
+                 </div>
+ 
+                 <div class="pt-[25px] px-[25px] pb-[35px]">
+                     <div class=" text-[14px] leading-[24px] font-medium">
+                        
+                            <div class="flex  mx-auto mb-1 pb-1">
+                                <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                                <div class="flex flex-col ps-2 leading-4">All WDW Disney Property Resorts</div>
+                            </div>
+
+                            <div class="flex  mx-auto mb-1 pb-1">
+                                <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                                <div class="flex flex-col ps-2 leading-4">Universal Studios Area Hotels</div>
+                            </div>
+
+                            <div class="flex  mx-auto mb-1 pb-1">
+                                <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                                <div class="flex flex-col ps-2 leading-4">International Drive Hotels</div>
+                            </div>
+
+                            <div class="flex  mx-auto mb-1 pb-1">
+                                <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                                <div class="flex flex-col ps-2 leading-4">Disney Springs Hotels</div>
+                            </div>
+ 
+                            
+                                
+                            <div class="grid grid-cols-2 gap-[10px] mt-3">
+                                <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                    <p class="text-[#00153B] text-[12px] font-bold">
+                                        <b>One Way</b><br> $150 +20%
+                                    </p>
+                                </div>
+                                <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                    <p class="text-[#00153B] text-[12px] font-bold">
+                                        <b>Round Trip</b><br>$290 +20%
+                                    </p>
+                                </div>
+                            </div>
+
+
+                            <hr class="mt-3">
+                            <div class="flex  mx-auto mt-2 pt-1">
+                                <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                                <div class="flex flex-col ps-2 leading-4">Kissimmee 192 Area Hotels                           </div>
+                            </div>   
+                            
+                                
+                            <div class="grid grid-cols-2 gap-[10px] mt-3">
+                                <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                    <p class="text-[#00153B] text-[12px] font-bold">
+                                        <b>One Way</b><br> $170 +20%
+                                    </p>
+                                </div>
+                                <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                    <p class="text-[#00153B] text-[12px] font-bold">
+                                        <b>Round Trip</b><br>$315 +20%
+                                    </p>
+                                </div>
+                            </div>
+
+                            <hr class="mt-3">
+                            <div class="flex  mx-auto mt-2 pt-1">
+                                <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                                <div class="flex flex-col ps-2 leading-4">Omni Championsgate / Reunion</div>
+                            </div>   
+                            
+                                
+                            <div class="grid grid-cols-2 gap-[10px] mt-3">
+                                <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                    <p class="text-[#00153B] text-[12px] font-bold">
+                                        <b>One Way</b><br> $175 +20%
+                                    </p>
+                                </div>
+                                <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                    <p class="text-[#00153B] text-[12px] font-bold">
+                                        <b>Round Trip</b><br>$335 +20%
+                                    </p>
+                                </div>
+                            </div>
+                        
+
+
+                        
+                     </div>
+ 
+                     <div class="mt-[25px]">
+                        <a href="/book" class="block p-1 w-full text-center rounded-full from-rose-400 via-fuchsia-500 to-indigo-500 bg-gradient-to-r">
+                            <span class="block text-black px-4 py-2 font-semibold rounded-full bg-white hover:bg-transparent hover:text-white transition">Book Now</span>
+                          </a>
+                         </div>
+                 </div>
+             </div>
+ 
+             <div class="w-full bg-[#fff] rounded-[10px] shadow-[0px 1px 2px #E1E3E5] border border-[#E1E3E5] divide-y">
+                <div class="pt-[15px] px-[25px] pb-[25px]">
+                   
+                   
+                    <div>
+                        <p class="mt-3 text-[#00153B] text-[19px] leading-[24px] font-bold">
+                            Port Canaveral Transportation Rates
+                        </p>
+                       
+                    </div>
+
+                   
+                </div>
+
+                <div class="pt-[25px] px-[25px] pb-[35px]">
+                    <div class=" text-[14px] leading-[24px] font-medium">
+                       
+                           <div class="flex  mx-auto">
+                               <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                               <div class="flex flex-col ps-2 leading-4">Port Canaveral (From Orlando Airport)</div>
+                           </div>
+
+                           
+                           
+                               
+                           <div class="grid grid-cols-2 gap-[10px] mt-3">
+                               <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                   <p class="text-[#00153B] text-[12px] font-bold">
+                                       <b>One Way</b><br> $210 +20%
+                                   </p>
+                               </div>
+                               <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                   <p class="text-[#00153B] text-[12px] font-bold">
+                                       <b>Round Trip</b><br>$395 +20%
+                                   </p>
+                               </div>
+                           </div>
+
+
+                           <hr class="mt-3">
+                           <div class="flex  mx-auto mt-2 pt-1">
+                            <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                            <div class="flex flex-col ps-2 leading-4">Port Canaveral (From Disney Area Hotels)
+                            </div>
+                        </div>
+
+                        
+                        
+                            
+                        <div class="grid grid-cols-2 gap-[10px] mt-3">
+                            <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                <p class="text-[#00153B] text-[12px] font-bold">
+                                    <b>One Way</b><br> $250 +20%
+                                </p>
+                            </div>
+                            <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                <p class="text-[#00153B] text-[12px] font-bold">
+                                    <b>Round Trip</b><br>$495 +20%
+                                </p>
+                            </div>
+                        </div>
+                       
+
+
+                       
+                    </div>
+                    
+                    
+                    <br class="hidden md:block">
+                    <br class="hidden md:block">
+                    <br class="hidden md:block">
+                    <br class="hidden md:block">
+                    <br class="hidden md:block">
+                    <br class="hidden md:block">
+
+                    <div class="mt-[25px] pt-0 md:pt-2">
+                       <a href="/book" class="block p-1 w-full text-center rounded-full from-rose-400 via-fuchsia-500 to-indigo-500 bg-gradient-to-r">
+                           <span class="block text-black px-4 py-2 font-semibold rounded-full bg-white hover:bg-transparent hover:text-white transition">Book Now</span>
+                         </a>
+                        </div>
+                </div>
+            </div>
+ 
+            <div class="w-full bg-[#fff] rounded-[10px] shadow-[0px 1px 2px #E1E3E5] border border-[#E1E3E5] divide-y">
+                <div class="pt-[15px] px-[25px] pb-[25px]">
+                   
+                   
+                    <div>
+                        <p class="mt-3 text-[#00153B] text-[19px] leading-[24px] font-bold">
+                            Universal Studios Rates
+
+                        </p>
+                       
+                    </div>
+
+                   
+                </div>
+
+                <div class="pt-[25px] px-[25px] pb-[35px]">
+                    <div class=" text-[14px] leading-[24px] font-medium">
+                       
+                           <div class="flex  mx-auto">
+                               <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                               <div class="flex flex-col ps-2 leading-4">All WDW Disney Property Resorts
+
+                            </div>
+                           </div>
+
+                           
+                           
+                               
+                           <div class="grid grid-cols-2 gap-[10px] mt-3">
+                               <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                   <p class="text-[#00153B] text-[12px] font-bold">
+                                       <b>One Way</b><br> $110 +20%
+                                   </p>
+                               </div>
+                               <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                   <p class="text-[#00153B] text-[12px] font-bold">
+                                       <b>Round Trip</b><br>$205 +20%
+                                   </p>
+                               </div>
+                           </div>
+
+                           <hr class="mt-3">
+                           <div class="flex  mx-auto mt-2 pt-1">
+                            <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                            <div class="flex flex-col ps-2 leading-4">Kissimmee 192 Area Hotels
+
+                            </div>
+                        </div>
+
+                        
+                        
+                            
+                        <div class="grid grid-cols-2 gap-[10px] mt-3">
+                            <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                <p class="text-[#00153B] text-[12px] font-bold">
+                                    <b>One Way</b><br> $120 +20%
+                                </p>
+                            </div>
+                            <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                <p class="text-[#00153B] text-[12px] font-bold">
+                                    <b>Round Trip</b><br>$230 +20%
+                                </p>
+                            </div>
+                        </div>
+                       
+
+
+                       
+                    </div>
+
+
+                    <br class="hidden md:block">
+                    <br class="hidden md:block">
+                    <br class="hidden md:block">
+                    <br class="hidden md:block">
+                    <br class="hidden md:block">
+                    <br class="hidden md:block">
+                    <br class="hidden md:block">
+                    <br class="hidden md:block">
+
+                    <div class="mt-[25px] ">
+                       <a href="/book" class="block p-1 w-full text-center rounded-full from-rose-400 via-fuchsia-500 to-indigo-500 bg-gradient-to-r">
+                           <span class="block text-black px-4 py-2 font-semibold rounded-full bg-white hover:bg-transparent hover:text-white transition">Book Now</span>
+                         </a>
+                        </div>
+                </div>
+            </div>
+
+
+            <div class="w-full bg-[#fff] rounded-[10px] shadow-[0px 1px 2px #E1E3E5] border border-[#E1E3E5] divide-y">
+                <div class="pt-[15px] px-[25px] pb-[25px]">
+                   
+                   
+                    <div>
+                        <p class="mt-3 text-[#00153B] text-[19px] leading-[24px] font-bold">
+                            Sea World Rates
+
+
+                        </p>
+                       
+                    </div>
+
+                   
+                </div>
+
+                <div class="pt-[25px] px-[25px] pb-[35px]">
+                    <div class=" text-[14px] leading-[24px] font-medium">
+                       
+                           <div class="flex  mx-auto">
+                               <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                               <div class="flex flex-col ps-2 leading-4">All WDW Disney Property Resorts
+
+
+                            </div>
+                           </div>
+
+                           
+                           
+                               
+                           <div class="grid grid-cols-2 gap-[10px] mt-3">
+                               <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                   <p class="text-[#00153B] text-[12px] font-bold">
+                                       <b>One Way</b><br> $100 +20%
+                                   </p>
+                               </div>
+                               <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                   <p class="text-[#00153B] text-[12px] font-bold">
+                                       <b>Round Trip</b><br> $190 +20%
+                                   </p>
+                               </div>
+                           </div>
+
+                           <hr class="mt-3">
+                           <div class="flex  mx-auto mt-2 pt-1">
+                            <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                            <div class="flex flex-col ps-2 leading-4">Kissimmee 192 Area Hotels
+
+
+                            </div>
+                        </div>
+
+                        
+                        
+                            
+                        <div class="grid grid-cols-2 gap-[10px] mt-3">
+                            <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                <p class="text-[#00153B] text-[12px] font-bold">
+                                    <b>One Way</b><br> $120 +20%
+                                </p>
+                            </div>
+                            <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                <p class="text-[#00153B] text-[12px] font-bold">
+                                    <b>Round Trip</b><br>$220 +20%
+                                </p>
+                            </div>
+                        </div>
+                       
+
+
+                       
+                    </div>
+
+
+
+
+                    <div class="mt-[25px] pt-0 md:pt-2">
+                       <a href="/book" class="block p-1 w-full text-center rounded-full from-rose-400 via-fuchsia-500 to-indigo-500 bg-gradient-to-r">
+                           <span class="block text-black px-4 py-2 font-semibold rounded-full bg-white hover:bg-transparent hover:text-white transition">Book Now</span>
+                         </a>
+                        </div>
+                </div>
+            </div>
+
+
+            <div class="w-full bg-[#fff] rounded-[10px] shadow-[0px 1px 2px #E1E3E5] border border-[#E1E3E5] divide-y">
+                <div class="pt-[15px] px-[25px] pb-[25px]">
+                   
+                   
+                    <div>
+                        <p class="mt-3 text-[#00153B] text-[19px] leading-[24px] font-bold">
+                            Sanford Int'l Airport (SFB)
+
+
+                        </p>
+                       
+                    </div>
+
+                   
+                </div>
+
+                <div class="pt-[25px] px-[25px] pb-[35px]">
+                    <div class=" text-[14px] leading-[24px] font-medium">
+                       
+                        <div class="flex  mx-auto mb-1 pb-1">
+                            <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                            <div class="flex flex-col ps-2 leading-4">All WDW Disney Property Resorts
+                            </div>
+                        </div>
+
+                        <div class="flex  mx-auto mb-1 pb-1">
+                            <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                            <div class="flex flex-col ps-2 leading-4">Universal Studios Area Hotels
+                            </div>
+                        </div>   
+                        
+
+                           
+                           
+                               
+                           <div class="grid grid-cols-2 gap-[10px] mt-3">
+                               <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                   <p class="text-[#00153B] text-[12px] font-bold">
+                                       <b>One Way</b><br>  $215 +20%
+                                   </p>
+                               </div>
+                               <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                   <p class="text-[#00153B] text-[12px] font-bold">
+                                       <b>Round Trip</b><br>$395 +20%
+                                   </p>
+                               </div>
+                           </div>
+
+
+                       
+                    </div>
+
+
+
+                    <br class="hidden md:block">
+                    <br class="hidden md:block">
+                    <br class="hidden md:block">
+
+                    <div class="mt-[25px] ">
+                       <a href="/book" class="block p-1 w-full text-center rounded-full from-rose-400 via-fuchsia-500 to-indigo-500 bg-gradient-to-r">
+                           <span class="block text-black px-4 py-2 font-semibold rounded-full bg-white hover:bg-transparent hover:text-white transition">Book Now</span>
+                         </a>
+                        </div>
+                </div>
+            </div>
+
+         </div>
+    </div>
+ </div>
+
+
+
+
+
+
+
+</div>
+
+
+
+<div class="hidden" id="miniwan" role="tabpanel" aria-labelledby="miniwan-tab">
+       
+    <!-- This is an example component -->
+<div class='flex '>
+    <div class="min-w-full">
+       
+ 
+         <div class="grid grid-cols-1 sm:grid-cols-3 gap-[20px]">
+             <div class="w-full bg-[#fff] rounded-[10px] shadow-[0px 1px 2px #E1E3E5] border border-[#E1E3E5] divide-y">
+                 <div class="pt-[15px] px-[25px] pb-[25px]">
+                    
+                    
+                     <div>
+                         <p class="mt-3 text-[#00153B] text-[19px] leading-[24px] font-bold">
+                            From Orlando International Airport To Hotels & Resorts
+
+                         </p>
+                        
+                     </div>
+ 
+                    
+                 </div>
+ 
+                 <div class="pt-[25px] px-[25px] pb-[35px]">
+                     <div class=" text-[14px] leading-[24px] font-medium">
+                        
+                            <div class="flex  mx-auto mb-1 pb-1">
+                                <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                                <div class="flex flex-col ps-2 leading-4">All WDW Disney Property Resorts</div>
+                            </div>
+
+                            <div class="flex  mx-auto mb-1 pb-1">
+                                <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                                <div class="flex flex-col ps-2 leading-4">Universal Studios Area Hotels</div>
+                            </div>
+
+                            <div class="flex  mx-auto mb-1 pb-1">
+                                <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                                <div class="flex flex-col ps-2 leading-4">International Drive Hotels</div>
+                            </div>
+
+                            <div class="flex  mx-auto mb-1 pb-1">
+                                <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                                <div class="flex flex-col ps-2 leading-4">Disney Springs Hotels</div>
+                            </div>
+ 
+                            
+                                
+                            <div class="grid grid-cols-2 gap-[10px] mt-3">
+                                <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                    <p class="text-[#00153B] text-[12px] font-bold">
+                                        <b>One Way</b><br> $125 +20%
+                                    </p>
+                                </div>
+                                <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                    <p class="text-[#00153B] text-[12px] font-bold">
+                                        <b>Round Trip</b><br>$245 +20%
+                                    </p>
+                                </div>
+                            </div>
+
+
+                            <hr class="mt-3">
+                            <div class="flex  mx-auto mt-2 pt-1">
+                                <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                                <div class="flex flex-col ps-2 leading-4">Kissimmee 192 Area Hotels                           </div>
+                            </div>   
+                            
+                                
+                            <div class="grid grid-cols-2 gap-[10px] mt-3">
+                                <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                    <p class="text-[#00153B] text-[12px] font-bold">
+                                        <b>One Way</b><br> $135 +20%
+                                    </p>
+                                </div>
+                                <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                    <p class="text-[#00153B] text-[12px] font-bold">
+                                        <b>Round Trip</b><br>$265 +20%
+                                    </p>
+                                </div>
+                            </div>
+
+                            <hr class="mt-3">
+                            <div class="flex  mx-auto mt-2 pt-1">
+                                <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                                <div class="flex flex-col ps-2 leading-4">Omni Championsgate / Reunion</div>
+                            </div>   
+                            
+                                
+                            <div class="grid grid-cols-2 gap-[10px] mt-3">
+                                <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                    <p class="text-[#00153B] text-[12px] font-bold">
+                                        <b>One Way</b><br> $175 +20%
+                                    </p>
+                                </div>
+                                <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                    <p class="text-[#00153B] text-[12px] font-bold">
+                                        <b>Round Trip</b><br>$335 +20%
+                                    </p>
+                                </div>
+                            </div>
+                        
+
+
+                        
+                     </div>
+ 
+                     <div class="mt-[25px]">
+                        <a href="/book" class="block p-1 w-full text-center rounded-full from-rose-400 via-fuchsia-500 to-indigo-500 bg-gradient-to-r">
+                            <span class="block text-black px-4 py-2 font-semibold rounded-full bg-white hover:bg-transparent hover:text-white transition">Book Now</span>
+                          </a>
+                         </div>
+                 </div>
+             </div>
+ 
+             <div class="w-full bg-[#fff] rounded-[10px] shadow-[0px 1px 2px #E1E3E5] border border-[#E1E3E5] divide-y">
+                <div class="pt-[15px] px-[25px] pb-[25px]">
+                   
+                   
+                    <div>
+                        <p class="mt-3 text-[#00153B] text-[19px] leading-[24px] font-bold">
+                            Port Canaveral Transportation Rates
+                        </p>
+                       
+                    </div>
+
+                   
+                </div>
+
+                <div class="pt-[25px] px-[25px] pb-[35px]">
+                    <div class=" text-[14px] leading-[24px] font-medium">
+                       
+                           <div class="flex  mx-auto">
+                               <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                               <div class="flex flex-col ps-2 leading-4">Port Canaveral (From Orlando Airport)</div>
+                           </div>
+
+                           
+                           
+                               
+                           <div class="grid grid-cols-2 gap-[10px] mt-3">
+                               <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                   <p class="text-[#00153B] text-[12px] font-bold">
+                                       <b>One Way</b><br> $175 +20%
+                                   </p>
+                               </div>
+                               <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                   <p class="text-[#00153B] text-[12px] font-bold">
+                                       <b>Round Trip</b><br>$345 +20%
+                                   </p>
+                               </div>
+                           </div>
+
+
+                           <hr class="mt-3">
+                           <div class="flex  mx-auto mt-2 pt-1">
+                            <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                            <div class="flex flex-col ps-2 leading-4">Port Canaveral (From Disney Area Hotels)
+                            </div>
+                        </div>
+
+                        
+                        
+                            
+                        <div class="grid grid-cols-2 gap-[10px] mt-3">
+                            <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                <p class="text-[#00153B] text-[12px] font-bold">
+                                    <b>One Way</b><br> $195 +20%
+                                </p>
+                            </div>
+                            <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                <p class="text-[#00153B] text-[12px] font-bold">
+                                    <b>Round Trip</b><br>$365 +20%
+                                </p>
+                            </div>
+                        </div>
+                       
+
+
+                       
+                    </div>
+                    
+                    
+                    <br class="hidden md:block">
+                    <br class="hidden md:block">
+                    <br class="hidden md:block">
+                    <br class="hidden md:block">
+                    <br class="hidden md:block">
+                    <br class="hidden md:block">
+
+                    <div class="mt-[25px] pt-0 md:pt-2">
+                       <a href="/book" class="block p-1 w-full text-center rounded-full from-rose-400 via-fuchsia-500 to-indigo-500 bg-gradient-to-r">
+                           <span class="block text-black px-4 py-2 font-semibold rounded-full bg-white hover:bg-transparent hover:text-white transition">Book Now</span>
+                         </a>
+                        </div>
+                </div>
+            </div>
+ 
+            <div class="w-full bg-[#fff] rounded-[10px] shadow-[0px 1px 2px #E1E3E5] border border-[#E1E3E5] divide-y">
+                <div class="pt-[15px] px-[25px] pb-[25px]">
+                   
+                   
+                    <div>
+                        <p class="mt-3 text-[#00153B] text-[19px] leading-[24px] font-bold">
+                            Universal Studios Rates
+
+                        </p>
+                       
+                    </div>
+
+                   
+                </div>
+
+                <div class="pt-[25px] px-[25px] pb-[35px]">
+                    <div class=" text-[14px] leading-[24px] font-medium">
+                       
+                           <div class="flex  mx-auto">
+                               <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                               <div class="flex flex-col ps-2 leading-4">All WDW Disney Property Resorts
+
+                            </div>
+                           </div>
+
+                           
+                           
+                               
+                           <div class="grid grid-cols-2 gap-[10px] mt-3">
+                               <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                   <p class="text-[#00153B] text-[12px] font-bold">
+                                       <b>One Way</b><br> $90 +20%
+                                   </p>
+                               </div>
+                               <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                   <p class="text-[#00153B] text-[12px] font-bold">
+                                       <b>Round Trip</b><br>$175 +20%
+                                   </p>
+                               </div>
+                           </div>
+
+                           <hr class="mt-3">
+                           <div class="flex  mx-auto mt-2 pt-1">
+                            <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                            <div class="flex flex-col ps-2 leading-4">Kissimmee 192 Area Hotels
+
+                            </div>
+                        </div>
+
+                        
+                        
+                            
+                        <div class="grid grid-cols-2 gap-[10px] mt-3">
+                            <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                <p class="text-[#00153B] text-[12px] font-bold">
+                                    <b>One Way</b><br> $95 +20%
+                                </p>
+                            </div>
+                            <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                <p class="text-[#00153B] text-[12px] font-bold">
+                                    <b>Round Trip</b><br>$185 +20%
+                                </p>
+                            </div>
+                        </div>
+                       
+
+
+                       
+                    </div>
+
+
+
+                    <br class="hidden md:block">
+                    <br class="hidden md:block">
+                    <br class="hidden md:block">
+                    <br class="hidden md:block">
+                    <br class="hidden md:block">
+                    <br class="hidden md:block">
+                    <br class="hidden md:block">
+                    <br class="hidden md:block">
+
+                    <div class="mt-[25px] ">
+                       <a href="/book" class="block p-1 w-full text-center rounded-full from-rose-400 via-fuchsia-500 to-indigo-500 bg-gradient-to-r">
+                           <span class="block text-black px-4 py-2 font-semibold rounded-full bg-white hover:bg-transparent hover:text-white transition">Book Now</span>
+                         </a>
+                        </div>
+                </div>
+            </div>
+
+
+            <div class="w-full bg-[#fff] rounded-[10px] shadow-[0px 1px 2px #E1E3E5] border border-[#E1E3E5] divide-y">
+                <div class="pt-[15px] px-[25px] pb-[25px]">
+                   
+                   
+                    <div>
+                        <p class="mt-3 text-[#00153B] text-[19px] leading-[24px] font-bold">
+                            Sea World Rates
+
+
+                        </p>
+                       
+                    </div>
+
+                   
+                </div>
+
+                <div class="pt-[25px] px-[25px] pb-[35px]">
+                    <div class=" text-[14px] leading-[24px] font-medium">
+                       
+                           <div class="flex  mx-auto">
+                               <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                               <div class="flex flex-col ps-2 leading-4">All WDW Disney Property Resorts
+
+
+                            </div>
+                           </div>
+
+                           
+                           
+                               
+                           <div class="grid grid-cols-2 gap-[10px] mt-3">
+                               <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                   <p class="text-[#00153B] text-[12px] font-bold">
+                                       <b>One Way</b><br> $75 +20%
+                                   </p>
+                               </div>
+                               <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                   <p class="text-[#00153B] text-[12px] font-bold">
+                                       <b>Round Trip</b><br> $145 +20%
+                                   </p>
+                               </div>
+                           </div>
+
+                           <hr class="mt-3">
+                           <div class="flex  mx-auto mt-2 pt-1">
+                            <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                            <div class="flex flex-col ps-2 leading-4">Kissimmee 192 Area Hotels
+
+
+                            </div>
+                        </div>
+
+                        
+                        
+                            
+                        <div class="grid grid-cols-2 gap-[10px] mt-3">
+                            <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                <p class="text-[#00153B] text-[12px] font-bold">
+                                    <b>One Way</b><br> $85 +20%
+                                </p>
+                            </div>
+                            <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                <p class="text-[#00153B] text-[12px] font-bold">
+                                    <b>Round Trip</b><br>$165 +20%
+                                </p>
+                            </div>
+                        </div>
+                       
+
+
+                       
+                    </div>
+
+
+
+
+                    <div class="mt-[25px] pt-0 md:pt-2">
+                       <a href="/book" class="block p-1 w-full text-center rounded-full from-rose-400 via-fuchsia-500 to-indigo-500 bg-gradient-to-r">
+                           <span class="block text-black px-4 py-2 font-semibold rounded-full bg-white hover:bg-transparent hover:text-white transition">Book Now</span>
+                         </a>
+                        </div>
+                </div>
+            </div>
+
+
+            <div class="w-full bg-[#fff] rounded-[10px] shadow-[0px 1px 2px #E1E3E5] border border-[#E1E3E5] divide-y">
+                <div class="pt-[15px] px-[25px] pb-[25px]">
+                   
+                   
+                    <div>
+                        <p class="mt-3 text-[#00153B] text-[19px] leading-[24px] font-bold">
+                            Sanford Int'l Airport (SFB)
+
+
+                        </p>
+                       
+                    </div>
+
+                   
+                </div>
+
+                <div class="pt-[25px] px-[25px] pb-[35px]">
+                    <div class=" text-[14px] leading-[24px] font-medium">
+                       
+                        <div class="flex  mx-auto mb-1 pb-1">
+                            <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                            <div class="flex flex-col ps-2 leading-4">All WDW Disney Property Resorts
+                            </div>
+                        </div>
+
+                        <div class="flex  mx-auto mb-1 pb-1">
+                            <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                            <div class="flex flex-col ps-2 leading-4">Universal Studios Area Hotels
+                            </div>
+                        </div>   
+                        
+
+                           
+                           
+                               
+                           <div class="grid grid-cols-2 gap-[10px] mt-3">
+                               <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                   <p class="text-[#00153B] text-[12px] font-bold">
+                                       <b>One Way</b><br>  $180 +20%
+                                   </p>
+                               </div>
+                               <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                   <p class="text-[#00153B] text-[12px] font-bold">
+                                       <b>Round Trip</b><br>$325 +20%
+                                   </p>
+                               </div>
+                           </div>
+
+
+                       
+                    </div>
+
+
+
+                    <br class="hidden md:block">
+                    <br class="hidden md:block">
+                    <br class="hidden md:block">
+
+                    <div class="mt-[25px] ">
+                       <a href="/book" class="block p-1 w-full text-center rounded-full from-rose-400 via-fuchsia-500 to-indigo-500 bg-gradient-to-r">
+                           <span class="block text-black px-4 py-2 font-semibold rounded-full bg-white hover:bg-transparent hover:text-white transition">Book Now</span>
+                         </a>
+                        </div>
+                </div>
+            </div>
+
+         </div>
+    </div>
+ </div>
+
+
+
+
+
+
+
+</div>
+
+<div class="hidden" id="limousine" role="tabpanel" aria-labelledby="limousine-tab">
+       
+    <!-- This is an example component -->
+<div class='flex '>
+    <div class="min-w-full">
+       
+ 
+         <div class="grid grid-cols-1 sm:grid-cols-3 gap-[20px]">
+             <div class="w-full bg-[#fff] rounded-[10px] shadow-[0px 1px 2px #E1E3E5] border border-[#E1E3E5] divide-y">
+                 <div class="pt-[15px] px-[25px] pb-[25px]">
+                    
+                    
+                     <div>
+                         <p class="mt-3 text-[#00153B] text-[19px] leading-[24px] font-bold">
+                            From Orlando International Airport To Hotels & Resorts
+
+                         </p>
+                        
+                     </div>
+ 
+                    
+                 </div>
+ 
+                 <div class="pt-[25px] px-[25px] pb-[35px]">
+                     <div class=" text-[14px] leading-[24px] font-medium">
+                        
+                            <div class="flex  mx-auto mb-1 pb-1">
+                                <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                                <div class="flex flex-col ps-2 leading-4">All WDW Disney Property Resorts</div>
+                            </div>
+
+                            <div class="flex  mx-auto mb-1 pb-1">
+                                <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                                <div class="flex flex-col ps-2 leading-4">Universal Studios Area Hotels</div>
+                            </div>
+
+                            <div class="flex  mx-auto mb-1 pb-1">
+                                <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                                <div class="flex flex-col ps-2 leading-4">International Drive Hotels</div>
+                            </div>
+
+                            <div class="flex  mx-auto mb-1 pb-1">
+                                <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                                <div class="flex flex-col ps-2 leading-4">Disney Springs Hotels</div>
+                            </div>
+ 
+                            
+                                
+                            <div class="grid grid-cols-2 gap-[10px] mt-3">
+                                <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                    <p class="text-[#00153B] text-[12px] font-bold">
+                                        <b>One Way</b><br> $150 +20%
+                                    </p>
+                                </div>
+                                <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                    <p class="text-[#00153B] text-[12px] font-bold">
+                                        <b>Round Trip</b><br>$290 +20%
+                                    </p>
+                                </div>
+                            </div>
+
+
+                            <hr class="mt-3">
+                            <div class="flex  mx-auto mt-2 pt-1">
+                                <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                                <div class="flex flex-col ps-2 leading-4">Kissimmee 192 Area Hotels                           </div>
+                            </div>   
+                            
+                                
+                            <div class="grid grid-cols-2 gap-[10px] mt-3">
+                                <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                    <p class="text-[#00153B] text-[12px] font-bold">
+                                        <b>One Way</b><br>  $170 +20%
+                                    </p>
+                                </div>
+                                <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                    <p class="text-[#00153B] text-[12px] font-bold">
+                                        <b>Round Trip</b><br>$315 +20%
+                                    </p>
+                                </div>
+                            </div>
+
+                            <hr class="mt-3">
+                            <div class="flex  mx-auto mt-2 pt-1">
+                                <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                                <div class="flex flex-col ps-2 leading-4">Omni Championsgate / Reunion</div>
+                            </div>   
+                            
+                                
+                            <div class="grid grid-cols-2 gap-[10px] mt-3">
+                                <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                    <p class="text-[#00153B] text-[12px] font-bold">
+                                        <b>One Way</b><br> $175 +20%
+                                    </p>
+                                </div>
+                                <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                    <p class="text-[#00153B] text-[12px] font-bold">
+                                        <b>Round Trip</b><br>$335 +20%
+                                    </p>
+                                </div>
+                            </div>
+                        
+
+
+                        
+                     </div>
+ 
+                     <div class="mt-[25px]">
+                        <a href="/book" class="block p-1 w-full text-center rounded-full from-rose-400 via-fuchsia-500 to-indigo-500 bg-gradient-to-r">
+                            <span class="block text-black px-4 py-2 font-semibold rounded-full bg-white hover:bg-transparent hover:text-white transition">Book Now</span>
+                          </a>
+                         </div>
+                 </div>
+             </div>
+ 
+             <div class="w-full bg-[#fff] rounded-[10px] shadow-[0px 1px 2px #E1E3E5] border border-[#E1E3E5] divide-y">
+                <div class="pt-[15px] px-[25px] pb-[25px]">
+                   
+                   
+                    <div>
+                        <p class="mt-3 text-[#00153B] text-[19px] leading-[24px] font-bold">
+                            Port Canaveral Transportation Rates
+                        </p>
+                       
+                    </div>
+
+                   
+                </div>
+
+                <div class="pt-[25px] px-[25px] pb-[35px]">
+                    <div class=" text-[14px] leading-[24px] font-medium">
+                       
+                           <div class="flex  mx-auto">
+                               <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                               <div class="flex flex-col ps-2 leading-4">Port Canaveral (From Orlando Airport)</div>
+                           </div>
+
+                           
+                           
+                               
+                           <div class="grid grid-cols-2 gap-[10px] mt-3">
+                               <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                   <p class="text-[#00153B] text-[12px] font-bold">
+                                       <b>One Way</b><br> $210 +20%
+                                   </p>
+                               </div>
+                               <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                   <p class="text-[#00153B] text-[12px] font-bold">
+                                       <b>Round Trip</b><br>$395 +20%
+                                   </p>
+                               </div>
+                           </div>
+
+
+                           <hr class="mt-3">
+                           <div class="flex  mx-auto mt-2 pt-1">
+                            <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                            <div class="flex flex-col ps-2 leading-4">Port Canaveral (From Disney Area Hotels)
+                            </div>
+                        </div>
+
+                        
+                        
+                            
+                        <div class="grid grid-cols-2 gap-[10px] mt-3">
+                            <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                <p class="text-[#00153B] text-[12px] font-bold">
+                                    <b>One Way</b><br> $250 +20%
+                                </p>
+                            </div>
+                            <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                <p class="text-[#00153B] text-[12px] font-bold">
+                                    <b>Round Trip</b><br>$495 +20%
+                                </p>
+                            </div>
+                        </div>
+                       
+
+
+                       
+                    </div>
+                    
+                    
+                    <br class="hidden md:block">
+                    <br class="hidden md:block">
+                    <br class="hidden md:block">
+                    <br class="hidden md:block">
+                    <br class="hidden md:block">
+                    <br class="hidden md:block">
+
+                    <div class="mt-[25px] pt-0 md:pt-2">
+                       <a href="/book" class="block p-1 w-full text-center rounded-full from-rose-400 via-fuchsia-500 to-indigo-500 bg-gradient-to-r">
+                           <span class="block text-black px-4 py-2 font-semibold rounded-full bg-white hover:bg-transparent hover:text-white transition">Book Now</span>
+                         </a>
+                        </div>
+                </div>
+            </div>
+ 
+            <div class="w-full bg-[#fff] rounded-[10px] shadow-[0px 1px 2px #E1E3E5] border border-[#E1E3E5] divide-y">
+                <div class="pt-[15px] px-[25px] pb-[25px]">
+                   
+                   
+                    <div>
+                        <p class="mt-3 text-[#00153B] text-[19px] leading-[24px] font-bold">
+                            Universal Studios Rates
+
+                        </p>
+                       
+                    </div>
+
+                   
+                </div>
+
+                <div class="pt-[25px] px-[25px] pb-[35px]">
+                    <div class=" text-[14px] leading-[24px] font-medium">
+                       
+                           <div class="flex  mx-auto">
+                               <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                               <div class="flex flex-col ps-2 leading-4">All WDW Disney Property Resorts
+
+                            </div>
+                           </div>
+
+                           
+                           
+                               
+                           <div class="grid grid-cols-2 gap-[10px] mt-3">
+                               <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                   <p class="text-[#00153B] text-[12px] font-bold">
+                                       <b>One Way</b><br> $110 +20%
+                                   </p>
+                               </div>
+                               <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                   <p class="text-[#00153B] text-[12px] font-bold">
+                                       <b>Round Trip</b><br>$205 +20%
+                                   </p>
+                               </div>
+                           </div>
+
+                           <hr class="mt-3">
+                           <div class="flex  mx-auto mt-2 pt-1">
+                            <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                            <div class="flex flex-col ps-2 leading-4">Kissimmee 192 Area Hotels
+
+                            </div>
+                        </div>
+
+                        
+                        
+                            
+                        <div class="grid grid-cols-2 gap-[10px] mt-3">
+                            <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                <p class="text-[#00153B] text-[12px] font-bold">
+                                    <b>One Way</b><br> $120 +20%
+                                </p>
+                            </div>
+                            <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                <p class="text-[#00153B] text-[12px] font-bold">
+                                    <b>Round Trip</b><br>$230 +20%
+                                </p>
+                            </div>
+                        </div>
+                       
+
+
+                       
+                    </div>
+
+
+                    <br class="hidden md:block">
+                    <br class="hidden md:block">
+                    <br class="hidden md:block">
+                    <br class="hidden md:block">
+                    <br class="hidden md:block">
+                    <br class="hidden md:block">
+                    <br class="hidden md:block">
+                    <br class="hidden md:block">
+
+                    <div class="mt-[25px] ">
+                       <a href="/book" class="block p-1 w-full text-center rounded-full from-rose-400 via-fuchsia-500 to-indigo-500 bg-gradient-to-r">
+                           <span class="block text-black px-4 py-2 font-semibold rounded-full bg-white hover:bg-transparent hover:text-white transition">Book Now</span>
+                         </a>
+                        </div>
+                </div>
+            </div>
+
+
+            <div class="w-full bg-[#fff] rounded-[10px] shadow-[0px 1px 2px #E1E3E5] border border-[#E1E3E5] divide-y">
+                <div class="pt-[15px] px-[25px] pb-[25px]">
+                   
+                   
+                    <div>
+                        <p class="mt-3 text-[#00153B] text-[19px] leading-[24px] font-bold">
+                            Sea World Rates
+
+
+                        </p>
+                       
+                    </div>
+
+                   
+                </div>
+
+                <div class="pt-[25px] px-[25px] pb-[35px]">
+                    <div class=" text-[14px] leading-[24px] font-medium">
+                       
+                           <div class="flex  mx-auto">
+                               <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                               <div class="flex flex-col ps-2 leading-4">All WDW Disney Property Resorts
+
+
+                            </div>
+                           </div>
+
+                           
+                           
+                               
+                           <div class="grid grid-cols-2 gap-[10px] mt-3">
+                               <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                   <p class="text-[#00153B] text-[12px] font-bold">
+                                       <b>One Way</b><br> $100 +20%
+                                   </p>
+                               </div>
+                               <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                   <p class="text-[#00153B] text-[12px] font-bold">
+                                       <b>Round Trip</b><br> $190 +20%
+                                   </p>
+                               </div>
+                           </div>
+
+                           <hr class="mt-3">
+                           <div class="flex  mx-auto mt-2 pt-1">
+                            <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                            <div class="flex flex-col ps-2 leading-4">Kissimmee 192 Area Hotels
+
+
+                            </div>
+                        </div>
+
+                        
+                        
+                            
+                        <div class="grid grid-cols-2 gap-[10px] mt-3">
+                            <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                <p class="text-[#00153B] text-[12px] font-bold">
+                                    <b>One Way</b><br> $120 +20%
+                                </p>
+                            </div>
+                            <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                <p class="text-[#00153B] text-[12px] font-bold">
+                                    <b>Round Trip</b><br> $220 +20%
+                                </p>
+                            </div>
+                        </div>
+                       
+
+
+                       
+                    </div>
+
+
+
+
+                    <div class="mt-[25px] pt-0 md:pt-2">
+                       <a href="/book" class="block p-1 w-full text-center rounded-full from-rose-400 via-fuchsia-500 to-indigo-500 bg-gradient-to-r">
+                           <span class="block text-black px-4 py-2 font-semibold rounded-full bg-white hover:bg-transparent hover:text-white transition">Book Now</span>
+                         </a>
+                        </div>
+                </div>
+            </div>
+
+
+            <div class="w-full bg-[#fff] rounded-[10px] shadow-[0px 1px 2px #E1E3E5] border border-[#E1E3E5] divide-y">
+                <div class="pt-[15px] px-[25px] pb-[25px]">
+                   
+                   
+                    <div>
+                        <p class="mt-3 text-[#00153B] text-[19px] leading-[24px] font-bold">
+                            Sanford Int'l Airport (SFB)
+
+
+                        </p>
+                       
+                    </div>
+
+                   
+                </div>
+
+                <div class="pt-[25px] px-[25px] pb-[35px]">
+                    <div class=" text-[14px] leading-[24px] font-medium">
+                       
+                        <div class="flex  mx-auto mb-1 pb-1">
+                            <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                            <div class="flex flex-col ps-2 leading-4">All WDW Disney Property Resorts
+                            </div>
+                        </div>
+
+                        <div class="flex  mx-auto mb-1 pb-1">
+                            <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                            <div class="flex flex-col ps-2 leading-4">Universal Studios Area Hotels
+                            </div>
+                        </div>   
+                        
+
+                           
+                           
+                               
+                           <div class="grid grid-cols-2 gap-[10px] mt-3">
+                               <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                   <p class="text-[#00153B] text-[12px] font-bold">
+                                       <b>One Way</b><br>  $215 +20%
+                                   </p>
+                               </div>
+                               <div class="bg-[#F6F6F7] rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
+                                   <p class="text-[#00153B] text-[12px] font-bold">
+                                       <b>Round Trip</b><br>$395 +20%
+                                   </p>
+                               </div>
+                           </div>
+
+
+                       
+                    </div>
+
+
+
+                    <br class="hidden md:block">
+                    <br class="hidden md:block">
+                    <br class="hidden md:block">
+
+                    <div class="mt-[25px] ">
+                       <a href="/book" class="block p-1 w-full text-center rounded-full from-rose-400 via-fuchsia-500 to-indigo-500 bg-gradient-to-r">
+                           <span class="block text-black px-4 py-2 font-semibold rounded-full bg-white hover:bg-transparent hover:text-white transition">Book Now</span>
+                         </a>
+                        </div>
+                </div>
+            </div>
+         </div>
+    </div>
+    
+ </div>
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
 </div>
 
 
