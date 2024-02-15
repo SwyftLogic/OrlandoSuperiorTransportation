@@ -22,8 +22,5 @@ export default defineConfig({
     prefetchAll: true,
   },
   output: "hybrid",
-  adapter: cloudflare({
-    mode: "directory",
-    functionPerRoute: true,
-  }),
+  adapter: cloudflare(),
 });
