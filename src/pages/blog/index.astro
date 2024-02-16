@@ -43,7 +43,7 @@ let posts = await res.json();
                                         <b>Author</b> {post._embedded["author"][index].name}
                                     </p>
                                 </div>
-
+                                
           <Fragment set:html={post.content.rendered} />
 
           <a href={`/blog/${post.slug}`} class="text-center mt-4 block p-1 rounded-full from-rose-400 via-fuchsia-500 to-indigo-500 bg-gradient-to-r">

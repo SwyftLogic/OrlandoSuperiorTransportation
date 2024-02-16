@@ -3,14 +3,17 @@ import { Image } from "astro:assets";
 import logo from "../assets/logo.png";
 ---
 
-  <footer class="w-full">
-    <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
-    <div
-      class="container mx-auto md:lg:xl:px-20 flex flex-col grid grid-cols-6 gap-4 px-5 py-24"
-    >
-      <div class="col-span-3 lg:col-span-3">
-        <span
-          class="flex items-start justify-start font-medium text-gray-900 title-font md:justify-start"
+
+
+<hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
+  
+ 
+<footer class="">
+  <div class="w-full mx-auto md:lg:xl:px-20 p-4 py-6 lg:py-8 ">
+      <div class="md:flex md:justify-between md:lg:xl:mx-10">
+        <div class="mb-6 md:mb-0">
+          <span
+          class="-ml-1 md:ml-0 flex items-start justify-start font-medium text-gray-900 title-font md:justify-start"
         >
           <Image
             src={logo}
@@ -18,27 +21,59 @@ import logo from "../assets/logo.png";
             style={{ objectFit: "contain" }}
           />
         </span>
-        <div class="mt-4 mb-4 pb-4">
-          <span
-            class="inline-flex justify-center mt-2 sm:ml-auto sm:mt-0 sm:justify-start"
-          >
-            <a
-              class="text-gray-500 cursor-pointer hover:text-gray-700"
-              href="https://web.facebook.com/people/Orlando-Superior-Transportation/100092177427861/?_rdc=1&_rdr"
-              target="_blank"
-            >
-              <svg
-                fill="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                class="w-5 h-5"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"
-                ></path>
-              </svg>
+        </div>
+        <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
+            <div>
+                <h2 class="mb-5 text-sm font-semibold text-gray-900 uppercase dark:text-white">Company</h2>
+                <ul class="text-gray-500 dark:text-gray-400 font-medium">
+                    <li class="mb-4">
+                        <a href="/#about" class="hover:underline">About</a>
+                    </li>
+                    <li class="mb-4">
+                      <a href="/#services" class="hover:underline">Services</a>
+                  </li>
+                  <li>
+                    <a href="/#rates" class="hover:underline">Rates</a>
+                  </li>
+                </ul>
+            </div>
+            <div>
+                <h2 class="mb-5 text-sm font-semibold text-gray-900 uppercase dark:text-white">Support</h2>
+                <ul class="text-gray-500 dark:text-gray-400 font-medium">
+                    <li class="mb-4">
+                        <a href="/#contact" class="hover:underline ">Contact</a>
+                    </li>
+                    <li>
+                        <a href="/#faq" class="hover:underline">FAQ</a>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <h2 class="mb-5 text-sm font-semibold text-gray-900 uppercase dark:text-white">Contact</h2>
+                <ul class="text-gray-500 dark:text-gray-400 font-medium">
+                    <li class="mb-4">
+                        <a href="/book" class="hover:underline">Book a Reservation</a>
+                    </li>
+                    <li>
+
+                    
+                        <a href="tel:4076976002" class="hover:underline">407 697 6002</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <hr class="my-6 md:lg:xl:mx-10 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
+    <div class="sm:flex sm:items-center sm:justify-between md:lg:xl:mx-10">
+        <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2024 <a href="/" class="hover:underline">Orlando Superior Transportation Services
+        </a>. All Rights Reserved.
+        </span>
+        <div class="flex mt-4 sm:justify-center sm:mt-0">
+            <a target="_blank" href="https://www.facebook.com/people/Orlando-Superior-Transportation/100092177427861/" class="text-gray-500 hover:text-gray-900 dark:hover:text-white">
+                <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 8 19">
+                      <path fill-rule="evenodd" d="M6.135 3H8V0H6.135a4.147 4.147 0 0 0-4.142 4.142V6H0v3h2v9.938h3V9h2.021l.592-3H5V3.591A.6.6 0 0 1 5.592 3h.543Z" clip-rule="evenodd"/>
+                  </svg>
+                <span class="sr-only">Facebook</span>
             </a>
 
             <a
@@ -47,6 +82,7 @@ import logo from "../assets/logo.png";
               target="_blank"
             >
               <svg
+              class="w-4 h-4"
                 fill="none"
                 stroke="currentColor"
                 stroke-linecap="round"
@@ -60,100 +96,16 @@ import logo from "../assets/logo.png";
                   d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"
                 ></path>
               </svg>
+              
+              <span class="sr-only">Instagram</span>
             </a>
-          </span>
+
         </div>
-      </div>
-      <div class="col-span-3 lg:col-span-1">
-        <h2
-          class="mb-3 text-sm font-medium tracking-widest text-gray-900 uppercase title-font"
-        >
-          Company
-        </h2>
-        <nav class="mb-10 list-none">
-          <ul>
-            <li class="mt-3">
-              <a
-                href="#about"
-                class="text-gray-500 cursor-pointer hover:text-gray-900"
-                >About Us</a
-              >
-            </li>
-            <li class="mt-3">
-              <a
-                href="#service"
-                class="text-gray-500 cursor-pointer hover:text-gray-900"
-                >Services</a
-              >
-            </li>
-            <li class="mt-3">
-              <a
-                href="#rates"
-                class="text-gray-500 cursor-pointer hover:text-gray-900"
-                >Rates</a
-              >
-            </li>
-          </ul>
-        </nav>
-      </div>
-
-      <div class="col-span-3 lg:col-span-1">
-        <h2
-          class="mb-3 text-sm font-medium tracking-widest text-gray-900 uppercase title-font"
-        >
-          Support
-        </h2>
-        <nav class="mb-10 list-none">
-          <ul>
-            <li class="mt-3">
-              <a
-                href="#contact"
-                class="text-gray-500 cursor-pointer hover:text-gray-900"
-                >Contact Support</a
-              >
-            </li>
-            <li class="mt-3">
-              <a
-                href="#faq"
-                class="text-gray-500 cursor-pointer hover:text-gray-900">FAQ</a
-              >
-            </li>
-          </ul>
-        </nav>
-      </div>
-
-      <div class="col-span-3 lg:col-span-1">
-        <h2
-          class="mb-3 text-sm font-medium tracking-widest text-gray-900 uppercase title-font"
-        >
-          Contact
-        </h2>
-        <nav class="mb-10 list-none">
-          <ul>
-            <li class="mt-3">
-              <a
-                href="#faq"
-                class="text-gray-500 cursor-pointer hover:text-gray-900"
-                >Send a Message</a
-              >
-            </li>
-            <li class="mt-3">
-              <a
-                href="/book"
-                class="text-gray-500 cursor-pointer hover:text-gray-900"
-                href="/book">Book a Reservation</a
-              >
-            </li>
-            <li class="mt-3">
-              <a
-                href="tel:4076976002"
-                class="text-gray-500 cursor-pointer hover:text-gray-900"
-                >407 697 6002</a
-              >
-            </li>
-          </ul>
-        </nav>
-      </div>
     </div>
-  </footer>
-
+  </div>
+  
+  <br class="block md:hidden">
+  <br class="block md:hidden">
+  <br class="block md:hidden">
+  <br class="block md:hidden">
+</footer>

@@ -4,6 +4,7 @@ import Layout from '../layouts/Layout.astro';
 import Services from '../components/services.astro';
 import Carousel from '../components/Carousel.astro';
 import About from '../components/About.astro';
+import Contact from '../components/Contact.astro';
 import Rates from '../components/Rates.astro';
 import Faq from '../components/Faq.astro';
 
@@ -21,9 +22,12 @@ import whatsapp from '../assets//whatsappicon.png';
 
 
 <Carousel />
-<Services />
 <About />
+<Services />
+<Contact />
 <Faq />
+
+
 
 				<a class="fixed bottom-20 md:bottom-2 mb-2 right-2" href="https://wa.me/4076976002?text=I'm%20interested%20in%20booking%20a%20reservation">
 				<Image src={whatsapp}  alt="Whatsapp Logo" style={{objectFit: "contain"}} width="48" height="48"/>

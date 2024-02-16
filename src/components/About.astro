@@ -1,9 +1,13 @@
 ---
 import { Image } from 'astro:assets';
 import about from '../assets/atlantacarwebsite.webp';
+import suv from '../assets/SUV.png';
+import town from '../assets/Town.png';
+import Van from '../assets/Van.png';
+import Limousine from '../assets/Limousine.png';
 ---	
 
-<div  class=" relative flex items-center justify-center overflow-hidden  ">
+<div id="about" class=" relative flex items-center justify-center overflow-hidden  ">
      
     <div class="relative mx-auto h-full px-4  pb-20   md:pb-10 sm:max-w-xl md:max-w-full md:px-24 lg:max-w-screen-xl lg:px-8">
         <div class="flex flex-col items-center justify-between lg:flex-row pt-16 pb-6">
@@ -35,7 +39,7 @@ import about from '../assets/atlantacarwebsite.webp';
         
          <p class="text-base text-gray-700">At Orlando Superior Transportation, sustainability is at the core of our values, reflected in our rigorous vehicle maintenance and route optimization practices. Additionally, we prioritize delivering impeccable service by investing in the training of our drivers, upholding the highest standards in vehicle maintenance, and guaranteeing punctuality for our valued customers. Our commitment to excellence extends to our ground transportation offerings, including black car services, chauffeured services, and a fleet of luxury sedans, SUVs, vans, and limousines. Our goal is to provide our customers with a top-tier experience, ensuring their comfort, convenience, and satisfaction throughout their journey with us
 </p>
-  <a href="/book"  id="faq" class="mt-4 block max-w-max text-center p-1 rounded-full from-rose-400 via-fuchsia-500 to-indigo-500 bg-gradient-to-r">
+  <a href="/book"  class="mt-4 block max-w-max text-center p-1 rounded-full from-rose-400 via-fuchsia-500 to-indigo-500 bg-gradient-to-r">
     <span class="block text-black py-2 px-8 pb-3 leading-5 text-lg font-semibold rounded-full bg-white hover:bg-transparent hover:text-white transition">
         <span class="block text-xs ">Orlando Transportation </span>
         Book a Reservation</span>
@@ -48,5 +52,269 @@ import about from '../assets/atlantacarwebsite.webp';
     </div>
    
      
+
+
+
+    
  
 </div>
+
+
+
+<!-- component -->
+<section class="py-10 relative px-2 md:px-0">
+    <div class="container">
+        <div class="mx-auto max-w-2xl sm:text-center">
+            
+            <h3 class="md:text-5xl text-3xl  tracking-tight  font-extrabold">Our Fleet
+            </h3>
+            <div class="w-10 mx-auto mt-5 bg-gradient-to-r from-cyan-500 to-purple-500 h-[2px]"></div>
+            <p class="mt-6 text-xl/8 text-gray-600 dark:text-gray-400">Choose the plan that suits your needs best and enjoy complete comfort, convenience, & Satisfaction with us.</p>
+        </div>
+
+        <div class="grid lg:grid-cols-4 grid-cols-1 gap-10 2xl:px-28 mt-20">
+            <div class="flex relative flex-col border bg-white border-gray-300 rounded-xl  dark:border-gray-700">
+               
+                <div class="absolute top-0 inset-x-0">
+                    <div class="flex justify-center">
+                        <span class="text-base font-medium uppercase border border-gray-700 text-white bg-black px-2 py-1 rounded-md -mt-3">SUV</span>
+                    </div>
+                </div>
+                <div class="text-center pt-10 mx-auto block">
+                    <Image src={suv}  alt="Suv Car" style={{objectFit: "contain"}}  />
+			
+                </div>
+
+                <div class="p-5">
+                    
+                    <div class="flex justify-center mt-2 pt-1">
+                            
+                        <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                        
+                        <h5 class="flex flex-col ps-2  font-medium dark:text-gray-300">
+                            6 Passengers
+                        </h5>
+                    </div>
+
+                    <div class="flex justify-center mt-2 pt-1">
+                            
+                        <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                        
+                        <h5 class="flex flex-col ps-2  font-medium dark:text-gray-300">
+                            6 Suitcases
+                        </h5>
+                    </div>
+
+                    <div class="flex justify-center mt-2 pt-1">
+                            
+                        <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                        
+                        <h5 class="flex flex-col ps-2  font-medium dark:text-gray-300">
+                            2 Booster Seats
+                        </h5>
+                    </div>
+
+                    <div class="flex justify-center mt-2 pt-1">
+                            
+                        <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                        
+                        <h5 class="flex flex-col ps-2  font-medium dark:text-gray-300">
+                            2 Car Seat
+                        </h5>
+                    </div>
+
+                   
+                    <div class="flex justify-center mt-4 pt-4">
+                        <a href="/book" class="block p-1 w-full text-center rounded-full from-rose-400 via-fuchsia-500 to-indigo-500 bg-gradient-to-r">
+                            <span class="block text-black px-4 py-2 font-semibold rounded-full bg-white hover:bg-transparent hover:text-white transition">Book Now</span>
+                          </a>
+                        </div>
+                </div>
+            </div>
+
+            <div class="flex relative flex-col border bg-white border-gray-300 rounded-xl  dark:border-gray-700">
+               
+                <div class="absolute top-0 inset-x-0">
+                    <div class="flex justify-center">
+                        <span class="text-base font-medium uppercase border border-gray-700 text-white bg-black px-2 py-1 rounded-md -mt-3">Town Car
+                        </span>
+                    </div>
+                </div>
+                <div class="text-center pt-10 mx-auto block">
+                    <Image src={town}  alt="Suv Car" style={{objectFit: "contain"}}  />
+			
+                </div>
+
+                <div class="p-5">
+                    
+                    <div class="flex justify-center mt-2 pt-1">
+                            
+                        <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                        
+                        <h5 class="flex flex-col ps-2  font-medium dark:text-gray-300">
+                            4 Passengers
+                        </h5>
+                    </div>
+
+                    <div class="flex justify-center mt-2 pt-1">
+                            
+                        <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                        
+                        <h5 class="flex flex-col ps-2  font-medium dark:text-gray-300">
+                            4 Suitcases
+                        </h5>
+                    </div>
+
+                    <div class="flex justify-center mt-2 pt-1">
+                            
+                        <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                        
+                        <h5 class="flex flex-col ps-2  font-medium dark:text-gray-300">
+                            1 Booster Seat
+                        </h5>
+                    </div>
+
+                    <div class="flex justify-center mt-2 pt-1">
+                            
+                        <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                        
+                        <h5 class="flex flex-col ps-2  font-medium dark:text-gray-300">
+                            1 Car Seat
+                        </h5>
+                    </div>
+
+                   
+                    <div class="flex justify-center mt-4 pt-4">
+                        <a href="/book" class="block p-1 w-full text-center rounded-full from-rose-400 via-fuchsia-500 to-indigo-500 bg-gradient-to-r">
+                            <span class="block text-black px-4 py-2 font-semibold rounded-full bg-white hover:bg-transparent hover:text-white transition">Book Now</span>
+                          </a>
+                        </div>
+                </div>
+            </div>
+
+            <div class="flex relative flex-col border bg-white border-gray-300 rounded-xl  dark:border-gray-700">
+               
+                <div class="absolute top-0 inset-x-0">
+                    <div class="flex justify-center">
+                        <span class="text-base font-medium uppercase border border-gray-700 text-white bg-black px-2 py-1 rounded-md -mt-3">Van
+                        </span>
+                    </div>
+                </div>
+                <div class="text-center pt-10 mx-auto block">
+                    <Image src={Van}  alt="Suv Car" style={{objectFit: "contain"}}  />
+			
+                </div>
+
+                <div class="p-5">
+                    
+                    <div class="flex justify-center mt-2 pt-1">
+                            
+                        <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                        
+                        <h5 class="flex flex-col ps-2  font-medium dark:text-gray-300">
+                            10 Passengers
+                        </h5>
+                    </div>
+
+                    <div class="flex justify-center mt-2 pt-1">
+                            
+                        <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                        
+                        <h5 class="flex flex-col ps-2  font-medium dark:text-gray-300">
+                            12 Suitcases
+                        </h5>
+                    </div>
+
+                    <div class="flex justify-center mt-2 pt-1">
+                            
+                        <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                        
+                        <h5 class="flex flex-col ps-2  font-medium dark:text-gray-300">
+                            2 Booster Seat
+                        </h5>
+                    </div>
+
+                    <div class="flex justify-center mt-2 pt-1">
+                            
+                        <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                        
+                        <h5 class="flex flex-col ps-2  font-medium dark:text-gray-300">
+                            2 Car Seat
+                        </h5>
+                    </div>
+
+                   
+                    <div class="flex justify-center mt-4 pt-4">
+                        <a href="/book" class="block p-1 w-full text-center rounded-full from-rose-400 via-fuchsia-500 to-indigo-500 bg-gradient-to-r">
+                            <span class="block text-black px-4 py-2 font-semibold rounded-full bg-white hover:bg-transparent hover:text-white transition">Book Now</span>
+                          </a>
+                        </div>
+                </div>
+            </div>
+
+            <div class="flex relative flex-col border bg-white border-gray-300 rounded-xl  dark:border-gray-700">
+               
+                <div class="absolute top-0 inset-x-0">
+                    <div class="flex justify-center">
+                        <span class="text-base font-medium uppercase border border-gray-700 text-white bg-black px-2 py-1 rounded-md -mt-3">Limousine
+                        </span>
+                    </div>
+                </div>
+                <div class="text-center pt-10 mx-auto block">
+                    <Image src={Limousine}  alt="Suv Car" style={{objectFit: "contain"}}  />
+			
+                </div>
+
+                <div class="p-5">
+                    
+                    <div class="flex justify-center mt-2 pt-1">
+                            
+                        <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                        
+                        <h5 class="flex flex-col ps-2  font-medium dark:text-gray-300">
+                            10 Passengers
+                        </h5>
+                    </div>
+
+                    <div class="flex justify-center mt-2 pt-1">
+                            
+                        <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                        
+                        <h5 class="flex flex-col ps-2  font-medium dark:text-gray-300">
+                            6 Suitcases
+                        </h5>
+                    </div>
+
+                    <div class="flex justify-center mt-2 pt-1">
+                            
+                        <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                        
+                        <h5 class="flex flex-col ps-2  font-medium dark:text-gray-300">
+                            1 Booster Seat
+                        </h5>
+                    </div>
+
+                    <div class="flex justify-center mt-2 pt-1">
+                            
+                        <svg viewBox="0 0 512 512" class="flex flex-col items-center" width="16px" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                        
+                        <h5 class="flex flex-col ps-2  font-medium dark:text-gray-300">
+                            1 Car Seat
+                        </h5>
+                    </div>
+
+                   
+                    <div class="flex justify-center mt-4 pt-4">
+                        <a href="/book" class="block p-1 w-full text-center rounded-full from-rose-400 via-fuchsia-500 to-indigo-500 bg-gradient-to-r">
+                            <span class="block text-black px-4 py-2 font-semibold rounded-full bg-white hover:bg-transparent hover:text-white transition">Book Now</span>
+                          </a>
+                        </div>
+                </div>
+            </div>
+
+           
+           
+        </div>
+        <h5 class="text-center font-medium mt-14" id="service">lnterested in a custom plan? <a href="/#contact" class="text-purple-500">Get in touch</a></h5>
+    </div>
+</section>
