@@ -10,47 +10,40 @@ import Limousine from '../assets/Limousine.png';
 <div id="about" class=" relative flex items-center justify-center overflow-hidden  ">
      
     <div class="relative mx-auto h-full px-4  pb-20   md:pb-10 sm:max-w-xl md:max-w-full md:px-24 lg:max-w-screen-xl lg:px-8">
-        <div class="flex flex-col items-center justify-between lg:flex-row pt-16 pb-6">
-            <div class=" relative ">
-                
-                <div class="lg:max-w-xl lg:pr-5 relative ">
-                    <h2 class="flex text-sm uppercase text-g1  ">
-                         
-                        About Us
-                    </h2>
-                    <h2 class=" max-w-lg  text-5xl md:text-6xl font-extrabold ">
-                        <span class="text-yellow-900">comfort,</span> <span class="text-yellow-700">convenience, &</span> 
-                        <span class="text-yellow-900">Satisfaction</span>
-                    </h2>
-                   
+        <div class=" flex flex-wrap">
+            <div class="w-full px-4">
+               <div class="mx-auto mb-12 text-center lg:mb-20">
+                  <h2 class="text-primary mb-2 block text-lg font-semibold">
+                    About Us
+                  </h2>
+                  <h1
+                     class="text-dark dark:text-gray-900 mb-3  leading-[1.2] md:text-[40px]"
+                     >
+                     <span class="font-bold text-3xl sm:text-4xl">ORLANDO SUPERIOR TRANSPORTATION SERVICES</span>
+                     <span class="block text-lg mt-2">WHERE QUALITY MEETS CONVENIENCE FOR YOUR ORLANDO TRAVEL!</span>
+
+                  </h1>
+                  <p class="text-body-color text-base dark:text-dark-6">
+                    <Image src={about}  alt="About Orlando Transportations Service" style={{objectFit: "contain"}} class="mx-auto max-w md:max-w-xl" />
                     
-                </div>
+                    At Orlando Superior Transportation, sustainability is at the core of our values, reflected in our rigorous vehicle maintenance and route optimization practices. Additionally, we prioritize delivering impeccable service by investing in the training of our drivers, upholding the highest standards in vehicle maintenance, and guaranteeing punctuality for our valued customers.
+<br><br>
+                    Our commitment to excellence extends to our ground transportation offerings, including black car services, chauffeured services, and a fleet of luxury sedans, SUVs, vans, and limousines. Our goal is to provide our customers with a top-tier experience, ensuring their comfort, convenience, and satisfaction throughout their journey with us
+                  </p>
+                  <a href="/book"  class="mt-5 block max-w md:max-w-max mx-auto text-center p-1 rounded-full from-rose-400 via-fuchsia-500 to-indigo-500 bg-gradient-to-r">
+                    <span class="block text-black py-2 px-8 pb-3 leading-5 text-lg font-semibold rounded-full bg-white hover:bg-transparent hover:text-white transition">
+                        <span class="block text-xs ">Orlando Transportation </span>
+                        Book a Reservation</span>
+                  </a>
                 
-               
+               </div>
             </div>
-            <div class="relative hidden lg:ml-32 lg:block lg:w-1/2">
-            <Image src={about}  alt="About Orlando Transportations Service" style={{objectFit: "contain"}} class="mr-3" />
-				
-                
-                
-                
-            </div>
-        </div>
+         </div>
+         
         
-         <p class="text-base text-gray-700">At Orlando Superior Transportation, sustainability is at the core of our values, reflected in our rigorous vehicle maintenance and route optimization practices. Additionally, we prioritize delivering impeccable service by investing in the training of our drivers, upholding the highest standards in vehicle maintenance, and guaranteeing punctuality for our valued customers. Our commitment to excellence extends to our ground transportation offerings, including black car services, chauffeured services, and a fleet of luxury sedans, SUVs, vans, and limousines. Our goal is to provide our customers with a top-tier experience, ensuring their comfort, convenience, and satisfaction throughout their journey with us
-</p>
-  <a href="/book"  class="mt-4 block max-w-max text-center p-1 rounded-full from-rose-400 via-fuchsia-500 to-indigo-500 bg-gradient-to-r">
-    <span class="block text-black py-2 px-8 pb-3 leading-5 text-lg font-semibold rounded-full bg-white hover:bg-transparent hover:text-white transition">
-        <span class="block text-xs ">Orlando Transportation </span>
-        Book a Reservation</span>
-  </a>
 
 			
     </div> 
-    <div class="hidden text-9xl varien absolute top-6 left-1/4 text-g/10     ">
-        About Us
-    </div>
-   
      
 
 
@@ -66,8 +59,8 @@ import Limousine from '../assets/Limousine.png';
     <div class="container">
         <div class="mx-auto max-w-2xl sm:text-center">
             
-            <h3 class="text-dark dark:text-gray-900 mb-3 text-3xl leading-[1.2] font-bold sm:text-4xl md:text-[40px]">Our Fleet
-            </h3>
+            <h2 class="text-dark dark:text-gray-900 mb-3 text-3xl leading-[1.2] font-bold sm:text-4xl md:text-[40px]">Our Fleet
+            </h2>
             <div class="w-10 mx-auto mt-5 bg-gradient-to-r from-cyan-500 to-purple-500 h-[2px]"></div>
             <p class="mt-6 text-xl/8 text-gray-600 dark:text-gray-400">Choose the plan that suits your needs best and enjoy complete comfort, convenience, & Satisfaction with us.</p>
         </div>
@@ -77,7 +70,7 @@ import Limousine from '../assets/Limousine.png';
                
                 <div class="absolute top-0 inset-x-0">
                     <div class="flex justify-center">
-                        <span class="text-base font-medium uppercase border border-gray-700 text-white bg-black px-2 py-1 rounded-md -mt-3">SUV</span>
+                        <h2 class="text-base font-medium uppercase border border-gray-700 text-white bg-black px-2 py-1 rounded-md -mt-3">Luxury SUVs</h2>
                     </div>
                 </div>
                 <div class="text-center pt-10 mx-auto block">
@@ -136,8 +129,8 @@ import Limousine from '../assets/Limousine.png';
                
                 <div class="absolute top-0 inset-x-0">
                     <div class="flex justify-center">
-                        <span class="text-base font-medium uppercase border border-gray-700 text-white bg-black px-2 py-1 rounded-md -mt-3">Town Car
-                        </span>
+                        <h2 class="text-base font-medium uppercase border border-gray-700 text-white bg-black px-2 py-1 rounded-md -mt-3">Luxury Sedans
+                        </h2>
                     </div>
                 </div>
                 <div class="text-center pt-10 mx-auto block">
@@ -196,8 +189,8 @@ import Limousine from '../assets/Limousine.png';
                
                 <div class="absolute top-0 inset-x-0">
                     <div class="flex justify-center">
-                        <span class="text-base font-medium uppercase border border-gray-700 text-white bg-black px-2 py-1 rounded-md -mt-3">Van
-                        </span>
+                        <h2 class="text-base font-medium uppercase border border-gray-700 text-white bg-black px-2 py-1 rounded-md -mt-3">Luxury Vans
+                        </h2>
                     </div>
                 </div>
                 <div class="text-center pt-10 mx-auto block">
@@ -256,8 +249,8 @@ import Limousine from '../assets/Limousine.png';
                
                 <div class="absolute top-0 inset-x-0">
                     <div class="flex justify-center">
-                        <span class="text-base font-medium uppercase border border-gray-700 text-white bg-black px-2 py-1 rounded-md -mt-3">Limousine
-                        </span>
+                        <h2 class="text-base font-medium uppercase border border-gray-700 text-white bg-black px-2 py-1 rounded-md -mt-3">Limousines
+                        </h2>
                     </div>
                 </div>
                 <div class="text-center pt-10 mx-auto block">
