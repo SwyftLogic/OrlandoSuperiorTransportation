@@ -1,12 +1,12 @@
 ---
-const { title, description, date, tags, author, authorurl } = Astro.props;
+const { title, description, author, authorurl } = Astro.props;
 
 const schema = {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
   "headline": title,
   "description": description,
-  "keywords": tags,
+//   "keywords": tags,
   "author": {
     "@type": "Person",
     "name": author,
