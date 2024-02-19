@@ -16,8 +16,6 @@ let [post] = await res.json();
   <BlogPostingJSONLD slot="head" 
     title={post.title.rendered}
           description={post.content.rendered}
-          tags={post.tags}
-          date={post.date}
           author={post._embedded["author"]["0"].name}
           authorurl={post._embedded["author"]["0"].link}/>
   <article>
