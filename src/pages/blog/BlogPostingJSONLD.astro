@@ -1,18 +1,19 @@
 ---
-const { title, description, author, authorurl } = Astro.props;
+export const prerender = false;
+const { title, description, date, tags, author, authorurl } = Astro.props;
 
 const schema = {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
   "headline": title,
   "description": description,
-//   "keywords": tags,
+  "keywords": tags,
   "author": {
     "@type": "Person",
     "name": author,
     "url": authorurl
   },
-//   "datePublished": new Date(date).toISOString().substring(0, 10),
+  "datePublished": new Date(date).toLocaleDateString('en-US'),
 };
 ---
 <script type="application/ld+json" set:html={JSON.stringify(schema)} />
