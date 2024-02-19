@@ -3,42 +3,55 @@ export const prerender = false;
 import Layout from "../../layouts/Layout.astro";
 import { Image } from "astro:assets";
 import BlogPostingJSONLD from "./BlogPostingJSONLD.astro";
+import banner1 from "../../assets/airporttransport-banner.png";
 
 const { slug } = Astro.params;
 
 let res = await fetch(
-  `${import.meta.env.BLOG_SITE}/wp-json/wp/v2/posts?slug=${slug}&_fields=title,tags,date,content,_links&_embed`
+  `${import.meta.env.BLOG_SITE}/wp-json/wp/v2/posts?slug=${slug}&_fields=id,title,tags,date,content,_links&_embed`
 );
 let [post] = await res.json();
+const tags = post._embedded['wp:term'].flat()
+    .filter(tag => tag.taxonomy === 'post_tag')
+    .map(tag => tag.name);
 ---
 
 <Layout title={post.title.rendered}>
-  <BlogPostingJSONLD slot="head" 
+  <BlogPostingJSONLD
+    slot="head"
     title={post.title.rendered}
-          description={post.content.rendered}
-          tags={post.tags}
-          date={post.date}
-          author={post._embedded["author"]["0"].name}
-          authorurl={post._embedded["author"]["0"].link}/>
+    description={post.content.rendered}
+    tags={tags}
+    date={post.date}
+    author={post._embedded["author"]["0"].name}
+    authorurl={post._embedded["author"]["0"].link}
+  />
   <article>
-
-  <div class="container mx-auto px-3 md:lg:xl:px-20 mb-4">
-    <h1
-      class="text-5xl font-extrabold text-center block mb-5 pb-2 pt-5"
-      set:html={post.title.rendered}
-    />
-    <div class="relative overflow-hidden rounded-xl mt-3">
-      <div
-        class="bg-[#F6F6F7] px-3 right-5 absolute top-5 z-20 rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]"
-      >
-        <p class="text-[#00153B] text-[12px] font-bold">
-          <b>Author</b>
-          {post._embedded["author"]["0"].name}
-        </p>
+    <div class="container mx-auto px-3 md:lg:xl:px-20 mb-4">
+      <h1
+        class="text-5xl font-extrabold text-center block mb-5 pb-2 pt-5"
+        set:html={post.title.rendered}
+      />
+      <div class="relative overflow-hidden rounded-xl mt-3">
+        <Image
+          src={post?._embedded["wp:featuredmedia"]?.[0]?.media_details?.sizes
+            ?.full.source_url || banner1}
+          alt={post.title.rendered}
+          width="640"
+          height="670"
+          class="h-64 w-full mb-3 bg-white border-3 object-cover object-top transition duration-500 group-hover:scale-105"
+        />
+        <div
+          class="bg-[#F6F6F7] px-3 right-5 absolute top-5 z-20 rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]"
+        >
+          <p class="text-[#00153B] text-[12px] font-bold">
+            <b>Author</b>
+            {post._embedded["author"]["0"].name}
+          </p>
+        </div>
       </div>
-    </div>
 
-    <Fragment set:html={post.content.rendered} />
-  </div>
-</article>
+      <Fragment set:html={post.content.rendered} />
+    </div>
+  </article>
 </Layout>
