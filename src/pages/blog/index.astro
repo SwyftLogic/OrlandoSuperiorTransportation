@@ -15,12 +15,12 @@ let posts = await res.json();
 
     <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
   {
-    posts.map((post, index) => (
+    posts.map((post) => (
     <div class="group relative p-6 sm:p-8 rounded-3xl bg-white border border-gray-100 dark:shadow-none dark:border-gray-700 dark:bg-gray-800 bg-opacity-50 shadow-2xl shadow-gray-600/10">
       <div class="relative overflow-hidden rounded-xl">
         <a href={`/blog/${post.slug}`} >
-            <Image src={
-                post._embedded["wp:featuredmedia"][index].media_details.sizes
+          <Image src={
+                post._embedded["wp:featuredmedia"]["0"].media_details.sizes
                   .full.source_url
               } alt={post.title.rendered} width="100" height="100" class="h-64 w-full object-cover object-top transition duration-500 group-hover:scale-105">
         </a>
@@ -40,7 +40,7 @@ let posts = await res.json();
           </p>
           <div class="bg-[#F6F6F7] px-3 right-5 absolute top-5 z-20 rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]">
                                     <p class="text-[#00153B] text-[12px] font-bold">
-                                        <b>Author</b> {post._embedded["author"][index].name}
+                                        <b>Author</b> {post._embedded["author"]["0"].name}
                                     </p>
                                 </div>
 
