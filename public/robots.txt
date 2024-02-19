@@ -1,8 +1,7 @@
 User-agent: *
 Allow: /
 
-Disallow: /api/*
-Disallow: *.orlandosuperiortransportation.pages.dev/*
-Disallow: orlandosuperiortransportation.pages.dev/*
+Disallow: /api/
+Disallow: /orlandosuperiortransportation.pages.dev/
 
 Sitemap: https://orlandosuperiortransportation.com/sitemap-index.xml
