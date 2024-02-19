@@ -4,7 +4,7 @@ import Layout from "../../layouts/Layout.astro";
 import { Image } from "astro:assets";
 
 let res = await fetch(
-  `${import.meta.env.BLOG_SITE}/wp-json/wp/v2/posts?_fields=tags,title,excerpt,slug,date,_links&_embed`
+  `${import.meta.env.BLOG_SITE}/wp-json/wp/v2/posts?_fields=title,excerpt,slug,date,_links&_embed`
 );
 let posts = await res.json();
 ---
