@@ -2,16 +2,24 @@
 export const prerender = false;
 import Layout from "../../layouts/Layout.astro";
 import { Image } from "astro:assets";
+import BlogPostingJSONLD from "./BlogPostingJSONLD.astro";
 
 const { slug } = Astro.params;
 
 let res = await fetch(
-  `${import.meta.env.BLOG_SITE}/wp-json/wp/v2/posts?slug=${slug}&_fields=title,date,content,_links&_embed`
+  `${import.meta.env.BLOG_SITE}/wp-json/wp/v2/posts?slug=${slug}&_fields=title,tags,date,content,_links&_embed`
 );
 let [post] = await res.json();
 ---
 
 <Layout title={post.title.rendered}>
+  <BlogPostingJSONLD slot="head" 
+    title={post.title.rendered}
+          description={post.content.rendered}
+          tags={post.tags}
+          date={post.date}
+          author={post._embedded["author"]["0"].name}
+          authorurl={post._embedded["author"]["0"].link}/>
   <article>
 
   <div class="container mx-auto px-3 md:lg:xl:px-20 mb-4">
@@ -20,14 +28,6 @@ let [post] = await res.json();
       set:html={post.title.rendered}
     />
     <div class="relative overflow-hidden rounded-xl mt-3">
-      <Image
-        src={post._embedded["wp:featuredmedia"]["0"].media_details.sizes.full
-          .source_url}
-        alt={post.title.rendered}
-        width="640"
-        height="670"
-        class="h-64 w-full mb-3 bg-white border-3 object-cover object-top transition duration-500 group-hover:scale-105"
-      />
       <div
         class="bg-[#F6F6F7] px-3 right-5 absolute top-5 z-20 rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]"
       >
