@@ -6,7 +6,7 @@ import partytown from "@astrojs/partytown";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://new-custom-template.orlandosuperiortransportation.pages.dev",
+  site: "https://orlandosuperiortransportation.com",
   integrations: [
     sitemap(),
     tailwind(),
