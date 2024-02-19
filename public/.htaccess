@@ -1,3 +1,8 @@
+RewriteEngine on
+RewriteCond %{HTTP_HOST} !^www\. [NC]
+RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [R=301,L]
+
+
 ##### Optimize default expiration time - BEGIN
 <IfModule mod_expires.c>
   
