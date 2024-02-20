@@ -2,7 +2,6 @@
 import { Image } from "astro:assets";
 import logo from "../assets/logo.png";
 ---
-
 <!-- component -->
 <header
   class="border-gray-100 sticky top-0 z-40 bg-gradient-to-r from-white to-amber-50"
@@ -24,21 +23,13 @@ import logo from "../assets/logo.png";
             href="tel:4076976002"
             ><span class="block text-xs">Call Now</span>407 697 6002</a
           >
-
-         
-
           <a href="/book" class="hidden md:block p-1 rounded-full from-rose-400 via-fuchsia-500 to-indigo-500 bg-gradient-to-r">
             <span class="block text-black px-4 py-1 font-semibold rounded-full bg-amber-50 hover:bg-transparent hover:text-white transition">Book Now</span>
           </a>
-
-
           <button
             type="button"
-            class="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden"
-            data-collapse-toggle="mobile-menu-2"
-            aria-controls="mobile-menu-2"
-            aria-expanded="false"
-          >
+            id="menu"
+            class="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden">
             <span class="sr-only">Open main menu</span>
             <svg
               class="w-6 h-6"
@@ -76,12 +67,10 @@ import logo from "../assets/logo.png";
                 aria-current="page">Home</a
               >
             </li>
-            <li 
+            <li
             >
-              
               <a
                 href="/#about"
-
                 class="block tracking-wide uppercase sm:normal-case text-3xl md:text-base py-4 pr-4 pl-3 text-gray-700 border-b border-gray-300 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-yellow-700 lg:p-0 lg:"
                 >About</a
               >
@@ -127,3 +116,21 @@ import logo from "../assets/logo.png";
     </nav>
   </div>
 </header>
+<script>
+import { Collapse } from 'flowbite';
+const $targetEl = document.getElementById('mobile-menu-2');
+const instanceOptions = {
+  id: 'mobile-menu-2',
+  override: true
+};
+const collapse = new Collapse($targetEl, null, null, instanceOptions);
+const liElements = document.querySelectorAll('#mobile-menu-2 ul li');
+  liElements.forEach((li) => {
+    li.addEventListener('click', () => {
+      collapse.collapse();
+    });
+  });
+document.getElementById('menu').addEventListener('click', () => {
+    collapse.toggle();
+});
+</script>
