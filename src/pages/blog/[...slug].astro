@@ -2,7 +2,6 @@
 export const prerender = false;
 import Layout from "../../layouts/Layout.astro";
 import { Image } from "astro:assets";
-import BlogPostingJSONLD from "./BlogPostingJSONLD.astro";
 import banner1 from "../../assets/airporttransport-banner.png";
 
 const { slug } = Astro.params;
@@ -11,21 +10,9 @@ let res = await fetch(
   `${import.meta.env.BLOG_SITE}/wp-json/wp/v2/posts?slug=${slug}&_fields=id,title,tags,date,content,_links&_embed`
 );
 let [post] = await res.json();
-const tags = post._embedded['wp:term'].flat()
-    .filter(tag => tag.taxonomy === 'post_tag')
-    .map(tag => tag.name);
 ---
 
 <Layout title={post.title.rendered}>
-  <BlogPostingJSONLD
-    slot="head"
-    title={post.title.rendered}
-    description={post.content.rendered}
-    tags={tags}
-    date={post.date}
-    author={post._embedded["author"]["0"].name}
-    authorurl={post._embedded["author"]["0"].link}
-  />
   <article>
     <div class="container mx-auto px-3 md:lg:xl:px-20 mb-4">
       <h1
