@@ -42,3 +42,14 @@ let [post] = await res.json();
     </div>
   </article>
 </Layout>
+
+
+<style is:global>
+  article a {
+   @apply underline text-yellow-500 hover:text-yellow-800 visited:text-yellow-800
+}
+article ul{
+    @apply ml-5 list-disc
+  }
+</style>
+
