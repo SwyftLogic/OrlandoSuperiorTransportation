@@ -4,4 +4,4 @@ Allow: /
 Disallow: /api/
 Disallow: /orlandosuperiortransportation.pages.dev/
 
-Sitemap: https://orlandosuperiortransportation.com/sitemap-index.xml
+Sitemap: https://www.orlandosuperiortransportation.com/sitemap-index.xml

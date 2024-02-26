@@ -88,7 +88,8 @@
 </IfModule>
 
 <IfModule mod_rewrite.c>
-RewriteEngine On
-RewriteCond %{HTTP_HOST} ^orlandosuperiortransportation.com [NC]
-RewriteRule ^(.*)$ https://www.orlandosuperiortransportation.com/$1 [L,R=301]
+RewriteEngine on
+RewriteCond %{HTTP_HOST} !^www\.
+RewriteCond %{HTTPS}s on(s)|offs()
+RewriteRule ^ http%1://www.%{HTTP_HOST}%{REQUEST_URI} [NE,L,R]
 </IfModule>
