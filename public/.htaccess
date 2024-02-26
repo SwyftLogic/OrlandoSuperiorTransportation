@@ -86,3 +86,7 @@
     Header append Vary: Accept-Encoding
   </FilesMatch>
 </IfModule>
+
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^orlandosuperiortransportation.com [NC]
+RewriteRule ^(.*)$ https://www.orlandosuperiortransportation.com/$1 [L,R=301]
