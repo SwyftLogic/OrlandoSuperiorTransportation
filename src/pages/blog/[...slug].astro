@@ -24,6 +24,7 @@ let [post] = await res.json();
           src={post?._embedded["wp:featuredmedia"]?.[0]?.media_details?.sizes
             ?.full.source_url || banner1}
           alt={post.title.rendered}
+          loading="eager"
           width="640"
           height="670"
           class="h-80 w-full mb-3 bg-white border-3 object-cover object-center transition duration-500 group-hover:scale-105"
