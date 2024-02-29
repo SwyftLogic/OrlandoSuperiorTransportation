@@ -8,8 +8,6 @@ interface Props {
 
 const { title } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const gtagKey = import.meta.env.GTAG_KEY;
-const gtagURL = `https://www.googletagmanager.com/ns.html?id=${gtagKey}`
 ---
 
 <!doctype html>
@@ -42,7 +40,7 @@ const gtagURL = `https://www.googletagmanager.com/ns.html?id=${gtagKey}`
     <link rel="sitemap" href="/sitemap-index.xml" />
     <title>{title}</title>
     <!-- Google Tag Manager -->
-    <script type="text/partytown" define:vars={{ gtagKey }}>
+    <script type="text/partytown">
       (function (w, d, s, l, i) {
         w[l] = w[l] || [];
         w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
@@ -52,7 +50,7 @@ const gtagURL = `https://www.googletagmanager.com/ns.html?id=${gtagKey}`
         j.async = true;
         j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
         f.parentNode.insertBefore(j, f);
-      })(window, document, "script", "dataLayer", gtagKey);
+      })(window, document, "script", "dataLayer", "GTM-5PNCBWND");
     </script>
     <!-- End Google Tag Manager -->
   </head>
@@ -61,7 +59,7 @@ const gtagURL = `https://www.googletagmanager.com/ns.html?id=${gtagKey}`
     <noscript
       ><iframe
         title="Google Tag Manager"
-        src={gtagURL}
+        src="https://www.googletagmanager.com/ns.html?id=GTM-5PNCBWND"
         height="0"
         width="0"
         style="display:none;visibility:hidden"></iframe></noscript
