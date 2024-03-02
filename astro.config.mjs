@@ -23,4 +23,14 @@ export default defineConfig({
   },
   output: "hybrid",
   adapter: cloudflare(),
+  redirects: {
+    '/blog': {
+      status: 301,
+      destination: '/blog/'
+    },
+    '/book/': {
+      status: 301,
+      destination: '/book-a-ride/'
+    },
+  }
 });
