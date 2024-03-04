@@ -27,6 +27,18 @@ export default defineConfig({
     '/book/': {
       status: 301,
       destination: '/book-a-ride/'
-    }
+    },
+    '/#about': {
+      status: 301,
+      destination: '/#about-orlando-transportation'
+    },
+    '/#service': {
+      status: 301,
+      destination: '/#transportation-services'
+    },
+    '/#Fleet': {
+      status: 301,
+      destination: '/#fleet'
+    },
   }
 });
