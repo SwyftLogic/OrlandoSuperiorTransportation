@@ -96,7 +96,7 @@ async function sendEmail(data) {
 
 <Layout title="Online Reservation - Book A Trip In Orlando" >
   <svelte:head>
-      <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+      <script type="text/partytown" src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
  </svelte:head>
 <!-- component -->
   <div class="container max-w-screen-lg mx-auto">
@@ -257,7 +257,7 @@ async function sendEmail(data) {
 </div>
 </Layout>
 
-<script>
+<script type="text/partytown">
   function decrement(e) {
     const btn = e.target.parentNode.parentElement.querySelector(
       'button[data-action="decrement"]'
