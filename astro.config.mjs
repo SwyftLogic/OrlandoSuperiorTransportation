@@ -10,11 +10,7 @@ export default defineConfig({
   integrations: [
     sitemap(),
     tailwind(),
-    partytown({
-      config: {
-        forward: ["dataLayer.push"],
-        debug: false,
-      },
+    partytown(),
     })
   ],
   prefetch: {
