@@ -11,7 +11,6 @@ export default defineConfig({
     sitemap(),
     tailwind(),
     partytown(),
-    })
   ],
   prefetch: {
     defaultStrategy: "hover",
