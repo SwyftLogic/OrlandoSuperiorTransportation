@@ -10,7 +10,7 @@ export default defineConfig({
   integrations: [
     sitemap(),
     tailwind(),
-    partytown(),
+    partytown({ config: { forward: ["dataLayer.push"], }, }),
   ],
   prefetch: {
     defaultStrategy: "hover",
@@ -19,9 +19,9 @@ export default defineConfig({
   output: "hybrid",
   adapter: cloudflare(),
   redirects: {
-    '/book': {
+    "/book": {
       status: 301,
-      destination: '/book-a-ride/'
-    }
-  }
+      destination: "/book-a-ride/",
+    },
+  },
 });
