@@ -16,15 +16,15 @@ let [post] = await res.json();
 <Layout title={post.title.rendered}>
   <article>
     <div class="container mx-auto px-3 md:lg:xl:px-20 mb-4">
-
-      <div class="flex flex-col sm:flex-row">
-        <div class="sm:w-7/12 md:w-8/12">
-        
-        
       <h1
-      class="text-5xl font-extrabold text-start block mb-5 pb-2 pt-5"
+      class="text-5xl font-extrabold text-center block mb-5 pb-2 pt-5"
       set:html={post.title.rendered}
     />
+      <div class="flex flex-col sm:flex-row">
+        <div class="sm:w-7/12 md:w-8/12 pb-5">
+        
+        
+    
     <div class="relative overflow-hidden rounded-xl mt-3">
       <Image
         src={post?._embedded["wp:featuredmedia"]?.[0]?.media_details?.sizes
@@ -49,15 +49,15 @@ let [post] = await res.json();
   
   
   </div>
-        <div class="sm:w-5/12 md:w-4/12 sm:p-0 md:p-6">
-          <p class="font-semibold text-gray-800 capitalize lg:text-2xl">From the blog</p>
+        <div class="sm:w-5/12 md:w-4/12 sm:p-0 sm:pt-4 md:p-7 md:pt-1">
+          <p class="font-semibold text-gray-800 capitalize text-2xl pb-1 border-b  mb-5  md:pt-0 sm:pt-4">From the blog</p>
 
          
           
           <div class="w-100 mt-2 mb-3 border-b">
             <img style="height: 120px;" class="object-cover w-full rounded-lg" src="https://images.unsplash.com/photo-1515378960530-7c0da6231fb1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" alt="">
 
-            <div class="flex flex-col justify-between py-4 ">
+            <div class="flex flex-col justify-between py-3 pt-1 ">
                 <a href="#" class="text-xl font-semibold text-gray-800 hover:underline dark:text-white ">
                     How to use sticky note for problem solving
                 </a>
@@ -72,7 +72,7 @@ let [post] = await res.json();
         <div class="w-100 mt-2 mb-3 border-b">
           <img style="height: 120px;" class="object-cover w-full rounded-lg" src="https://images.unsplash.com/photo-1515378960530-7c0da6231fb1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" alt="">
 
-          <div class="flex flex-col justify-between py-4 ">
+          <div class="flex flex-col justify-between py-3 pt-1 ">
               <a href="#" class="text-xl font-semibold text-gray-800 hover:underline dark:text-white ">
                   How to use sticky note for problem solving
               </a>
