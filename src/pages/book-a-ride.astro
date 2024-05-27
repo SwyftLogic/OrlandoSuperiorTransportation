@@ -39,11 +39,7 @@ if (Astro.request.method === "POST") {
 }
 
 async function sendAdminEmail(data) {
-  // Read the email template
-  const templateFiles = await Astro.glob(`../email-template/admin.html`);
-  let template = templateFiles[0].toString();
-
-  // Replace placeholders with actual data
+  const dateObject = new Date(data.get("pickup_date"));
   const formattedDate = new Intl.DateTimeFormat("en-US", {
     year: "numeric",
     month: "numeric",
@@ -52,33 +48,39 @@ async function sendAdminEmail(data) {
     minute: "numeric",
     second: "numeric",
     timeZone: "UTC",
-  }).format(new Date(data.get("pickup_date")));
-
-  const message = template
-    .replace('{{full_name}}', data.get('full_name'))
-    .replace('{{email}}', data.get('email'))
-    .replace('{{phone}}', data.get('phone'))
-    .replace('{{pickup_address}}', data.get('pickup_address'))
-    .replace('{{formatted_date}}', formattedDate)
-    .replace('{{dropoff_address}}', data.get('dropoff_address'))
-    .replace('{{passengers}}', data.get('passengers'))
-    .replace('{{bags}}', data.get('bags'))
-    .replace('{{preferred_vehicle}}', data.get('preferred_vehicle'))
-    .replace('{{flight_number}}', data.get('flight_number'))
-    .replace('{{child_seat}}', data.get('child_seat') == null ? "No" : "Yes")
-    .replace('{{booster_seat}}', data.get('booster_seat') == null ? "No" : "Yes")
-    .replace('{{comments}}', data.get('comments'));
-    await sendEmail('hassaan@swyftlogic.org', 'Hassaan', message);
+  }).format(dateObject);
+  const message = `
+  <html>
+    <body>
+      <p><strong>Full Name:</strong> ${data.get("full_name")}</p>
+      <p><strong>Email:</strong> ${data.get("email")}</p>
+      <p><strong>Phone:</strong> ${data.get("phone")}</p>
+      <p><strong>Pickup Address:</strong> ${data.get("pickup_address")}</p>
+      <p><strong>Pickup Date:</strong> ${formattedDate}</p>
+      <p><strong>Drop-off Address:</strong> ${data.get("dropoff_address")}</p>
+      <p><strong>Passengers:</strong> ${data.get("passengers")}</p>
+      <p><strong>Bags:</strong> ${data.get("bags")}</p>
+      <p><strong>Preferred Vehicle:</strong> ${data.get("preferred_vehicle")}</p>
+      <p><strong>Flight Number:</strong> ${data.get("flight_number")}</p>
+      <p><strong>Child Seat:</strong> ${data.get("child_seat") == null ? "No" : "Yes"}</p>
+      <p><strong>Booster Seat:</strong> ${data.get("booster_seat") == null ? "No" : "Yes"}</p>
+      <p><strong>Comments:</strong> ${data.get("comments")}</p>
+    </body>
+  </html>`;
+  await sendEmail('hassaan@swyftlogic.org', 'Hassaan', message);
   // await sendEmail(import.meta.env.EMAIL_TO, import.meta.env.NAME_TO, message);
 }
 
 async function sendSubmitterEmail(data) {
-  const templateFiles = await Astro.glob(`../email-template/submitter.html`);
-  let template = templateFiles[0].toString();
+  const message = `
+  <html>
+    <body>
+      <p>Dear ${data.get("full_name")}, </p>
+      <p>Thank you for choosing <strong>Orlando Superior Transportation</strong></p>
+    </body>
+  </html>`;
 
-  template = template.replace('{{full_name}}', data.get("full_name"));
-
-  await sendEmail(data.get("email"), data.get("full_name"), template);
+  await sendEmail(data.get("email"), data.get("full_name"), message);
 }
 
 async function sendEmail(emailTo, nameTo, message) {
