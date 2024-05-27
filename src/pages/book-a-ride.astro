@@ -2,8 +2,6 @@
 export const prerender = false;
 
 import Layout from "../layouts/Layout.astro";
-import { promises as fs } from 'fs';
-import path from 'path';
 
 const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
 const turnstileSecretKey = import.meta.env.TURNSTILE_SECRET_KEY;
@@ -42,8 +40,8 @@ if (Astro.request.method === "POST") {
 
 async function sendAdminEmail(data) {
   // Read the email template
-  const templatePath = path.resolve('../email-template/admin.html');
-  let template = await loadTemplate(templatePath);
+  const templateFiles = await Astro.glob(`../email-template/admin.html`);
+  let template = templateFiles[0].toString();
 
   // Replace placeholders with actual data
   const formattedDate = new Intl.DateTimeFormat("en-US", {
@@ -75,8 +73,8 @@ async function sendAdminEmail(data) {
 }
 
 async function sendSubmitterEmail(data) {
-  const templatePath = path.resolve('../email-template/submitter.html');
-  let template = await loadTemplate(templatePath);
+  const templateFiles = await Astro.glob(`../email-template/submitter.html`);
+  let template = templateFiles[0].toString();
 
   template = template.replace('{{full_name}}', data.get("full_name"));
 
@@ -110,10 +108,6 @@ async function sendEmail(emailTo, nameTo, message) {
       ],
     }),
   });
-}
-
-async function loadTemplate(templatePath) {
-  return fs.readFile(templatePath, 'utf-8');
 }
 ---
 
