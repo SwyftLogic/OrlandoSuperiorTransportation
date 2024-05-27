@@ -2,6 +2,8 @@
 export const prerender = false;
 
 import Layout from "../layouts/Layout.astro";
+import { promises as fs } from 'fs';
+import path from 'path';
 
 const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
 const turnstileSecretKey = import.meta.env.TURNSTILE_SECRET_KEY;
@@ -29,7 +31,8 @@ if (Astro.request.method === "POST") {
     if (!outcome.success) {
       responseMessage = "Turnstile verification failed. Please try again.";
     } else {
-      await sendEmail(data);
+      await sendAdminEmail(data);
+      await sendSubmitterEmail(data);
       responseMessage = "Thanks for reaching out.";
     }
   } catch (error) {
@@ -37,8 +40,12 @@ if (Astro.request.method === "POST") {
   }
 }
 
-async function sendEmail(data) {
-  const dateObject = new Date(data.get("pickup_date"));
+async function sendAdminEmail(data) {
+  // Read the email template
+  const templatePath = path.resolve('../email-template/admin.html');
+  let template = await loadTemplate(templatePath);
+
+  // Replace placeholders with actual data
   const formattedDate = new Intl.DateTimeFormat("en-US", {
     year: "numeric",
     month: "numeric",
@@ -47,25 +54,36 @@ async function sendEmail(data) {
     minute: "numeric",
     second: "numeric",
     timeZone: "UTC",
-  }).format(dateObject);
-  const message = `
-  <html>
-    <body>
-      <p><strong>Full Name:</strong> ${data.get("full_name")}</p>
-      <p><strong>Email:</strong> ${data.get("email")}</p>
-      <p><strong>Phone:</strong> ${data.get("phone")}</p>
-      <p><strong>Pickup Address:</strong> ${data.get("pickup_address")}</p>
-      <p><strong>Pickup Date:</strong> ${formattedDate}</p>
-      <p><strong>Drop-off Address:</strong> ${data.get("dropoff_address")}</p>
-      <p><strong>Passengers:</strong> ${data.get("passengers")}</p>
-      <p><strong>Bags:</strong> ${data.get("bags")}</p>
-      <p><strong>Preferred Vehicle:</strong> ${data.get("preferred_vehicle")}</p>
-      <p><strong>Flight Number:</strong> ${data.get("flight_number")}</p>
-      <p><strong>Child Seat:</strong> ${data.get("child_seat") == null ? "No" : "Yes"}</p>
-      <p><strong>Booster Seat:</strong> ${data.get("booster_seat") == null ? "No" : "Yes"}</p>
-      <p><strong>Comments:</strong> ${data.get("comments")}</p>
-    </body>
-  </html>`;
+  }).format(new Date(data.get("pickup_date")));
+
+  const message = template
+    .replace('{{full_name}}', data.get('full_name'))
+    .replace('{{email}}', data.get('email'))
+    .replace('{{phone}}', data.get('phone'))
+    .replace('{{pickup_address}}', data.get('pickup_address'))
+    .replace('{{formatted_date}}', formattedDate)
+    .replace('{{dropoff_address}}', data.get('dropoff_address'))
+    .replace('{{passengers}}', data.get('passengers'))
+    .replace('{{bags}}', data.get('bags'))
+    .replace('{{preferred_vehicle}}', data.get('preferred_vehicle'))
+    .replace('{{flight_number}}', data.get('flight_number'))
+    .replace('{{child_seat}}', data.get('child_seat') == null ? "No" : "Yes")
+    .replace('{{booster_seat}}', data.get('booster_seat') == null ? "No" : "Yes")
+    .replace('{{comments}}', data.get('comments'));
+    await sendEmail('hassaan@swyftlogic.org', 'Hassaan', message);
+  // await sendEmail(import.meta.env.EMAIL_TO, import.meta.env.NAME_TO, message);
+}
+
+async function sendSubmitterEmail(data) {
+  const templatePath = path.resolve('../email-template/submitter.html');
+  let template = await loadTemplate(templatePath);
+
+  template = template.replace('{{full_name}}', data.get("full_name"));
+
+  await sendEmail(data.get("email"), data.get("full_name"), template);
+}
+
+async function sendEmail(emailTo, nameTo, message) {
   const response = await fetch("https://api.mailchannels.net/tx/v1/send", {
     method: "POST",
     headers: {
@@ -75,7 +93,7 @@ async function sendEmail(data) {
       personalizations: [
         {
           to: [
-            { email: import.meta.env.EMAIL_TO, name: import.meta.env.NAME_TO },
+            { email: emailTo, name: nameTo},
           ],
         },
       ],
@@ -92,6 +110,10 @@ async function sendEmail(data) {
       ],
     }),
   });
+}
+
+async function loadTemplate(templatePath) {
+  return fs.readFile(templatePath, 'utf-8');
 }
 ---
 
