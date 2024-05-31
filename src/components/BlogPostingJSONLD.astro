@@ -1,0 +1,32 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+type Props = CollectionEntry<"blog">["data"];
+
+const { title, date, _embedded, excerpt, slug } = Astro.props as Props;
+
+const pageUrl = new URL(Astro.url.pathname, Astro.site);
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: title.rendered,
+  description: excerpt.rendered,
+  datePublished: new Date(date).toISOString(),
+  url: `${pageUrl}${slug}`,
+  thumbnailUrl:
+    _embedded["wp:featuredmedia"]?.[0]?.media_details?.sizes?.full.source_url,
+  image: {
+    "@type": "ImageObject",
+    url: _embedded["wp:featuredmedia"]?.[0]?.media_details?.sizes?.full
+      .source_url,
+  },
+  author: {
+    "@type": "Person",
+    name: _embedded["author"]["0"].name,
+    url: "",
+  },
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(structuredData)} />

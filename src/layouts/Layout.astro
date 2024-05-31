@@ -39,6 +39,11 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
     <link rel="sitemap" href="/sitemap-index.xml" />
     <title>{title}</title>
+    
+    <!-- Structured Data Slot -->
+    <slot name="structured-data" />
+    <!-- End Structured Data Slot -->
+
     <!-- Google Tag Manager -->
     <script type="text/partytown">
       (function (w, d, s, l, i) {
