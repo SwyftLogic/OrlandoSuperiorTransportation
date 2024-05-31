@@ -1,36 +1,31 @@
 ---
-import type { CollectionEntry } from "astro:content"
+import type { CollectionEntry } from "astro:content";
 
-type Props = CollectionEntry<"blog">["data"]
+type Props = CollectionEntry<"blog">["data"];
 
-const { title, description, createdAt, updatedAt, author, heroImage } =
-  Astro.props as Props
+const { title, date, _embedded, excerpt } = Astro.props as Props;
 
-const pageUrl = new URL(Astro.url.pathname, Astro.site)
+const pageUrl = new URL(Astro.url.pathname, Astro.site);
 
 const structuredData = {
   "@context": "https://schema.org",
   "@type": "Article",
-  headline: title,
-  description,
-  datePublished: createdAt.toISOString(),
-  dateModified: updatedAt?.toISOString() ?? undefined,
+  headline: title.rendered,
+  description: excerpt.rendered,
+  datePublished: new Date(date).toISOString(),
   url: pageUrl,
-  thumbnailUrl: heroImage.url.src,
+  thumbnailUrl:
+    _embedded["wp:featuredmedia"]?.[0]?.media_details?.sizes?.full.source_url,
   image: {
     "@type": "ImageObject",
-    url: heroImage.url.src,
-    width: heroImage.url.width,
-    height: heroImage.url.height,
-    caption: heroImage.alt,
+    url: _embedded["wp:featuredmedia"]?.[0]?.media_details?.sizes?.full
+      .source_url,
   },
   author: {
     "@type": "Person",
-    name: author.name,
-    description: author.bio,
-    url: author.profileUrl,
+    name: _embedded["author"]["0"].name,
   },
-}
+};
 ---
 
 <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
