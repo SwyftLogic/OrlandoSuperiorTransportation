@@ -227,7 +227,7 @@ async function sendEmail(data) {
             </div>
 
             <input type="text" id="pickup_address" placeholder="Pick Up Address" class="h-10 border mt-1 rounded w-full bg-gray-50 capture">
-            <ul id="suggestions" class="mt-2 bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-auto hidden">
+            <ul id="suggestions" class="absolute mt-2 bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-auto hidden">
               <!-- Suggestions will be dynamically added here -->
             </ul>
 
@@ -270,24 +270,39 @@ async function sendEmail(data) {
   "Walt Disney World Swan Reserve",
   "Wyndham Lake Buena Vista Disney Springs Resort",
   "Four Seasons Resort Orlando",
-  "Waldorf Astoria Orlando",
+  "Waldorf Astoria Orlando"
+];
+          
+const UniversalOrlandoResortHotels
+ = [
   "Universal’s Cabana Bay Beach Resort",
   "Loews Sapphire Falls Resort",
   "Universal’s Aventura Hotel",
   "Loews Royal Pacific Resort",
   "Hard Rock Hotel at Universal Orlando",
   "Universal’s Endless Summer Resort – Surfside Inn and Suites",
-  "Universal’s Endless Summer Resort – Dockside Inn and Suites",
-  "Hyatt Regency Orlando",
+  "Universal’s Endless Summer Resort – Dockside Inn and Suites"
+  
+];
+
+        
+const InternationalDriveHotels
+ = [ 
+ "Hyatt Regency Orlando",
   "Rosen Shingle Creek",
   "The Point Hotel & Suites",
   "Avanti International Resort",
   "Rosen Inn at Pointe Orlando",
   "DoubleTree by Hilton Hotel Orlando at SeaWorld",
-  "Embassy Suites by Hilton Orlando International Drive Convention Center",
-  "Wyndham Orlando Resort International Drive",
-  "Rosen Centre Hotel",
-  "Homewood Suites by Hilton Orlando-International Drive/Convention Center",
+  "Embassy Suites by Hilton Orlando International Drive Convention Center"  
+];
+
+
+
+        
+const Kissimmee192AreaHotels
+
+ = [ 
   "Radisson Resort Orlando-Celebration",
   "Comfort Inn Maingate",
   "Clarion Suites Maingate",
@@ -298,10 +313,16 @@ async function sendEmail(data) {
   "Red Lion Hotel Orlando Lake Buena Vista South",
   "Magic Moment Resort and Kids Club",
   "Super 8 by Wyndham Kissimmee/Maingate/Orlando Area",
-  "Omni Orlando Resort at Championsgate",
-  "Reunion Resort, A Salamander Golf & Spa Resort"
+  
 ];
-          
+
+const OmniChampionsgateReunion
+ = [ 
+"Omni Orlando Resort at Championsgate",
+  "Reunion Resort, A Salamander Golf & Spa Resort",
+  
+  ];
+
               const input = document.getElementById('pickup_address');
               const suggestionList = document.getElementById('suggestions');
           
