@@ -155,7 +155,7 @@ async function sendEmail(data) {
       <div id="alertTemplate" class="space-y-4"></div>
       <form method="POST">
         <input type="text" id="sessionId" value="" style="display:none;" />
-        <div class="flex flex-col grid grid-cols-6 gap-4">
+        <div class="grid grid-cols-6 gap-4">
           <div class="col-span-6 lg:col-span-2 mt-2">
             <label for="full_name">Full Name</label>
             <input
@@ -192,10 +192,150 @@ async function sendEmail(data) {
               value=""
             />
           </div>
-
-          <div class="col-span-6 lg:col-span-4 mt-2">
+          <div class="col-span-3 lg:col-span-2 mt-2">
             <label for="pickup_address">Pick Up Address</label>
-            <input
+            <select
+            name="pickuptype"
+            id="pickuptype"
+            class="h-10 border mt-1 rounded w-full bg-gray-50 capture"
+            value=""
+          >
+            <option value="Orlando Airport">Orlando Airport</option>
+            <option value="All Walt Disney World Hotels & Resorts">All Walt Disney World Hotels & Resorts</option>
+            <option value="Kissimmee 192 Area Hotels">Kissimmee 192 Area Hotels</option>
+            <option value="Port Canaveral">Port Canaveral</option>
+            <option value="Sea World">Sea World</option>
+            <option value="Sanford Int'l Airport">Sanford Int'l Airport</option>
+            
+          </select>
+          </div>
+          <div class="col-span-3 lg:col-span-2 mt-2">
+            
+            <div class="grid grid-cols-6 ">
+              
+              <div class="col-span-6 text-end flex justify-end items-center">
+                
+                <input
+                type="checkbox"
+                name="round_trip"
+                id="round_trip"
+                class="form-checkbox capture"
+              />
+              <label for="round_trip" class="ml-2">Round Trip</label>
+            </div>
+
+            </div>
+
+            <input type="text" id="pickup_address" placeholder="Pick Up Address" class="h-10 border mt-1 rounded w-full bg-gray-50 capture">
+            <ul id="suggestions" class="mt-2 bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-auto hidden">
+              <!-- Suggestions will be dynamically added here -->
+            </ul>
+
+            <script>
+              const suggestions = [
+  "Animal Kingdom – Jambo House",
+  "Animal Kingdom – Kidani Village",
+  "B Resort & Spa",
+  "Bay Lake Tower at Disney’s Contemporary Resort",
+  "Disney’s All-Star Movies Resort",
+  "Disney’s All-Star Music Resort",
+  "Disney’s All-Star Sports Resort",
+  "Disney’s Art of Animation Resort",
+  "Disney’s Beach Club Resort",
+  "Disney’s Boardwalk Resort",
+  "Disney’s Caribbean Beach Resort",
+  "Disney’s Contemporary Resort",
+  "Disney’s Coronado Springs Resort",
+  "Disney’s Grand Floridian Resort & Spa",
+  "Disney’s Old Key West Resort",
+  "Disney’s Polynesian Village Resort",
+  "Disney’s Pop Century Resort",
+  "Disney’s Riviera Resort",
+  "Disney’s Saratoga Springs Resort & Spa",
+  "Disney’s Wilderness Lodge",
+  "Disney’s Yacht Club Resort",
+  "DoubleTree Suites by Hilton Orlando-Disney Springs",
+  "Disney’s Fort Wilderness Resort & Campground",
+  "Gaylord Palms Resort & Convention Center",
+  "Hilton Orlando Buena Vista Palace – Disney Springs",
+  "Hilton Orlando Bonnet Creek",
+  "Hilton Orlando Lake Buena Vista – Disney Springs",
+  "Holiday Inn Orlando-Disney Springs",
+  "Orlando World Center Marriott",
+  "Port Orleans Resort – French Quarter",
+  "Port Orleans Resort – Riverside",
+  "Shades of Green",
+  "Walt Disney World Dolphin",
+  "Walt Disney World Swan",
+  "Walt Disney World Swan Reserve",
+  "Wyndham Lake Buena Vista Disney Springs Resort",
+  "Four Seasons Resort Orlando",
+  "Waldorf Astoria Orlando",
+  "Universal’s Cabana Bay Beach Resort",
+  "Loews Sapphire Falls Resort",
+  "Universal’s Aventura Hotel",
+  "Loews Royal Pacific Resort",
+  "Hard Rock Hotel at Universal Orlando",
+  "Universal’s Endless Summer Resort – Surfside Inn and Suites",
+  "Universal’s Endless Summer Resort – Dockside Inn and Suites",
+  "Hyatt Regency Orlando",
+  "Rosen Shingle Creek",
+  "The Point Hotel & Suites",
+  "Avanti International Resort",
+  "Rosen Inn at Pointe Orlando",
+  "DoubleTree by Hilton Hotel Orlando at SeaWorld",
+  "Embassy Suites by Hilton Orlando International Drive Convention Center",
+  "Wyndham Orlando Resort International Drive",
+  "Rosen Centre Hotel",
+  "Homewood Suites by Hilton Orlando-International Drive/Convention Center",
+  "Radisson Resort Orlando-Celebration",
+  "Comfort Inn Maingate",
+  "Clarion Suites Maingate",
+  "Quality Inn & Suites Kissimmee by The Lake",
+  "Ramada by Wyndham Kissimmee Gateway",
+  "Days Inn by Wyndham Kissimmee West",
+  "Howard Johnson by Wyndham Tropical Palms Kissimmee",
+  "Red Lion Hotel Orlando Lake Buena Vista South",
+  "Magic Moment Resort and Kids Club",
+  "Super 8 by Wyndham Kissimmee/Maingate/Orlando Area",
+  "Omni Orlando Resort at Championsgate",
+  "Reunion Resort, A Salamander Golf & Spa Resort"
+];
+          
+              const input = document.getElementById('pickup_address');
+              const suggestionList = document.getElementById('suggestions');
+          
+              input.addEventListener('input', () => {
+                const value = input.value.toLowerCase();
+                suggestionList.innerHTML = '';
+                if (value) {
+                  const filteredSuggestions = suggestions.filter(item => item.toLowerCase().includes(value));
+                  filteredSuggestions.forEach(suggestion => {
+                    const li = document.createElement('li');
+                    li.textContent = suggestion;
+                    li.className = 'p-2 cursor-pointer hover:bg-indigo-600 hover:text-white';
+                    li.addEventListener('click', () => {
+                      input.value = suggestion;
+                      suggestionList.classList.add('hidden');
+                    });
+                    suggestionList.appendChild(li);
+                  });
+                  suggestionList.classList.remove('hidden');
+                } else {
+                  suggestionList.classList.add('hidden');
+                }
+              });
+          
+              document.addEventListener('click', (event) => {
+                if (!input.contains(event.target)) {
+                  suggestionList.classList.add('hidden');
+                }
+              });
+            </script>
+
+
+
+            <!-- <input
               type="text"
               required
               name="pickup_address"
@@ -203,7 +343,7 @@ async function sendEmail(data) {
               class="h-10 border mt-1 rounded w-full bg-gray-50 capture"
               value=""
               placeholder=""
-            />
+            />-->
           </div>
 
           <div class="col-span-6 lg:col-span-2 mt-2">
@@ -223,12 +363,30 @@ async function sendEmail(data) {
             />
           </div>
 
-          <div class="col-span-6 lg:col-span-4 mt-2">
+          <div class="col-span-3 lg:col-span-2 mt-2">
             <label for="dropoff_address">Drop Off Address</label>
+            <select
+            name="Droptype"
+            id="Droptype"
+            class="h-10 border mt-1 rounded w-full bg-gray-50 capture"
+            value=""
+          >
+            <option value="Orlando Airport">Orlando Airport</option>
+            <option value="All Walt Disney World Hotels & Resorts">All Walt Disney World Hotels & Resorts</option>
+            <option value="Kissimmee 192 Area Hotels">Kissimmee 192 Area Hotels</option>
+            <option value="Port Canaveral">Port Canaveral</option>
+            <option value="Sea World">Sea World</option>
+            <option value="Sanford Int'l Airport">Sanford Int'l Airport</option>
+            
+          </select>
+          </div>
+          <div class="col-span-3 lg:col-span-2 mt-2 flex items-end ">
+           
             <input
               type="text"
               required
               name="dropoff_address"
+              placeholder="Drop Off Address"
               id="dropoff_address"
               class="h-10 border mt-1 rounded w-full bg-gray-50 capture"
               value=""
@@ -239,7 +397,7 @@ async function sendEmail(data) {
           <div class="col-span-3 lg:col-span-1 mt-2">
             <label for="passengers">Passengers</label>
             <div
-              class="h-10 w-33 bg-gray-50 flex border border-gray-200 rounded items-center mt-1"
+              class="h-10 w-33 bg-gray-50 flex border border-gray-500 rounded items-center mt-1"
             >
               <button
                 type="button"
@@ -291,7 +449,7 @@ async function sendEmail(data) {
           <div class="col-span-3 lg:col-span-1 mt-2">
             <label for="bags">Bags</label>
             <div
-              class="h-10 w-33 bg-gray-50 flex border border-gray-200 rounded items-center mt-1"
+              class="h-10 w-33 bg-gray-50 flex border border-gray-500 rounded items-center mt-1"
             >
               <button
                 type="button"
@@ -369,19 +527,30 @@ async function sendEmail(data) {
           </div>
 
           <div class="col-span-3 lg:col-span-1 flex align-item-end mt-2">
-            <div class="inline-flex items-center">
+            <div class="items-center">
+              <label for="payment_method">Payment Method</label>
+            <select
+              name="payment_method"
+              id="payment_method"
+              class="h-10 border mt-1 rounded w-full bg-gray-50 capture"
+              value=""
+            >
+              <option value="Cash">Cash</option>
+              <option value="CreditCard">Credit Card</option>
+            </select>
+            </div>
+          </div>
+
+          <div class="col-span-3 lg:col-span-1 flex items-end mt-2">
+            <div class="items-center">
               <input
                 type="checkbox"
                 name="child_seat"
                 id="child_seat"
                 class="form-checkbox capture"
               />
-              <label for="child_seat" class="ml-2">Child Seat</label>
-            </div>
-          </div>
+              <label for="child_seat" class="ml-2">Child Seat</label><br>
 
-          <div class="col-span-3 lg:col-span-1 flex align-item-center mt-2">
-            <div class="inline-flex items-center">
               <input
                 type="checkbox"
                 name="booster_seat"
@@ -402,23 +571,67 @@ async function sendEmail(data) {
               placeholder=""></textarea>
           </div>
 
-          <div
-            class="cf-turnstile"
-            data-sitekey={turnstileSiteKey}
-            data-size="compact"
-          >
-          </div>
+          <div class="col-span-6 lg:col-span-3 ">
 
-          <div class="col-span-6 text-right">
-            <div class="block md:inline-flex items-end">
-              <button
-                type="submit"
-                id="btn-submit"
-                class="w-full leading-4 py-3 md:py-2 text-2lg bg-transparent hover:bg-indigo-600 border-4 border-indigo-600 px-6 text-center rounded-full text-black hover:text-white"
-                >Submit</button
-              >
-            </div>
+
+             <!-- Purchase Resume -->
+    <div class="flex flex-col w-full h-fit">
+      <p class="font-medium text-xl">Cart</p>
+      <div class="flex flex-col p-3 gap-2 shadow-md border rounded-sm">
+          <div class="flex flex-row justify-between">
+              <p class="text-gray-600">Round Trip</p>
+              <p class="text-end font-bold">$99.98</p>
           </div>
+          <hr class="bg-gray-200 h-0.5">
+          <div class="flex flex-row justify-between">
+              <p class="text-gray-600">20% Gratuity</p>
+              <div>
+              <p class="text-end font-bold">$3.90</p>
+              </div>
+          </div>
+          <hr class="bg-gray-200 h-0.5">
+          <div class="flex flex-row justify-between">
+              <p class="text-gray-600">Total</p>
+              <div>
+              <p class="text-end font-bold">$103.88</p>
+              </div>
+          </div>
+      </div>
+  </div>
+
+
+
+
+
+        </div>
+
+        <div class="col-span-6 lg:col-span-3 text-right">
+          
+
+
+
+          <div class="block md:inline-flex items-end justify-end">
+            <button
+              type="submit"
+              id="btn-submit"
+              class="w-full leading-4 py-3 md:py-2 text-2lg bg-transparent hover:bg-indigo-600 border-4 border-indigo-600 px-6 text-center rounded-full text-black hover:text-white"
+              >Submit</button
+            >
+          </div>
+          <br>
+          <br>
+          <div
+          class="cf-turnstile justify-end items-end flex "
+          data-sitekey={turnstileSiteKey}
+          data-size="normal"
+        >
+      </div>
+        </div>
+
+        
+      </div>
+
+        
         </div>
       </form>
     </div>
