@@ -193,168 +193,53 @@ async function sendEmail(data) {
             />
           </div>
           <div class="col-span-3 lg:col-span-2 mt-2">
-            <label for="pickup_address">Pick Up Address</label>
+            <label for="pickuptype">Pick Up Address</label>
             <select
-            name="pickuptype"
-            id="pickuptype"
-            class="h-10 border mt-1 rounded w-full bg-gray-50 capture"
-            value=""
-          >
-            <option value="Orlando Airport">Orlando Airport</option>
-            <option value="All Walt Disney World Hotels & Resorts">All Walt Disney World Hotels & Resorts</option>
-            <option value="Kissimmee 192 Area Hotels">Kissimmee 192 Area Hotels</option>
-            <option value="Port Canaveral">Port Canaveral</option>
-            <option value="Sea World">Sea World</option>
-            <option value="Sanford Int'l Airport">Sanford Int'l Airport</option>
-            
-          </select>
+              name="pickuptype"
+              id="pickuptype"
+              class="h-10 border mt-1 rounded w-full bg-gray-50 capture"
+              value=""
+            >
+              <option value="Orlando Airport">Orlando Airport</option>
+              <option value="All Walt Disney World Hotels & Resorts"
+                >All Walt Disney World Hotels & Resorts</option
+              >
+              <option value="Kissimmee 192 Area Hotels"
+                >Kissimmee 192 Area Hotels</option
+              >
+              <option value="Port Canaveral">Port Canaveral</option>
+              <option value="Sea World">Sea World</option>
+              <option value="Sanford Int'l Airport"
+                >Sanford Int'l Airport</option
+              >
+            </select>
           </div>
           <div class="col-span-3 lg:col-span-2 mt-2">
-            
-            <div class="grid grid-cols-6 ">
-              
+            <div class="grid grid-cols-6">
               <div class="col-span-6 text-end flex justify-end items-center">
-                
                 <input
-                type="checkbox"
-                name="round_trip"
-                id="round_trip"
-                class="form-checkbox capture"
-              />
-              <label for="round_trip" class="ml-2">Round Trip</label>
+                  type="checkbox"
+                  name="round_trip"
+                  id="round_trip"
+                  class="form-checkbox capture"
+                />
+                <label for="round_trip" class="ml-2">Round Trip</label>
+              </div>
             </div>
 
-            </div>
-
-            <input type="text" id="pickup_address" placeholder="Pick Up Address" class="h-10 border mt-1 rounded w-full bg-gray-50 capture">
-            <ul id="suggestions" class="absolute mt-2 bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-auto hidden">
+            <input
+              type="text"
+              name="pickup_address"
+              id="pickup_address"
+              placeholder="Pick Up Address"
+              class="h-10 border mt-1 rounded w-full bg-gray-50 capture"
+            />
+            <ul
+              id="pickup_suggestions"
+              class="absolute mt-2 bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-auto hidden"
+            >
               <!-- Suggestions will be dynamically added here -->
             </ul>
-
-            <script>
-              const suggestions = [
-  "Animal Kingdom – Jambo House",
-  "Animal Kingdom – Kidani Village",
-  "B Resort & Spa",
-  "Bay Lake Tower at Disney’s Contemporary Resort",
-  "Disney’s All-Star Movies Resort",
-  "Disney’s All-Star Music Resort",
-  "Disney’s All-Star Sports Resort",
-  "Disney’s Art of Animation Resort",
-  "Disney’s Beach Club Resort",
-  "Disney’s Boardwalk Resort",
-  "Disney’s Caribbean Beach Resort",
-  "Disney’s Contemporary Resort",
-  "Disney’s Coronado Springs Resort",
-  "Disney’s Grand Floridian Resort & Spa",
-  "Disney’s Old Key West Resort",
-  "Disney’s Polynesian Village Resort",
-  "Disney’s Pop Century Resort",
-  "Disney’s Riviera Resort",
-  "Disney’s Saratoga Springs Resort & Spa",
-  "Disney’s Wilderness Lodge",
-  "Disney’s Yacht Club Resort",
-  "DoubleTree Suites by Hilton Orlando-Disney Springs",
-  "Disney’s Fort Wilderness Resort & Campground",
-  "Gaylord Palms Resort & Convention Center",
-  "Hilton Orlando Buena Vista Palace – Disney Springs",
-  "Hilton Orlando Bonnet Creek",
-  "Hilton Orlando Lake Buena Vista – Disney Springs",
-  "Holiday Inn Orlando-Disney Springs",
-  "Orlando World Center Marriott",
-  "Port Orleans Resort – French Quarter",
-  "Port Orleans Resort – Riverside",
-  "Shades of Green",
-  "Walt Disney World Dolphin",
-  "Walt Disney World Swan",
-  "Walt Disney World Swan Reserve",
-  "Wyndham Lake Buena Vista Disney Springs Resort",
-  "Four Seasons Resort Orlando",
-  "Waldorf Astoria Orlando"
-];
-          
-const UniversalOrlandoResortHotels
- = [
-  "Universal’s Cabana Bay Beach Resort",
-  "Loews Sapphire Falls Resort",
-  "Universal’s Aventura Hotel",
-  "Loews Royal Pacific Resort",
-  "Hard Rock Hotel at Universal Orlando",
-  "Universal’s Endless Summer Resort – Surfside Inn and Suites",
-  "Universal’s Endless Summer Resort – Dockside Inn and Suites"
-  
-];
-
-        
-const InternationalDriveHotels
- = [ 
- "Hyatt Regency Orlando",
-  "Rosen Shingle Creek",
-  "The Point Hotel & Suites",
-  "Avanti International Resort",
-  "Rosen Inn at Pointe Orlando",
-  "DoubleTree by Hilton Hotel Orlando at SeaWorld",
-  "Embassy Suites by Hilton Orlando International Drive Convention Center"  
-];
-
-
-
-        
-const Kissimmee192AreaHotels
-
- = [ 
-  "Radisson Resort Orlando-Celebration",
-  "Comfort Inn Maingate",
-  "Clarion Suites Maingate",
-  "Quality Inn & Suites Kissimmee by The Lake",
-  "Ramada by Wyndham Kissimmee Gateway",
-  "Days Inn by Wyndham Kissimmee West",
-  "Howard Johnson by Wyndham Tropical Palms Kissimmee",
-  "Red Lion Hotel Orlando Lake Buena Vista South",
-  "Magic Moment Resort and Kids Club",
-  "Super 8 by Wyndham Kissimmee/Maingate/Orlando Area",
-  
-];
-
-const OmniChampionsgateReunion
- = [ 
-"Omni Orlando Resort at Championsgate",
-  "Reunion Resort, A Salamander Golf & Spa Resort",
-  
-  ];
-
-              const input = document.getElementById('pickup_address');
-              const suggestionList = document.getElementById('suggestions');
-          
-              input.addEventListener('input', () => {
-                const value = input.value.toLowerCase();
-                suggestionList.innerHTML = '';
-                if (value) {
-                  const filteredSuggestions = suggestions.filter(item => item.toLowerCase().includes(value));
-                  filteredSuggestions.forEach(suggestion => {
-                    const li = document.createElement('li');
-                    li.textContent = suggestion;
-                    li.className = 'p-2 cursor-pointer hover:bg-indigo-600 hover:text-white';
-                    li.addEventListener('click', () => {
-                      input.value = suggestion;
-                      suggestionList.classList.add('hidden');
-                    });
-                    suggestionList.appendChild(li);
-                  });
-                  suggestionList.classList.remove('hidden');
-                } else {
-                  suggestionList.classList.add('hidden');
-                }
-              });
-          
-              document.addEventListener('click', (event) => {
-                if (!input.contains(event.target)) {
-                  suggestionList.classList.add('hidden');
-                }
-              });
-            </script>
-
-
 
             <!-- <input
               type="text"
@@ -385,25 +270,29 @@ const OmniChampionsgateReunion
           </div>
 
           <div class="col-span-3 lg:col-span-2 mt-2">
-            <label for="dropoff_address">Drop Off Address</label>
+            <label for="dropofftype">Drop Off Address</label>
             <select
-            name="Droptype"
-            id="Droptype"
-            class="h-10 border mt-1 rounded w-full bg-gray-50 capture"
-            value=""
-          >
-            <option value="Orlando Airport">Orlando Airport</option>
-            <option value="All Walt Disney World Hotels & Resorts">All Walt Disney World Hotels & Resorts</option>
-            <option value="Kissimmee 192 Area Hotels">Kissimmee 192 Area Hotels</option>
-            <option value="Port Canaveral">Port Canaveral</option>
-            <option value="Sea World">Sea World</option>
-            <option value="Sanford Int'l Airport">Sanford Int'l Airport</option>
-            
-          </select>
+              name="dropofftype"
+              id="dropofftype"
+              class="h-10 border mt-1 rounded w-full bg-gray-50 capture"
+              value=""
+            >
+              <option value="Orlando Airport">Orlando Airport</option>
+              <option value="All Walt Disney World Hotels & Resorts"
+                >All Walt Disney World Hotels & Resorts</option
+              >
+              <option value="Kissimmee 192 Area Hotels"
+                >Kissimmee 192 Area Hotels</option
+              >
+              <option value="Port Canaveral">Port Canaveral</option>
+              <option value="Sea World">Sea World</option>
+              <option value="Sanford Int'l Airport"
+                >Sanford Int'l Airport</option
+              >
+            </select>
           </div>
-          <div class="col-span-3 lg:col-span-2 mt-2 flex items-end ">
-           
-            <input
+          <div class="col-span-3 lg:col-span-2 mt-2 flex items-end">
+            <!-- <input
               type="text"
               required
               name="dropoff_address"
@@ -412,7 +301,20 @@ const OmniChampionsgateReunion
               class="h-10 border mt-1 rounded w-full bg-gray-50 capture"
               value=""
               placeholder=""
+            /> -->
+            <input
+              type="text"
+              name="dropoff_address"
+              id="dropoff_address"
+              placeholder="Drop Off Address"
+              class="h-10 border mt-1 rounded w-full bg-gray-50 capture"
             />
+            <ul
+              id="dropoff_suggestions"
+              class="absolute mt-2 bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-auto hidden"
+            >
+              <!-- Suggestions will be dynamically added here -->
+            </ul>
           </div>
 
           <div class="col-span-3 lg:col-span-1 mt-2">
@@ -520,7 +422,7 @@ const OmniChampionsgateReunion
           </div>
 
           <div class="col-span-3 lg:col-span-2 mt-2">
-            <label for="pickup_address">Preferred Vehicle</label>
+            <label for="preferred_vehicle">Preferred Vehicle</label>
             <select
               name="preferred_vehicle"
               id="preferred_vehicle"
@@ -550,15 +452,15 @@ const OmniChampionsgateReunion
           <div class="col-span-3 lg:col-span-1 flex align-item-end mt-2">
             <div class="items-center">
               <label for="payment_method">Payment Method</label>
-            <select
-              name="payment_method"
-              id="payment_method"
-              class="h-10 border mt-1 rounded w-full bg-gray-50 capture"
-              value=""
-            >
-              <option value="Cash">Cash</option>
-              <option value="CreditCard">Credit Card</option>
-            </select>
+              <select
+                name="payment_method"
+                id="payment_method"
+                class="h-10 border mt-1 rounded w-full bg-gray-50 capture"
+                value=""
+              >
+                <option value="Cash">Cash</option>
+                <option value="CreditCard">Credit Card</option>
+              </select>
             </div>
           </div>
 
@@ -570,7 +472,7 @@ const OmniChampionsgateReunion
                 id="child_seat"
                 class="form-checkbox capture"
               />
-              <label for="child_seat" class="ml-2">Child Seat</label><br>
+              <label for="child_seat" class="ml-2">Child Seat</label><br />
 
               <input
                 type="checkbox"
@@ -592,67 +494,51 @@ const OmniChampionsgateReunion
               placeholder=""></textarea>
           </div>
 
-          <div class="col-span-6 lg:col-span-3 ">
-
-
-             <!-- Purchase Resume -->
-    <div class="flex flex-col w-full h-fit">
-      <p class="font-medium text-xl">Cart</p>
-      <div class="flex flex-col p-3 gap-2 shadow-md border rounded-sm">
-          <div class="flex flex-row justify-between">
-              <p class="text-gray-600">Round Trip</p>
-              <p class="text-end font-bold">$99.98</p>
-          </div>
-          <hr class="bg-gray-200 h-0.5">
-          <div class="flex flex-row justify-between">
-              <p class="text-gray-600">20% Gratuity</p>
-              <div>
-              <p class="text-end font-bold">$3.90</p>
+          <div class="col-span-6 lg:col-span-3">
+            <!-- Purchase Resume -->
+            <div class="flex flex-col w-full h-fit">
+              <p class="font-medium text-xl">Cart</p>
+              <div class="flex flex-col p-3 gap-2 shadow-md border rounded-sm">
+                <div class="flex flex-row justify-between">
+                  <p class="text-gray-600" id="tripType"></p>
+                  <p class="text-end font-bold" id="tripRate"></p>
+                </div>
+                <hr class="bg-gray-200 h-0.5" />
+                <div class="flex flex-row justify-between">
+                  <p class="text-gray-600">20% Gratuity</p>
+                  <div>
+                    <p class="text-end font-bold" id="tripGratuity"></p>
+                  </div>
+                </div>
+                <hr class="bg-gray-200 h-0.5" />
+                <div class="flex flex-row justify-between">
+                  <p class="text-gray-600">Total</p>
+                  <div>
+                    <p class="text-end font-bold" id="tripTotal"></p>
+                  </div>
+                </div>
               </div>
+            </div>
           </div>
-          <hr class="bg-gray-200 h-0.5">
-          <div class="flex flex-row justify-between">
-              <p class="text-gray-600">Total</p>
-              <div>
-              <p class="text-end font-bold">$103.88</p>
-              </div>
-          </div>
-      </div>
-  </div>
 
-
-
-
-
-        </div>
-
-        <div class="col-span-6 lg:col-span-3 text-right">
-          
-
-
-
-          <div class="block md:inline-flex items-end justify-end">
-            <button
-              type="submit"
-              id="btn-submit"
-              class="w-full leading-4 py-3 md:py-2 text-2lg bg-transparent hover:bg-indigo-600 border-4 border-indigo-600 px-6 text-center rounded-full text-black hover:text-white"
-              >Submit</button
+          <div class="col-span-6 lg:col-span-3 text-right">
+            <div class="block md:inline-flex items-end justify-end">
+              <button
+                type="submit"
+                id="btn-submit"
+                class="w-full leading-4 py-3 md:py-2 text-2lg bg-transparent hover:bg-indigo-600 border-4 border-indigo-600 px-6 text-center rounded-full text-black hover:text-white"
+                >Submit</button
+              >
+            </div>
+            <br />
+            <br />
+            <div
+              class="cf-turnstile justify-end items-end flex"
+              data-sitekey={turnstileSiteKey}
+              data-size="normal"
             >
+            </div>
           </div>
-          <br>
-          <br>
-          <div
-          class="cf-turnstile justify-end items-end flex "
-          data-sitekey={turnstileSiteKey}
-          data-size="normal"
-        >
-      </div>
-        </div>
-
-        
-      </div>
-
-        
         </div>
       </form>
     </div>
@@ -811,4 +697,322 @@ const OmniChampionsgateReunion
       body: JSON.stringify(data),
     });
   }
+
+  // Autocomplete address suggestion
+
+  const suggestions = [
+    "Animal Kingdom – Jambo House",
+    "Animal Kingdom – Kidani Village",
+    "B Resort & Spa",
+    "Bay Lake Tower at Disney’s Contemporary Resort",
+    "Disney’s All-Star Movies Resort",
+    "Disney’s All-Star Music Resort",
+    "Disney’s All-Star Sports Resort",
+    "Disney’s Art of Animation Resort",
+    "Disney’s Beach Club Resort",
+    "Disney’s Boardwalk Resort",
+    "Disney’s Caribbean Beach Resort",
+    "Disney’s Contemporary Resort",
+    "Disney’s Coronado Springs Resort",
+    "Disney’s Grand Floridian Resort & Spa",
+    "Disney’s Old Key West Resort",
+    "Disney’s Polynesian Village Resort",
+    "Disney’s Pop Century Resort",
+    "Disney’s Riviera Resort",
+    "Disney’s Saratoga Springs Resort & Spa",
+    "Disney’s Wilderness Lodge",
+    "Disney’s Yacht Club Resort",
+    "DoubleTree Suites by Hilton Orlando-Disney Springs",
+    "Disney’s Fort Wilderness Resort & Campground",
+    "Gaylord Palms Resort & Convention Center",
+    "Hilton Orlando Buena Vista Palace – Disney Springs",
+    "Hilton Orlando Bonnet Creek",
+    "Hilton Orlando Lake Buena Vista – Disney Springs",
+    "Holiday Inn Orlando-Disney Springs",
+    "Orlando World Center Marriott",
+    "Port Orleans Resort – French Quarter",
+    "Port Orleans Resort – Riverside",
+    "Shades of Green",
+    "Walt Disney World Dolphin",
+    "Walt Disney World Swan",
+    "Walt Disney World Swan Reserve",
+    "Wyndham Lake Buena Vista Disney Springs Resort",
+    "Four Seasons Resort Orlando",
+    "Waldorf Astoria Orlando",
+  ];
+
+  const UniversalOrlandoResortHotels = [
+    "Universal’s Cabana Bay Beach Resort",
+    "Loews Sapphire Falls Resort",
+    "Universal’s Aventura Hotel",
+    "Loews Royal Pacific Resort",
+    "Hard Rock Hotel at Universal Orlando",
+    "Universal’s Endless Summer Resort – Surfside Inn and Suites",
+    "Universal’s Endless Summer Resort – Dockside Inn and Suites",
+  ];
+
+  const InternationalDriveHotels = [
+    "Hyatt Regency Orlando",
+    "Rosen Shingle Creek",
+    "The Point Hotel & Suites",
+    "Avanti International Resort",
+    "Rosen Inn at Pointe Orlando",
+    "DoubleTree by Hilton Hotel Orlando at SeaWorld",
+    "Embassy Suites by Hilton Orlando International Drive Convention Center",
+  ];
+
+  const Kissimmee192AreaHotels = [
+    "Radisson Resort Orlando-Celebration",
+    "Comfort Inn Maingate",
+    "Clarion Suites Maingate",
+    "Quality Inn & Suites Kissimmee by The Lake",
+    "Ramada by Wyndham Kissimmee Gateway",
+    "Days Inn by Wyndham Kissimmee West",
+    "Howard Johnson by Wyndham Tropical Palms Kissimmee",
+    "Red Lion Hotel Orlando Lake Buena Vista South",
+    "Magic Moment Resort and Kids Club",
+    "Super 8 by Wyndham Kissimmee/Maingate/Orlando Area",
+  ];
+
+  const OmniChampionsgateReunion = [
+    "Omni Orlando Resort at Championsgate",
+    "Reunion Resort, A Salamander Golf & Spa Resort",
+  ];
+
+  const pickupAddressSuggestion = [
+    {
+      "Orlando Airport": [
+        "Animal Kingdom – Jambo House",
+        "Animal Kingdom – Kidani Village",
+        "B Resort & Spa",
+        "Bay Lake Tower at Disney’s Contemporary Resort",
+        "Disney’s All-Star Movies Resort",
+        "Disney’s All-Star Music Resort",
+        "Disney’s All-Star Sports Resort",
+        "Disney’s Art of Animation Resort",
+        "Disney’s Beach Club Resort",
+        "Disney’s Boardwalk Resort",
+        "Disney’s Caribbean Beach Resort",
+        "Disney’s Contemporary Resort",
+        "Disney’s Coronado Springs Resort",
+        "Disney’s Grand Floridian Resort & Spa",
+        "Disney’s Old Key West Resort",
+        "Disney’s Polynesian Village Resort",
+        "Disney’s Pop Century Resort",
+        "Disney’s Riviera Resort",
+        "Disney’s Saratoga Springs Resort & Spa",
+        "Disney’s Wilderness Lodge",
+        "Disney’s Yacht Club Resort",
+        "DoubleTree Suites by Hilton Orlando-Disney Springs",
+        "Disney’s Fort Wilderness Resort & Campground",
+        "Gaylord Palms Resort & Convention Center",
+        "Hilton Orlando Buena Vista Palace – Disney Springs",
+        "Hilton Orlando Bonnet Creek",
+        "Hilton Orlando Lake Buena Vista – Disney Springs",
+        "Holiday Inn Orlando-Disney Springs",
+        "Orlando World Center Marriott",
+        "Port Orleans Resort – French Quarter",
+        "Port Orleans Resort – Riverside",
+        "Shades of Green",
+        "Walt Disney World Dolphin",
+        "Walt Disney World Swan",
+        "Walt Disney World Swan Reserve",
+        "Wyndham Lake Buena Vista Disney Springs Resort",
+        "Four Seasons Resort Orlando",
+        "Waldorf Astoria Orlando",
+      ],
+      "Sea World": [
+        "Hyatt Regency Orlando",
+        "Rosen Shingle Creek",
+        "The Point Hotel & Suites",
+        "Avanti International Resort",
+        "Rosen Inn at Pointe Orlando",
+        "DoubleTree by Hilton Hotel Orlando at SeaWorld",
+        "Embassy Suites by Hilton Orlando International Drive Convention Center",
+      ],
+    },
+  ];
+
+  const dropoffAddressSuggestion = [
+    {
+      "Orlando Airport": [
+        "Animal Kingdom – Jambo House",
+        "Animal Kingdom – Kidani Village",
+        "B Resort & Spa",
+        "Bay Lake Tower at Disney’s Contemporary Resort",
+        "Disney’s All-Star Movies Resort",
+        "Disney’s All-Star Music Resort",
+        "Disney’s All-Star Sports Resort",
+        "Disney’s Art of Animation Resort",
+        "Disney’s Beach Club Resort",
+        "Disney’s Boardwalk Resort",
+        "Disney’s Caribbean Beach Resort",
+        "Disney’s Contemporary Resort",
+        "Disney’s Coronado Springs Resort",
+        "Disney’s Grand Floridian Resort & Spa",
+        "Disney’s Old Key West Resort",
+        "Disney’s Polynesian Village Resort",
+        "Disney’s Pop Century Resort",
+        "Disney’s Riviera Resort",
+        "Disney’s Saratoga Springs Resort & Spa",
+        "Disney’s Wilderness Lodge",
+        "Disney’s Yacht Club Resort",
+        "DoubleTree Suites by Hilton Orlando-Disney Springs",
+        "Disney’s Fort Wilderness Resort & Campground",
+        "Gaylord Palms Resort & Convention Center",
+        "Hilton Orlando Buena Vista Palace – Disney Springs",
+        "Hilton Orlando Bonnet Creek",
+        "Hilton Orlando Lake Buena Vista – Disney Springs",
+        "Holiday Inn Orlando-Disney Springs",
+        "Orlando World Center Marriott",
+        "Port Orleans Resort – French Quarter",
+        "Port Orleans Resort – Riverside",
+        "Shades of Green",
+        "Walt Disney World Dolphin",
+        "Walt Disney World Swan",
+        "Walt Disney World Swan Reserve",
+        "Wyndham Lake Buena Vista Disney Springs Resort",
+        "Four Seasons Resort Orlando",
+        "Waldorf Astoria Orlando",
+      ],
+      "Sea World": [
+        "Hyatt Regency Orlando",
+        "Rosen Shingle Creek",
+        "The Point Hotel & Suites",
+        "Avanti International Resort",
+        "Rosen Inn at Pointe Orlando",
+        "DoubleTree by Hilton Hotel Orlando at SeaWorld",
+        "Embassy Suites by Hilton Orlando International Drive Convention Center",
+      ],
+      "Port Canaveral": ["Port 1", "Port 2"],
+    },
+  ];
+
+  function setupAutocomplete(
+    inputId,
+    dropdownId,
+    suggestionListId,
+    suggestionData,
+  ) {
+    const input = document.getElementById(inputId);
+    const suggestionList = document.getElementById(suggestionListId);
+    const dropdown = document.getElementById(dropdownId);
+
+    input.addEventListener("input", () => {
+      const value = input.value.toLowerCase();
+      suggestionList.innerHTML = "";
+
+      if (value) {
+        let filteredSuggestions = [];
+
+        const selectedType = dropdown.value;
+
+        suggestionData.forEach((group) => {
+          if (group[selectedType]) {
+            group[selectedType].forEach((item) => {
+              if (item.toLowerCase().includes(value)) {
+                filteredSuggestions.push(item);
+              }
+            });
+          }
+        });
+
+        filteredSuggestions.forEach((suggestion) => {
+          const li = document.createElement("li");
+          li.textContent = suggestion;
+          li.className =
+            "p-2 cursor-pointer hover:bg-indigo-600 hover:text-white";
+          li.addEventListener("click", () => {
+            input.value = suggestion;
+            suggestionList.classList.add("hidden");
+          });
+          suggestionList.appendChild(li);
+        });
+
+        suggestionList.classList.remove("hidden");
+      } else {
+        suggestionList.classList.add("hidden");
+      }
+    });
+
+    document.addEventListener("click", (event) => {
+      if (!input.contains(event.target)) {
+        suggestionList.classList.add("hidden");
+      }
+    });
+  }
+
+  setupAutocomplete(
+    "pickup_address",
+    "pickuptype",
+    "pickup_suggestions",
+    pickupAddressSuggestion,
+  );
+  setupAutocomplete(
+    "dropoff_address",
+    "dropofftype",
+    "dropoff_suggestions",
+    dropoffAddressSuggestion,
+  );
+
+  // End Autocomplete address suggestion
+
+  // Rates Calculation
+  const rates = [
+    {
+      pickup: "Orlando Airport",
+      dropoff: "All Walt Disney World Hotels & Resorts",
+      tripType: "One Way",
+      vehicle: "Town Car",
+      rate: 95,
+    },
+    {
+      pickup: "Orlando Airport",
+      dropoff: "All Walt Disney World Hotels & Resorts",
+      tripType: "Round Trip",
+      vehicle: "Town Car",
+      rate: 185,
+    },
+  ];
+
+  function findRates(pickup, dropoff, vehicle, tripType) {
+    return rates.find(
+      (rate) =>
+        rate.pickup === pickup &&
+        rate.dropoff === dropoff &&
+        rate.vehicle === vehicle &&
+        rate.tripType === tripType,
+    );
+  }
+
+  function updateTripDetails() {
+    const tripType = document.getElementById("round_trip").checked
+      ? "Round Trip"
+      : "One Way";
+    const selectedPickup = document.getElementById("pickuptype").value;
+    const selectedDropoff = document.getElementById("dropofftype").value;
+    const selectedVehicle = document.getElementById("preferred_vehicle").value;
+
+    const matchingRates = findRates(
+      selectedPickup,
+      selectedDropoff,
+      selectedVehicle,
+      tripType,
+    );
+    const gratuity = (matchingRates.rate * 20) / 100;
+
+    document.getElementById("tripType").textContent = tripType;
+    document.getElementById("tripRate").textContent = "$" + matchingRates.rate;
+    document.getElementById("tripGratuity").textContent = "$" + gratuity;
+    document.getElementById("tripTotal").textContent =
+      "$" + (matchingRates.rate + gratuity);
+  }
+  updateTripDetails();
+  // Bind the function to onchange event of input elements
+  document.getElementById("round_trip").onchange = updateTripDetails;
+  document.getElementById("pickuptype").onchange = updateTripDetails;
+  document.getElementById("dropofftype").onchange = updateTripDetails;
+  document.getElementById("preferred_vehicle").onchange = updateTripDetails;
+
+  // End Rates Calculation
 </script>
