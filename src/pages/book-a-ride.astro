@@ -54,6 +54,7 @@ async function sendEmail(data) {
       <p><strong>Full Name:</strong> ${data.get("full_name")}</p>
       <p><strong>Email:</strong> ${data.get("email")}</p>
       <p><strong>Phone:</strong> ${data.get("phone")}</p>
+      <p><strong>Trip:</strong> ${data.get("round_trip") == null ? "One Way" : "Round Trip"}</p>
       <p><strong>Pickup Address:</strong> ${data.get("pickup_address")}</p>
       <p><strong>Pickup Date:</strong> ${formattedDate}</p>
       <p><strong>Drop-off Address:</strong> ${data.get("dropoff_address")}</p>
@@ -61,6 +62,7 @@ async function sendEmail(data) {
       <p><strong>Bags:</strong> ${data.get("bags")}</p>
       <p><strong>Preferred Vehicle:</strong> ${data.get("preferred_vehicle")}</p>
       <p><strong>Flight Number:</strong> ${data.get("flight_number")}</p>
+      <p><strong>Payment Method:</strong> ${data.get("payment_method")}</p>
       <p><strong>Child Seat:</strong> ${data.get("child_seat") == null ? "No" : "Yes"}</p>
       <p><strong>Booster Seat:</strong> ${data.get("booster_seat") == null ? "No" : "Yes"}</p>
       <p><strong>Comments:</strong> ${data.get("comments")}</p>
@@ -986,6 +988,7 @@ async function sendEmail(data) {
   }
 
   function updateTripDetails() {
+    debugger;
     const tripType = document.getElementById("round_trip").checked
       ? "Round Trip"
       : "One Way";
@@ -999,13 +1002,22 @@ async function sendEmail(data) {
       selectedVehicle,
       tripType,
     );
-    const gratuity = (matchingRates.rate * 20) / 100;
+    if (matchingRates) {
+      const gratuity = (matchingRates.rate * 20) / 100;
 
-    document.getElementById("tripType").textContent = tripType;
-    document.getElementById("tripRate").textContent = "$" + matchingRates.rate;
-    document.getElementById("tripGratuity").textContent = "$" + gratuity;
-    document.getElementById("tripTotal").textContent =
-      "$" + (matchingRates.rate + gratuity);
+      document.getElementById("tripType").textContent = tripType;
+      document.getElementById("tripRate").textContent =
+        "$" + matchingRates.rate;
+      document.getElementById("tripGratuity").textContent = "$" + gratuity;
+      document.getElementById("tripTotal").textContent =
+        "$" + (matchingRates.rate + gratuity);
+    } else {
+      document.getElementById("tripType").textContent = tripType;
+      document.getElementById("tripRate").textContent =
+        "$" + 0;
+      document.getElementById("tripGratuity").textContent = "$" + 0;
+      document.getElementById("tripTotal").textContent = "$" + 0;
+    }
   }
   updateTripDetails();
   // Bind the function to onchange event of input elements
