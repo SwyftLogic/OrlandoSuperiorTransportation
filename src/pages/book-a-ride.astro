@@ -205,17 +205,23 @@ async function sendEmail(data) {
               value=""
             >
               <option value="Orlando Airport">Orlando Airport</option>
-              <option value="All Walt Disney World Hotels & Resorts"
-                >All Walt Disney World Hotels & Resorts</option
+              <option value="Walt Disney World Area"
+                >Walt Disney World Area</option
               >
-              <option value="Kissimmee 192 Area Hotels"
-                >Kissimmee 192 Area Hotels</option
+              <option value="Universal Studios Area"
+                >Universal Studios Area </option
               >
-              <option value="Port Canaveral">Port Canaveral</option>
-              <option value="Sea World">Sea World</option>
+              <option value="International Drive Area"
+                >International Drive Area </option
+              >
+              
+              
+              <option value="Kissimmee 192 Area">Kissimmee 192 Area</option>
+              <option value="Omni Championsgate / Reunion Area">Omni Championsgate / Reunion Area </option>
+              <option value="Port Canaveral Area">Port Canaveral Area</option>
+              <option value="SeaWorld Area">SeaWorld Area</option>
               <option value="Sanford Int'l Airport"
-                >Sanford Int'l Airport</option
-              >
+                >Sanford Int'l Airport</option>
             </select>
           </div>
           <div class="col-span-3 lg:col-span-2 mt-2">
@@ -281,18 +287,23 @@ async function sendEmail(data) {
               class="h-10 border mt-1 rounded w-full bg-gray-50 capture"
               value=""
             >
-              <option value="Orlando Airport">Orlando Airport</option>
-              <option value="All Walt Disney World Hotels & Resorts"
-                >All Walt Disney World Hotels & Resorts</option
-              >
-              <option value="Kissimmee 192 Area Hotels"
-                >Kissimmee 192 Area Hotels</option
-              >
-              <option value="Port Canaveral">Port Canaveral</option>
-              <option value="Sea World">Sea World</option>
-              <option value="Sanford Int'l Airport"
-                >Sanford Int'l Airport</option
-              >
+            <option value="Orlando Airport">Orlando Airport</option>
+            <option value="Walt Disney World Area"
+              >Walt Disney World Area</option
+            >
+            <option value="Universal Studios Area"
+              >Universal Studios Area </option
+            >
+            <option value="International Drive Area"
+              >International Drive Area </option
+            >
+            
+            
+            <option value="Kissimmee 192 Area">Kissimmee 192 Area</option>
+            <option value="Omni Championsgate / Reunion Area">Omni Championsgate / Reunion Area </option>
+            <option value="Port Canaveral Area">Port Canaveral Area</option>
+            <option value="SeaWorld Area">SeaWorld Area</option>
+            <option value="Sanford Int'l Airport">Sanford Int'l Airport</option>
             </select>
           </div>
           <div class="col-span-3 lg:col-span-2 mt-2 flex items-end">
@@ -840,55 +851,105 @@ async function sendEmail(data) {
   const dropoffAddressSuggestion = [
     {
       "Orlando Airport": [
-        "Animal Kingdom – Jambo House",
-        "Animal Kingdom – Kidani Village",
-        "B Resort & Spa",
-        "Bay Lake Tower at Disney’s Contemporary Resort",
-        "Disney’s All-Star Movies Resort",
-        "Disney’s All-Star Music Resort",
-        "Disney’s All-Star Sports Resort",
-        "Disney’s Art of Animation Resort",
-        "Disney’s Beach Club Resort",
-        "Disney’s Boardwalk Resort",
-        "Disney’s Caribbean Beach Resort",
-        "Disney’s Contemporary Resort",
-        "Disney’s Coronado Springs Resort",
-        "Disney’s Grand Floridian Resort & Spa",
-        "Disney’s Old Key West Resort",
-        "Disney’s Polynesian Village Resort",
-        "Disney’s Pop Century Resort",
-        "Disney’s Riviera Resort",
-        "Disney’s Saratoga Springs Resort & Spa",
-        "Disney’s Wilderness Lodge",
-        "Disney’s Yacht Club Resort",
-        "DoubleTree Suites by Hilton Orlando-Disney Springs",
-        "Disney’s Fort Wilderness Resort & Campground",
-        "Gaylord Palms Resort & Convention Center",
-        "Hilton Orlando Buena Vista Palace – Disney Springs",
-        "Hilton Orlando Bonnet Creek",
-        "Hilton Orlando Lake Buena Vista – Disney Springs",
-        "Holiday Inn Orlando-Disney Springs",
-        "Orlando World Center Marriott",
-        "Port Orleans Resort – French Quarter",
-        "Port Orleans Resort – Riverside",
-        "Shades of Green",
-        "Walt Disney World Dolphin",
-        "Walt Disney World Swan",
-        "Walt Disney World Swan Reserve",
-        "Wyndham Lake Buena Vista Disney Springs Resort",
-        "Four Seasons Resort Orlando",
-        "Waldorf Astoria Orlando",
+        "Orlando International Airport (MCO)",
+        "Orlando Sanford International Airport (SFB)"
       ],
-      "Sea World": [
-        "Hyatt Regency Orlando",
+      "Walt Disney World Area": [
+      "Animal Kingdom – Jambo House",
+      "Animal Kingdom – Kidani Village",
+      "B Resort & Spa",
+      "Bay Lake Tower at Disney’s Contemporary Resort",
+      "Disney’s All-Star Movies Resort",
+      "Disney’s All-Star Music Resort",
+      "Disney’s All-Star Sports Resort",
+      "Disney’s Art of Animation Resort",
+      "Disney’s Beach Club Resort",
+      "Disney’s Boardwalk Resort",
+      "Disney’s Caribbean Beach Resort",
+      "Disney’s Contemporary Resort",
+      "Disney’s Coronado Springs Resort",
+      "Disney’s Grand Floridian Resort & Spa",
+      "Disney’s Old Key West Resort",
+      "Disney’s Polynesian Village Resort",
+      "Disney’s Pop Century Resort",
+      "Disney’s Riviera Resort",
+      "Disney’s Saratoga Springs Resort & Spa",
+      "Disney’s Wilderness Lodge",
+      "Disney’s Yacht Club Resort",
+      "DoubleTree Suites by Hilton Orlando - Disney Springs",
+      "Disney’s Fort Wilderness Resort & Campground",
+      "Gaylord Palms Resort & Convention Center",
+      "Hilton Orlando Buena Vista Palace – Disney Springs",
+      "Hilton Orlando Bonnet Creek",
+      "Hilton Orlando Lake Buena Vista – Disney Springs",
+      "Holiday Inn Orlando - Disney Springs",
+      "Orlando World Center Marriott",
+      "Port Orleans Resort – French Quarter",
+      "Port Orleans Resort – Riverside",
+      "Shades of Green",
+      "Walt Disney World Dolphin",
+      "Walt Disney World Swan",
+      "Walt Disney World Swan Reserve",
+      "Wyndham Lake Buena Vista Disney Springs Resort",
+      "Four Seasons Resort Orlando",
+      "Waldorf Astoria Orlando"
+      ],
+      "Universal Studios Area ": [
+        "Universal’s Cabana Bay Beach Resort",
+        "Loews Sapphire Falls Resort",
+        "Universal’s Aventura Hotel",
+        "Loews Royal Pacific Resort",
+        "Hard Rock Hotel ",
+        "Universal’s Endless Summer Resort – Surfside Inn and Suites",
+        "Universal’s Endless Summer Resort – Dockside Inn and Suites",
+      ],
+      "International Drive Area": [
+        "Hyatt Regency",
         "Rosen Shingle Creek",
         "The Point Hotel & Suites",
         "Avanti International Resort",
         "Rosen Inn at Pointe Orlando",
-        "DoubleTree by Hilton Hotel Orlando at SeaWorld",
         "Embassy Suites by Hilton Orlando International Drive Convention Center",
+        "Wyndham Orlando Resort International Drive",
+        "Rosen Centre Hotel",
+        "Homewood Suites by Hilton Orlando-International Drive/Convention Center"
       ],
-      "Port Canaveral": ["Port 1", "Port 2"],
+      "Kissimmee 192 Area": [
+        "Radisson Resort Orlando",
+        "Comfort Inn Maingate",
+        "Clarion Suites Maingate",
+        "Quality Inn & Suites Kissimmee by The Lake",
+        "Ramada by Wyndham Kissimmee Gateway",
+        "Days Inn by Wyndham Kissimmee West",
+        "Howard Johnson by Wyndham Tropical Palms Kissimmee",
+        "Red Lion Hotel Orlando Lake Buena Vista South",
+        "Magic Moment Resort and Kids Club",
+        "Super 8 by Wyndham Kissimmee/Maingate"
+      ],
+      "Omni Championsgate / Reunion Area": [
+        "Omni Orlando Resort at Championsgate",
+        "Reunion Resort, A Salamander Golf & Spa Resort"
+      ],
+      "Port Canaveral Area": [
+        "Home2 Suites By Hilton",
+        "Hampton Inn & Suites",
+        "La Quinta Inn by Wyndham Cocoa Beach-Port Canaveral",
+        "Days Inn by Wyndham Cocoa Beach Port Canaveral",
+        "Radisson Resort"
+      ],
+      "SeaWorld Area": [
+        "Renaissance Orlando",
+        "DoubleTree by Hilton Orlando",
+        "Fairfield Inn and Suites",
+        "Hilton Garden Inn",
+        "Holiday Inn Express and Suites",
+        "SpringHill Suites",
+        "TownePlace Suites",
+        "Hampton Inn and Suites",
+        "Staybridge Suites",
+        "Residence Inn",
+        "Hilton Grand Vacations"
+      ],
     },
   ];
 
@@ -963,20 +1024,260 @@ async function sendEmail(data) {
 
   // Rates Calculation
   const rates = [
-    {
+  {
       pickup: "Orlando Airport",
-      dropoff: "All Walt Disney World Hotels & Resorts",
-      tripType: "One Way",
-      vehicle: "Town Car",
-      rate: 95,
+      dropoff: "Walt Disney World Area",
+      rate: [
+        {
+        vehicle: "Town Car",
+        oneway_rate: 95,
+        roundtrip_rate: 185,
+        },
+        {
+          vehicle: "Suv Car",
+          oneway_rate: 135,
+          roundtrip_rate: 265,
+        },
+        {
+          vehicle: "Van",
+          oneway_rate: 150,
+          roundtrip_rate: 290,
+        },
+        {
+          vehicle: "Mini Van",
+          oneway_rate: 110,
+          roundtrip_rate: 215,
+        },
+        {
+          vehicle: "Limousine",
+          oneway_rate: 150,
+          roundtrip_rate: 290,
+        },
+      ]
     },
     {
-      pickup: "Orlando Airport",
-      dropoff: "All Walt Disney World Hotels & Resorts",
-      tripType: "Round Trip",
-      vehicle: "Town Car",
-      rate: 185,
+      pickup: "Port Canaveral Area",
+      dropoff: "Orlando Airport",
+      rate: [
+      {
+        vehicle: "Town Car",
+        oneway_rate: 155,
+        roundtrip_rate: 290,
+        },
+        {
+          vehicle: "Suv Car",
+          oneway_rate: 195,
+          roundtrip_rate: 375,
+        },
+        {
+          vehicle: "Van",
+          oneway_rate: 210,
+          roundtrip_rate: 395,
+        },
+        {
+          vehicle: "Mini Van",
+          oneway_rate: 175,
+          roundtrip_rate: 345,
+        },
+        {
+          vehicle: "Limousine",
+          oneway_rate: 210,
+          roundtrip_rate: 395,
+        },
+      ]
     },
+    ,
+    {
+      pickup: "Port Canaveral Area",
+      dropoff: "Walt Disney World Area",
+      rate: [
+      {
+        vehicle: "Town Car",
+        oneway_rate: 185,
+        roundtrip_rate: 345,
+        },
+        {
+          vehicle: "Suv Car",
+          oneway_rate: 230,
+          roundtrip_rate: 430,
+        },
+        {
+          vehicle: "Van",
+          oneway_rate: 250,
+          roundtrip_rate: 495,
+        },
+        {
+          vehicle: "Mini Van",
+          oneway_rate: 195,
+          roundtrip_rate: 365,
+        },
+        {
+          vehicle: "Limousine",
+          oneway_rate: 250,
+          roundtrip_rate: 495,
+        },
+      ]
+    },
+   
+    {
+      pickup: "Universal Studios Area",
+      dropoff: "Walt Disney World Area",
+      rate: [
+      {
+        vehicle: "Town Car",
+        oneway_rate: 90,
+        roundtrip_rate: 175,
+        },
+        {
+          vehicle: "Suv Car",
+          oneway_rate: 100,
+          roundtrip_rate: 195,
+        },
+        {
+          vehicle: "Van",
+          oneway_rate: 110,
+          roundtrip_rate: 205,
+        },
+        {
+          vehicle: "Mini Van",
+          oneway_rate: 90,
+          roundtrip_rate: 175,
+        },
+        {
+          vehicle: "Limousine",
+          oneway_rate: 110,
+          roundtrip_rate: 205,
+        },
+      ]
+    },
+
+    ,
+   
+    {
+      pickup: "Universal Studios Area",
+      dropoff: "Kissimmee 192 Area",
+      rate: [
+      {
+        vehicle: "Town Car",
+        oneway_rate: 95,
+        roundtrip_rate: 185,
+        },
+        {
+          vehicle: "Suv Car",
+          oneway_rate: 105,
+          roundtrip_rate: 205,
+        },
+        {
+          vehicle: "Van",
+          oneway_rate: 120,
+          roundtrip_rate: 230,
+        },
+        {
+          vehicle: "Mini Van",
+          oneway_rate: 95,
+          roundtrip_rate: 185,
+        },
+        {
+          vehicle: "Limousine",
+          oneway_rate: 120,
+          roundtrip_rate: 230,
+        },
+      ]
+    },
+    {
+      pickup: "SeaWorld Area",
+      dropoff: "Walt Disney World Area",
+      rate: [
+      {
+        vehicle: "Town Car",
+        oneway_rate: 65,
+        roundtrip_rate: 120,
+        },
+        {
+          vehicle: "Suv Car",
+          oneway_rate: 85,
+          roundtrip_rate: 165,
+        },
+        {
+          vehicle: "Van",
+          oneway_rate: 150,
+          roundtrip_rate: 290,
+        },
+        {
+          vehicle: "Mini Van",
+          oneway_rate: 75,
+          roundtrip_rate: 145,
+        },
+        {
+          vehicle: "Limousine",
+          oneway_rate: 100,
+          roundtrip_rate: 190,
+        },
+      ]
+    },
+    {
+      pickup: "SeaWorld Area",
+      dropoff: "Kissimmee 192 Area",
+      rate: [
+      {
+        vehicle: "Town Car",
+        oneway_rate: 80,
+        roundtrip_rate: 150,
+        },
+        {
+          vehicle: "Suv Car",
+          oneway_rate: 95,
+          roundtrip_rate: 185,
+        },
+        {
+          vehicle: "Van",
+          oneway_rate: 120,
+          roundtrip_rate: 220,
+        },
+        {
+          vehicle: "Mini Van",
+          oneway_rate: 85,
+          roundtrip_rate: 165,
+        },
+        {
+          vehicle: "Limousine",
+          oneway_rate: 120,
+          roundtrip_rate: 120,
+        },
+      ]
+    },
+    {
+      pickup: "Sanford Int'l Airport",
+      dropoff: "Walt Disney World Area",
+      rate: [
+      {
+        vehicle: "Town Car",
+        oneway_rate: 155,
+        roundtrip_rate: 285,
+        },
+        {
+          vehicle: "Suv Car",
+          oneway_rate: 195,
+          roundtrip_rate: 360,
+        },
+        {
+          vehicle: "Van",
+          oneway_rate: 215,
+          roundtrip_rate: 395,
+        },
+        {
+          vehicle: "Mini Van",
+          oneway_rate: 180,
+          roundtrip_rate: 325,
+        },
+        {
+          vehicle: "Limousine",
+          oneway_rate: 215,
+          roundtrip_rate: 395,
+        },
+      ]
+    },
+    
   ];
 
   function findRates(pickup, dropoff, vehicle, tripType) {
