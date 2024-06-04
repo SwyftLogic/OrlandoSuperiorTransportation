@@ -518,7 +518,7 @@ async function sendEmail(data) {
             <!-- Purchase Resume -->
             <div class="flex flex-col w-full h-fit">
               <p class="font-medium text-xl">Fare Estimate</p>
-              <div class="flex flex-col p-3 gap-2 shadow-md border rounded-sm">
+              <div class="flex flex-col py-3 gap-2">
                 <div class="flex flex-row justify-between">
                   <p class="text-gray-600" id="tripType"></p>
                   <p class="text-end font-bold" id="tripRate"></p>
@@ -532,9 +532,9 @@ async function sendEmail(data) {
                 </div>
                 <hr class="bg-gray-200 h-0.5" />
                 <div class="flex flex-row justify-between">
-                  <p class="text-gray-600">Total</p>
+                  <p class="text-gray-600 text-lg font-bold">Total</p>
                   <div>
-                    <p class="text-end font-bold" id="tripTotal"></p>
+                    <p class="text-end text-lg font-bold" id="tripTotal"></p>
                   </div>
                 </div>
               </div>
