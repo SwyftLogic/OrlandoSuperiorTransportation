@@ -55,8 +55,10 @@ async function sendEmail(data) {
       <p><strong>Email:</strong> ${data.get("email")}</p>
       <p><strong>Phone:</strong> ${data.get("phone")}</p>
       <p><strong>Trip:</strong> ${data.get("round_trip") == null ? "One Way" : "Round Trip"}</p>
+      <p><strong>Pickup Type:</strong> ${data.get("pickup_type")}</p>
       <p><strong>Pickup Address:</strong> ${data.get("pickup_address")}</p>
       <p><strong>Pickup Date:</strong> ${formattedDate}</p>
+      <p><strong>Drop-off Type:</strong> ${data.get("dropoff_type")}</p>
       <p><strong>Drop-off Address:</strong> ${data.get("dropoff_address")}</p>
       <p><strong>Passengers:</strong> ${data.get("passengers")}</p>
       <p><strong>Bags:</strong> ${data.get("bags")}</p>
@@ -195,10 +197,10 @@ async function sendEmail(data) {
             />
           </div>
           <div class="col-span-3 lg:col-span-2 mt-2">
-            <label for="pickuptype">Pick Up Address</label>
+            <label for="pickup_type">Pick Up Address</label>
             <select
-              name="pickuptype"
-              id="pickuptype"
+              name="pickup_type"
+              id="pickup_type"
               class="h-10 border mt-1 rounded w-full bg-gray-50 capture"
               value=""
             >
@@ -278,10 +280,10 @@ async function sendEmail(data) {
           </div>
 
           <div class="col-span-3 lg:col-span-2 mt-2">
-            <label for="dropofftype">Drop Off Address</label>
+            <label for="dropoff_type">Drop Off Address</label>
             <select
-              name="dropofftype"
-              id="dropofftype"
+              name="dropoff_type"
+              id="dropoff_type"
               class="h-10 border mt-1 rounded w-full bg-gray-50 capture"
               value=""
             >
@@ -1077,13 +1079,13 @@ async function sendEmail(data) {
 
   setupAutocomplete(
     "pickup_address",
-    "pickuptype",
+    "pickup_type",
     "pickup_suggestions",
     pickupAddressSuggestion,
   );
   setupAutocomplete(
     "dropoff_address",
-    "dropofftype",
+    "dropoff_type",
     "dropoff_suggestions",
     dropoffAddressSuggestion,
   );
@@ -1363,8 +1365,8 @@ async function sendEmail(data) {
     const tripType = document.getElementById("round_trip").checked
       ? "Round Trip"
       : "One Way";
-    const selectedPickup = document.getElementById("pickuptype").value;
-    const selectedDropoff = document.getElementById("dropofftype").value;
+    const selectedPickup = document.getElementById("pickup_type").value;
+    const selectedDropoff = document.getElementById("dropoff_type").value;
     const selectedVehicle = document.getElementById("preferred_vehicle").value;
 
     const matchingRates = findRates(
@@ -1393,8 +1395,8 @@ async function sendEmail(data) {
   updateTripDetails();
   // Bind the function to onchange event of input elements
   document.getElementById("round_trip").onchange = updateTripDetails;
-  document.getElementById("pickuptype").onchange = updateTripDetails;
-  document.getElementById("dropofftype").onchange = updateTripDetails;
+  document.getElementById("pickup_type").onchange = updateTripDetails;
+  document.getElementById("dropoff_type").onchange = updateTripDetails;
   document.getElementById("preferred_vehicle").onchange = updateTripDetails;
 
   // End Rates Calculation
