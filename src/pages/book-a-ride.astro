@@ -204,7 +204,7 @@ async function sendEmail(data) {
               class="h-10 border mt-1 rounded w-full bg-gray-50 capture"
               value=""
             >
-              <option value="Orlando Airport">Orlando Airport</option>
+              <option value="Orlando Airport">Orlando International Airport</option>
               <option value="Walt Disney World Area"
                 >Walt Disney World Area</option
               >
@@ -221,8 +221,8 @@ async function sendEmail(data) {
               </option>
               <option value="Port Canaveral Area">Port Canaveral Area</option>
               <option value="SeaWorld Area">SeaWorld Area</option>
-              <option value="Sanford Int'l Airport"
-                >Sanford Int'l Airport</option
+              <option value="Orlando Sanford International Airport (SFB)"
+                >Orlando Sanford International Airport (SFB)</option
               >
             </select>
           </div>
@@ -289,7 +289,7 @@ async function sendEmail(data) {
               class="h-10 border mt-1 rounded w-full bg-gray-50 capture"
               value=""
             >
-              <option value="Orlando Airport">Orlando Airport</option>
+              <option value="Orlando Airport">Orlando International Airport</option>
               <option value="Walt Disney World Area"
                 >Walt Disney World Area</option
               >
@@ -306,8 +306,8 @@ async function sendEmail(data) {
               </option>
               <option value="Port Canaveral Area">Port Canaveral Area</option>
               <option value="SeaWorld Area">SeaWorld Area</option>
-              <option value="Sanford Int'l Airport"
-                >Sanford Int'l Airport</option
+              <option value="Orlando Sanford International Airport (SFB)"
+                >Orlando Sanford International Airport (SFB)</option
               >
             </select>
           </div>
@@ -832,48 +832,6 @@ async function sendEmail(data) {
   }
 
   // Autocomplete address suggestion
-
- 
-  
-
-  const UniversalOrlandoResortHotels = [
-    "Universal’s Cabana Bay Beach Resort",
-    "Loews Sapphire Falls Resort",
-    "Universal’s Aventura Hotel",
-    "Loews Royal Pacific Resort",
-    "Hard Rock Hotel at Universal Orlando",
-    "Universal’s Endless Summer Resort – Surfside Inn and Suites",
-    "Universal’s Endless Summer Resort – Dockside Inn and Suites",
-  ];
-
-  const InternationalDriveHotels = [
-    "Hyatt Regency Orlando",
-    "Rosen Shingle Creek",
-    "The Point Hotel & Suites",
-    "Avanti International Resort",
-    "Rosen Inn at Pointe Orlando",
-    "DoubleTree by Hilton Hotel Orlando at SeaWorld",
-    "Embassy Suites by Hilton Orlando International Drive Convention Center",
-  ];
-
-  const Kissimmee192AreaHotels = [
-    "Radisson Resort Orlando-Celebration",
-    "Comfort Inn Maingate",
-    "Clarion Suites Maingate",
-    "Quality Inn & Suites Kissimmee by The Lake",
-    "Ramada by Wyndham Kissimmee Gateway",
-    "Days Inn by Wyndham Kissimmee West",
-    "Howard Johnson by Wyndham Tropical Palms Kissimmee",
-    "Red Lion Hotel Orlando Lake Buena Vista South",
-    "Magic Moment Resort and Kids Club",
-    "Super 8 by Wyndham Kissimmee/Maingate/Orlando Area",
-  ];
-
-  const OmniChampionsgateReunion = [
-    "Omni Orlando Resort at Championsgate",
-    "Reunion Resort, A Salamander Golf & Spa Resort",
-  ];
-
   const pickupAddressSuggestion = [
     {
         "Walt Disney World Area": [
@@ -1148,9 +1106,133 @@ async function sendEmail(data) {
 
   // Rates Calculation
   const rates = [
-    {
+  {
       location1: "Orlando Airport",
       location2: "Walt Disney World Area",
+      rate: [
+        {
+          vehicle: "Town Car",
+          oneway_rate: 95,
+          roundtrip_rate: 185,
+        },
+        {
+          vehicle: "SUV",
+          oneway_rate: 135,
+          roundtrip_rate: 265,
+        },
+        {
+          vehicle: "Van",
+          oneway_rate: 150,
+          roundtrip_rate: 290,
+        },
+        {
+          vehicle: "Mini Van",
+          oneway_rate: 110,
+          roundtrip_rate: 215,
+        },
+        {
+          vehicle: "Limousine",
+          oneway_rate: 150,
+          roundtrip_rate: 290,
+        },
+      ],
+    },
+    {
+      location1: "Orlando Airport",
+      location2: "Universal Studios Area",
+      rate: [
+        {
+          vehicle: "Town Car",
+          oneway_rate: 95,
+          roundtrip_rate: 185,
+        },
+        {
+          vehicle: "SUV",
+          oneway_rate: 135,
+          roundtrip_rate: 265,
+        },
+        {
+          vehicle: "Van",
+          oneway_rate: 150,
+          roundtrip_rate: 290,
+        },
+        {
+          vehicle: "Mini Van",
+          oneway_rate: 110,
+          roundtrip_rate: 215,
+        },
+        {
+          vehicle: "Limousine",
+          oneway_rate: 150,
+          roundtrip_rate: 290,
+        },
+      ],
+    },
+    {
+      location1: "Orlando Airport",
+      location2: "International Drive Area",
+      rate: [
+        {
+          vehicle: "Town Car",
+          oneway_rate: 95,
+          roundtrip_rate: 185,
+        },
+        {
+          vehicle: "SUV",
+          oneway_rate: 135,
+          roundtrip_rate: 265,
+        },
+        {
+          vehicle: "Van",
+          oneway_rate: 150,
+          roundtrip_rate: 290,
+        },
+        {
+          vehicle: "Mini Van",
+          oneway_rate: 110,
+          roundtrip_rate: 215,
+        },
+        {
+          vehicle: "Limousine",
+          oneway_rate: 150,
+          roundtrip_rate: 290,
+        },
+      ],
+    },
+    {
+      location1: "Orlando Airport",
+      location2: "Omni Championsgate / Reunion Area",
+      rate: [
+        {
+          vehicle: "Town Car",
+          oneway_rate: 95,
+          roundtrip_rate: 185,
+        },
+        {
+          vehicle: "SUV",
+          oneway_rate: 135,
+          roundtrip_rate: 265,
+        },
+        {
+          vehicle: "Van",
+          oneway_rate: 150,
+          roundtrip_rate: 290,
+        },
+        {
+          vehicle: "Mini Van",
+          oneway_rate: 110,
+          roundtrip_rate: 215,
+        },
+        {
+          vehicle: "Limousine",
+          oneway_rate: 150,
+          roundtrip_rate: 290,
+        },
+      ],
+    },
+    {
+      location1: "Orlando Airport",
+      location2: "SeaWorld Area",
       rate: [
         {
           vehicle: "Town Car",
@@ -1207,6 +1289,37 @@ async function sendEmail(data) {
           vehicle: "Limousine",
           oneway_rate: 210,
           roundtrip_rate: 395,
+        },
+      ],
+    },
+    {
+      location1: "Kissimmee 192 Area",
+      location2: "Orlando Airport",
+      rate: [
+        {
+          vehicle: "Town Car",
+          oneway_rate: 95,
+          roundtrip_rate: 185,
+        },
+        {
+          vehicle: "SUV",
+          oneway_rate: 150,
+          roundtrip_rate: 290,
+        },
+        {
+          vehicle: "Van",
+          oneway_rate: 170,
+          roundtrip_rate: 315,
+        },
+        {
+          vehicle: "Mini Van",
+          oneway_rate: 125,
+          roundtrip_rate: 245,
+        },
+        {
+          vehicle: "Limousine",
+          oneway_rate: 170,
+          roundtrip_rate: 315,
         },
       ],
     },
@@ -1273,6 +1386,38 @@ async function sendEmail(data) {
         },
       ],
     },
+    {
+      location1: "Kissimmee 192 Area",
+      location2: "Walt Disney World Area",
+      rate: [
+        {
+          vehicle: "Town Car",
+          oneway_rate: 95,
+          roundtrip_rate: 185,
+        },
+        {
+          vehicle: "SUV",
+          oneway_rate: 150,
+          roundtrip_rate: 290,
+        },
+        {
+          vehicle: "Van",
+          oneway_rate: 170,
+          roundtrip_rate: 315,
+        },
+        {
+          vehicle: "Mini Van",
+          oneway_rate: 125,
+          roundtrip_rate: 245,
+        },
+        {
+          vehicle: "Limousine",
+          oneway_rate: 170,
+          roundtrip_rate: 315,
+        },
+      ],
+    },
+    
     {
       location1: "Universal Studios Area",
       location2: "Kissimmee 192 Area",
@@ -1367,7 +1512,7 @@ async function sendEmail(data) {
       ],
     },
     {
-      location1: "Sanford Int'l Airport",
+      location1: "Orlando Sanford International Airport (SFB)",
       location2: "Walt Disney World Area",
       rate: [
         {
