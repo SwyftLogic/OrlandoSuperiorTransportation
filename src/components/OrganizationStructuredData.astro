@@ -1,0 +1,27 @@
+---
+const pageUrl = new URL(Astro.url.pathname, Astro.site);
+
+const structuredData =
+{
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "image": "https://www.orlandosuperiortransportation.com/og-graphic.jpg",
+      "url": "https://www.orlandosuperiortransportation.com/",
+      "sameAs": "https://www.facebook.com/orlandosuperiortransportation",
+      "logo": "https://www.orlandosuperiortransportation.com/_astro/logo.y7FIYTX7_Z1RVuDX.webp",
+      "name": "Orlando Superior Transportation LLC",
+      "description": "At Orlando Superior Transportation, we aim to provide exceptional transportation services to our clients, focusing on safety, reliability, and customer satisfaction. We offer top-notch private town car service, as well as limo services featuring luxury SUVs, luxury vans, and limousines for airport transfers, trips to Disney World, Universal Studios, and many other destinations",
+      "email": "info@orlandosuperiortransportation.com",
+      "telephone": "+14076976002",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "11530 Charnock Dr Windermere Florida 34786",
+        "addressLocality": "Windermere",
+        "addressCountry": "US",
+        "addressRegion": "FL",
+        "postalCode": "34786"
+      }
+    }
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
