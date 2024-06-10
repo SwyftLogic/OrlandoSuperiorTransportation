@@ -538,11 +538,16 @@ async function sendEmail(data) {
 
           <div class="col-span-6 lg:col-span-3 text-right">
             <div class="block md:inline-flex items-end justify-end">
+             
+
+
+
+
               <button
                 type="submit"
                 id="btn-submit"
                 class="w-full leading-4 py-3 md:py-2 text-2lg bg-transparent hover:bg-indigo-600 border-4 border-indigo-600 px-6 text-center rounded-full text-black hover:text-white"
-                >Submit</button
+                >Book</button
               >
             </div>
             <br />
@@ -669,6 +674,71 @@ async function sendEmail(data) {
           </div>
       </div>
       </form>
+
+<p class="text-center">
+      <button onclick="openModal(true)" class="px-4 py-2 rounded text-blue-500 hover:text-blue-800 focus:outline-none">
+        Privacy policy
+    </button>
+     |
+     <button onclick="openModal(true)" class="px-4 py-2 rounded text-blue-500 hover:text-blue-800 focus:outline-none">Terms and Conditions</button>
+
+  </p>
+      
+    
+    <!-- overlay -->
+    <div id="modal_overlay" class="hidden absolute inset-0 bg-black bg-opacity-30 h-screen w-full flex justify-center items-start md:items-center pt-10 md:pt-0">
+    
+    <!-- modal -->
+    <div id="modal" class="pacity-0 transform -translate-y-full scale-150  relative w-10/12 md:w-1/2 h-1/2 md:h-3/4 bg-white rounded shadow-lg transition-opacity transition-transform duration-300">
+    
+        <!-- button close -->
+        <button 
+        onclick="openModal(false)"
+        class="absolute -top-3 -right-3 bg-red-500 hover:bg-red-600 text-2xl w-10 h-10 rounded-full focus:outline-none text-white">
+        &cross;
+        </button>
+    
+        <!-- header -->
+        <div class="px-4 py-3 border-b border-gray-200">
+        <h2 class="text-xl font-semibold text-gray-600">Privacy Policy </h2>
+        </div>
+    
+        <!-- body -->
+        <div class="w-full p-3">
+          All information collected through our secure reservations form is encrypted for your protection. Alternatively, you may contact us toll-free 24/7 by calling 407-697-6002, or via email at <a href="info@orlandosuperiortransportation.com">info@orlandosuperiortransportation.com</a> or <a href="mailto:booking@orlandosuperiortransportation.com">booking@orlandosuperiortransportation.com.</a> 
+        </div>
+    
+      
+    </div>
+    
+    </div>
+    
+    <script>
+    const modal_overlay = document.querySelector('#modal_overlay');
+    const modal = document.querySelector('#modal');
+    
+    function openModal (value){
+        const modalCl = modal.classList
+        const overlayCl = modal_overlay
+    
+        if(value){
+        overlayCl.classList.remove('hidden')
+        setTimeout(() => {
+            modalCl.remove('opacity-0')
+            modalCl.remove('-translate-y-full')
+            modalCl.remove('scale-150')
+        }, 100);
+        } else {
+        modalCl.add('-translate-y-full')
+        setTimeout(() => {
+            modalCl.add('opacity-0')
+            modalCl.add('scale-150')
+        }, 100);
+        setTimeout(() => overlayCl.classList.add('hidden'), 300);
+        }
+    }
+    openModal(true)
+    </script>
     </div>
   </div>
 </Layout>
