@@ -7,7 +7,7 @@ import whatsapp from "../../assets//whatsappicon.png";
 import BlogPostingJSONLD from "../../components/BlogPostingJSONLD.astro";
 
 let res = await fetch(
-  `${import.meta.env.BLOG_SITE}/wp-json/wp/v2/posts?_fields=title,excerpt,slug,date,_links&_embed`
+  `${import.meta.env.BLOG_SITE}/wp-json/wp/v2/posts?per_page=100&_fields=title,excerpt,slug,date,_links&_embed`
 );
 let posts = await res.json();
 ---
