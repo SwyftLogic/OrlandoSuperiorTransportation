@@ -509,7 +509,7 @@ async function sendEmail(data) {
               placeholder=""></textarea>
           </div>
 
-          <div class="col-span-6 lg:col-span-3">
+          <div class="col-span-6 lg:col-span-3" id="fareEstimate">
             <!-- Purchase Resume -->
             <div class="flex flex-col w-full h-fit">
               <p class="font-medium text-xl">Fare Estimate</p>
@@ -533,6 +533,12 @@ async function sendEmail(data) {
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+          <div class="col-span-6 lg:col-span-3" id="fareEstimateCustomMessage">
+            <!-- Purchase Resume -->
+            <div class="flex flex-col w-full h-fit">
+              <p class="font-medium text-xl">No Rates Available</p>
             </div>
           </div>
 
@@ -994,7 +1000,7 @@ async function sendEmail(data) {
         "Four Seasons Resort Orlando",
         "Waldorf Astoria Orlando",
       ],
-      "Universal Studios Area ": [
+      "Universal Studios Area": [
         "Universal’s Cabana Bay Beach Resort",
         "Loews Sapphire Falls Resort",
         "Universal’s Aventura Hotel",
@@ -1096,7 +1102,7 @@ async function sendEmail(data) {
         "Four Seasons Resort Orlando",
         "Waldorf Astoria Orlando",
       ],
-      "Universal Studios Area ": [
+      "Universal Studios Area": [
         "Universal’s Cabana Bay Beach Resort",
         "Loews Sapphire Falls Resort",
         "Universal’s Aventura Hotel",
@@ -1706,11 +1712,17 @@ async function sendEmail(data) {
       document.getElementById("tripGratuity").textContent = "$" + gratuity;
       document.getElementById("tripTotal").textContent =
         "$" + (matchingRates.rate + gratuity);
+
+        document.getElementById('fareEstimate').style.display = 'block';
+        document.getElementById('fareEstimateCustomMessage').style.display = 'none';
     } else {
       document.getElementById("tripType").textContent = tripType;
       document.getElementById("tripRate").textContent = "$" + 0;
       document.getElementById("tripGratuity").textContent = "$" + 0;
       document.getElementById("tripTotal").textContent = "$" + 0;
+
+      document.getElementById('fareEstimateCustomMessage').style.display = 'block';
+      document.getElementById('fareEstimate').style.display = 'none';
     }
   }
   updateTripDetails();
