@@ -1640,6 +1640,37 @@ async function sendEmail(data) {
         },
       ],
     },
+    {
+      location1: "Orlando Sanford International Airport (SFB)",
+      location2: "Universal Studios Area",
+      rate: [
+        {
+          vehicle: "Town Car",
+          oneway_rate: 155,
+          roundtrip_rate: 285,
+        },
+        {
+          vehicle: "SUV",
+          oneway_rate: 195,
+          roundtrip_rate: 360,
+        },
+        {
+          vehicle: "Van",
+          oneway_rate: 215,
+          roundtrip_rate: 395,
+        },
+        {
+          vehicle: "Mini Van",
+          oneway_rate: 180,
+          roundtrip_rate: 325,
+        },
+        {
+          vehicle: "Limousine",
+          oneway_rate: 215,
+          roundtrip_rate: 395,
+        },
+      ],
+    }
   ];
 
   function findRates(locationA, locationB, vehicle, tripType) {
