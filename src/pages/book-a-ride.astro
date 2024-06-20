@@ -221,18 +221,8 @@ async function sendEmail(data) {
              
             </select>
           </div>
-          <div class="col-span-3 lg:col-span-2 mt-2">
-            <div class="grid grid-cols-6">
-              <div class="col-span-6 text-end flex justify-end items-center">
-                <input
-                  type="checkbox"
-                  name="round_trip"
-                  id="round_trip"
-                  class="form-checkbox capture"
-                />
-                <label for="round_trip" class="ml-2">Round Trip</label>
-              </div>
-            </div>
+          <div class="col-span-3 lg:col-span-2 mt-2 flex items-end">
+            
 
             <input
               type="text"
@@ -248,15 +238,7 @@ async function sendEmail(data) {
               <!-- Suggestions will be dynamically added here -->
             </ul>
 
-            <!-- <input
-              type="text"
-              required
-              name="pickup_address"
-              id="pickup_address"
-              class="h-10 border mt-1 rounded w-full bg-gray-50 capture"
-              value=""
-              placeholder=""
-            />-->
+          
           </div>
 
           <div class="col-span-6 lg:col-span-2 mt-2">
@@ -509,7 +491,20 @@ async function sendEmail(data) {
           <div class="col-span-6 lg:col-span-3" id="fareEstimate">
             <!-- Purchase Resume -->
             <div class="flex flex-col w-full h-fit">
-              <p class="font-medium text-xl">Fare Estimate</p>
+              
+              <div class="grid grid-cols-6">
+                <p class="col-span-3 font-medium text-xl">Fare Estimate</p>
+                <div class="col-span-3 text-end flex justify-end items-center">
+                  <input
+                    type="checkbox"
+                    name="round_trip"
+                    id="round_trip"
+                    class="form-checkbox capture"
+                  />
+                  <label for="round_trip" class="ml-2">Round Trip</label>
+                </div>
+              </div>
+
               <div class="flex flex-col py-3 gap-2">
                 <div class="flex flex-row justify-between">
                   <p class="text-gray-600" id="tripType"></p>
