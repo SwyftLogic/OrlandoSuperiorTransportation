@@ -530,7 +530,7 @@ async function sendEmail(data) {
           <div class="col-span-6 lg:col-span-3" id="fareEstimateCustomMessage">
             <!-- Purchase Resume -->
             <div class="flex flex-col w-full h-fit">
-              <p class="font-medium text-lg">The standard rate is not available for your selected route. Our team will contact you shortly to discuss the rate</p>
+              <p class="font-medium text-lg">The standard rate is not available for your selected route. Our team will contact you shortly to discuss the rate.</p>
             </div>
           </div>
 
@@ -1303,23 +1303,23 @@ async function sendEmail(data) {
         },
         {
           vehicle: "SUV",
+          oneway_rate: 160,
+          roundtrip_rate: 310,
+        },
+        {
+          vehicle: "Van",
+          oneway_rate: 175,
+          roundtrip_rate: 335,
+        },
+        {
+          vehicle: "Mini Van",
           oneway_rate: 135,
           roundtrip_rate: 265,
         },
         {
-          vehicle: "Van",
-          oneway_rate: 150,
-          roundtrip_rate: 290,
-        },
-        {
-          vehicle: "Mini Van",
-          oneway_rate: 110,
-          roundtrip_rate: 215,
-        },
-        {
           vehicle: "Limousine",
-          oneway_rate: 150,
-          roundtrip_rate: 290,
+          oneway_rate: 175,
+          roundtrip_rate: 335,
         },
       ],
     },
@@ -1528,8 +1528,8 @@ async function sendEmail(data) {
         },
         {
           vehicle: "Van",
-          oneway_rate: 150,
-          roundtrip_rate: 290,
+          oneway_rate: 100,
+          roundtrip_rate: 190,
         },
         {
           vehicle: "Mini Van",
@@ -1570,7 +1570,7 @@ async function sendEmail(data) {
         {
           vehicle: "Limousine",
           oneway_rate: 120,
-          roundtrip_rate: 120,
+          roundtrip_rate: 220,
         },
       ],
     },
