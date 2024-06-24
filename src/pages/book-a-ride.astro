@@ -7,6 +7,9 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
 const turnstileSecretKey = import.meta.env.TURNSTILE_SECRET_KEY;
 const supabaseUrl = import.meta.env.SUPABASE_URL;
 const supabaseApiKey = import.meta.env.SUPABASE_API_KEY;
+const squareUrl = import.meta.env.SQUARE_URL;
+const squareLocationID = import.meta.env.SQUARE_LOCATION_ID;
+const squareToken = import.meta.env.SQUARE_TOKEN;
 var responseMessage = "";
 if (Astro.request.method === "POST") {
   try {
@@ -29,15 +32,31 @@ if (Astro.request.method === "POST") {
     if (!outcome.success) {
       responseMessage = "Turnstile verification failed. Please try again.";
     } else {
-      await sendEmail(data);
-      responseMessage = "Thanks for reaching out.";
+      let paymentURL = "";
+      await sendAdminEmail(data);
+      const token = Date.now().toString();
+      if (
+        data.get("payment_method") == "Credit Card" &&
+        data.get("totalTripAmount") != "0"
+      ) {
+        paymentURL = await generatePaymentURL(data);
+        if (paymentURL) {
+          await sendSubmitterEmail(data, paymentURL);
+          return Astro.redirect(paymentURL);
+        } else {
+          return Astro.redirect(`/thank-you?t=${token}`);
+        }
+      } else {        
+        await sendSubmitterEmail(data, '');
+        return Astro.redirect(`/thank-you?t=${token}`);
+      }
     }
   } catch (error) {
     responseMessage = "An error occurred. Please try again later.";
   }
 }
 
-async function sendEmail(data) {
+async function sendAdminEmail(data) {
   const dateObject = new Date(data.get("pickup_date"));
   const formattedDate = new Intl.DateTimeFormat("en-US", {
     year: "numeric",
@@ -48,28 +67,43 @@ async function sendEmail(data) {
     second: "numeric",
     timeZone: "UTC",
   }).format(dateObject);
+  // Admin Email Content
   const message = `
   <html>
     <body>
       <p><strong>Full Name:</strong> ${data.get("full_name")}</p>
       <p><strong>Email:</strong> ${data.get("email")}</p>
       <p><strong>Phone:</strong> ${data.get("phone")}</p>
-      <p><strong>Trip:</strong> ${data.get("round_trip") == null ? "One Way" : "Round Trip"}</p>
-      <p><strong>Pickup Type:</strong> ${data.get("pickup_type")}</p>
       <p><strong>Pickup Address:</strong> ${data.get("pickup_address")}</p>
       <p><strong>Pickup Date:</strong> ${formattedDate}</p>
-      <p><strong>Drop-off Type:</strong> ${data.get("dropoff_type")}</p>
       <p><strong>Drop-off Address:</strong> ${data.get("dropoff_address")}</p>
       <p><strong>Passengers:</strong> ${data.get("passengers")}</p>
       <p><strong>Bags:</strong> ${data.get("bags")}</p>
       <p><strong>Preferred Vehicle:</strong> ${data.get("preferred_vehicle")}</p>
       <p><strong>Flight Number:</strong> ${data.get("flight_number")}</p>
-      <p><strong>Payment Method:</strong> ${data.get("payment_method")}</p>
       <p><strong>Child Seat:</strong> ${data.get("child_seat") == null ? "No" : "Yes"}</p>
       <p><strong>Booster Seat:</strong> ${data.get("booster_seat") == null ? "No" : "Yes"}</p>
       <p><strong>Comments:</strong> ${data.get("comments")}</p>
     </body>
   </html>`;
+  await sendEmail(import.meta.env.EMAIL_TO, import.meta.env.NAME_TO, message);
+}
+
+async function sendSubmitterEmail(data, paymentURL) {
+  // Submitter Email Content
+  const message = `
+  <html>
+    <body>
+      <p>Dear ${data.get("full_name")}, </p>
+      <p>Thank you for choosing <strong>Orlando Superior Transportation</strong></p>
+      ${paymentURL ? `<p>Please proceed with your payment <a href="${paymentURL}">here</a>.</p>` : ""}
+    </body>
+  </html>`;
+
+  await sendEmail(data.get("email"), data.get("full_name"), message);
+}
+
+async function sendEmail(emailTo, nameTo, message) {
   const response = await fetch("https://api.mailchannels.net/tx/v1/send", {
     method: "POST",
     headers: {
@@ -78,15 +112,19 @@ async function sendEmail(data) {
     body: JSON.stringify({
       personalizations: [
         {
-          to: [
-            { email: import.meta.env.EMAIL_TO, name: import.meta.env.NAME_TO },
-          ],
+          to: [{ email: emailTo, name: nameTo }],
         },
       ],
       from: {
         email: import.meta.env.EMAIL_FROM,
         name: import.meta.env.NAME_FROM,
       },
+      bcc: [
+        {
+          email: import.meta.env.EMAIL_TO,
+          name: import.meta.env.NAME_TO,
+        },
+      ],
       subject: "Orlando Superior Transportation",
       content: [
         {
@@ -96,6 +134,39 @@ async function sendEmail(data) {
       ],
     }),
   });
+}
+
+async function generatePaymentURL(data) {
+  const myHeaders = new Headers();
+  myHeaders.append("Authorization", `Bearer ${squareToken}`);
+  myHeaders.append("Content-Type", "application/json");
+
+  const raw = JSON.stringify({
+    description: data.get("pickup_type") + " to " + data.get("dropoff_type"),
+    quick_pay: {
+      location_id: squareLocationID,
+      price_money: {
+        amount: parseFloat(data.get("totalTripAmount") + '00'),
+        currency: "USD",
+      },
+      name: "Orlando Superior Transportation Online Booking",
+    },
+    idempotency_key: data.get("sessionId"),
+    // "checkout_options": {
+    //   "redirect_url": "https:\\\\www.yahoo.com"
+    // }
+  });
+  const response = await fetch(squareUrl, {
+    method: "POST",
+    headers: myHeaders,
+    body: raw,
+  });
+
+  const result = await response.text();
+  const res = JSON.parse(result);
+  const paymentURL = res.payment_link.url;
+
+  return paymentURL;
 }
 ---
 
@@ -113,7 +184,7 @@ async function sendEmail(data) {
   </svelte:head>
   <!-- component -->
   <div class="container max-w-screen-lg mx-auto">
-    <h1 class="text-center pt-4  mt-3 text-4xl md:text-4xl font-extrabold">
+    <h1 class="text-center pt-4 mt-3 text-4xl md:text-4xl font-extrabold">
       Book a Trip!
     </h1>
 
@@ -123,7 +194,8 @@ async function sendEmail(data) {
       <div class="text-gray-600 text-center">
         <h2 class="font-medium text-2xl">Make an Online Reservation</h2>
         <h3 class="pb-4 font-normal text-lg">
-          Booking Online With Orlando Superior Transportation Services Is Fast, Easy, & Secure.
+          Booking Online With Orlando Superior Transportation Services Is Fast,
+          Easy, & Secure.
         </h3>
       </div>
       {
@@ -154,8 +226,19 @@ async function sendEmail(data) {
       }
       <div class=""></div>
       <div id="alertTemplate" class="space-y-4"></div>
-      <form method="POST">
-        <input type="text" id="sessionId" value="" style="display:none;" />
+      <form method="POST" id="bookingForm">
+        <input
+          type="text"
+          id="sessionId"
+          name="sessionId"
+          style="display:none;"
+        />
+        <input
+          type="text"
+          id="totalTripAmount"
+          name="totalTripAmount"
+          style="display:none;"
+        />
         <div class="grid grid-cols-6 gap-4">
           <div class="col-span-6 lg:col-span-2 mt-2">
             <label for="full_name">Full Name</label>
@@ -193,7 +276,7 @@ async function sendEmail(data) {
               value=""
             />
           </div>
-          <div class="col-span-3 lg:col-span-2 mt-2">
+          <div class="col-span-3 mt-2">
             <label for="pickup_type">Pick Up Address</label>
             <select
               name="pickup_type"
@@ -201,13 +284,19 @@ async function sendEmail(data) {
               class="h-10 border mt-1 rounded w-full bg-gray-50 capture"
               value=""
             >
-            <option value="Orlando International Airport (MCO)">Orlando International Airport (MCO)</option>
-            <option value="Orlando Sanford International Airport (SFB)">Orlando Sanford International Airport (SFB)</option>
-              
-              
-              <option value="Walt Disney World Area">Walt Disney World Area</option>
-              <option value="Universal Studios Area">Universal Studios Area</option>
-             
+              <option value="Orlando International Airport (MCO)"
+                >Orlando International Airport (MCO)</option
+              >
+              <option value="Orlando Sanford International Airport (SFB)"
+                >Orlando Sanford International Airport (SFB)</option
+              >
+
+              <option value="Walt Disney World Area"
+                >Walt Disney World Area</option
+              >
+              <option value="Universal Studios Area"
+                >Universal Studios Area</option
+              >
 
               <option value="Kissimmee 192 Area">Kissimmee 192 Area</option>
               <option value="Omni Championsgate / Reunion Area"
@@ -215,14 +304,12 @@ async function sendEmail(data) {
               </option>
               <option value="Port Canaveral Area">Port Canaveral Area</option>
               <option value="SeaWorld Area">SeaWorld Area</option>
-              <option value="International Drive Area">International Drive Area</option>
-              
-             
+              <option value="International Drive Area"
+                >International Drive Area</option
+              >
             </select>
           </div>
           <div class="col-span-3 lg:col-span-2 mt-2 flex items-end">
-            
-
             <input
               type="text"
               name="pickup_address"
@@ -236,8 +323,6 @@ async function sendEmail(data) {
             >
               <!-- Suggestions will be dynamically added here -->
             </ul>
-
-          
           </div>
 
           <div class="col-span-6 lg:col-span-2 mt-2">
@@ -265,13 +350,19 @@ async function sendEmail(data) {
               class="h-10 border mt-1 rounded w-full bg-gray-50 capture"
               value=""
             >
-            <option value="Orlando International Airport (MCO)">Orlando International Airport (MCO)</option>
-            <option value="Orlando Sanford International Airport (SFB)">Orlando Sanford International Airport (SFB)</option>
-              
-              
-              <option value="Walt Disney World Area" selected>Walt Disney World Area</option>
-              <option value="Universal Studios Area">Universal Studios Area</option>
-             
+              <option value="Orlando International Airport (MCO)"
+                >Orlando International Airport (MCO)</option
+              >
+              <option value="Orlando Sanford International Airport (SFB)"
+                >Orlando Sanford International Airport (SFB)</option
+              >
+
+              <option value="Walt Disney World Area" selected
+                >Walt Disney World Area</option
+              >
+              <option value="Universal Studios Area"
+                >Universal Studios Area</option
+              >
 
               <option value="Kissimmee 192 Area">Kissimmee 192 Area</option>
               <option value="Omni Championsgate / Reunion Area"
@@ -279,8 +370,10 @@ async function sendEmail(data) {
               </option>
               <option value="Port Canaveral Area">Port Canaveral Area</option>
               <option value="SeaWorld Area">SeaWorld Area</option>
-              
-              <option value="International Drive Area">International Drive Area</option>
+
+              <option value="International Drive Area"
+                >International Drive Area</option
+              >
             </select>
           </div>
           <div class="col-span-3 lg:col-span-2 mt-2 flex items-end">
@@ -429,7 +522,6 @@ async function sendEmail(data) {
             </select>
           </div>
 
-          
           <div class="col-span-3 lg:col-span-2 mt-2">
             <div class="items-center">
               <label for="payment_method">Payment Method</label>
@@ -440,12 +532,11 @@ async function sendEmail(data) {
                 value=""
               >
                 <option value="Cash">Cash</option>
-                <option value="CreditCard">Credit Card</option>
+                <option value="Credit Card">Credit Card</option>
               </select>
             </div>
           </div>
 
-          
           <div class="col-span-3 lg:col-span-1 mt-2">
             <label for="flight_number">Flight Number</label>
             <input
@@ -457,7 +548,6 @@ async function sendEmail(data) {
               value=""
             />
           </div>
-
 
           <div class="col-span-3 lg:col-span-1 flex items-end mt-2">
             <div class="items-center">
@@ -492,7 +582,6 @@ async function sendEmail(data) {
           <div class="col-span-6 lg:col-span-3" id="fareEstimate">
             <!-- Purchase Resume -->
             <div class="flex flex-col w-full h-fit">
-              
               <div class="grid grid-cols-6">
                 <p class="col-span-3 font-medium text-xl">Fare Estimate</p>
                 <div class="col-span-3 text-end flex justify-end items-center">
@@ -531,27 +620,38 @@ async function sendEmail(data) {
           <div class="col-span-6 lg:col-span-3" id="fareEstimateCustomMessage">
             <!-- Purchase Resume -->
             <div class="flex flex-col w-full h-fit">
-              <p class="font-medium text-lg">The standard rate is not available for your selected route. Our team will contact you shortly to discuss the rate.</p>
+              <p class="font-medium text-lg">
+                The standard rate is not available for your selected route. Our
+                team will contact you shortly to discuss the rate.
+              </p>
             </div>
           </div>
 
-          <div class="col-span-6 lg:col-span-3 text-center md:text-right ">
+          <div class="col-span-6 lg:col-span-3 text-center md:text-right">
             <div class="block items-end justify-end">
-             
-
               <p class="block">
-                By clicking the button below, you agree to our   <button data-modal-target="privacypolicy" data-modal-toggle="privacypolicy" class="rounded text-blue-500 hover:text-blue-800 focus:outline-none" type="button">
+                By clicking the button below, you agree to our <button
+                  data-modal-target="privacypolicy"
+                  data-modal-toggle="privacypolicy"
+                  class="rounded text-blue-500 hover:text-blue-800 focus:outline-none"
+                  type="button"
+                >
                   Privacy Policy
                 </button>
-                  and <button data-modal-target="terms" data-modal-toggle="terms" class="rounded text-blue-500 hover:text-blue-800 focus:outline-none" type="button">
-                    Terms and Conditions
-                  </button>
-                </p>
+                and <button
+                  data-modal-target="terms"
+                  data-modal-toggle="terms"
+                  class="rounded text-blue-500 hover:text-blue-800 focus:outline-none"
+                  type="button"
+                >
+                  Terms and Conditions
+                </button>
+              </p>
 
               <button
                 type="submit"
                 id="btn-submit"
-                class=" w-full md:w-auto leading-3 mt-2 py-3 md:py-2 text-2lg bg-transparent hover:bg-indigo-600 border-4 border-indigo-600 px-6 text-center rounded-full text-black hover:text-white"
+                class="w-full md:w-auto leading-3 mt-2 py-3 md:py-2 text-2lg bg-transparent hover:bg-indigo-600 border-4 border-indigo-600 px-6 text-center rounded-full text-black hover:text-white"
                 >Book Now</button
               >
             </div>
@@ -564,210 +664,505 @@ async function sendEmail(data) {
             >
             </div>
           </div>
-
-          
         </div>
 
-        <div class="bg-white pt-7 col-span-6 lg:col-span-3  md:mx-auto">
-          
-          
-
-         
+        <div class="bg-white pt-7 col-span-6 lg:col-span-3 md:mx-auto">
           <div class="text-center">
             <p class="text-center pt-2">
-              <span class="mx-auto pb-3 block  text-gray-900 font-semibold text-center">All transactions are safe and secure with Square.</span>
-           
-              <span class="mx-auto px-3 inline-block ">
-                <span class="inline-block ">
-                  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="35px" height="35px" version="1.1" id="Layer_1" viewBox="0 0 512 512" xml:space="preserve"><script xmlns="" id="eppiocemhmnlbhjplcgkofciiegomcon"/><script xmlns=""/><script xmlns=""/>
-                    <path style="fill:#507C5C;" d="M427.826,365.485c-7.149-2.276-14.8,1.68-17.075,8.836c-21.013,66.089-81.77,110.492-151.182,110.492  c-87.457,0-158.61-71.151-158.61-158.61c0-87.457,71.153-158.609,158.61-158.609c69.653,0,132.171,46.572,152.033,113.255  c2.144,7.195,9.714,11.292,16.908,9.147c7.195-2.144,11.291-9.714,9.147-16.908c-9.929-33.336-29.539-63.676-55.778-86.704v-60.503  C381.88,56.47,325.41,0,255.999,0c-15.482,0-30.606,2.781-44.951,8.268c-7.012,2.682-10.523,10.539-7.842,17.552  c2.682,7.012,10.535,10.522,17.554,7.842c11.231-4.297,23.088-6.475,35.239-6.475c54.42,0,98.695,44.274,98.695,98.694v40.708  c-28.664-17.168-61.165-26.184-95.124-26.184c-37.758,0-72.913,11.332-102.265,30.757v-45.281c0-19.693,5.779-38.7,16.712-54.968  c4.188-6.231,2.531-14.677-3.7-18.865c-6.23-4.186-14.676-2.533-18.865,3.7c-13.958,20.767-21.334,45.019-21.334,70.133v67.189  c-34.729,33.778-56.344,80.974-56.344,133.132C73.774,428.651,157.121,512,259.571,512c40.23,0,78.515-12.649,110.716-36.578  c31.565-23.455,54.517-55.566,66.376-92.863C438.936,375.404,434.98,367.759,427.826,365.485z"/>
-                    <circle style="fill:#CFF09E;" cx="255.999" cy="326.197" r="109.009"/>
-                    <g>
-                      <path style="fill:#507C5C;" d="M255.999,448.809c-67.605,0-122.607-55.001-122.607-122.607s55.002-122.607,122.607-122.607   s122.607,55.001,122.607,122.607S323.603,448.809,255.999,448.809z M255.999,230.783c-52.615,0-95.419,42.806-95.419,95.419   s42.804,95.419,95.419,95.419s95.419-42.806,95.419-95.419S308.614,230.783,255.999,230.783z"/>
-                      <path style="fill:#507C5C;" d="M255.999,363.392c-3.282,0-6.467-1.188-8.954-3.366l-35.882-31.415   c-5.648-4.945-6.219-13.534-1.275-19.182c4.948-5.65,13.534-6.219,19.182-1.274l25.289,22.14l35.057-43.008   c4.744-5.821,13.306-6.691,19.125-1.949c5.818,4.744,6.691,13.307,1.948,19.126l-43.953,53.923c-2.33,2.86-5.722,4.648-9.397,4.958   C256.757,363.378,256.377,363.392,255.999,363.392z"/>
-                    </g>
-                    </svg>
-                  </span>
-                  <span class="inline-block text-left leading-none">
-              <b class="text-lg">SECURE</b> <br>Payment</span>
-              </span>
+              <span
+                class="mx-auto pb-3 block text-gray-900 font-semibold text-center"
+                >All transactions are safe and secure with Square.</span
+              >
 
+              <span class="mx-auto px-3 inline-block">
+                <span class="inline-block">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    width="35px"
+                    height="35px"
+                    version="1.1"
+                    id="Layer_1"
+                    viewBox="0 0 512 512"
+                    xml:space="preserve"
+                    ><script xmlns="" id="eppiocemhmnlbhjplcgkofciiegomcon"
+                    ></script><script xmlns=""></script><script xmlns=""
+                    ></script>
+                    <path
+                      style="fill:#507C5C;"
+                      d="M427.826,365.485c-7.149-2.276-14.8,1.68-17.075,8.836c-21.013,66.089-81.77,110.492-151.182,110.492  c-87.457,0-158.61-71.151-158.61-158.61c0-87.457,71.153-158.609,158.61-158.609c69.653,0,132.171,46.572,152.033,113.255  c2.144,7.195,9.714,11.292,16.908,9.147c7.195-2.144,11.291-9.714,9.147-16.908c-9.929-33.336-29.539-63.676-55.778-86.704v-60.503  C381.88,56.47,325.41,0,255.999,0c-15.482,0-30.606,2.781-44.951,8.268c-7.012,2.682-10.523,10.539-7.842,17.552  c2.682,7.012,10.535,10.522,17.554,7.842c11.231-4.297,23.088-6.475,35.239-6.475c54.42,0,98.695,44.274,98.695,98.694v40.708  c-28.664-17.168-61.165-26.184-95.124-26.184c-37.758,0-72.913,11.332-102.265,30.757v-45.281c0-19.693,5.779-38.7,16.712-54.968  c4.188-6.231,2.531-14.677-3.7-18.865c-6.23-4.186-14.676-2.533-18.865,3.7c-13.958,20.767-21.334,45.019-21.334,70.133v67.189  c-34.729,33.778-56.344,80.974-56.344,133.132C73.774,428.651,157.121,512,259.571,512c40.23,0,78.515-12.649,110.716-36.578  c31.565-23.455,54.517-55.566,66.376-92.863C438.936,375.404,434.98,367.759,427.826,365.485z"
+                    ></path>
+                    <circle
+                      style="fill:#CFF09E;"
+                      cx="255.999"
+                      cy="326.197"
+                      r="109.009"></circle>
+                    <g>
+                      <path
+                        style="fill:#507C5C;"
+                        d="M255.999,448.809c-67.605,0-122.607-55.001-122.607-122.607s55.002-122.607,122.607-122.607   s122.607,55.001,122.607,122.607S323.603,448.809,255.999,448.809z M255.999,230.783c-52.615,0-95.419,42.806-95.419,95.419   s42.804,95.419,95.419,95.419s95.419-42.806,95.419-95.419S308.614,230.783,255.999,230.783z"
+                      ></path>
+                      <path
+                        style="fill:#507C5C;"
+                        d="M255.999,363.392c-3.282,0-6.467-1.188-8.954-3.366l-35.882-31.415   c-5.648-4.945-6.219-13.534-1.275-19.182c4.948-5.65,13.534-6.219,19.182-1.274l25.289,22.14l35.057-43.008   c4.744-5.821,13.306-6.691,19.125-1.949c5.818,4.744,6.691,13.307,1.948,19.126l-43.953,53.923c-2.33,2.86-5.722,4.648-9.397,4.958   C256.757,363.378,256.377,363.392,255.999,363.392z"
+                      ></path>
+                    </g>
+                  </svg>
+                </span>
+                <span class="inline-block text-left leading-none">
+                  <b class="text-lg">SECURE</b> <br />Payment</span
+                >
+              </span>
 
               <span class="mx-auto px-2 inline-block text-sm">
                 <span class="inline-block pe-1">
-                
-                  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000" height="35px" width="35px" version="1.1" id="Layer_1" viewBox="0 0 512.001 512.001" xml:space="preserve"><script xmlns="" id="eppiocemhmnlbhjplcgkofciiegomcon"/><script xmlns=""/><script xmlns=""/>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    fill="#000000"
+                    height="35px"
+                    width="35px"
+                    version="1.1"
+                    id="Layer_1"
+                    viewBox="0 0 512.001 512.001"
+                    xml:space="preserve"
+                    ><script xmlns="" id="eppiocemhmnlbhjplcgkofciiegomcon"
+                    ></script><script xmlns=""></script><script xmlns=""
+                    ></script>
                     <g>
                       <g>
                         <g>
-                          <path fill="#0f2cd9" d="M466.395,88.411C395.95,69.109,325.091,39.054,261.478,1.496c-3.379-1.995-7.572-1.995-10.95,0     C185.08,40.133,118.05,68.562,45.605,88.411c-4.68,1.281-7.924,5.535-7.924,10.388v110.046     c0,113.323,52.279,188.335,96.137,231.306c47.216,46.265,102.216,71.85,122.185,71.85c19.967,0,74.967-25.585,122.183-71.85     c43.857-42.97,96.133-117.982,96.133-231.306V98.798C474.319,93.946,471.075,89.692,466.395,88.411z M452.779,208.844     c0,105.843-48.761,175.838-89.669,215.92c-46.431,45.495-96.074,65.695-107.107,65.695c-11.033,0-60.679-20.2-107.111-65.695     c-40.907-40.083-89.67-110.077-89.67-215.92V106.974C128.5,87.304,193.018,59.853,256.005,23.25     c61.414,35.632,129.151,64.448,196.774,83.72V208.844z"/>
-                          <path fill="#0f2cd9"  d="M160.538,105.769c-2.18-5.535-8.433-8.254-13.969-6.073c-19.24,7.581-38.988,14.559-58.695,20.741     c-4.491,1.41-7.547,5.57-7.547,10.276v41.591c0,5.948,4.823,10.77,10.77,10.77s10.77-4.822,10.77-10.77v-33.72     c17.679-5.72,35.339-12.047,52.598-18.848C160,117.557,162.719,111.304,160.538,105.769z"/>
-                          <path fill="#0f2cd9"  d="M180.997,107.812c1.445,0,2.912-0.291,4.319-0.905l0.198-0.086c5.449-2.388,7.903-8.731,5.515-14.178     c-2.39-5.449-8.769-7.914-14.212-5.528l-0.174,0.075c-5.452,2.381-7.914,8.719-5.533,14.169     C172.877,105.405,176.842,107.812,180.997,107.812z"/>
-                          <path fill="#0f2cd9"  d="M384.322,347.283c-4.977-3.253-11.651-1.854-14.908,3.125c-8.875,13.584-19.287,26.592-30.951,38.659     c-9.592,9.922-19.986,19.17-30.893,27.485c-4.729,3.606-5.639,10.364-2.034,15.095c2.121,2.779,5.328,4.241,8.572,4.241     c2.278,0,4.573-0.719,6.523-2.207c11.765-8.971,22.975-18.944,33.317-29.642c12.611-13.044,23.881-27.124,33.499-41.849     C390.702,357.21,389.301,350.536,384.322,347.283z"/>
-                          <path fill="#0f2cd9"  d="M282.558,433.443l-0.618,0.364c-5.147,2.981-6.906,9.569-3.926,14.716c1.997,3.45,5.612,5.376,9.331,5.376     c1.83,0,3.688-0.467,5.385-1.452l0.713-0.419c5.133-3.006,6.857-9.603,3.851-14.736     C294.286,432.161,287.688,430.44,282.558,433.443z"/>
-                          <path fill="#0f2cd9"  d="M182.589,234.019c-6.613-6.614-15.408-10.254-24.762-10.254s-18.15,3.641-24.766,10.254     c-13.653,13.656-13.653,35.876,0,49.531l63.596,63.594c6.614,6.612,15.409,10.253,24.764,10.253s18.15-3.641,24.765-10.255     L378.947,214.38c13.652-13.659,13.652-35.876-0.002-49.527c-6.614-6.614-15.409-10.254-24.765-10.254     c-9.355,0-18.15,3.641-24.765,10.254L221.42,272.848L182.589,234.019z M344.647,180.085c2.545-2.545,5.932-3.946,9.534-3.946     c3.604,0,6.988,1.401,9.535,3.946c5.255,5.255,5.255,13.809-0.002,19.066l-132.759,132.76c-2.545,2.545-5.932,3.946-9.534,3.946     s-6.989-1.401-9.535-3.946l-63.594-63.592c-5.257-5.257-5.257-13.811-0.002-19.066c2.546-2.545,5.933-3.948,9.536-3.948     s6.988,1.401,9.533,3.946l46.445,46.446c2.021,2.019,4.759,3.154,7.616,3.154s5.595-1.134,7.614-3.154L344.647,180.085z"/>
+                          <path
+                            fill="#0f2cd9"
+                            d="M466.395,88.411C395.95,69.109,325.091,39.054,261.478,1.496c-3.379-1.995-7.572-1.995-10.95,0     C185.08,40.133,118.05,68.562,45.605,88.411c-4.68,1.281-7.924,5.535-7.924,10.388v110.046     c0,113.323,52.279,188.335,96.137,231.306c47.216,46.265,102.216,71.85,122.185,71.85c19.967,0,74.967-25.585,122.183-71.85     c43.857-42.97,96.133-117.982,96.133-231.306V98.798C474.319,93.946,471.075,89.692,466.395,88.411z M452.779,208.844     c0,105.843-48.761,175.838-89.669,215.92c-46.431,45.495-96.074,65.695-107.107,65.695c-11.033,0-60.679-20.2-107.111-65.695     c-40.907-40.083-89.67-110.077-89.67-215.92V106.974C128.5,87.304,193.018,59.853,256.005,23.25     c61.414,35.632,129.151,64.448,196.774,83.72V208.844z"
+                          ></path>
+                          <path
+                            fill="#0f2cd9"
+                            d="M160.538,105.769c-2.18-5.535-8.433-8.254-13.969-6.073c-19.24,7.581-38.988,14.559-58.695,20.741     c-4.491,1.41-7.547,5.57-7.547,10.276v41.591c0,5.948,4.823,10.77,10.77,10.77s10.77-4.822,10.77-10.77v-33.72     c17.679-5.72,35.339-12.047,52.598-18.848C160,117.557,162.719,111.304,160.538,105.769z"
+                          ></path>
+                          <path
+                            fill="#0f2cd9"
+                            d="M180.997,107.812c1.445,0,2.912-0.291,4.319-0.905l0.198-0.086c5.449-2.388,7.903-8.731,5.515-14.178     c-2.39-5.449-8.769-7.914-14.212-5.528l-0.174,0.075c-5.452,2.381-7.914,8.719-5.533,14.169     C172.877,105.405,176.842,107.812,180.997,107.812z"
+                          ></path>
+                          <path
+                            fill="#0f2cd9"
+                            d="M384.322,347.283c-4.977-3.253-11.651-1.854-14.908,3.125c-8.875,13.584-19.287,26.592-30.951,38.659     c-9.592,9.922-19.986,19.17-30.893,27.485c-4.729,3.606-5.639,10.364-2.034,15.095c2.121,2.779,5.328,4.241,8.572,4.241     c2.278,0,4.573-0.719,6.523-2.207c11.765-8.971,22.975-18.944,33.317-29.642c12.611-13.044,23.881-27.124,33.499-41.849     C390.702,357.21,389.301,350.536,384.322,347.283z"
+                          ></path>
+                          <path
+                            fill="#0f2cd9"
+                            d="M282.558,433.443l-0.618,0.364c-5.147,2.981-6.906,9.569-3.926,14.716c1.997,3.45,5.612,5.376,9.331,5.376     c1.83,0,3.688-0.467,5.385-1.452l0.713-0.419c5.133-3.006,6.857-9.603,3.851-14.736     C294.286,432.161,287.688,430.44,282.558,433.443z"
+                          ></path>
+                          <path
+                            fill="#0f2cd9"
+                            d="M182.589,234.019c-6.613-6.614-15.408-10.254-24.762-10.254s-18.15,3.641-24.766,10.254     c-13.653,13.656-13.653,35.876,0,49.531l63.596,63.594c6.614,6.612,15.409,10.253,24.764,10.253s18.15-3.641,24.765-10.255     L378.947,214.38c13.652-13.659,13.652-35.876-0.002-49.527c-6.614-6.614-15.409-10.254-24.765-10.254     c-9.355,0-18.15,3.641-24.765,10.254L221.42,272.848L182.589,234.019z M344.647,180.085c2.545-2.545,5.932-3.946,9.534-3.946     c3.604,0,6.988,1.401,9.535,3.946c5.255,5.255,5.255,13.809-0.002,19.066l-132.759,132.76c-2.545,2.545-5.932,3.946-9.534,3.946     s-6.989-1.401-9.535-3.946l-63.594-63.592c-5.257-5.257-5.257-13.811-0.002-19.066c2.546-2.545,5.933-3.948,9.536-3.948     s6.988,1.401,9.533,3.946l46.445,46.446c2.021,2.019,4.759,3.154,7.616,3.154s5.595-1.134,7.614-3.154L344.647,180.085z"
+                          ></path>
                         </g>
                       </g>
                     </g>
-                    </svg>
-                  </span>
+                  </svg>
+                </span>
                 <span class="inline-block text-left leading-none">
-              <b class="text-lg">SECURE</b> <br>SSL Encryption</span>
+                  <b class="text-lg">SECURE</b> <br />SSL Encryption</span
+                >
               </span>
-
-
             </p>
 
-            
-                <p class="text-center">
-                
+            <p class="text-center">
+              <svg
+                class="mx-auto px-2 inline-block"
+                xmlns="http://www.w3.org/2000/svg"
+                width="60px"
+                height="60px"
+                viewBox="0 -9 58 58"
+                fill="none"
+                ><script xmlns="" id="eppiocemhmnlbhjplcgkofciiegomcon"
+                ></script><script xmlns=""></script><script xmlns=""></script>
+                <rect
+                  x="0.5"
+                  y="0.5"
+                  width="57"
+                  height="39"
+                  rx="3.5"
+                  fill="white"
+                  stroke="#F3F3F3"></rect>
+                <path
+                  d="M25.7516 27.4332H21.8901L24.3054 13.4325H28.1667L25.7516 27.4332Z"
+                  fill="#15195A"></path>
+                <path
+                  d="M39.7499 13.7748C38.9882 13.4915 37.7802 13.1787 36.2865 13.1787C32.4731 13.1787 29.7878 15.0851 29.7713 17.8106C29.7396 19.8215 31.6939 20.9384 33.1556 21.6089C34.6495 22.2941 35.1574 22.7413 35.1574 23.352C35.1422 24.29 33.9502 24.7223 32.8384 24.7223C31.2967 24.7223 30.4707 24.4994 29.2153 23.9776L28.7069 23.7539L28.1665 26.8967C29.0722 27.2835 30.7408 27.6268 32.4731 27.6419C36.5249 27.6419 39.1627 25.765 39.1939 22.8605C39.2093 21.2667 38.1774 20.0454 35.9526 19.0475C34.602 18.4069 33.7749 17.9749 33.7749 17.3195C33.7908 16.7236 34.4745 16.1133 35.9991 16.1133C37.2544 16.0834 38.1768 16.3663 38.8755 16.6494L39.2247 16.7981L39.7499 13.7748V13.7748V13.7748Z"
+                  fill="#15195A"></path>
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M46.6618 13.4325H49.6486L52.7639 27.433H49.1885C49.1885 27.433 48.8386 25.8244 48.7278 25.3328H43.7699C43.6266 25.705 42.9595 27.433 42.9595 27.433H38.9078L44.6435 14.5941C45.0409 13.6855 45.7407 13.4325 46.6618 13.4325ZM46.4238 18.556C46.4238 18.556 45.2001 21.6689 44.8821 22.4732H48.0918C47.933 21.7733 47.2017 18.4219 47.2017 18.4219L46.9319 17.2156C46.8182 17.5262 46.6539 17.9533 46.543 18.2414C46.4679 18.4366 46.4173 18.568 46.4238 18.556Z"
+                  fill="#15195A"></path>
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M5.1589 13.4325H11.3716C12.2138 13.462 12.8971 13.7152 13.1194 14.6094L14.4696 21.0422C14.4697 21.0426 14.4699 21.043 14.47 21.0434L14.8832 22.9796L18.6649 13.4325H22.7481L16.6785 27.4184H12.5951L9.15337 15.253C7.96587 14.6021 6.6106 14.0786 5.09534 13.7154L5.1589 13.4325Z"
+                  fill="#15195A"></path>
+              </svg>
 
-                <svg class="mx-auto px-2 inline-block"  xmlns="http://www.w3.org/2000/svg" width="60px" height="60px" viewBox="0 -9 58 58" fill="none"><script xmlns="" id="eppiocemhmnlbhjplcgkofciiegomcon"/><script xmlns=""/><script xmlns=""/>
-                  <rect x="0.5" y="0.5" width="57" height="39" rx="3.5" fill="white" stroke="#F3F3F3"/>
-                  <path d="M25.7516 27.4332H21.8901L24.3054 13.4325H28.1667L25.7516 27.4332Z" fill="#15195A"/>
-                  <path d="M39.7499 13.7748C38.9882 13.4915 37.7802 13.1787 36.2865 13.1787C32.4731 13.1787 29.7878 15.0851 29.7713 17.8106C29.7396 19.8215 31.6939 20.9384 33.1556 21.6089C34.6495 22.2941 35.1574 22.7413 35.1574 23.352C35.1422 24.29 33.9502 24.7223 32.8384 24.7223C31.2967 24.7223 30.4707 24.4994 29.2153 23.9776L28.7069 23.7539L28.1665 26.8967C29.0722 27.2835 30.7408 27.6268 32.4731 27.6419C36.5249 27.6419 39.1627 25.765 39.1939 22.8605C39.2093 21.2667 38.1774 20.0454 35.9526 19.0475C34.602 18.4069 33.7749 17.9749 33.7749 17.3195C33.7908 16.7236 34.4745 16.1133 35.9991 16.1133C37.2544 16.0834 38.1768 16.3663 38.8755 16.6494L39.2247 16.7981L39.7499 13.7748V13.7748V13.7748Z" fill="#15195A"/>
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M46.6618 13.4325H49.6486L52.7639 27.433H49.1885C49.1885 27.433 48.8386 25.8244 48.7278 25.3328H43.7699C43.6266 25.705 42.9595 27.433 42.9595 27.433H38.9078L44.6435 14.5941C45.0409 13.6855 45.7407 13.4325 46.6618 13.4325ZM46.4238 18.556C46.4238 18.556 45.2001 21.6689 44.8821 22.4732H48.0918C47.933 21.7733 47.2017 18.4219 47.2017 18.4219L46.9319 17.2156C46.8182 17.5262 46.6539 17.9533 46.543 18.2414C46.4679 18.4366 46.4173 18.568 46.4238 18.556Z" fill="#15195A"/>
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M5.1589 13.4325H11.3716C12.2138 13.462 12.8971 13.7152 13.1194 14.6094L14.4696 21.0422C14.4697 21.0426 14.4699 21.043 14.47 21.0434L14.8832 22.9796L18.6649 13.4325H22.7481L16.6785 27.4184H12.5951L9.15337 15.253C7.96587 14.6021 6.6106 14.0786 5.09534 13.7154L5.1589 13.4325Z" fill="#15195A"/>
-                  </svg>
+              <svg
+                class="mx-auto px-2 inline-block"
+                xmlns="http://www.w3.org/2000/svg"
+                width="60px"
+                height="60px"
+                viewBox="0 -9 58 58"
+                fill="none"
+                ><script xmlns="" id="eppiocemhmnlbhjplcgkofciiegomcon"
+                ></script><script xmlns=""></script><script xmlns=""></script>
+                <rect
+                  x="0.5"
+                  y="0.5"
+                  width="57"
+                  height="39"
+                  rx="3.5"
+                  fill="#006FCF"
+                  stroke="#F3F3F3"></rect>
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M11.8632 28.8937V20.6592H21.1869L22.1872 21.8787L23.2206 20.6592H57.0632V28.3258C57.0632 28.3258 56.1782 28.8855 55.1546 28.8937H36.4152L35.2874 27.5957V28.8937H31.5916V26.6779C31.5916 26.6779 31.0867 26.9872 29.9953 26.9872H28.7373V28.8937H23.1415L22.1426 27.6481L21.1284 28.8937H11.8632ZM1 14.4529L3.09775 9.86914H6.7256L7.9161 12.4368V9.86914H12.4258L13.1346 11.7249L13.8216 9.86914H34.0657V10.8021C34.0657 10.8021 35.1299 9.86914 36.8789 9.86914L43.4474 9.89066L44.6173 12.4247V9.86914H48.3913L49.43 11.3247V9.86914H53.2386V18.1037H49.43L48.4346 16.6434V18.1037H42.8898L42.3321 16.8056H40.8415L40.293 18.1037H36.5327C35.0277 18.1037 34.0657 17.1897 34.0657 17.1897V18.1037H28.3961L27.2708 16.8056V18.1037H6.18816L5.63093 16.8056H4.14505L3.59176 18.1037H1V14.4529ZM1.01082 17.05L3.84023 10.8843H5.98528L8.81199 17.05H6.92932L6.40997 15.8154H3.37498L2.85291 17.05H1.01082ZM5.81217 14.4768L4.88706 12.3192L3.95925 14.4768H5.81217ZM9.00675 17.049V10.8832L11.6245 10.8924L13.147 14.8676L14.6331 10.8832H17.2299V17.049H15.5853V12.5058L13.8419 17.049H12.3996L10.6514 12.5058V17.049H9.00675ZM18.3552 17.049V10.8832H23.7219V12.2624H20.0171V13.3171H23.6353V14.6151H20.0171V15.7104H23.7219V17.049H18.3552ZM24.674 17.05V10.8843H28.3339C29.5465 10.8843 30.6331 11.5871 30.6331 12.8846C30.6331 13.9938 29.717 14.7082 28.8289 14.7784L30.9929 17.05H28.9831L27.0111 14.8596H26.3186V17.05H24.674ZM28.1986 12.2635H26.3186V13.5615H28.223C28.5526 13.5615 28.9776 13.3221 28.9776 12.9125C28.9776 12.5941 28.6496 12.2635 28.1986 12.2635ZM32.9837 17.049H31.3045V10.8832H32.9837V17.049ZM36.9655 17.049H36.603C34.8492 17.049 33.7844 15.754 33.7844 13.9915C33.7844 12.1854 34.8373 10.8832 37.052 10.8832H38.8698V12.3436H36.9856C36.0865 12.3436 35.4507 13.0012 35.4507 14.0067C35.4507 15.2008 36.1777 15.7023 37.2251 15.7023H37.6579L36.9655 17.049ZM37.7147 17.05L40.5441 10.8843H42.6892L45.5159 17.05H43.6332L43.1139 15.8154H40.0789L39.5568 17.05H37.7147ZM42.5161 14.4768L41.591 12.3192L40.6632 14.4768H42.5161ZM45.708 17.049V10.8832H47.7989L50.4687 14.7571V10.8832H52.1134V17.049H50.09L47.3526 13.0737V17.049H45.708ZM12.9885 27.8391V21.6733H18.3552V23.0525H14.6504V24.1072H18.2686V25.4052H14.6504V26.5005H18.3552V27.8391H12.9885ZM39.2853 27.8391V21.6733H44.6519V23.0525H40.9472V24.1072H44.5481V25.4052H40.9472V26.5005H44.6519V27.8391H39.2853ZM18.5635 27.8391L21.1765 24.7942L18.5012 21.6733H20.5733L22.1665 23.6026L23.7651 21.6733H25.756L23.1159 24.7562L25.7338 27.8391H23.6621L22.1151 25.9402L20.6057 27.8391H18.5635ZM25.9291 27.8401V21.6744H29.5619C31.0525 21.6744 31.9234 22.5748 31.9234 23.7482C31.9234 25.1647 30.8131 25.893 29.3482 25.893H27.617V27.8401H25.9291ZM29.4402 23.0687H27.617V24.4885H29.4348C29.9151 24.4885 30.2517 24.1901 30.2517 23.7786C30.2517 23.3406 29.9134 23.0687 29.4402 23.0687ZM32.6375 27.8391V21.6733H36.2973C37.51 21.6733 38.5966 22.3761 38.5966 23.6736C38.5966 24.7828 37.6805 25.4972 36.7923 25.5675L38.9563 27.8391H36.9465L34.9746 25.6486H34.2821V27.8391H32.6375ZM36.1621 23.0525H34.2821V24.3505H36.1864C36.5161 24.3505 36.9411 24.1112 36.9411 23.7015C36.9411 23.3831 36.6131 23.0525 36.1621 23.0525ZM45.4137 27.8391V26.5005H48.7051C49.1921 26.5005 49.403 26.2538 49.403 25.9833C49.403 25.7241 49.1928 25.462 48.7051 25.462H47.2177C45.9249 25.462 45.2048 24.7237 45.2048 23.6153C45.2048 22.6267 45.8642 21.6733 47.7854 21.6733H50.9881L50.2956 23.0606H47.5257C46.9962 23.0606 46.8332 23.321 46.8332 23.5697C46.8332 23.8253 47.0347 24.1072 47.4392 24.1072H48.9972C50.4384 24.1072 51.0638 24.8734 51.0638 25.8768C51.0638 26.9555 50.367 27.8391 48.9188 27.8391H45.4137ZM51.2088 27.8391V26.5005H54.5002C54.9873 26.5005 55.1981 26.2538 55.1981 25.9833C55.1981 25.7241 54.9879 25.462 54.5002 25.462H53.0129C51.72 25.462 51 24.7237 51 23.6153C51 22.6267 51.6594 21.6733 53.5806 21.6733H56.7833L56.0908 23.0606H53.3209C52.7914 23.0606 52.6284 23.321 52.6284 23.5697C52.6284 23.8253 52.8298 24.1072 53.2343 24.1072H54.7924C56.2336 24.1072 56.859 24.8734 56.859 25.8768C56.859 26.9555 56.1621 27.8391 54.7139 27.8391H51.2088Z"
+                  fill="white"></path>
+              </svg>
 
-                <svg class="mx-auto px-2 inline-block" xmlns="http://www.w3.org/2000/svg" width="60px" height="60px" viewBox="0 -9 58 58" fill="none"><script xmlns="" id="eppiocemhmnlbhjplcgkofciiegomcon"/><script xmlns=""/><script xmlns=""/>
-                  <rect x="0.5" y="0.5" width="57" height="39" rx="3.5" fill="#006FCF" stroke="#F3F3F3"/>
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M11.8632 28.8937V20.6592H21.1869L22.1872 21.8787L23.2206 20.6592H57.0632V28.3258C57.0632 28.3258 56.1782 28.8855 55.1546 28.8937H36.4152L35.2874 27.5957V28.8937H31.5916V26.6779C31.5916 26.6779 31.0867 26.9872 29.9953 26.9872H28.7373V28.8937H23.1415L22.1426 27.6481L21.1284 28.8937H11.8632ZM1 14.4529L3.09775 9.86914H6.7256L7.9161 12.4368V9.86914H12.4258L13.1346 11.7249L13.8216 9.86914H34.0657V10.8021C34.0657 10.8021 35.1299 9.86914 36.8789 9.86914L43.4474 9.89066L44.6173 12.4247V9.86914H48.3913L49.43 11.3247V9.86914H53.2386V18.1037H49.43L48.4346 16.6434V18.1037H42.8898L42.3321 16.8056H40.8415L40.293 18.1037H36.5327C35.0277 18.1037 34.0657 17.1897 34.0657 17.1897V18.1037H28.3961L27.2708 16.8056V18.1037H6.18816L5.63093 16.8056H4.14505L3.59176 18.1037H1V14.4529ZM1.01082 17.05L3.84023 10.8843H5.98528L8.81199 17.05H6.92932L6.40997 15.8154H3.37498L2.85291 17.05H1.01082ZM5.81217 14.4768L4.88706 12.3192L3.95925 14.4768H5.81217ZM9.00675 17.049V10.8832L11.6245 10.8924L13.147 14.8676L14.6331 10.8832H17.2299V17.049H15.5853V12.5058L13.8419 17.049H12.3996L10.6514 12.5058V17.049H9.00675ZM18.3552 17.049V10.8832H23.7219V12.2624H20.0171V13.3171H23.6353V14.6151H20.0171V15.7104H23.7219V17.049H18.3552ZM24.674 17.05V10.8843H28.3339C29.5465 10.8843 30.6331 11.5871 30.6331 12.8846C30.6331 13.9938 29.717 14.7082 28.8289 14.7784L30.9929 17.05H28.9831L27.0111 14.8596H26.3186V17.05H24.674ZM28.1986 12.2635H26.3186V13.5615H28.223C28.5526 13.5615 28.9776 13.3221 28.9776 12.9125C28.9776 12.5941 28.6496 12.2635 28.1986 12.2635ZM32.9837 17.049H31.3045V10.8832H32.9837V17.049ZM36.9655 17.049H36.603C34.8492 17.049 33.7844 15.754 33.7844 13.9915C33.7844 12.1854 34.8373 10.8832 37.052 10.8832H38.8698V12.3436H36.9856C36.0865 12.3436 35.4507 13.0012 35.4507 14.0067C35.4507 15.2008 36.1777 15.7023 37.2251 15.7023H37.6579L36.9655 17.049ZM37.7147 17.05L40.5441 10.8843H42.6892L45.5159 17.05H43.6332L43.1139 15.8154H40.0789L39.5568 17.05H37.7147ZM42.5161 14.4768L41.591 12.3192L40.6632 14.4768H42.5161ZM45.708 17.049V10.8832H47.7989L50.4687 14.7571V10.8832H52.1134V17.049H50.09L47.3526 13.0737V17.049H45.708ZM12.9885 27.8391V21.6733H18.3552V23.0525H14.6504V24.1072H18.2686V25.4052H14.6504V26.5005H18.3552V27.8391H12.9885ZM39.2853 27.8391V21.6733H44.6519V23.0525H40.9472V24.1072H44.5481V25.4052H40.9472V26.5005H44.6519V27.8391H39.2853ZM18.5635 27.8391L21.1765 24.7942L18.5012 21.6733H20.5733L22.1665 23.6026L23.7651 21.6733H25.756L23.1159 24.7562L25.7338 27.8391H23.6621L22.1151 25.9402L20.6057 27.8391H18.5635ZM25.9291 27.8401V21.6744H29.5619C31.0525 21.6744 31.9234 22.5748 31.9234 23.7482C31.9234 25.1647 30.8131 25.893 29.3482 25.893H27.617V27.8401H25.9291ZM29.4402 23.0687H27.617V24.4885H29.4348C29.9151 24.4885 30.2517 24.1901 30.2517 23.7786C30.2517 23.3406 29.9134 23.0687 29.4402 23.0687ZM32.6375 27.8391V21.6733H36.2973C37.51 21.6733 38.5966 22.3761 38.5966 23.6736C38.5966 24.7828 37.6805 25.4972 36.7923 25.5675L38.9563 27.8391H36.9465L34.9746 25.6486H34.2821V27.8391H32.6375ZM36.1621 23.0525H34.2821V24.3505H36.1864C36.5161 24.3505 36.9411 24.1112 36.9411 23.7015C36.9411 23.3831 36.6131 23.0525 36.1621 23.0525ZM45.4137 27.8391V26.5005H48.7051C49.1921 26.5005 49.403 26.2538 49.403 25.9833C49.403 25.7241 49.1928 25.462 48.7051 25.462H47.2177C45.9249 25.462 45.2048 24.7237 45.2048 23.6153C45.2048 22.6267 45.8642 21.6733 47.7854 21.6733H50.9881L50.2956 23.0606H47.5257C46.9962 23.0606 46.8332 23.321 46.8332 23.5697C46.8332 23.8253 47.0347 24.1072 47.4392 24.1072H48.9972C50.4384 24.1072 51.0638 24.8734 51.0638 25.8768C51.0638 26.9555 50.367 27.8391 48.9188 27.8391H45.4137ZM51.2088 27.8391V26.5005H54.5002C54.9873 26.5005 55.1981 26.2538 55.1981 25.9833C55.1981 25.7241 54.9879 25.462 54.5002 25.462H53.0129C51.72 25.462 51 24.7237 51 23.6153C51 22.6267 51.6594 21.6733 53.5806 21.6733H56.7833L56.0908 23.0606H53.3209C52.7914 23.0606 52.6284 23.321 52.6284 23.5697C52.6284 23.8253 52.8298 24.1072 53.2343 24.1072H54.7924C56.2336 24.1072 56.859 24.8734 56.859 25.8768C56.859 26.9555 56.1621 27.8391 54.7139 27.8391H51.2088Z" fill="white"/>
-                  </svg>
-
-
-              <svg class="mx-auto px-2 inline-block"  xmlns="http://www.w3.org/2000/svg" width="60px" height="60px" viewBox="0 -9 58 58" fill="none"><script xmlns="" id="eppiocemhmnlbhjplcgkofciiegomcon"/><script xmlns=""/><script xmlns=""/>
-                <rect x="0.5" y="0.5" width="57" height="39" rx="3.5" fill="white" stroke="#F3F3F3"/>
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M19.0689 20.3224C19.0689 22.7645 20.9865 24.658 23.4543 24.658C24.1518 24.658 24.7494 24.5209 25.4861 24.1739V22.2663C24.8384 22.9147 24.2644 23.1763 23.5297 23.1763C21.8975 23.1763 20.739 21.9928 20.739 20.3102C20.739 18.7152 21.9341 17.4569 23.4543 17.4569C24.2272 17.4569 24.8124 17.7327 25.4861 18.3916V16.485C24.7748 16.1242 24.19 15.9746 23.4925 15.9746C21.0372 15.9746 19.0689 17.9066 19.0689 20.3224ZM14.91 18.3046C14.91 18.7536 15.1954 18.9908 16.168 19.3507C18.0114 20.0251 18.5577 20.6224 18.5577 21.9426C18.5577 23.5508 17.3762 24.6707 15.6923 24.6707C14.459 24.6707 13.5622 24.1851 12.8156 23.0889L13.8626 22.0807C14.2356 22.8022 14.8583 23.189 15.6313 23.189C16.3545 23.189 16.8896 22.6902 16.8896 22.0171C16.8896 21.6682 16.7275 21.3687 16.4036 21.1572C16.2408 21.057 15.9179 20.9081 15.2833 20.684C13.7612 20.1364 13.2393 19.5503 13.2393 18.4057C13.2393 17.046 14.3605 16.0252 15.8306 16.0252C16.7416 16.0252 17.5752 16.3366 18.272 16.9461L17.424 18.0564C17.0019 17.5833 16.6026 17.3836 16.1173 17.3836C15.4188 17.3836 14.91 17.7814 14.91 18.3046ZM10.5846 24.4709H12.2053V16.1625H10.5846V24.4709ZM7.27202 22.4038C6.76294 22.8638 6.10138 23.0644 5.05432 23.0644H4.61938V17.57H5.05432C6.10138 17.57 6.73694 17.7575 7.27202 18.2422C7.83247 18.741 8.16951 19.5146 8.16951 20.3103C8.16951 21.108 7.83247 21.905 7.27202 22.4038ZM5.37884 16.1625H3V24.4706H5.36632C6.62459 24.4706 7.53299 24.174 8.33064 23.5115C9.27852 22.7274 9.83896 21.5452 9.83896 20.3225C9.83896 17.8705 8.00709 16.1625 5.37884 16.1625ZM36.1203 16.1625L38.3357 21.7432L40.5801 16.1625H42.3368L38.7476 24.6841H37.8754L34.3497 16.1625H36.1203ZM43.0697 24.4708H47.6656V23.0642H44.689V20.8215H47.5561V19.4142H44.689V17.5702H47.6656V16.1623H43.0697V24.4708ZM50.3576 19.9874H50.831C51.8662 19.9874 52.4148 19.5377 52.4148 18.7025C52.4148 17.894 51.8662 17.4712 50.8567 17.4712H50.3576V19.9874ZM51.1421 16.1622C53.0109 16.1622 54.0823 17.0597 54.0823 18.6152C54.0823 19.8873 53.4102 20.7225 52.1895 20.9706L54.8052 24.4707H52.8122L50.5691 21.133H50.3576V24.4707H48.7388V16.1622H51.1421Z" fill="#1D1D1B"/>
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M34.1585 22.7268C35.4738 20.67 34.8731 17.9376 32.8166 16.6224V16.6224C30.76 15.3072 28.0271 15.9076 26.7117 17.9644V17.9644C25.3967 20.0206 25.9977 22.7539 28.0542 24.0691V24.0691C30.1107 25.3843 32.8434 24.783 34.1585 22.7268Z" fill="url(#paint0_linear_545_4255)"/>
+              <svg
+                class="mx-auto px-2 inline-block"
+                xmlns="http://www.w3.org/2000/svg"
+                width="60px"
+                height="60px"
+                viewBox="0 -9 58 58"
+                fill="none"
+                ><script xmlns="" id="eppiocemhmnlbhjplcgkofciiegomcon"
+                ></script><script xmlns=""></script><script xmlns=""></script>
+                <rect
+                  x="0.5"
+                  y="0.5"
+                  width="57"
+                  height="39"
+                  rx="3.5"
+                  fill="white"
+                  stroke="#F3F3F3"></rect>
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M19.0689 20.3224C19.0689 22.7645 20.9865 24.658 23.4543 24.658C24.1518 24.658 24.7494 24.5209 25.4861 24.1739V22.2663C24.8384 22.9147 24.2644 23.1763 23.5297 23.1763C21.8975 23.1763 20.739 21.9928 20.739 20.3102C20.739 18.7152 21.9341 17.4569 23.4543 17.4569C24.2272 17.4569 24.8124 17.7327 25.4861 18.3916V16.485C24.7748 16.1242 24.19 15.9746 23.4925 15.9746C21.0372 15.9746 19.0689 17.9066 19.0689 20.3224ZM14.91 18.3046C14.91 18.7536 15.1954 18.9908 16.168 19.3507C18.0114 20.0251 18.5577 20.6224 18.5577 21.9426C18.5577 23.5508 17.3762 24.6707 15.6923 24.6707C14.459 24.6707 13.5622 24.1851 12.8156 23.0889L13.8626 22.0807C14.2356 22.8022 14.8583 23.189 15.6313 23.189C16.3545 23.189 16.8896 22.6902 16.8896 22.0171C16.8896 21.6682 16.7275 21.3687 16.4036 21.1572C16.2408 21.057 15.9179 20.9081 15.2833 20.684C13.7612 20.1364 13.2393 19.5503 13.2393 18.4057C13.2393 17.046 14.3605 16.0252 15.8306 16.0252C16.7416 16.0252 17.5752 16.3366 18.272 16.9461L17.424 18.0564C17.0019 17.5833 16.6026 17.3836 16.1173 17.3836C15.4188 17.3836 14.91 17.7814 14.91 18.3046ZM10.5846 24.4709H12.2053V16.1625H10.5846V24.4709ZM7.27202 22.4038C6.76294 22.8638 6.10138 23.0644 5.05432 23.0644H4.61938V17.57H5.05432C6.10138 17.57 6.73694 17.7575 7.27202 18.2422C7.83247 18.741 8.16951 19.5146 8.16951 20.3103C8.16951 21.108 7.83247 21.905 7.27202 22.4038ZM5.37884 16.1625H3V24.4706H5.36632C6.62459 24.4706 7.53299 24.174 8.33064 23.5115C9.27852 22.7274 9.83896 21.5452 9.83896 20.3225C9.83896 17.8705 8.00709 16.1625 5.37884 16.1625ZM36.1203 16.1625L38.3357 21.7432L40.5801 16.1625H42.3368L38.7476 24.6841H37.8754L34.3497 16.1625H36.1203ZM43.0697 24.4708H47.6656V23.0642H44.689V20.8215H47.5561V19.4142H44.689V17.5702H47.6656V16.1623H43.0697V24.4708ZM50.3576 19.9874H50.831C51.8662 19.9874 52.4148 19.5377 52.4148 18.7025C52.4148 17.894 51.8662 17.4712 50.8567 17.4712H50.3576V19.9874ZM51.1421 16.1622C53.0109 16.1622 54.0823 17.0597 54.0823 18.6152C54.0823 19.8873 53.4102 20.7225 52.1895 20.9706L54.8052 24.4707H52.8122L50.5691 21.133H50.3576V24.4707H48.7388V16.1622H51.1421Z"
+                  fill="#1D1D1B"></path>
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M34.1585 22.7268C35.4738 20.67 34.8731 17.9376 32.8166 16.6224V16.6224C30.76 15.3072 28.0271 15.9076 26.7117 17.9644V17.9644C25.3967 20.0206 25.9977 22.7539 28.0542 24.0691V24.0691C30.1107 25.3843 32.8434 24.783 34.1585 22.7268Z"
+                  fill="url(#paint0_linear_545_4255)"></path>
                 <defs>
-                <linearGradient id="paint0_linear_545_4255" x1="36.5397" y1="19.0034" x2="29.0929" y2="14.241" gradientUnits="userSpaceOnUse">
-                <stop stop-color="#F6A000"/>
-                <stop offset="0.623918" stop-color="#E47E02"/>
-                <stop offset="1" stop-color="#D36002"/>
-                </linearGradient>
+                  <linearGradient
+                    id="paint0_linear_545_4255"
+                    x1="36.5397"
+                    y1="19.0034"
+                    x2="29.0929"
+                    y2="14.241"
+                    gradientUnits="userSpaceOnUse"
+                  >
+                    <stop stop-color="#F6A000"></stop>
+                    <stop offset="0.623918" stop-color="#E47E02"></stop>
+                    <stop offset="1" stop-color="#D36002"></stop>
+                  </linearGradient>
                 </defs>
-                </svg>
+              </svg>
 
-              <svg class="mx-auto px-2 inline-block"  xmlns="http://www.w3.org/2000/svg" width="60px" height="60px" viewBox="0 -9 58 58" fill="none"><script xmlns="" id="eppiocemhmnlbhjplcgkofciiegomcon"/><script xmlns=""/><script xmlns=""/>
-                <rect x="0.5" y="0.5" width="57" height="39" rx="3.5" fill="white" stroke="#F3F3F3"/>
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M21.2489 30.8906V32.3674V33.8443H20.6016V33.4857C20.3963 33.7517 20.0848 33.9186 19.6614 33.9186C18.8266 33.9186 18.1722 33.27 18.1722 32.3674C18.1722 31.4656 18.8266 30.8163 19.6614 30.8163C20.0848 30.8163 20.3963 30.9832 20.6016 31.2492V30.8906H21.2489ZM19.7419 31.4218C19.1816 31.4218 18.8387 31.8483 18.8387 32.3674C18.8387 32.8866 19.1816 33.3131 19.7419 33.3131C20.2773 33.3131 20.6387 32.905 20.6387 32.3674C20.6387 31.8299 20.2773 31.4218 19.7419 31.4218ZM43.1228 32.3674C43.1228 31.8483 43.4657 31.4218 44.026 31.4218C44.5621 31.4218 44.9228 31.8299 44.9228 32.3674C44.9228 32.905 44.5621 33.3131 44.026 33.3131C43.4657 33.3131 43.1228 32.8866 43.1228 32.3674ZM45.5338 29.7044V32.3674V33.8443H44.8858V33.4857C44.6804 33.7517 44.3689 33.9186 43.9455 33.9186C43.1107 33.9186 42.4563 33.27 42.4563 32.3674C42.4563 31.4656 43.1107 30.8163 43.9455 30.8163C44.3689 30.8163 44.6804 30.9832 44.8858 31.2492V29.7044H45.5338ZM29.2838 31.3914C29.7008 31.3914 29.9688 31.6509 30.0373 32.1079H28.4925C28.5616 31.6814 28.8225 31.3914 29.2838 31.3914ZM27.8138 32.3674C27.8138 31.4465 28.424 30.8163 29.2966 30.8163C30.1307 30.8163 30.7038 31.4465 30.7102 32.3674C30.7102 32.4537 30.7038 32.5344 30.6974 32.6143H28.4868C28.5802 33.1462 28.9601 33.3379 29.3771 33.3379C29.6758 33.3379 29.9938 33.2261 30.2433 33.0288L30.5605 33.5048C30.1991 33.8075 29.7885 33.9186 29.3401 33.9186C28.449 33.9186 27.8138 33.3068 27.8138 32.3674ZM37.1126 32.3674C37.1126 31.8483 37.4555 31.4218 38.0158 31.4218C38.5511 31.4218 38.9126 31.8299 38.9126 32.3674C38.9126 32.905 38.5511 33.3131 38.0158 33.3131C37.4555 33.3131 37.1126 32.8866 37.1126 32.3674ZM39.5228 30.8906V32.3674V33.8443H38.8755V33.4857C38.6695 33.7517 38.3587 33.9186 37.9352 33.9186C37.1004 33.9186 36.446 33.27 36.446 32.3674C36.446 31.4656 37.1004 30.8163 37.9352 30.8163C38.3587 30.8163 38.6695 30.9832 38.8755 31.2492V30.8906H39.5228ZM33.4569 32.3674C33.4569 33.2636 34.0857 33.9186 35.0452 33.9186C35.4936 33.9186 35.7923 33.8196 36.116 33.5663L35.8051 33.0472C35.5621 33.2205 35.3068 33.3131 35.026 33.3131C34.5091 33.3068 34.1292 32.9361 34.1292 32.3674C34.1292 31.7988 34.5091 31.4281 35.026 31.4218C35.3068 31.4218 35.5621 31.5144 35.8051 31.6877L36.116 31.1685C35.7923 30.9153 35.4936 30.8163 35.0452 30.8163C34.0857 30.8163 33.4569 31.4713 33.4569 32.3674ZM41.0177 31.2492C41.1859 30.9896 41.429 30.8163 41.8026 30.8163C41.9337 30.8163 42.1205 30.8411 42.2638 30.8969L42.0642 31.5024C41.9273 31.4465 41.7904 31.4281 41.6593 31.4281C41.2358 31.4281 41.0241 31.6997 41.0241 32.1885V33.8443H40.3761V30.8906H41.0177V31.2492ZM24.4505 31.1254C24.1389 30.9217 23.7098 30.8163 23.2364 30.8163C22.4822 30.8163 21.9967 31.1749 21.9967 31.762C21.9967 32.2437 22.3582 32.5407 23.024 32.6334L23.3298 32.6765C23.6848 32.7261 23.8524 32.8187 23.8524 32.9856C23.8524 33.2141 23.6157 33.3442 23.1737 33.3442C22.7253 33.3442 22.4017 33.2021 22.1835 33.0351L21.8784 33.5352C22.2334 33.7948 22.6818 33.9186 23.1673 33.9186C24.027 33.9186 24.5253 33.5168 24.5253 32.9545C24.5253 32.4353 24.1332 32.1637 23.4852 32.0711L23.1801 32.0272C22.9 31.9904 22.6754 31.9353 22.6754 31.7372C22.6754 31.5208 22.8871 31.3914 23.2421 31.3914C23.6221 31.3914 23.9899 31.5335 24.1703 31.6446L24.4505 31.1254ZM32.0184 31.2492C32.1859 30.9896 32.429 30.8163 32.8025 30.8163C32.9337 30.8163 33.1205 30.8411 33.2637 30.8969L33.0641 31.5024C32.9273 31.4465 32.7904 31.4281 32.6592 31.4281C32.2358 31.4281 32.0241 31.6997 32.0241 32.1885V33.8443H31.3768V30.8906H32.0184V31.2492ZM27.2784 30.8906H26.2198V29.9944H25.5654V30.8906H24.9616V31.4776H25.5654V32.8251C25.5654 33.5105 25.8334 33.9186 26.5991 33.9186C26.8799 33.9186 27.2036 33.8323 27.4089 33.6901L27.2221 33.1398C27.0289 33.2509 26.8172 33.3068 26.649 33.3068C26.3253 33.3068 26.2198 33.1087 26.2198 32.8123V31.4776H27.2784V30.8906ZM17.5997 31.9904V33.8443H16.9453V32.2005C16.9453 31.6997 16.7336 31.4218 16.2916 31.4218C15.8617 31.4218 15.563 31.6941 15.563 32.2069V33.8443H14.9086V32.2005C14.9086 31.6997 14.6912 31.4218 14.2613 31.4218C13.8186 31.4218 13.5321 31.6941 13.5321 32.2069V33.8443H12.8784V30.8906H13.5264V31.2548C13.7695 30.909 14.0803 30.8163 14.3982 30.8163C14.853 30.8163 15.1767 31.0144 15.382 31.3418C15.6564 30.9274 16.0485 30.8099 16.4285 30.8163C17.1513 30.8227 17.5997 31.2923 17.5997 31.9904Z" fill="#231F20"/>
-                <path d="M34.0465 25.8715H24.2359V8.3783H34.0465V25.8715Z" fill="#FF5F00"/>
-                <path d="M24.8583 17.1253C24.8583 13.5767 26.5328 10.4157 29.1405 8.37867C27.2336 6.88907 24.8269 5.99998 22.2114 5.99998C16.0194 5.99998 11 10.9809 11 17.1253C11 23.2697 16.0194 28.2506 22.2114 28.2506C24.8269 28.2506 27.2336 27.3615 29.1405 25.8719C26.5328 23.8349 24.8583 20.6739 24.8583 17.1253" fill="#EB001B"/>
-                <path d="M47.2818 17.1253C47.2818 23.2697 42.2624 28.2506 36.0704 28.2506C33.4548 28.2506 31.0482 27.3615 29.1405 25.8719C31.7489 23.8349 33.4235 20.6739 33.4235 17.1253C33.4235 13.5767 31.7489 10.4157 29.1405 8.37867C31.0482 6.88907 33.4548 5.99998 36.0704 5.99998C42.2624 5.99998 47.2818 10.9809 47.2818 17.1253" fill="#F79E1B"/>
-                </svg>
-
-               </p>
+              <svg
+                class="mx-auto px-2 inline-block"
+                xmlns="http://www.w3.org/2000/svg"
+                width="60px"
+                height="60px"
+                viewBox="0 -9 58 58"
+                fill="none"
+                ><script xmlns="" id="eppiocemhmnlbhjplcgkofciiegomcon"
+                ></script><script xmlns=""></script><script xmlns=""></script>
+                <rect
+                  x="0.5"
+                  y="0.5"
+                  width="57"
+                  height="39"
+                  rx="3.5"
+                  fill="white"
+                  stroke="#F3F3F3"></rect>
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M21.2489 30.8906V32.3674V33.8443H20.6016V33.4857C20.3963 33.7517 20.0848 33.9186 19.6614 33.9186C18.8266 33.9186 18.1722 33.27 18.1722 32.3674C18.1722 31.4656 18.8266 30.8163 19.6614 30.8163C20.0848 30.8163 20.3963 30.9832 20.6016 31.2492V30.8906H21.2489ZM19.7419 31.4218C19.1816 31.4218 18.8387 31.8483 18.8387 32.3674C18.8387 32.8866 19.1816 33.3131 19.7419 33.3131C20.2773 33.3131 20.6387 32.905 20.6387 32.3674C20.6387 31.8299 20.2773 31.4218 19.7419 31.4218ZM43.1228 32.3674C43.1228 31.8483 43.4657 31.4218 44.026 31.4218C44.5621 31.4218 44.9228 31.8299 44.9228 32.3674C44.9228 32.905 44.5621 33.3131 44.026 33.3131C43.4657 33.3131 43.1228 32.8866 43.1228 32.3674ZM45.5338 29.7044V32.3674V33.8443H44.8858V33.4857C44.6804 33.7517 44.3689 33.9186 43.9455 33.9186C43.1107 33.9186 42.4563 33.27 42.4563 32.3674C42.4563 31.4656 43.1107 30.8163 43.9455 30.8163C44.3689 30.8163 44.6804 30.9832 44.8858 31.2492V29.7044H45.5338ZM29.2838 31.3914C29.7008 31.3914 29.9688 31.6509 30.0373 32.1079H28.4925C28.5616 31.6814 28.8225 31.3914 29.2838 31.3914ZM27.8138 32.3674C27.8138 31.4465 28.424 30.8163 29.2966 30.8163C30.1307 30.8163 30.7038 31.4465 30.7102 32.3674C30.7102 32.4537 30.7038 32.5344 30.6974 32.6143H28.4868C28.5802 33.1462 28.9601 33.3379 29.3771 33.3379C29.6758 33.3379 29.9938 33.2261 30.2433 33.0288L30.5605 33.5048C30.1991 33.8075 29.7885 33.9186 29.3401 33.9186C28.449 33.9186 27.8138 33.3068 27.8138 32.3674ZM37.1126 32.3674C37.1126 31.8483 37.4555 31.4218 38.0158 31.4218C38.5511 31.4218 38.9126 31.8299 38.9126 32.3674C38.9126 32.905 38.5511 33.3131 38.0158 33.3131C37.4555 33.3131 37.1126 32.8866 37.1126 32.3674ZM39.5228 30.8906V32.3674V33.8443H38.8755V33.4857C38.6695 33.7517 38.3587 33.9186 37.9352 33.9186C37.1004 33.9186 36.446 33.27 36.446 32.3674C36.446 31.4656 37.1004 30.8163 37.9352 30.8163C38.3587 30.8163 38.6695 30.9832 38.8755 31.2492V30.8906H39.5228ZM33.4569 32.3674C33.4569 33.2636 34.0857 33.9186 35.0452 33.9186C35.4936 33.9186 35.7923 33.8196 36.116 33.5663L35.8051 33.0472C35.5621 33.2205 35.3068 33.3131 35.026 33.3131C34.5091 33.3068 34.1292 32.9361 34.1292 32.3674C34.1292 31.7988 34.5091 31.4281 35.026 31.4218C35.3068 31.4218 35.5621 31.5144 35.8051 31.6877L36.116 31.1685C35.7923 30.9153 35.4936 30.8163 35.0452 30.8163C34.0857 30.8163 33.4569 31.4713 33.4569 32.3674ZM41.0177 31.2492C41.1859 30.9896 41.429 30.8163 41.8026 30.8163C41.9337 30.8163 42.1205 30.8411 42.2638 30.8969L42.0642 31.5024C41.9273 31.4465 41.7904 31.4281 41.6593 31.4281C41.2358 31.4281 41.0241 31.6997 41.0241 32.1885V33.8443H40.3761V30.8906H41.0177V31.2492ZM24.4505 31.1254C24.1389 30.9217 23.7098 30.8163 23.2364 30.8163C22.4822 30.8163 21.9967 31.1749 21.9967 31.762C21.9967 32.2437 22.3582 32.5407 23.024 32.6334L23.3298 32.6765C23.6848 32.7261 23.8524 32.8187 23.8524 32.9856C23.8524 33.2141 23.6157 33.3442 23.1737 33.3442C22.7253 33.3442 22.4017 33.2021 22.1835 33.0351L21.8784 33.5352C22.2334 33.7948 22.6818 33.9186 23.1673 33.9186C24.027 33.9186 24.5253 33.5168 24.5253 32.9545C24.5253 32.4353 24.1332 32.1637 23.4852 32.0711L23.1801 32.0272C22.9 31.9904 22.6754 31.9353 22.6754 31.7372C22.6754 31.5208 22.8871 31.3914 23.2421 31.3914C23.6221 31.3914 23.9899 31.5335 24.1703 31.6446L24.4505 31.1254ZM32.0184 31.2492C32.1859 30.9896 32.429 30.8163 32.8025 30.8163C32.9337 30.8163 33.1205 30.8411 33.2637 30.8969L33.0641 31.5024C32.9273 31.4465 32.7904 31.4281 32.6592 31.4281C32.2358 31.4281 32.0241 31.6997 32.0241 32.1885V33.8443H31.3768V30.8906H32.0184V31.2492ZM27.2784 30.8906H26.2198V29.9944H25.5654V30.8906H24.9616V31.4776H25.5654V32.8251C25.5654 33.5105 25.8334 33.9186 26.5991 33.9186C26.8799 33.9186 27.2036 33.8323 27.4089 33.6901L27.2221 33.1398C27.0289 33.2509 26.8172 33.3068 26.649 33.3068C26.3253 33.3068 26.2198 33.1087 26.2198 32.8123V31.4776H27.2784V30.8906ZM17.5997 31.9904V33.8443H16.9453V32.2005C16.9453 31.6997 16.7336 31.4218 16.2916 31.4218C15.8617 31.4218 15.563 31.6941 15.563 32.2069V33.8443H14.9086V32.2005C14.9086 31.6997 14.6912 31.4218 14.2613 31.4218C13.8186 31.4218 13.5321 31.6941 13.5321 32.2069V33.8443H12.8784V30.8906H13.5264V31.2548C13.7695 30.909 14.0803 30.8163 14.3982 30.8163C14.853 30.8163 15.1767 31.0144 15.382 31.3418C15.6564 30.9274 16.0485 30.8099 16.4285 30.8163C17.1513 30.8227 17.5997 31.2923 17.5997 31.9904Z"
+                  fill="#231F20"></path>
+                <path
+                  d="M34.0465 25.8715H24.2359V8.3783H34.0465V25.8715Z"
+                  fill="#FF5F00"></path>
+                <path
+                  d="M24.8583 17.1253C24.8583 13.5767 26.5328 10.4157 29.1405 8.37867C27.2336 6.88907 24.8269 5.99998 22.2114 5.99998C16.0194 5.99998 11 10.9809 11 17.1253C11 23.2697 16.0194 28.2506 22.2114 28.2506C24.8269 28.2506 27.2336 27.3615 29.1405 25.8719C26.5328 23.8349 24.8583 20.6739 24.8583 17.1253"
+                  fill="#EB001B"></path>
+                <path
+                  d="M47.2818 17.1253C47.2818 23.2697 42.2624 28.2506 36.0704 28.2506C33.4548 28.2506 31.0482 27.3615 29.1405 25.8719C31.7489 23.8349 33.4235 20.6739 33.4235 17.1253C33.4235 13.5767 31.7489 10.4157 29.1405 8.37867C31.0482 6.88907 33.4548 5.99998 36.0704 5.99998C42.2624 5.99998 47.2818 10.9809 47.2818 17.1253"
+                  fill="#F79E1B"></path>
+              </svg>
+            </p>
           </div>
-      </div>
+        </div>
       </form>
 
-      
-    
-  
+      <!-- Modal toggle -->
 
-
-<!-- Modal toggle -->
-
-
-<!-- Main modal -->
-<div id="privacypolicy" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-    <div class="relative p-4 w-full max-w-2xl max-h-full">
-        <!-- Modal content -->
-        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+      <!-- Main modal -->
+      <div
+        id="privacypolicy"
+        tabindex="-1"
+        aria-hidden="true"
+        class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
+      >
+        <div class="relative p-4 w-full max-w-2xl max-h-full">
+          <!-- Modal content -->
+          <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
             <!-- Modal header -->
-            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                  Privacy policy
-                </h3>
-                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="privacypolicy">
-                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                    </svg>
-                    <span class="sr-only">Close modal</span>
-                </button>
+            <div
+              class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600"
+            >
+              <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                Privacy policy
+              </h3>
+              <button
+                type="button"
+                class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                data-modal-hide="privacypolicy"
+              >
+                <svg
+                  class="w-3 h-3"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 14 14"
+                >
+                  <path
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"></path>
+                </svg>
+                <span class="sr-only">Close modal</span>
+              </button>
             </div>
             <!-- Modal body -->
             <div class="p-4 md:p-5 space-y-4">
-                <p class="text-base leading-relaxed">
-                  All information collected through our secure reservations form is encrypted for your protection. Alternatively, you may contact us toll-free 24/7 by calling 407-697-6002, or via email at <a href="info@orlandosuperiortransportation.com" class=" text-blue-500 hover:text-blue-800">info@orlandosuperiortransportation.com</a> or <a href="mailto:booking@orlandosuperiortransportation.com" class=" text-blue-500 hover:text-blue-800">booking@orlandosuperiortransportation.com.</a> 
-                </p>
-               
+              <p class="text-base leading-relaxed">
+                All information collected through our secure reservations form
+                is encrypted for your protection. Alternatively, you may contact
+                us toll-free 24/7 by calling 407-697-6002, or via email at <a
+                  href="info@orlandosuperiortransportation.com"
+                  class="text-blue-500 hover:text-blue-800"
+                  >info@orlandosuperiortransportation.com</a
+                > or <a
+                  href="mailto:booking@orlandosuperiortransportation.com"
+                  class="text-blue-500 hover:text-blue-800"
+                  >booking@orlandosuperiortransportation.com.</a
+                >
+              </p>
             </div>
-           
+          </div>
         </div>
-    </div>
-</div>
+      </div>
 
-
-<div id="terms" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-  <div class="relative p-4 w-full max-w-2xl max-h-full">
-      <!-- Modal content -->
-      <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-          <!-- Modal header -->
-          <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+      <div
+        id="terms"
+        tabindex="-1"
+        aria-hidden="true"
+        class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
+      >
+        <div class="relative p-4 w-full max-w-2xl max-h-full">
+          <!-- Modal content -->
+          <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <!-- Modal header -->
+            <div
+              class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600"
+            >
               <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
                 Terms and Conditions
               </h3>
-              <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="terms">
-                  <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                  </svg>
-                  <span class="sr-only">Close modal</span>
+              <button
+                type="button"
+                class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                data-modal-hide="terms"
+              >
+                <svg
+                  class="w-3 h-3"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 14 14"
+                >
+                  <path
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"></path>
+                </svg>
+                <span class="sr-only">Close modal</span>
               </button>
-          </div>
-          <!-- Modal body -->
-          <div class="p-4 md:p-5 ">
-              
+            </div>
+            <!-- Modal body -->
+            <div class="p-4 md:p-5">
               <strong>Accuracy of Information</strong>
-              <p class="m-0 p-0 mb-4">It is your responsibility to review and ensure the accuracy of your booking details. Please notify Orlando Superior Transportation immediately of any discrepancies by calling 407-697-6002, or via email at <a href="info@orlandosuperiortransportation.com" class=" text-blue-500 hover:text-blue-800">info@orlandosuperiortransportation.com</a> or <a href="booking@orlandosuperiortransportation.com" class=" text-blue-500 hover:text-blue-800">booking@orlandosuperiortransportation.com</a>. 
+              <p class="m-0 p-0 mb-4">
+                It is your responsibility to review and ensure the accuracy of
+                your booking details. Please notify Orlando Superior
+                Transportation immediately of any discrepancies by calling
+                407-697-6002, or via email at <a
+                  href="info@orlandosuperiortransportation.com"
+                  class="text-blue-500 hover:text-blue-800"
+                  >info@orlandosuperiortransportation.com</a
+                > or <a
+                  href="booking@orlandosuperiortransportation.com"
+                  class="text-blue-500 hover:text-blue-800"
+                  >booking@orlandosuperiortransportation.com</a
+                >.
               </p>
-              
-              <strong>Billing and Payment Policies</strong><br>
-              <p class="m-0 p-0 mb-4">Your card will be billed in full up to 14 days before your scheduled pickup date. Ensure that all changes to future bookings are made by contacting us via the provided phone number or email. Changes reported directly to the driver will not be processed.</p>
-              <strong>Cancellation Policy</strong><br>
-              <p class="m-0 p-0 mb-4">To avoid extra charges, cancellations must be made at least 2 days before your scheduled pickup. Failure to cancel within this timeframe or not showing up at your pre-scheduled time will result in a full one-way fare charge.</p>
-<strong>Airport Pickup Procedure</strong>
-<p class="m-0 p-0 mb-4">If you do not see our driver at the airport, contact us immediately. Do not leave the airport without notifying us, as failure to do so will result in a full one-way fare charge. We reserve the right to charge for wait time and additional airport parking if your bags do not arrive on the flight and you need to complete paperwork at baggage claim.</p>
-<strong>Flight Delays and Changes</strong>
-<p class="m-0 p-0 mb-4">A fee of $15/hour will be charged for delayed flights as our drivers must be compensated for waiting. If your flight is canceled or changed, inform us immediately to avoid a full one-way charge for the reserved vehicle. Grocery stops are not available if the flight is delayed by 30 minutes or longer or arrives 30 minutes early unless a customized plan is arranged at booking.</p>
 
- 
+              <strong>Billing and Payment Policies</strong><br />
+              <p class="m-0 p-0 mb-4">
+                Your card will be billed in full up to 14 days before your
+                scheduled pickup date. Ensure that all changes to future
+                bookings are made by contacting us via the provided phone number
+                or email. Changes reported directly to the driver will not be
+                processed.
+              </p>
+              <strong>Cancellation Policy</strong><br />
+              <p class="m-0 p-0 mb-4">
+                To avoid extra charges, cancellations must be made at least 2
+                days before your scheduled pickup. Failure to cancel within this
+                timeframe or not showing up at your pre-scheduled time will
+                result in a full one-way fare charge.
+              </p>
+              <strong>Airport Pickup Procedure</strong>
+              <p class="m-0 p-0 mb-4">
+                If you do not see our driver at the airport, contact us
+                immediately. Do not leave the airport without notifying us, as
+                failure to do so will result in a full one-way fare charge. We
+                reserve the right to charge for wait time and additional airport
+                parking if your bags do not arrive on the flight and you need to
+                complete paperwork at baggage claim.
+              </p>
+              <strong>Flight Delays and Changes</strong>
+              <p class="m-0 p-0 mb-4">
+                A fee of $15/hour will be charged for delayed flights as our
+                drivers must be compensated for waiting. If your flight is
+                canceled or changed, inform us immediately to avoid a full
+                one-way charge for the reserved vehicle. Grocery stops are not
+                available if the flight is delayed by 30 minutes or longer or
+                arrives 30 minutes early unless a customized plan is arranged at
+                booking.
+              </p>
 
-<strong>Departure Day Procedures</strong>
-<p class="m-0 p-0 mb-4">Be ready at the pre-scheduled time on your departure day. A grace period of 10 minutes (non-airport) or up to 80 minutes (international airport arrivals) is provided. After the grace period, wait time charges plus parking fees (for airport pickups) will apply. We will wait up to a maximum of 30 minutes before potentially instructing the driver to depart if you have not made contact.</p>
-<strong>Pickup Time Changes</strong>
-<p class="m-0 p-0 mb-4">Notify us at least 48 hours in advance to change your pickup time. We will attempt to accommodate changes but cannot guarantee availability.</p>
-<strong>Vehicle Responsibility</strong>
-<p class="m-0 p-0 mb-4">You are responsible for any damages to the vehicle resulting from negligence by you or your guests. Consumption of food inside any vehicle is prohibited. A minimum cleaning fee of $100.00 applies for excessive trash, with higher fees for specific issues such as smoking ($200.00), spills requiring professional cleaning ($100.00), and vomiting ($250.00).</p>
-<strong>Vehicle Availability and Substitutions</strong>
-<p class="m-0 p-0 mb-4">Due to potential flight delays or vehicle breakdowns, you may be transported in a different vehicle than originally reserved. If the new charge is less than the original, we will refund the difference. Note that we do not guarantee the color of the booked vehicle.</p>
-  <strong>Child Seats </strong>
-  <p class="m-0 p-0 mb-4">Drivers may sometimes forget to bring child seats; we will credit the cost but not issue further credits toward the fare. Customers are responsible for installing rented child seats.</p> 
-    <strong>Communication and Confirmations</strong>
-    <p class="m-0 p-0 mb-4">After you book a ride through our website, our customer support will email you. Please respond to it at your earliest convenience. Your driver will text you between 6 PM and 9 PM ET the day before your scheduled pickup to confirm your ride. Respond to the driver’s text with "CONFIRMED." For port pickups, expect a text message an hour before the scheduled ride, and contact the driver once outside the terminal.</p>
-<strong>Additional Charges</strong>
-<p class="m-0 p-0 mb-4">The quoted rate does not include gratuities and miscellaneous charges such as car seats, port fees, early/late fees, international arrival fees, and out-of-town fuel surcharges. Refunds are limited to the maximum booked fare. No refunds are provided if alternate transportation is taken before the pre-scheduled pickup time. Cancellation refunds may take up to 14 days to process.</p>
-<strong>COVID-19 Waiver of Liability</strong>
-<p class="m-0 p-0 mb-4">The novel coronavirus, COVID-19, has been declared a worldwide pandemic and is highly contagious. By choosing to utilize our services, you acknowledge and accept the risk of contracting COVID-19, releasing Orlando Superior Transportation from liability. This waiver includes claims for personal injuries, death, disease, or property losses related to COVID-19 exposure or any other disease.</p>
-<strong>Assumption of Risk</strong>
-<p class="m-0 p-0 mb-4">You accept the risk of contracting COVID-19 for yourself and/or your children in order to utilize our services and premises. This includes the potential for serious illness or death, given the evolving state of medical knowledge and the contagious nature of the virus.</p>
-<strong>Waiver of Lawsuit/Liability</strong>
-<p class="m-0 p-0 mb-4">You agree to waive your right to bring any lawsuit against Orlando Superior Transportation, its owners, officers, directors, employees, or representatives in connection with COVID-19 exposure, infection, or spread related to utilizing our services. This waiver includes claims of negligence and other losses, whether foreseen or unforeseen.</p">
+              <strong>Departure Day Procedures</strong>
+              <p class="m-0 p-0 mb-4">
+                Be ready at the pre-scheduled time on your departure day. A
+                grace period of 10 minutes (non-airport) or up to 80 minutes
+                (international airport arrivals) is provided. After the grace
+                period, wait time charges plus parking fees (for airport
+                pickups) will apply. We will wait up to a maximum of 30 minutes
+                before potentially instructing the driver to depart if you have
+                not made contact.
+              </p>
+              <strong>Pickup Time Changes</strong>
+              <p class="m-0 p-0 mb-4">
+                Notify us at least 48 hours in advance to change your pickup
+                time. We will attempt to accommodate changes but cannot
+                guarantee availability.
+              </p>
+              <strong>Vehicle Responsibility</strong>
+              <p class="m-0 p-0 mb-4">
+                You are responsible for any damages to the vehicle resulting
+                from negligence by you or your guests. Consumption of food
+                inside any vehicle is prohibited. A minimum cleaning fee of
+                $100.00 applies for excessive trash, with higher fees for
+                specific issues such as smoking ($200.00), spills requiring
+                professional cleaning ($100.00), and vomiting ($250.00).
+              </p>
+              <strong>Vehicle Availability and Substitutions</strong>
+              <p class="m-0 p-0 mb-4">
+                Due to potential flight delays or vehicle breakdowns, you may be
+                transported in a different vehicle than originally reserved. If
+                the new charge is less than the original, we will refund the
+                difference. Note that we do not guarantee the color of the
+                booked vehicle.
+              </p>
+              <strong>Child Seats </strong>
+              <p class="m-0 p-0 mb-4">
+                Drivers may sometimes forget to bring child seats; we will
+                credit the cost but not issue further credits toward the fare.
+                Customers are responsible for installing rented child seats.
+              </p>
+              <strong>Communication and Confirmations</strong>
+              <p class="m-0 p-0 mb-4">
+                After you book a ride through our website, our customer support
+                will email you. Please respond to it at your earliest
+                convenience. Your driver will text you between 6 PM and 9 PM ET
+                the day before your scheduled pickup to confirm your ride.
+                Respond to the driver’s text with "CONFIRMED." For port pickups,
+                expect a text message an hour before the scheduled ride, and
+                contact the driver once outside the terminal.
+              </p>
+              <strong>Additional Charges</strong>
+              <p class="m-0 p-0 mb-4">
+                The quoted rate does not include gratuities and miscellaneous
+                charges such as car seats, port fees, early/late fees,
+                international arrival fees, and out-of-town fuel surcharges.
+                Refunds are limited to the maximum booked fare. No refunds are
+                provided if alternate transportation is taken before the
+                pre-scheduled pickup time. Cancellation refunds may take up to
+                14 days to process.
+              </p>
+              <strong>COVID-19 Waiver of Liability</strong>
+              <p class="m-0 p-0 mb-4">
+                The novel coronavirus, COVID-19, has been declared a worldwide
+                pandemic and is highly contagious. By choosing to utilize our
+                services, you acknowledge and accept the risk of contracting
+                COVID-19, releasing Orlando Superior Transportation from
+                liability. This waiver includes claims for personal injuries,
+                death, disease, or property losses related to COVID-19 exposure
+                or any other disease.
+              </p>
+              <strong>Assumption of Risk</strong>
+              <p class="m-0 p-0 mb-4">
+                You accept the risk of contracting COVID-19 for yourself and/or
+                your children in order to utilize our services and premises.
+                This includes the potential for serious illness or death, given
+                the evolving state of medical knowledge and the contagious
+                nature of the virus.
+              </p>
+              <strong>Waiver of Lawsuit/Liability</strong>
+              <p class="m-0 p-0 mb-4">
+                You agree to waive your right to bring any lawsuit against
+                Orlando Superior Transportation, its owners, officers,
+                directors, employees, or representatives in connection with
+                COVID-19 exposure, infection, or spread related to utilizing our
+                services. This waiver includes claims of negligence and other
+                losses, whether foreseen or unforeseen.
+              </p>
 
-<p class="m-0 p-0 mb-4">For any further questions or to report discrepancies, please contact Orlando Superior Transportation at 407-697-6002, or via email at <a class="py-2  text-blue-500 hover:text-blue-800 focus:outline-none" href="info@orlandosuperiortransportation.com">info@orlandosuperiortransportation.com</a> or <a class="py-2 rounded text-blue-500 hover:text-blue-800 focus:outline-none" href="booking@orlandosuperiortransportation.com">booking@orlandosuperiortransportation.com</a>. </p>
-
-
-             
+              <p class="m-0 p-0 mb-4">
+                For any further questions or to report discrepancies, please
+                contact Orlando Superior Transportation at 407-697-6002, or via
+                email at <a
+                  class="py-2 text-blue-500 hover:text-blue-800 focus:outline-none"
+                  href="info@orlandosuperiortransportation.com"
+                  >info@orlandosuperiortransportation.com</a
+                > or <a
+                  class="py-2 rounded text-blue-500 hover:text-blue-800 focus:outline-none"
+                  href="booking@orlandosuperiortransportation.com"
+                  >booking@orlandosuperiortransportation.com</a
+                >.
+              </p>
+            </div>
           </div>
-         
+        </div>
       </div>
-  </div>
-</div>
-
-
-
-
     </div>
   </div>
 </Layout>
@@ -887,9 +1282,13 @@ async function sendEmail(data) {
     });
   }
 
-  // document.getElementById("btn-submit").addEventListener("click", () => {
-  //   getElementKeys().forEach((key) => window.sessionStorage.removeItem(key));
-  // });
+  document.getElementById("bookingForm").addEventListener("submit", () => {
+    getElementKeys().forEach((key) => window.sessionStorage.removeItem(key));
+    uniqueId = generateUUID();
+    window.sessionStorage.setItem("uniqueId", uniqueId);
+    saveUUID(uniqueId);
+    document.getElementById("sessionId").value = uniqueId;
+  });
 
   setValuesToInputs();
 
@@ -928,7 +1327,7 @@ async function sendEmail(data) {
   // Autocomplete address suggestion
   const pickupAddressSuggestion = [
     {
-        "Walt Disney World Area": [
+      "Walt Disney World Area": [
         "Animal Kingdom – Jambo House",
         "Animal Kingdom – Kidani Village",
         "B Resort & Spa",
@@ -1029,7 +1428,6 @@ async function sendEmail(data) {
 
   const dropoffAddressSuggestion = [
     {
-      
       "Walt Disney World Area": [
         "Animal Kingdom – Jambo House",
         "Animal Kingdom – Kidani Village",
@@ -1142,7 +1540,6 @@ async function sendEmail(data) {
     input.addEventListener("input", () => {
       const value = input.value.toLowerCase();
       suggestionList.innerHTML = "";
-
       if (value) {
         let filteredSuggestions = [];
 
@@ -1181,6 +1578,30 @@ async function sendEmail(data) {
         suggestionList.classList.add("hidden");
       }
     });
+
+    document.addEventListener("change", (event) => {
+      addressDropdownChange(dropdownId, inputId, suggestionData);
+    });
+  }
+
+  function addressDropdownChange(dropdownId, inputId, suggestionData) {
+    const dropdown = document.getElementById(dropdownId);
+    const selectedType = dropdown.value;
+    const input = document.getElementById(inputId);
+    suggestionData.forEach((group) => {
+      if (group[selectedType]) {
+        input.parentElement.classList.remove("hidden");
+        input.setAttribute("required", "required");
+        dropdown.parentElement.classList.remove("lg:col-span-4");
+        dropdown.parentElement.classList.add("lg:col-span-2");
+      } else {
+        input.parentElement.classList.add("hidden");
+        input.removeAttribute("required");
+        input.value = "";
+        dropdown.parentElement.classList.remove("lg:col-span-2");
+        dropdown.parentElement.classList.add("lg:col-span-4");
+      }
+    });
   }
 
   setupAutocomplete(
@@ -1196,13 +1617,22 @@ async function sendEmail(data) {
     dropoffAddressSuggestion,
   );
 
+  addressDropdownChange(
+    "pickup_type",
+    "pickup_address",
+    pickupAddressSuggestion,
+  );
+  addressDropdownChange(
+    "dropoff_type",
+    "dropoff_address",
+    dropoffAddressSuggestion,
+  );
+
   // End Autocomplete address suggestion
 
   // Rates Calculation
   const rates = [
-
-  
-  {
+    {
       location1: "Orlando International Airport (MCO)",
       location2: "International Drive Area",
       rate: [
@@ -1233,7 +1663,7 @@ async function sendEmail(data) {
         },
       ],
     },
-  {
+    {
       location1: "Orlando International Airport (MCO)",
       location2: "Walt Disney World Area",
       rate: [
@@ -1357,7 +1787,7 @@ async function sendEmail(data) {
         },
       ],
     },
-    
+
     {
       location1: "Port Canaveral Area",
       location2: "Orlando International Airport (MCO)",
@@ -1514,7 +1944,7 @@ async function sendEmail(data) {
         },
       ],
     },
-    
+
     {
       location1: "Universal Studios Area",
       location2: "Kissimmee 192 Area",
@@ -1669,7 +2099,7 @@ async function sendEmail(data) {
           roundtrip_rate: 395,
         },
       ],
-    }
+    },
   ];
 
   function findRates(locationA, locationB, vehicle, tripType) {
@@ -1714,17 +2144,22 @@ async function sendEmail(data) {
       document.getElementById("tripGratuity").textContent = "$" + gratuity;
       document.getElementById("tripTotal").textContent =
         "$" + (matchingRates.rate + gratuity);
+      document.getElementById("totalTripAmount").value =
+        matchingRates.rate + gratuity;
 
-        document.getElementById('fareEstimate').style.display = 'block';
-        document.getElementById('fareEstimateCustomMessage').style.display = 'none';
+      document.getElementById("fareEstimate").style.display = "block";
+      document.getElementById("fareEstimateCustomMessage").style.display =
+        "none";
     } else {
       document.getElementById("tripType").textContent = tripType;
       document.getElementById("tripRate").textContent = "$" + 0;
       document.getElementById("tripGratuity").textContent = "$" + 0;
       document.getElementById("tripTotal").textContent = "$" + 0;
+      document.getElementById("totalTripAmount").value = 0;
 
-      document.getElementById('fareEstimateCustomMessage').style.display = 'block';
-      document.getElementById('fareEstimate').style.display = 'none';
+      document.getElementById("fareEstimateCustomMessage").style.display =
+        "block";
+      document.getElementById("fareEstimate").style.display = "none";
     }
   }
   updateTripDetails();
