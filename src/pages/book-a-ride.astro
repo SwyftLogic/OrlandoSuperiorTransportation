@@ -30,7 +30,8 @@ if (Astro.request.method === "POST") {
       responseMessage = "Turnstile verification failed. Please try again.";
     } else {
       await sendEmail(data);
-      responseMessage = "Thanks for reaching out.";
+      const token = Date.now().toString();
+      return Astro.redirect(`/thank-you?t=${token}`);
     }
   } catch (error) {
     responseMessage = "An error occurred. Please try again later.";
