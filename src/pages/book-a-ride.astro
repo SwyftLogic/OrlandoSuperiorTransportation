@@ -91,10 +91,33 @@ async function sendAdminEmail(data) {
 
 async function sendSubmitterEmail(data, paymentURL) {
   // Submitter Email Content
+  const dateObject = new Date(data.get("pickup_date"));
+  const formattedDate = new Intl.DateTimeFormat("en-US", {
+    year: "numeric",
+    month: "numeric",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+    second: "numeric",
+    timeZone: "UTC",
+  }).format(dateObject);
   const message = `
   <html>
     <body>
       <p>Dear ${data.get("full_name")}, </p>
+      <p><strong>Full Name:</strong> ${data.get("full_name")}</p>
+      <p><strong>Email:</strong> ${data.get("email")}</p>
+      <p><strong>Phone:</strong> ${data.get("phone")}</p>
+      <p><strong>Pickup Address:</strong> ${data.get("pickup_address")}</p>
+      <p><strong>Pickup Date:</strong> ${formattedDate}</p>
+      <p><strong>Drop-off Address:</strong> ${data.get("dropoff_address")}</p>
+      <p><strong>Passengers:</strong> ${data.get("passengers")}</p>
+      <p><strong>Bags:</strong> ${data.get("bags")}</p>
+      <p><strong>Preferred Vehicle:</strong> ${data.get("preferred_vehicle")}</p>
+      <p><strong>Flight Number:</strong> ${data.get("flight_number")}</p>
+      <p><strong>Child Seat:</strong> ${data.get("child_seat") == null ? "No" : "Yes"}</p>
+      <p><strong>Booster Seat:</strong> ${data.get("booster_seat") == null ? "No" : "Yes"}</p>
+      <p><strong>Comments:</strong> ${data.get("comments")}</p>
       <p>Thank you for choosing <strong>Orlando Superior Transportation</strong></p>
       ${paymentURL ? `<p>Please proceed with your payment <a href="${paymentURL}">here</a>.</p>` : ""}
     </body>
