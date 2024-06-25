@@ -119,7 +119,27 @@ async function sendSubmitterEmail(data, paymentURL) {
       <p><strong>Booster Seat:</strong> ${data.get("booster_seat") == null ? "No" : "Yes"}</p>
       <p><strong>Comments:</strong> ${data.get("comments")}</p>
       <p>Thank you for choosing <strong>Orlando Superior Transportation</strong></p>
-      ${paymentURL ? `<p>Please proceed with your payment <a href="${paymentURL}">here</a>.</p>` : ""}
+      ${paymentURL ? `<p>For the payment process, please proceed to the following link: <a href="${paymentURL}">here</a>.</p>
+      <p>As per your requirements, our team is making arrangements. In the meantime, we invite you to visit our Orlando Travel Resource Page for all the latest travel tips and information.
+ 
+      Thank you for choosing Orlando Superior Transportation. We look forward to providing you with a safe and comfortable ride.
+
+
+      Regards,
+      Orlando Superior Transportation
+      407-697-6002
+      https://www.orlandosuperiortransportation.com/
+      </p>` : `<p>To ensure everything is set for your journey, we kindly ask you to confirm the provided details. Please reply to this email at your earliest convenience to confirm the details or to provide any updates.
+      As per your requirements, our team is making arrangements. In the meantime, we invite you to visit our Orlando Travel Resource Page for all the latest travel tips and information.
+      Thank you for choosing Orlando Superior Transportation. We look forward to providing you with a safe and comfortable ride.
+
+
+Regards,
+Orlando Superior Transportation
+407-697-6002
+https://www.orlandosuperiortransportation.com/
+</p>`}
+      
     </body>
   </html>`;
 
