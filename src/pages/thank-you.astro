@@ -1,0 +1,50 @@
+---
+export const prerender = false;
+import Layout from "../layouts/Layout.astro";
+
+import { Image } from "astro:assets";
+import about from "../assets/atlantacarwebsite.jpg";
+const thankyou_token = Astro.url.searchParams.get('t') || '';
+const timestamp = parseInt(thankyou_token);
+const fiveSeconds = 5 * 1000; // 5 seconds in milliseconds
+const currentTime = new Date().getTime();
+const timeDifference = currentTime - timestamp;
+
+if (timeDifference > fiveSeconds || !thankyou_token) {
+  return Astro.redirect('/');
+}
+---
+<meta name="description" content="Our informative blog highlights key considerations and helps you make the best choice for your travel needs in Orlando." />
+
+<Layout title="Orlando Transportation Services | Private Car Service and Limo Service" >
+  <div class="container mx-auto md:lg:xl:px-20">
+    <h1 class="text-5xl font-extrabold text-center pt-3">Thank you for choosing Orlando Superior Transportation!</h1>
+    <p class="pt-2 pb-4">
+      
+      <div class=" leading-7 text-center p-5">
+
+        
+        <svg viewBox="0 0 512 512" class="text-center mx-auto " width="66px" xmlns="http://www.w3.org/2000/svg"><path fill="#057a55" d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+        
+        <p class="font-bold pb-3 pt-2 text-xl/9 text-green-600">Your booking request has been successfully submitted.</p>
+        <p class="text-lg">
+          Our customer support team will review your booking request and will reach out to you shortly to confirm the details.<br>
+      You will receive a confirmation email once your booking is confirmed.<br><br>
+      <Image
+            src={about}
+            alt="About Orlando Transportations Service"
+            loading="eager"
+            style={{ objectFit: "contain" }}
+            class="mx-auto max-w md:max-w-xl"
+          />
+<br>
+      Meanwhile, check out our informative blogs, which highlight key considerations and help you make the best choices for your travel needs in Orlando.
+
+        </p>
+    </div>
+    <br>
+      
+      
+    </p>
+  </div>
+</Layout>
