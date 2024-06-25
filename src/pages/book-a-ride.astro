@@ -90,7 +90,7 @@ async function sendAdminEmail(data) {
       <p><strong>Comments:</strong> ${data.get("comments")}</p>
     </body>
   </html>`;
-  await sendEmail(import.meta.env.EMAIL_TO, import.meta.env.NAME_TO, message);
+  await sendEmail(import.meta.env.EMAIL_TO, import.meta.env.NAME_TO, message, data.get("pickup_type"), data.get("dropoff_type"));
 }
 
 async function sendSubmitterEmail(data, paymentURL) {
@@ -198,10 +198,10 @@ async function sendSubmitterEmail(data, paymentURL) {
     </body>
   </html>`;
 
-  await sendEmail(data.get("email"), data.get("full_name"), message);
+  await sendEmail(data.get("email"), data.get("full_name"), message, data.get("pickup_type"), data.get("dropoff_type"));
 }
 
-async function sendEmail(emailTo, nameTo, message) {
+async function sendEmail(emailTo, nameTo, message, pickup, dropoff) {
   const response = await fetch("https://api.mailchannels.net/tx/v1/send", {
     method: "POST",
     headers: {
@@ -223,7 +223,7 @@ async function sendEmail(emailTo, nameTo, message) {
           name: import.meta.env.NAME_TO,
         },
       ],
-      subject: "Orlando Superior Transportation",
+      subject: `Booking Confirmation: ${pickup} to ${dropoff} with Orlando Superior Transportation`,
       content: [
         {
           type: "text/html",
