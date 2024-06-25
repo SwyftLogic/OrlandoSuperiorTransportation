@@ -239,8 +239,7 @@ async function generatePaymentURL(data) {
     description: `Booking Information:\n\nFull Name: ${data.get("fullName")}\nEmail: ${data.get("email")}\n${data.get("pickup_type")} to ${data.get("dropoff_type")}`,
     payment_note: `Booking Information:\n\nFull Name: ${data.get("fullName")}\nEmail: ${data.get("email")}\n${data.get("pickup_type")} to ${data.get("dropoff_type")}`,
     pre_populated_data: {
-      "buyer_email": data.get("email"),
-      "buyer_phone_number": data.get("phone")
+      buyer_email: data.get("email")
     },
     quick_pay: {
       location_id: squareLocationID,
