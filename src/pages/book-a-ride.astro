@@ -107,49 +107,87 @@ async function sendSubmitterEmail(data, paymentURL) {
       <p>Dear ${data.get("full_name")}, </p>
       <p>We have received your ride booking with Orlando Superior Transportation, as requested through our website.</p>
       <p>Here are the details of your booking:</p>
-      <table cellpadding="0px" cellspacing="0px">
+      <table cellpadding="0px" cellspacing="0px" width="100%">
       <tr>
       <td width="200px"><strong>Full Name:</strong></td>
       <td style="padding-left:10px">${data.get("full_name")}</td>
       </tr>
       <tr>
-      <td width="200px"></td>
-      <td style="padding-left:10px"></td>
+      <td width="200px"><strong>Email:</strong> </td>
+      <td style="padding-left:10px">${data.get("email")}</td>
+      </tr>
+      <tr>
+      <td width="200px"><strong>Phone:</strong> </td>
+      <td style="padding-left:10px">${data.get("phone")}</td>
+      </tr>
+      <tr>
+      <td width="200px"><strong>Pickup Address:</strong> </td>
+      <td style="padding-left:10px">${data.get("pickup_address")}</td>
+      </tr>
+      <tr>
+      <td width="200px"><strong>Pickup Date:</strong> </td>
+      <td style="padding-left:10px">${formattedDate}</td>
+      </tr>
+      <tr>
+      <td width="200px"><strong>Drop-off Address:</strong> </td>
+      <td style="padding-left:10px">${data.get("dropoff_address")}</td>
+      </tr>
+      <tr>
+      <td width="200px"><strong>Passengers:</strong> </td>
+      <td style="padding-left:10px">${data.get("passengers")}</td>
+      </tr>
+      <tr>
+      <td width="200px"><strong>Bags:</strong> </td>
+      <td style="padding-left:10px">${data.get("bags")}</td>
+      </tr>
+      <tr>
+      <td width="200px"><strong>Preferred Vehicle:</strong> </td>
+      <td style="padding-left:10px">${data.get("preferred_vehicle")}</td>
+      </tr>
+      <tr>
+      <td width="200px"><strong>Flight Number:</strong> </td>
+      <td style="padding-left:10px">${data.get("flight_number")}</td>
+      </tr>
+      <tr>
+      <td width="200px"><strong>Child Seat:</strong> </td>
+      <td style="padding-left:10px">${data.get("child_seat") == null ? "No" : "Yes"}</td>
+      </tr>
+      <tr>
+      <td width="200px"><strong>Booster Seat:</strong> </td>
+      <td style="padding-left:10px">${data.get("booster_seat") == null ? "No" : "Yes"}</td>
+      </tr>
+      <tr>
+      <td width="200px"><strong>Comments:</strong></td>
+      <td style="padding-left:10px">${data.get("comments")}</td>
       </tr>
       </table>
-      <p> </p>
-      <p><strong>Email:</strong> ${data.get("email")}</p>
-      <p><strong>Phone:</strong> ${data.get("phone")}</p>
-      <p><strong>Pickup Address:</strong> ${data.get("pickup_address")}</p>
-      <p><strong>Pickup Date:</strong> ${formattedDate}</p>
-      <p><strong>Drop-off Address:</strong> ${data.get("dropoff_address")}</p>
-      <p><strong>Passengers:</strong> ${data.get("passengers")}</p>
-      <p><strong>Bags:</strong> ${data.get("bags")}</p>
-      <p><strong>Preferred Vehicle:</strong> ${data.get("preferred_vehicle")}</p>
-      <p><strong>Flight Number:</strong> ${data.get("flight_number")}</p>
-      <p><strong>Child Seat:</strong> ${data.get("child_seat") == null ? "No" : "Yes"}</p>
-      <p><strong>Booster Seat:</strong> ${data.get("booster_seat") == null ? "No" : "Yes"}</p>
-      <p><strong>Comments:</strong> ${data.get("comments")}</p>
       <p>Thank you for choosing <strong>Orlando Superior Transportation</strong></p>
       ${paymentURL ? `<p>For the payment process, please proceed to the following link: <a href="${paymentURL}">here</a>.</p>
-      <p>As per your requirements, our team is making arrangements. In the meantime, we invite you to visit our Orlando Travel Resource Page for all the latest travel tips and information.
- 
-      Thank you for choosing Orlando Superior Transportation. We look forward to providing you with a safe and comfortable ride.
+      <p>As per your requirements, our team is making arrangements. In the meantime, we invite you to visit our Orlando Travel Resource Page for all the latest travel tips and information.</p>
+      <p>Thank you for choosing Orlando Superior Transportation. We look forward to providing you with a safe and comfortable ride.</p>
 
 
+      <br>
       Regards,
+      <br>
       Orlando Superior Transportation
+      <br>
       407-697-6002
-      https://www.orlandosuperiortransportation.com/
-      </p>` : `<p>To ensure everything is set for your journey, we kindly ask you to confirm the provided details. Please reply to this email at your earliest convenience to confirm the details or to provide any updates.
-      As per your requirements, our team is making arrangements. In the meantime, we invite you to visit our Orlando Travel Resource Page for all the latest travel tips and information.
-      Thank you for choosing Orlando Superior Transportation. We look forward to providing you with a safe and comfortable ride.
+      <br>
+      <a href="https://www.orlandosuperiortransportation.com/">https://www.orlandosuperiortransportation.com</a>
+      </p>` : `
+      <p>To ensure everything is set for your journey, we kindly ask you to confirm the provided details. Please reply to this email at your earliest convenience to confirm the details or to provide any updates.</p>
+      <p>As per your requirements, our team is making arrangements. In the meantime, we invite you to visit our Orlando Travel Resource Page for all the latest travel tips and information.</p>
+      <p>Thank you for choosing Orlando Superior Transportation. We look forward to providing you with a safe and comfortable ride.</p>
 
 
-Regards,
-Orlando Superior Transportation
-407-697-6002
-https://www.orlandosuperiortransportation.com/
+      <br>
+      Regards,
+      <br>
+      Orlando Superior Transportation
+      <br>
+      407-697-6002
+      <br><a href="https://www.orlandosuperiortransportation.com/">https://www.orlandosuperiortransportation.com</a>
 </p>`}
       
     </body>
