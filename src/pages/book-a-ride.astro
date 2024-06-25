@@ -165,17 +165,18 @@ async function sendSubmitterEmail(data, paymentURL) {
       <td style="padding-left:10px; padding-bottom:8px;">${data.get("comments")}</td>
       </tr>
       </table>
-      ${paymentURL ? `<p style="color:black"><strong>To confirm your booking, please proceed with the payment by clicking the button below:</strong> <u><a href="${paymentURL}">here</a></u>.</p>
+      ${paymentURL ? `<p style="color:black">To confirm your booking, please proceed with the payment by clicking the button below:<br>
+      <u><a href="${paymentURL}" style="padding:5px 15px; margin:10px 0px; color:#ffffff; background-color:#598800;">Pay Now</a></u>.</p>
       <p style="color:black">As per your requirements, our team is making arrangements and will contact you soon. In the meantime, we invite you to visit our <a href="https://www.orlandosuperiortransportation.com/blog/"><u>Orlando Travel Resource Page</u></a> for all the latest travel tips and information.</p>
       <p style="color:black">Thank you for choosing Orlando Superior Transportation. We look forward to providing you with a safe and comfortable ride.</p>
 
-
+      <span style="color:black">
       <br>
       Regards,
       <br>
       Orlando Superior Transportation
       <br>
-      407-697-6002
+      407-697-6002</span>
       <br>
       <a href="https://www.orlandosuperiortransportation.com/">https://www.orlandosuperiortransportation.com</a><br><br>
       <img src="https://www.orlandosuperiortransportation.com/_astro/logo.y7FIYTX7_Z1RVuDX.webp" alt="Orlando Superior Transportation Service Logo" width="151" height="76" >
@@ -186,11 +187,12 @@ async function sendSubmitterEmail(data, paymentURL) {
 
 
       <br>
+      <span style="color:black">
       Regards,
       <br>
       Orlando Superior Transportation
       <br>
-      407-697-6002
+      407-697-6002</span>
       <br><a href="https://www.orlandosuperiortransportation.com/">https://www.orlandosuperiortransportation.com</a><br><br>
       <img src="https://www.orlandosuperiortransportation.com/_astro/logo.y7FIYTX7_Z1RVuDX.webp" alt="Orlando Superior Transportation Service Logo" width="151" height="76" >
 </p>`}
