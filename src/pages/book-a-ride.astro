@@ -236,14 +236,14 @@ async function generatePaymentURL(data) {
   myHeaders.append("Content-Type", "application/json");
 
   const raw = JSON.stringify({
-    description: data.get("pickup_type") + " to " + data.get("dropoff_type"),
+    description: `Booking Information:\n\nFull Name: ${data.get("fullName")}\nEmail: ${data.get("email")}\n${data.get("pickup_type")} to ${data.get("dropoff_type")}`,
     quick_pay: {
       location_id: squareLocationID,
       price_money: {
         amount: parseFloat(data.get("totalTripAmount") + '00'),
         currency: "USD",
       },
-      name: "Orlando Superior Transportation Online Booking",
+      name: "Booking Reservation from " + data.get('pickup_type') + " to " + data.get('dropoff_type'),
     },
     idempotency_key: data.get("sessionId"),
     // "checkout_options": {
