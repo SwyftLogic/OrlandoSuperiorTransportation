@@ -105,7 +105,19 @@ async function sendSubmitterEmail(data, paymentURL) {
   <html>
     <body>
       <p>Dear ${data.get("full_name")}, </p>
-      <p><strong>Full Name:</strong> ${data.get("full_name")}</p>
+      <p>We have received your ride booking with Orlando Superior Transportation, as requested through our website.</p>
+      <p>Here are the details of your booking:</p>
+      <table cellpadding="0px" cellspacing="0px">
+      <tr>
+      <td width="200px"><strong>Full Name:</strong></td>
+      <td style="padding-left:10px">${data.get("full_name")}</td>
+      </tr>
+      <tr>
+      <td width="200px"></td>
+      <td style="padding-left:10px"></td>
+      </tr>
+      </table>
+      <p> </p>
       <p><strong>Email:</strong> ${data.get("email")}</p>
       <p><strong>Phone:</strong> ${data.get("phone")}</p>
       <p><strong>Pickup Address:</strong> ${data.get("pickup_address")}</p>
