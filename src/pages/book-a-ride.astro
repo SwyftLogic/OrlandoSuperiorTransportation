@@ -108,10 +108,10 @@ async function sendSubmitterEmail(data, paymentURL) {
   const message = `
   <html>
     <body>
-      <p>Dear ${data.get("full_name")}, </p>
-      <p>We have received your ride booking with Orlando Superior Transportation, as requested through our website.</p>
-      <p>Here are the details of your booking:</p>
-      <table cellpadding="0px" cellspacing="0px" width="100%">
+      <p style="color:black">Dear ${data.get("full_name")}, </p>
+      <p style="color:black">We have received your ride booking with Orlando Superior Transportation, as requested through our website.</p>
+      <p style="color:black">Here are the details of your booking:</p>
+      <table cellpadding="0px" cellspacing="0px" width="100%" style="color:black">
       <tr>
       <td width="160px" style="padding-bottom:8px;"><strong>Full Name:</strong></td>
       <td style="padding-left:10px; padding-bottom:8px;">${data.get("full_name")}</td>
@@ -165,9 +165,9 @@ async function sendSubmitterEmail(data, paymentURL) {
       <td style="padding-left:10px; padding-bottom:8px;">${data.get("comments")}</td>
       </tr>
       </table>
-      ${paymentURL ? `<p><strong>For the payment process, please proceed to the following link:</strong> <u><a href="${paymentURL}">here</a></u>.</p>
-      <p>As per your requirements, our team is making arrangements. In the meantime, we invite you to visit our Orlando Travel Resource Page for all the latest travel tips and information.</p>
-      <p>Thank you for choosing Orlando Superior Transportation. We look forward to providing you with a safe and comfortable ride.</p>
+      ${paymentURL ? `<p style="color:black"><strong>To confirm your booking, please proceed with the payment by clicking the button below:</strong> <u><a href="${paymentURL}">here</a></u>.</p>
+      <p style="color:black">As per your requirements, our team is making arrangements and will contact you soon. In the meantime, we invite you to visit our <a href="https://www.orlandosuperiortransportation.com/blog/"><u>Orlando Travel Resource Page</u></a> for all the latest travel tips and information.</p>
+      <p style="color:black">Thank you for choosing Orlando Superior Transportation. We look forward to providing you with a safe and comfortable ride.</p>
 
 
       <br>
@@ -180,9 +180,9 @@ async function sendSubmitterEmail(data, paymentURL) {
       <a href="https://www.orlandosuperiortransportation.com/">https://www.orlandosuperiortransportation.com</a><br><br>
       <img src="https://www.orlandosuperiortransportation.com/_astro/logo.y7FIYTX7_Z1RVuDX.webp" alt="Orlando Superior Transportation Service Logo" width="151" height="76" >
       </p>` : `
-      <p>To ensure everything is set for your journey, we kindly ask you to confirm the provided details. Please reply to this email at your earliest convenience to confirm the details or to provide any updates.</p>
-      <p>As per your requirements, our team is making arrangements. In the meantime, we invite you to visit our Orlando Travel Resource Page for all the latest travel tips and information.</p>
-      <p>Thank you for choosing Orlando Superior Transportation. We look forward to providing you with a safe and comfortable ride.</p>
+      <p style="color:black">To ensure everything is set for your journey, we kindly ask you to confirm the provided details. Please reply to this email at your earliest convenience to confirm the details or to provide any updates.</p>
+      <p style="color:black">As per your requirements, our team is making arrangements and will contact you soon. In the meantime, we invite you to visit our <a href="https://www.orlandosuperiortransportation.com/blog/"><u>Orlando Travel Resource Page</u></a> for all the latest travel tips and information.</p>
+      <p style="color:black">Thank you for choosing Orlando Superior Transportation. We look forward to providing you with a safe and comfortable ride.</p>
 
 
       <br>
@@ -286,7 +286,7 @@ async function generatePaymentURL(data) {
   </svelte:head>
   <!-- component -->
   <div class="container max-w-screen-lg mx-auto">
-    <h1 class="text-center pt-4 mt-3 text-4xl md:text-4xl font-extrabold">
+    <h1 class="text-center pt-4 mt-3 pb-3 text-4xl md:text-4xl font-extrabold">
       Book a Trip!
     </h1>
 
