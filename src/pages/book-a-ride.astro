@@ -109,60 +109,59 @@ async function sendSubmitterEmail(data, paymentURL) {
       <p>Here are the details of your booking:</p>
       <table cellpadding="0px" cellspacing="0px" width="100%">
       <tr>
-      <td width="200px"><strong>Full Name:</strong></td>
-      <td style="padding-left:10px">${data.get("full_name")}</td>
+      <td width="200px" style="padding-bottom:5px;"><strong>Full Name:</strong></td>
+      <td style="padding-left:10px; padding-bottom:5px;">${data.get("full_name")}</td>
       </tr>
       <tr>
-      <td width="200px"><strong>Email:</strong> </td>
-      <td style="padding-left:10px">${data.get("email")}</td>
+      <td style="padding-bottom:5px;"><strong>Email:</strong> </td>
+      <td style="padding-left:10px; padding-bottom:5px;">${data.get("email")}</td>
       </tr>
       <tr>
-      <td width="200px"><strong>Phone:</strong> </td>
-      <td style="padding-left:10px">${data.get("phone")}</td>
+      <td style="padding-bottom:5px;"><strong>Phone:</strong> </td>
+      <td style="padding-left:10px; padding-bottom:5px;">${data.get("phone")}</td>
       </tr>
       <tr>
-      <td width="200px"><strong>Pickup Address:</strong> </td>
-      <td style="padding-left:10px">${data.get("pickup_address")}</td>
+      <td style="padding-bottom:5px;"><strong>Pickup Address:</strong> </td>
+      <td style="padding-left:10px; padding-bottom:5px;">${data.get("pickup_address")}</td>
       </tr>
       <tr>
-      <td width="200px"><strong>Pickup Date:</strong> </td>
-      <td style="padding-left:10px">${formattedDate}</td>
+      <td style="padding-bottom:5px;"><strong>Pickup Date:</strong> </td>
+      <td style="padding-left:10px; padding-bottom:5px;">${formattedDate}</td>
       </tr>
       <tr>
-      <td width="200px"><strong>Drop-off Address:</strong> </td>
-      <td style="padding-left:10px">${data.get("dropoff_address")}</td>
+      <td style="padding-bottom:5px;"><strong>Drop-off Address:</strong> </td>
+      <td style="padding-left:10px; padding-bottom:5px;">${data.get("dropoff_address")}</td>
       </tr>
       <tr>
-      <td width="200px"><strong>Passengers:</strong> </td>
-      <td style="padding-left:10px">${data.get("passengers")}</td>
+      <td style="padding-bottom:5px;"><strong>Passengers:</strong> </td>
+      <td style="padding-left:10px; padding-bottom:5px;">${data.get("passengers")}</td>
       </tr>
       <tr>
       <td width="200px"><strong>Bags:</strong> </td>
-      <td style="padding-left:10px">${data.get("bags")}</td>
+      <td style="padding-left:10px; padding-bottom:5px;">${data.get("bags")}</td>
       </tr>
       <tr>
       <td width="200px"><strong>Preferred Vehicle:</strong> </td>
-      <td style="padding-left:10px">${data.get("preferred_vehicle")}</td>
+      <td style="padding-left:10px; padding-bottom:5px;">${data.get("preferred_vehicle")}</td>
       </tr>
       <tr>
       <td width="200px"><strong>Flight Number:</strong> </td>
-      <td style="padding-left:10px">${data.get("flight_number")}</td>
+      <td style="padding-left:10px; padding-bottom:5px;">${data.get("flight_number")}</td>
       </tr>
       <tr>
       <td width="200px"><strong>Child Seat:</strong> </td>
-      <td style="padding-left:10px">${data.get("child_seat") == null ? "No" : "Yes"}</td>
+      <td style="padding-left:10px; padding-bottom:5px;">${data.get("child_seat") == null ? "No" : "Yes"}</td>
       </tr>
       <tr>
       <td width="200px"><strong>Booster Seat:</strong> </td>
-      <td style="padding-left:10px">${data.get("booster_seat") == null ? "No" : "Yes"}</td>
+      <td style="padding-left:10px; padding-bottom:5px;">${data.get("booster_seat") == null ? "No" : "Yes"}</td>
       </tr>
       <tr>
       <td width="200px"><strong>Comments:</strong></td>
-      <td style="padding-left:10px">${data.get("comments")}</td>
+      <td style="padding-left:10px; padding-bottom:5px;">${data.get("comments")}</td>
       </tr>
       </table>
-      <p>Thank you for choosing <strong>Orlando Superior Transportation</strong></p>
-      ${paymentURL ? `<p>For the payment process, please proceed to the following link: <a href="${paymentURL}">here</a>.</p>
+      ${paymentURL ? `<p><strong>For the payment process, please proceed to the following link:</strong> <u><a href="${paymentURL}">here</a></u>.</p>
       <p>As per your requirements, our team is making arrangements. In the meantime, we invite you to visit our Orlando Travel Resource Page for all the latest travel tips and information.</p>
       <p>Thank you for choosing Orlando Superior Transportation. We look forward to providing you with a safe and comfortable ride.</p>
 
@@ -174,7 +173,8 @@ async function sendSubmitterEmail(data, paymentURL) {
       <br>
       407-697-6002
       <br>
-      <a href="https://www.orlandosuperiortransportation.com/">https://www.orlandosuperiortransportation.com</a>
+      <a href="https://www.orlandosuperiortransportation.com/">https://www.orlandosuperiortransportation.com</a><br>
+      <img src="https://www.orlandosuperiortransportation.com/_astro/logo.y7FIYTX7_Z1RVuDX.webp" alt="Orlando Superior Transportation Service Logo" width="151" height="76" >
       </p>` : `
       <p>To ensure everything is set for your journey, we kindly ask you to confirm the provided details. Please reply to this email at your earliest convenience to confirm the details or to provide any updates.</p>
       <p>As per your requirements, our team is making arrangements. In the meantime, we invite you to visit our Orlando Travel Resource Page for all the latest travel tips and information.</p>
@@ -187,7 +187,8 @@ async function sendSubmitterEmail(data, paymentURL) {
       Orlando Superior Transportation
       <br>
       407-697-6002
-      <br><a href="https://www.orlandosuperiortransportation.com/">https://www.orlandosuperiortransportation.com</a>
+      <br><a href="https://www.orlandosuperiortransportation.com/">https://www.orlandosuperiortransportation.com</a><br>
+      <img src="https://www.orlandosuperiortransportation.com/_astro/logo.y7FIYTX7_Z1RVuDX.webp" alt="Orlando Superior Transportation Service Logo" width="151" height="76" >
 </p>`}
       
     </body>
