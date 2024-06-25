@@ -74,11 +74,15 @@ async function sendAdminEmail(data) {
       <p><strong>Full Name:</strong> ${data.get("full_name")}</p>
       <p><strong>Email:</strong> ${data.get("email")}</p>
       <p><strong>Phone:</strong> ${data.get("phone")}</p>
+      <p><strong>Pickup Address Type:</strong> ${data.get("pickup_type")}</p>
       <p><strong>Pickup Address:</strong> ${data.get("pickup_address")}</p>
       <p><strong>Pickup Date:</strong> ${formattedDate}</p>
+      <p><strong>Drop-off Address Type:</strong> ${data.get("dropoff_type")}</p>
       <p><strong>Drop-off Address:</strong> ${data.get("dropoff_address")}</p>
+      <p><strong>Payment Method:</strong> ${data.get("payment_method")}</p>
       <p><strong>Passengers:</strong> ${data.get("passengers")}</p>
       <p><strong>Bags:</strong> ${data.get("bags")}</p>
+      <p><strong>Round Trip: </strong>  ${data.get("round_trip") == null ? "Yes" : "No"}</p>
       <p><strong>Preferred Vehicle:</strong> ${data.get("preferred_vehicle")}</p>
       <p><strong>Flight Number:</strong> ${data.get("flight_number")}</p>
       <p><strong>Child Seat:</strong> ${data.get("child_seat") == null ? "No" : "Yes"}</p>
@@ -122,7 +126,7 @@ async function sendSubmitterEmail(data, paymentURL) {
       </tr>
       <tr>
       <td style="padding-bottom:8px;"><strong>Pickup Address:</strong> </td>
-      <td style="padding-left:10px; padding-bottom:8px;">${data.get("pickup_address")}</td>
+      <td style="padding-left:10px; padding-bottom:8px;">${data.get("pickup_address") ? data.get("pickup_address") : data.get("pickup_type")}</td>
       </tr>
       <tr>
       <td style="padding-bottom:8px;"><strong>Pickup Date:</strong> </td>
@@ -130,7 +134,7 @@ async function sendSubmitterEmail(data, paymentURL) {
       </tr>
       <tr>
       <td style="padding-bottom:8px;"><strong>Drop-off Address:</strong> </td>
-      <td style="padding-left:10px; padding-bottom:8px;">${data.get("dropoff_address")}</td>
+      <td style="padding-left:10px; padding-bottom:8px;">${data.get("dropoff_address") ? data.get("dropoff_address") : data.get("dropoff_type")}</td>
       </tr>
       <tr>
       <td style="padding-bottom:8px;"><strong>Passengers:</strong> </td>
