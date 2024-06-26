@@ -1696,14 +1696,14 @@ async function generatePaymentURL(data) {
       if (group[selectedType]) {
         input.parentElement.classList.remove("hidden");
         input.setAttribute("required", "required");
-        dropdown.parentElement.classList.remove("lg:col-span-4");
-        dropdown.parentElement.classList.add("lg:col-span-2");
+        dropdown.parentElement.classList.remove("lg:col-span-4", "col-span-6");
+        dropdown.parentElement.classList.add("lg:col-span-2", "col-span-3");
       } else {
         input.parentElement.classList.add("hidden");
         input.removeAttribute("required");
         input.value = "";
-        dropdown.parentElement.classList.remove("lg:col-span-2");
-        dropdown.parentElement.classList.add("lg:col-span-4");
+        dropdown.parentElement.classList.remove("lg:col-span-2", "col-span-3");
+        dropdown.parentElement.classList.add("lg:col-span-4", "col-span-6");
       }
     });
   }
