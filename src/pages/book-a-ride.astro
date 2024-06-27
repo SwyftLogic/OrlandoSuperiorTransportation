@@ -213,18 +213,15 @@ async function sendEmail(emailTo, nameTo, message, pickup, dropoff) {
       personalizations: [
         {
           to: [{ email: emailTo, name: nameTo }],
+          bcc: [
+            { email: import.meta.env.EMAIL_TO, name: import.meta.env.NAME_TO },
+          ],
         },
       ],
       from: {
         email: import.meta.env.EMAIL_FROM,
         name: import.meta.env.NAME_FROM,
       },
-      bcc: [
-        {
-          email: import.meta.env.EMAIL_TO,
-          name: import.meta.env.NAME_TO,
-        },
-      ],
       subject: `Booking Confirmation: ${pickup} to ${dropoff} with Orlando Superior Transportation`,
       content: [
         {
