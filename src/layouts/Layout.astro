@@ -1,6 +1,9 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
 import Footer from "../components/Footer.astro";
+import WebsiteStructuredData from "../components/WebsiteStructuredData.astro"
+import LocalBusinessStructuredData from "../components/LocalBusinessStructuredData.astro"
+import OrganizationStructuredData from "../components/OrganizationStructuredData.astro"
 
 interface Props {
   title: string;
@@ -39,6 +42,14 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
     <link rel="sitemap" href="/sitemap-index.xml" />
     <title>{title}</title>
+    
+    <!-- Structured Data Slot -->
+    <WebsiteStructuredData slot="structured-data" />
+    <LocalBusinessStructuredData slot="structured-data" />
+    <OrganizationStructuredData slot="structured-data" />
+    <slot name="structured-data" />
+    <!-- End Structured Data Slot -->
+
     <!-- Google Tag Manager -->
     <script type="text/partytown">
       (function (w, d, s, l, i) {
