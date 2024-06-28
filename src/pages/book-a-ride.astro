@@ -704,18 +704,13 @@ async function generatePaymentURL(data) {
                   <p class="text-gray-600" id="tripType"></p>
                   <p class="text-end font-bold" id="tripRate"></p>
                 </div>
-                <hr class="bg-gray-200 h-0.5" />
-                <div class="flex flex-row justify-between">
-                  <p class="text-gray-600">20% Gratuity</p>
-                  <div>
-                    <p class="text-end font-bold" id="tripGratuity"></p>
-                  </div>
-                </div>
+               
                 <hr class="bg-gray-200 h-0.5" />
                 <div class="flex flex-row justify-between">
                   <p class="text-gray-600 text-lg font-bold">Total</p>
                   <div>
-                    <p class="text-end text-lg font-bold" id="tripTotal"></p>
+                    <p class="text-end text-lg font-bold mb-0" id="tripTotal"></p>
+                    <span class="text-end text-sm text-gray-600" >20% Gratuity Excluded</span>
                   </div>
                 </div>
               </div>
@@ -2240,16 +2235,14 @@ async function generatePaymentURL(data) {
       tripType,
     );
     if (matchingRates) {
-      const gratuity = (matchingRates.rate * 20) / 100;
 
       document.getElementById("tripType").textContent = tripType;
       document.getElementById("tripRate").textContent =
         "$" + matchingRates.rate;
-      document.getElementById("tripGratuity").textContent = "$" + gratuity;
       document.getElementById("tripTotal").textContent =
-        "$" + (matchingRates.rate + gratuity);
+        "$" + (matchingRates.rate);
       document.getElementById("totalTripAmount").value =
-        matchingRates.rate + gratuity;
+        matchingRates.rate;
 
       document.getElementById("fareEstimate").style.display = "block";
       document.getElementById("fareEstimateCustomMessage").style.display =
@@ -2257,7 +2250,6 @@ async function generatePaymentURL(data) {
     } else {
       document.getElementById("tripType").textContent = tripType;
       document.getElementById("tripRate").textContent = "$" + 0;
-      document.getElementById("tripGratuity").textContent = "$" + 0;
       document.getElementById("tripTotal").textContent = "$" + 0;
       document.getElementById("totalTripAmount").value = 0;
 
