@@ -16,6 +16,7 @@ import client7 from '../assets/clients/client7.png';
 import client8 from '../assets/clients/client8.png';
 
 
+import Reviews from "../components/Reviews.astro";
 
 ---	
 
@@ -255,10 +256,12 @@ Whether you need airport transportation to and from Orlando Airport MCO and Disn
     <!-- ====== Services Section End -->
 
 
+    <Reviews />
+
            <div class="flex flex-col mx-3 rounded-lg">
             <div class="w-full draggable">
     <div class="container flex flex-col items-center gap-8 mx-auto my-10">
-      <p class="text-base font-medium leading-7 text-center text-dark-grey-600">Endorsed by the premier 500 global corporations</p>
+      <p class="text-base font-medium leading-7 text-center text-dark-grey-600 pt-3">Endorsed by the premier 500 global corporations</p>
       <div class="flex flex-wrap items-center justify-center w-full gap-6 lg:gap-0 lg:flex-nowrap lg:justify-between">
         <span>
           <Image src={client1} class="p-2" alt="Orlando Transportations Service Client" style={{objectFit: "contain"}}>

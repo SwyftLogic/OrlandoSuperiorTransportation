@@ -1,8 +1,7 @@
 ---
 export const prerender = false;
-
 import Layout from '../layouts/Layout.astro';
-
+import Reviews from "../components/Reviews.astro";
 import { Image } from 'astro:assets';
 import whatsapp from "../assets//whatsappicon.png";
 ---
@@ -2782,5 +2781,8 @@ Our private transportation services cover airport transportation to Disney, MCO 
           >
         </a>
       </div>
+    </div> 
+  <div class="container max-w-screen-lg mx-auto">
+    <Reviews />
     </div>
 </Layout>
