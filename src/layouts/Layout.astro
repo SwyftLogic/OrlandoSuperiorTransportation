@@ -1,6 +1,7 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
 import Footer from "../components/Footer.astro";
+import Banner from "../components/banner.astro";
 import WebsiteStructuredData from "../components/WebsiteStructuredData.astro"
 import LocalBusinessStructuredData from "../components/LocalBusinessStructuredData.astro"
 import OrganizationStructuredData from "../components/OrganizationStructuredData.astro"
@@ -90,6 +91,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     >
     <!-- End Google Tag Manager (noscript) -->
     <main class="min-h-screen bg-gradient-to-r from-white to-amber-50">
+      <Banner />
       <BaseHead />
       <slot />
       <Footer />
