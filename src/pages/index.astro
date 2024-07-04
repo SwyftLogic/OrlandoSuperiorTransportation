@@ -7,6 +7,7 @@ import Faq from "../components/Faq.astro";
 
 import { Image } from "astro:assets";
 import whatsapp from "../assets//whatsappicon.png";
+import upgrateoffer from "../assets/upgrateoffer.png";
 import FAQStructuredData from "../components/FAQStructuredData.astro";
 ---
 <meta
@@ -17,6 +18,26 @@ content="Explore Walt Disney World, Disney Springs, Disney World area hotels, Un
   <FAQStructuredData slot="structured-data" />
   <div class="container mx-auto md:lg:xl:px-20">
     <Carousel />
+    <div class="mt-4 mb-12 rounded-0 md:rounded-full from-rose-300 via-fuchsia-200 to-transparent bg-gradient-to-r grid grid-cols-1 sm:grid-cols-3 gap-5 border  px-16 py-2 text-center md:text-left">
+      <div class="sm:col-span-2 w-full sm:w-7/10">
+        <h4 class="text-2xl md:text-3xl text-uppercase font-bold pt-2 md:pt-4">Limited Time Offer!</h4>
+        <p class="text-1xl md:text-xl pt-1">
+          Get a <span class="font-bold">FREE SUV upgrade</span> when you choose a Town Car. 
+          <span class="font-bold inline-block md:block">Same price, bigger ride!</span>
+          
+        </p>
+      </div>
+      <div class="w-full sm:w-3/10 text-center md:text-right">
+        <Image
+        class="inline-block"
+        height="138"
+        src={upgrateoffer}
+        loading="eager"
+        alt="upgrate town car to suv"
+        style={{ objectFit: "contain" }}
+      />
+      </div>
+    </div>
     <About />
     <Services />
     <Faq />
