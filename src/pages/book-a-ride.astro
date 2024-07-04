@@ -699,7 +699,7 @@ async function generatePaymentURL(data) {
               <div class="flex flex-col py-3 gap-2">
                 <div class="flex flex-row justify-between">
                   <p class="text-gray-600" id="tripType"></p>
-                  <p class="text-end font-bold" id="tripRate"></p>
+                  <p class="text-end font-bold" ><span class="font-normal line-through pr-2">$135</span> <span id="tripRate"></span></p>
                 </div>
                
                 <hr class="bg-gray-200 h-0.5" />
@@ -709,6 +709,9 @@ async function generatePaymentURL(data) {
                     <p class="text-end text-lg font-bold mb-0" id="tripTotal"></p>
                     <span class="text-end text-sm text-gray-600" >20% Gratuity Excluded</span>
                   </div>
+                </div>
+                <div class="flex flex-row justify-between">
+                  <p class=" w-full text-center p-3 bg-yellow-100">Free upgrade to SUV vehicle on same price</p>
                 </div>
               </div>
             </div>
