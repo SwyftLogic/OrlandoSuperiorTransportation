@@ -7,7 +7,6 @@ import Faq from "../components/Faq.astro";
 
 import { Image } from "astro:assets";
 import whatsapp from "../assets//whatsappicon.png";
-import upgrateoffer from "../assets/upgrateoffer.png";
 import FAQStructuredData from "../components/FAQStructuredData.astro";
 ---
 <meta
@@ -67,83 +66,5 @@ content="Explore Walt Disney World, Disney Springs, Disney World area hotels, Un
       </div>
     </div>
   </div>
-  <div class="p-3">
-    <button onclick="openModal(true)" class="bg-green-500 hover:bg-green-600 px-4 py-2 rounded text-white focus:outline-none">
-        Open Modal
-    </button>
-</div>
-
-<!-- overlay -->
-<div id="modal_overlay" class="z-50 hidden fixed inset-0 bg-black bg-opacity-30 h-screen w-full flex justify-center items-start md:items-center pt-10 md:pt-0">
-
-<!-- modal -->
-<div id="modal" class="opacity-0 transform -translate-y-full scale-150  relative w-10/12 md:w-1/2 h-[380px] md:h-[400px] from-rose-300 via-fuchsia-200 to-white bg-gradient-to-r rounded shadow-lg transition-opacity transition-transform duration-300">
-
-    <!-- button close -->
-    <button 
-    id="modelpopup" 
-    class="absolute -top-3 -right-3 bg-red-500 hover:bg-red-600 text-2xl w-10 h-10 rounded-full focus:outline-none text-white">
-    &cross;
-    </button>
-
-    
-
-    <!-- body -->
-    <div class="w-full p-3 text-center">
-        <h4 class="text-2xl md:text-3xl text-uppercase font-bold pt-2 md:pt-4">Limited Time Offer!</h4>
-        <p class="text-1xl md:text-xl pt-1 mb-4">
-          Get a <span class="font-bold">FREE SUV upgrade</span> when you choose a Town Car. 
-          <span class="font-bold inline-block md:block">Same price, bigger ride!</span>
-          
-        </p>
-      
-        <Image
-        class="inline-block"
-        height="168"
-        src={upgrateoffer}
-        loading="eager"
-        alt="upgrate town car to suv"
-        style={{ objectFit: "contain" }}
-      />
-
-      <p class="mt-6">
-        <a href="/book-a-ride/" class="block w-full md:w-1/3 md:inline-block p-1 rounded-full from-rose-400 via-fuchsia-500 to-indigo-500 bg-gradient-to-r">
-          <span class="block text-black px-4 py-1 font-semibold rounded-full bg-amber-50 hover:bg-transparent hover:text-white transition">Book Now</span>
-        </a>
-      </p>
-      </div>
-
-</div>
-
-</div>
-
-<script>
-  const button = document.getElementById('modelpopup');
-  button.addEventListener('click', () => { openModal(false); });
-
-const modal_overlay = document.querySelector('#modal_overlay');
-const modal = document.querySelector('#modal');
-
-function openModal (value){
-    const modalCl = modal.classList
-    const overlayCl = modal_overlay
-
-    if(value){
-    overlayCl.classList.remove('hidden')
-    setTimeout(() => {
-        modalCl.remove('opacity-0')
-        modalCl.remove('-translate-y-full')
-        modalCl.remove('scale-150')
-    }, 100);
-    } else {
-    modalCl.add('-translate-y-full')
-    setTimeout(() => {
-        modalCl.add('opacity-0')
-        modalCl.add('scale-150')
-    }, 100);
-    setTimeout(() => overlayCl.classList.add('hidden'), 300);
-    }
-}
-openModal(true)
-</script>
+  
 </Layout>
