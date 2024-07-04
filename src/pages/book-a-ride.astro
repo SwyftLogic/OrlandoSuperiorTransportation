@@ -46,8 +46,8 @@ if (Astro.request.method === "POST") {
         } else {
           return Astro.redirect(`/thank-you?t=${token}`);
         }
-      } else {        
-        await sendSubmitterEmail(data, '');
+      } else {
+        await sendSubmitterEmail(data, "");
         return Astro.redirect(`/thank-you?t=${token}`);
       }
     }
@@ -90,7 +90,13 @@ async function sendAdminEmail(data) {
       <p><strong>Comments:</strong> ${data.get("comments")}</p>
     </body>
   </html>`;
-  await sendEmail(import.meta.env.EMAIL_TO, import.meta.env.NAME_TO, message, data.get("pickup_type"), data.get("dropoff_type"));
+  await sendEmail(
+    import.meta.env.EMAIL_TO,
+    import.meta.env.NAME_TO,
+    message,
+    data.get("pickup_type"),
+    data.get("dropoff_type"),
+  );
 }
 
 async function sendSubmitterEmail(data, paymentURL) {
@@ -165,7 +171,9 @@ async function sendSubmitterEmail(data, paymentURL) {
       <td style="padding-left:10px; padding-bottom:8px;">${data.get("comments")}</td>
       </tr>
       </table>
-      ${paymentURL ? `<p style="color:black">To confirm your booking, please proceed with the payment by clicking the button below:<br>
+      ${
+        paymentURL
+          ? `<p style="color:black">To confirm your booking, please proceed with the payment by clicking the button below:<br>
       <p style=" padding: 7px 0px;"><a href="${paymentURL}" style="padding:5px 20px;  color:#ffffff; background-color:#598800; text-decoration:none;">Pay Now</a></p>
       <p style="color:black">As per your requirements, our team is making arrangements and will contact you soon. In the meantime, we invite you to visit our <a href="https://www.orlandosuperiortransportation.com/blog/"><u>Orlando Travel Resource Page</u></a> for all the latest travel tips and information.</p>
       <p style="color:black">Thank you for choosing Orlando Superior Transportation. We look forward to providing you with a safe and comfortable ride.</p>
@@ -180,7 +188,8 @@ async function sendSubmitterEmail(data, paymentURL) {
       <br>
       <a href="https://www.orlandosuperiortransportation.com/">https://www.orlandosuperiortransportation.com</a><br><br>
       <img src="https://www.orlandosuperiortransportation.com/_astro/logo.y7FIYTX7_Z1RVuDX.webp" alt="Orlando Superior Transportation Service Logo" width="151" height="76" >
-      </p>` : `
+      </p>`
+          : `
       <p style="color:black">To ensure everything is set for your journey, we kindly ask you to confirm the provided details. Please reply to this email at your earliest convenience to confirm the details or to provide any updates.</p>
       <p style="color:black">As per your requirements, our team is making arrangements and will contact you soon. In the meantime, we invite you to visit our <a href="https://www.orlandosuperiortransportation.com/blog/"><u>Orlando Travel Resource Page</u></a> for all the latest travel tips and information.</p>
       <p style="color:black">Thank you for choosing Orlando Superior Transportation. We look forward to providing you with a safe and comfortable ride.</p>
@@ -195,12 +204,19 @@ async function sendSubmitterEmail(data, paymentURL) {
       407-697-6002</span>
       <br><a href="https://www.orlandosuperiortransportation.com/">https://www.orlandosuperiortransportation.com</a><br><br>
       <img src="https://www.orlandosuperiortransportation.com/_astro/logo.y7FIYTX7_Z1RVuDX.webp" alt="Orlando Superior Transportation Service Logo" width="151" height="76" >
-</p>`}
+</p>`
+      }
       
     </body>
   </html>`;
 
-  await sendEmail(data.get("email"), data.get("full_name"), message, data.get("pickup_type"), data.get("dropoff_type"));
+  await sendEmail(
+    data.get("email"),
+    data.get("full_name"),
+    message,
+    data.get("pickup_type"),
+    data.get("dropoff_type"),
+  );
 }
 
 async function sendEmail(emailTo, nameTo, message, pickup, dropoff) {
@@ -242,15 +258,19 @@ async function generatePaymentURL(data) {
     description: `Booking Information:\n\nFull Name: ${data.get("fullName")}\nEmail: ${data.get("email")}\n${data.get("pickup_type")} to ${data.get("dropoff_type")}`,
     payment_note: `Booking Information:\n\nFull Name: ${data.get("fullName")}\nEmail: ${data.get("email")}\n${data.get("pickup_type")} to ${data.get("dropoff_type")}`,
     pre_populated_data: {
-      buyer_email: data.get("email")
+      buyer_email: data.get("email"),
     },
     quick_pay: {
       location_id: squareLocationID,
       price_money: {
-        amount: parseFloat(data.get("totalTripAmount") + '00'),
+        amount: parseFloat(data.get("totalTripAmount") + "00"),
         currency: "USD",
       },
-      name: "Booking Reservation from " + data.get('pickup_type') + " to " + data.get('dropoff_type'),
+      name:
+        "Booking Reservation from " +
+        data.get("pickup_type") +
+        " to " +
+        data.get("dropoff_type"),
     },
     idempotency_key: data.get("sessionId"),
     // "checkout_options": {
@@ -699,19 +719,29 @@ async function generatePaymentURL(data) {
               <div class="flex flex-col py-3 gap-2">
                 <div class="flex flex-row justify-between">
                   <p class="text-gray-600" id="tripType"></p>
-                  <p class="text-end font-bold" ><span class="font-normal line-through pr-2">$135</span> <span id="tripRate"></span></p>
+                  <p class="text-end font-bold">
+                    <span class="font-normal line-through pr-2" id="beforeDiscountRate"></span>
+                    <span id="tripRate"></span>
+                  </p>
                 </div>
-               
+
                 <hr class="bg-gray-200 h-0.5" />
                 <div class="flex flex-row justify-between">
                   <p class="text-gray-600 text-lg font-bold">Total</p>
                   <div>
-                    <p class="text-end text-lg font-bold mb-0" id="tripTotal"></p>
-                    <span class="text-end text-sm text-gray-600" >20% Gratuity Excluded</span>
+                    <p class="text-end text-lg font-bold mb-0" id="tripTotal">
+                    </p>
+                    <span class="text-end text-sm text-gray-600"
+                      >20% Gratuity Excluded</span
+                    >
                   </div>
                 </div>
                 <div class="flex flex-row justify-between">
-                  <p class=" w-full text-center p-3 bg-yellow-100">Free upgrade to SUV vehicle on same price</p>
+                  <p
+                    id="tripCustomMessage"
+                    class="w-full text-center p-3 bg-yellow-100"
+                  >
+                  </p>
                 </div>
               </div>
             </div>
@@ -1739,11 +1769,14 @@ async function generatePaymentURL(data) {
           vehicle: "Town Car",
           oneway_rate: 95,
           roundtrip_rate: 185,
+          offer_msg: "Free upgrade to SUV vehicle on same price",
         },
         {
           vehicle: "SUV",
           oneway_rate: 135,
           roundtrip_rate: 265,
+          discount_percent: 30,
+          discount_msg: "This is discount message",
         },
         {
           vehicle: "Van",
@@ -1770,11 +1803,14 @@ async function generatePaymentURL(data) {
           vehicle: "Town Car",
           oneway_rate: 95,
           roundtrip_rate: 185,
+          offer_msg: "Free upgrade to SUV vehicle on same price",
         },
         {
           vehicle: "SUV",
           oneway_rate: 135,
           roundtrip_rate: 265,
+          discount_percent: 30,
+          discount_msg: "This is discount message",
         },
         {
           vehicle: "Van",
@@ -1801,11 +1837,14 @@ async function generatePaymentURL(data) {
           vehicle: "Town Car",
           oneway_rate: 95,
           roundtrip_rate: 185,
+          offer_msg: "Free upgrade to SUV vehicle on same price",
         },
         {
           vehicle: "SUV",
           oneway_rate: 135,
           roundtrip_rate: 265,
+          discount_percent: 30,
+          discount_msg: "This is discount message",
         },
         {
           vehicle: "Van",
@@ -1832,11 +1871,14 @@ async function generatePaymentURL(data) {
           vehicle: "Town Car",
           oneway_rate: 95,
           roundtrip_rate: 185,
+          offer_msg: "Free upgrade to SUV vehicle on same price",
         },
         {
           vehicle: "SUV",
           oneway_rate: 135,
           roundtrip_rate: 265,
+          discount_percent: 30,
+          discount_msg: "This is discount message",
         },
         {
           vehicle: "Van",
@@ -1863,11 +1905,14 @@ async function generatePaymentURL(data) {
           vehicle: "Town Car",
           oneway_rate: 95,
           roundtrip_rate: 185,
+          offer_msg: "Free upgrade to SUV vehicle on same price",
         },
         {
           vehicle: "SUV",
           oneway_rate: 160,
           roundtrip_rate: 310,
+          discount_percent: 30,
+          discount_msg: "This is discount message",
         },
         {
           vehicle: "Van",
@@ -1895,11 +1940,14 @@ async function generatePaymentURL(data) {
           vehicle: "Town Car",
           oneway_rate: 155,
           roundtrip_rate: 290,
+          offer_msg: "Free upgrade to SUV vehicle on same price",
         },
         {
           vehicle: "SUV",
           oneway_rate: 195,
           roundtrip_rate: 375,
+          discount_percent: 30,
+          discount_msg: "This is discount message",
         },
         {
           vehicle: "Van",
@@ -1926,11 +1974,14 @@ async function generatePaymentURL(data) {
           vehicle: "Town Car",
           oneway_rate: 95,
           roundtrip_rate: 185,
+          offer_msg: "Free upgrade to SUV vehicle on same price",
         },
         {
           vehicle: "SUV",
           oneway_rate: 150,
           roundtrip_rate: 290,
+          discount_percent: 30,
+          discount_msg: "This is discount message",
         },
         {
           vehicle: "Van",
@@ -1957,11 +2008,14 @@ async function generatePaymentURL(data) {
           vehicle: "Town Car",
           oneway_rate: 185,
           roundtrip_rate: 345,
+          offer_msg: "Free upgrade to SUV vehicle on same price",
         },
         {
           vehicle: "SUV",
           oneway_rate: 230,
           roundtrip_rate: 430,
+          discount_percent: 30,
+          discount_msg: "This is discount message",
         },
         {
           vehicle: "Van",
@@ -1989,11 +2043,14 @@ async function generatePaymentURL(data) {
           vehicle: "Town Car",
           oneway_rate: 90,
           roundtrip_rate: 175,
+          offer_msg: "Free upgrade to SUV vehicle on same price",
         },
         {
           vehicle: "SUV",
           oneway_rate: 100,
           roundtrip_rate: 195,
+          discount_percent: 30,
+          discount_msg: "This is discount message",
         },
         {
           vehicle: "Van",
@@ -2020,11 +2077,14 @@ async function generatePaymentURL(data) {
           vehicle: "Town Car",
           oneway_rate: 95,
           roundtrip_rate: 185,
+          offer_msg: "Free upgrade to SUV vehicle on same price",
         },
         {
           vehicle: "SUV",
           oneway_rate: 150,
           roundtrip_rate: 290,
+          discount_percent: 30,
+          discount_msg: "This is discount message",
         },
         {
           vehicle: "Van",
@@ -2052,11 +2112,14 @@ async function generatePaymentURL(data) {
           vehicle: "Town Car",
           oneway_rate: 95,
           roundtrip_rate: 185,
+          offer_msg: "Free upgrade to SUV vehicle on same price",
         },
         {
           vehicle: "SUV",
           oneway_rate: 105,
           roundtrip_rate: 205,
+          discount_percent: 30,
+          discount_msg: "This is discount message",
         },
         {
           vehicle: "Van",
@@ -2083,11 +2146,14 @@ async function generatePaymentURL(data) {
           vehicle: "Town Car",
           oneway_rate: 65,
           roundtrip_rate: 120,
+          offer_msg: "Free upgrade to SUV vehicle on same price",
         },
         {
           vehicle: "SUV",
           oneway_rate: 85,
           roundtrip_rate: 165,
+          discount_percent: 30,
+          discount_msg: "This is discount message",
         },
         {
           vehicle: "Van",
@@ -2114,11 +2180,14 @@ async function generatePaymentURL(data) {
           vehicle: "Town Car",
           oneway_rate: 80,
           roundtrip_rate: 150,
+          offer_msg: "Free upgrade to SUV vehicle on same price",
         },
         {
           vehicle: "SUV",
           oneway_rate: 95,
           roundtrip_rate: 185,
+          discount_percent: 30,
+          discount_msg: "This is discount message",
         },
         {
           vehicle: "Van",
@@ -2145,11 +2214,14 @@ async function generatePaymentURL(data) {
           vehicle: "Town Car",
           oneway_rate: 155,
           roundtrip_rate: 285,
+          offer_msg: "Free upgrade to SUV vehicle on same price",
         },
         {
           vehicle: "SUV",
           oneway_rate: 195,
           roundtrip_rate: 360,
+          discount_percent: 30,
+          discount_msg: "This is discount message",
         },
         {
           vehicle: "Van",
@@ -2176,11 +2248,14 @@ async function generatePaymentURL(data) {
           vehicle: "Town Car",
           oneway_rate: 155,
           roundtrip_rate: 285,
+          offer_msg: "Free upgrade to SUV vehicle on same price",
         },
         {
           vehicle: "SUV",
           oneway_rate: 195,
           roundtrip_rate: 360,
+          discount_percent: 30,
+          discount_msg: "This is discount message",
         },
         {
           vehicle: "Van",
@@ -2216,6 +2291,7 @@ async function generatePaymentURL(data) {
             tripType === "Round Trip"
               ? vehicleRate?.roundtrip_rate
               : vehicleRate?.oneway_rate,
+          ...vehicleRate,
         }
       : null;
   }
@@ -2234,19 +2310,42 @@ async function generatePaymentURL(data) {
       selectedVehicle,
       tripType,
     );
+   
     if (matchingRates) {
-
+      let tripRate = matchingRates.rate;;
+      let tripTotal = matchingRates.rate;
+      if(matchingRates.discount_percent) {
+        tripTotal = matchingRates.rate - ((matchingRates.rate * matchingRates.discount_percent) / 100);
+        tripRate = tripTotal;
+        document.getElementById("beforeDiscountRate").classList.remove("hidden");
+        document.getElementById("beforeDiscountRate").textContent =
+        "$" + matchingRates.rate;
+      }
+      else {
+        document.getElementById("beforeDiscountRate").classList.add("hidden");
+      }
       document.getElementById("tripType").textContent = tripType;
       document.getElementById("tripRate").textContent =
-        "$" + matchingRates.rate;
+        "$" + tripRate;
       document.getElementById("tripTotal").textContent =
-        "$" + (matchingRates.rate);
-      document.getElementById("totalTripAmount").value =
-        matchingRates.rate;
+        "$" + tripTotal;
+      document.getElementById("totalTripAmount").value = tripTotal;
 
       document.getElementById("fareEstimate").style.display = "block";
       document.getElementById("fareEstimateCustomMessage").style.display =
         "none";
+
+      document.getElementById("tripCustomMessage").classList.remove("hidden");
+      if (matchingRates?.offer_msg) {
+        document.getElementById("tripCustomMessage").textContent =
+          matchingRates?.offer_msg;
+      } else if (matchingRates?.discount_msg) {
+        document.getElementById("tripCustomMessage").textContent =
+          matchingRates?.discount_msg;
+      } else {
+        document.getElementById("tripCustomMessage").textContent = "";
+        document.getElementById("tripCustomMessage").classList.add("hidden");
+      }
     } else {
       document.getElementById("tripType").textContent = tripType;
       document.getElementById("tripRate").textContent = "$" + 0;
