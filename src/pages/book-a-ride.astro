@@ -2264,7 +2264,7 @@ async function generatePaymentURL(data) {
       let tripRate = matchingRates.rate;;
       let tripTotal = matchingRates.rate;
       if(matchingRates.discount_percent) {
-        tripTotal = matchingRates.rate - ((matchingRates.rate * matchingRates.discount_percent) / 100);
+        tripTotal = matchingRates.rate - Math.round((matchingRates.rate * matchingRates.discount_percent) / 100);
         tripRate = tripTotal;
         document.getElementById("beforeDiscountRate").classList.remove("hidden");
         document.getElementById("beforeDiscountRate").textContent =
