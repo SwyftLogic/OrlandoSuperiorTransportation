@@ -101,17 +101,12 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 
 
-    <div class="p-3">
-      <button onclick="openModal(true)" class="bg-green-500 hover:bg-green-600 px-4 py-2 rounded text-white focus:outline-none">
-          Open Modal
-      </button>
-  </div>
   
   <!-- overlay -->
   <div id="modal_overlay" class="z-50 hidden fixed inset-0 bg-black bg-opacity-30 h-screen w-full flex justify-center items-start md:items-center pt-10 md:pt-0">
   
   <!-- modal -->
-  <div id="modal" class="opacity-0 transform -translate-y-full scale-150  relative w-10/12 md:w-1/2 h-[380px] md:h-[400px] from-rose-300 via-fuchsia-200 to-white bg-gradient-to-r rounded shadow-lg transition-opacity transition-transform duration-300">
+  <div id="modal" class="opacity-0 transform -translate-y-full scale-150  relative w-10/12 md:w-1/2 h-[390px] md:h-[420px] bg-white rounded-2xl shadow-2xl transition-opacity transition-transform duration-300">
   
       <!-- button close -->
       <button 
@@ -124,10 +119,10 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   
       <!-- body -->
       <div class="w-full p-3 text-center">
-          <h4 class="text-2xl md:text-3xl text-uppercase font-bold pt-2 md:pt-4">Limited Time Offer!</h4>
+          <h4 class="text-2xl md:text-3xl text-uppercase font-bold pt-2 md:pt-4 text-yellow-500">Limited Time Offer!</h4>
           <p class="text-1xl md:text-xl pt-1 mb-4">
-            Get a <span class="font-bold">FREE SUV upgrade</span> when you choose a Town Car. 
-            <span class="font-bold inline-block md:block">Same price, bigger ride!</span>
+            Book a Trip Now and Get a  <span class="font-bold">Free Vehicle Upgrade!</span> <br>Upgrade from a Towncar to an SUV at Towncar Prices!
+            <span class="font-bold inline-block md:block">Enjoy Luxury and Save!</span>
             
           </p>
         
@@ -140,9 +135,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
           style={{ objectFit: "contain" }}
         />
   
-        <p class="mt-6">
+        <p class="mt-4">
           <a href="/book-a-ride/" class="block w-full md:w-1/3 md:inline-block p-1 rounded-full from-rose-400 via-fuchsia-500 to-indigo-500 bg-gradient-to-r">
-            <span class="block text-black px-4 py-1 font-semibold rounded-full bg-amber-50 hover:bg-transparent hover:text-white transition">Book Now</span>
+            <span class="block text-black px-4 py-1 font-semibold rounded-full bg-white hover:bg-transparent hover:text-white transition">Book Now</span>
           </a>
         </p>
         </div>
