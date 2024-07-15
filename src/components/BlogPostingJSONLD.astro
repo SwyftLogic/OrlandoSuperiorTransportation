@@ -3,9 +3,7 @@ import type { CollectionEntry } from "astro:content";
 
 type Props = CollectionEntry<"blog">["data"];
 
-const { title, date, _embedded, excerpt, slug } = Astro.props as Props;
-
-const pageUrl = new URL(Astro.url.pathname, Astro.site);
+const { title, date, _embedded, excerpt, pageUrl } = Astro.props as Props;
 
 const structuredData = {
   "@context": "https://schema.org",
@@ -13,7 +11,7 @@ const structuredData = {
   headline: title.rendered,
   description: excerpt.rendered,
   datePublished: new Date(date).toISOString(),
-  url: `${pageUrl}${slug}`,
+  url: pageUrl,
   thumbnailUrl:
     _embedded["wp:featuredmedia"]?.[0]?.media_details?.sizes?.full.source_url,
   image: {
