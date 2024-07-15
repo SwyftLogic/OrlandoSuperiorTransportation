@@ -8,6 +8,7 @@ import BlogPostingJSONLD from "../../components/BlogPostingJSONLD.astro";
 
 const { slug } = Astro.params;
 
+const pageUrl = new URL(Astro.url.pathname, Astro.site);
 let res = await fetch(
   `${import.meta.env.BLOG_SITE}/wp-json/wp/v2/posts?slug=${slug}&_fields=id,excerpt,slug,title,tags,date,content,_links&_embed`
 );
@@ -15,7 +16,7 @@ let [post] = await res.json();
 ---
 <meta name="description" content={post._embedded?.replies?.[0]?.[0]?.content?.rendered?.replace(/<[^>]*>/g, '')} />
 <Layout title={post.title.rendered}>
-  <BlogPostingJSONLD slot="structured-data" {...post} />
+  <BlogPostingJSONLD slot="structured-data" {...post} pageUrl={pageUrl} />
   <article>
     <div class="container mx-auto px-3 md:lg:xl:px-20 mb-4">
       <h1

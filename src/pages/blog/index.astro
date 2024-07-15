@@ -9,6 +9,7 @@ import BlogPostingJSONLD from "../../components/BlogPostingJSONLD.astro";
 let res = await fetch(
   `${import.meta.env.BLOG_SITE}/wp-json/wp/v2/posts?per_page=100&_fields=title,excerpt,slug,date,_links&_embed`
 );
+const pageUrl = new URL(Astro.url.pathname, Astro.site);
 let posts = await res.json();
 ---
 <meta name="description" content="Our informative blog highlights key considerations and helps you make the best choice for your travel needs in Orlando." />
@@ -20,7 +21,7 @@ let posts = await res.json();
     <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
       {
         posts.map((post) => (
-        <BlogPostingJSONLD slot="structured-data" {...post} />
+        <BlogPostingJSONLD slot="structured-data" {...post} pageUrl={`${pageUrl}${post.slug}`}/>
           <div class="group relative p-6 sm:p-8 rounded-3xl bg-white border border-gray-100 dark:shadow-none dark:border-gray-700 dark:bg-gray-800 bg-opacity-50 shadow-2xl shadow-gray-600/10">
             <div class="relative overflow-hidden rounded-xl">
               <a href={`/blog/${post.slug}`}>
