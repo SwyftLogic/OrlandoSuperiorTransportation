@@ -1,13 +1,18 @@
 ---
-const SITE_TITLE = 'Orlando Superior Transportation LLC'
-const pageUrl = new URL(Astro.url.pathname, Astro.site)
+const SITE_TITLE = "Orlando Superior Transportation LLC";
+const pageUrl = new URL(Astro.url.pathname, Astro.site);
 
 const structuredData = {
-  "@context": "https://schema.org",
+  "@context": "https://schema.org/",
   "@type": "WebSite",
-  name: SITE_TITLE,
-  url: pageUrl,
-}
+  name: "Orlando Superior Transportation",
+  url: "https://www.orlandosuperiortransportation.com/",
+  potentialAction: {
+    "@type": "SearchAction",
+    target: "{search_term_string}",
+    "query-input": "required name=search_term_string",
+  },
+};
 ---
 
 <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
