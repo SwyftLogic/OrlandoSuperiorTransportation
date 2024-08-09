@@ -13,6 +13,11 @@ let res = await fetch(
   `${import.meta.env.BLOG_SITE}/wp-json/wp/v2/posts?slug=${slug}&_fields=id,excerpt,slug,title,tags,date,content,_links&_embed`
 );
 let [post] = await res.json();
+
+let allPostsRes = await fetch(
+  `${import.meta.env.BLOG_SITE}/wp-json/wp/v2/posts?per_page=3&order=desc&orderby=date&exclude=${post.id}&_fields=title,excerpt,slug,date,_links&_embed`
+);
+let posts = await allPostsRes.json();
 ---
 <meta name="description" content={post._embedded?.replies?.[0]?.[0]?.content?.rendered?.replace(/<[^>]*>/g, '')} />
 <Layout title={post.title.rendered}>
@@ -20,32 +25,71 @@ let [post] = await res.json();
   <article>
     <div class="container mx-auto px-3 md:lg:xl:px-20 mb-4">
       <h1
-        class="text-5xl font-extrabold text-center block mb-5 pb-2 pt-5"
-        set:html={post.title.rendered}
+      class="text-5xl font-extrabold text-center block mb-5 pb-2 pt-5"
+      set:html={post.title.rendered}
+    />
+      <div class="flex flex-col sm:flex-row">
+        <div class="sm:w-7/12 md:w-8/12 pb-5">
+        
+        
+    
+    <div class="relative overflow-hidden rounded-xl mt-3">
+      <Image
+        src={post?._embedded["wp:featuredmedia"]?.[0]?.media_details?.sizes
+          ?.full.source_url || banner1}
+        alt={post.title.rendered}
+        loading="eager"
+        width="640"
+        height="670"
+        class="h-80 w-full mb-3 bg-white border-3 object-cover object-center transition duration-500 group-hover:scale-105"
       />
-      <div class="relative overflow-hidden rounded-xl mt-3">
-        <Image
-          src={post?._embedded["wp:featuredmedia"]?.[0]?.media_details?.sizes
-            ?.full.source_url || banner1}
-          alt={post.title.rendered}
-          loading="eager"
-          width="640"
-          height="670"
-          class="h-80 w-full mb-3 bg-white border-3 object-cover object-center transition duration-500 group-hover:scale-105"
-        />
-        <div
-          class="bg-[#F6F6F7] px-3 right-5 absolute top-5 z-20 rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]"
-        >
-          <p class="text-[#00153B] text-[12px] font-bold">
-            <b>Author </b>
-            {post._embedded["author"]["0"].name}
-          </p>
+      <div
+        class="bg-[#F6F6F7] px-3 right-5 absolute top-5 z-20 rounded-[10px] leading-4 text-center flex justify-center align-center py-[5px]"
+      >
+        <p class="text-[#00153B] text-[12px] font-bold">
+          <b>Author </b>
+          {post._embedded["author"]["0"].name}
+        </p>
+      </div>
+    </div>
+
+    <Fragment set:html={post.content.rendered} />
+  
+  
+  </div>
+        <div class="sm:w-5/12 md:w-4/12 sm:p-0 sm:pt-4 md:p-7 md:pt-1">
+          <p class="font-semibold text-gray-800 capitalize text-2xl pb-1 border-b  mb-5  md:pt-0 sm:pt-4">From the blog</p>
+
+          {
+            posts.map((post) => (
+            <div class="w-100 mt-2 mb-3 border-b">
+            <Image
+                  src={
+                    post?._embedded["wp:featuredmedia"]?.[0]?.media_details
+                      ?.sizes?.full.source_url || banner1
+                  }
+                  alt={post.title.rendered}
+                  width="100"
+                  height="120"
+                  class="object-cover w-full rounded-lg"
+                />
+            <div class="flex flex-col justify-between py-3 pt-1 ">
+                <a href={`/blog/${post.slug}`} class="text-xl font-semibold text-gray-800 hover:underline dark:text-white ">
+                  {post.title.rendered}
+                </a>
+                
+                <span class="text-sm text-gray-500 dark:text-gray-300">On: {new Date(post.date).toLocaleDateString("en-US", {
+                    dateStyle: "full",
+                  })}</span>
+            </div>
+            </div>
+            ))
+          }
+           
         </div>
       </div>
-
-      <Fragment set:html={post.content.rendered} />
-
     </div>
+    
   </article>
   
   <a
