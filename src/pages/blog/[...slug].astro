@@ -11,6 +11,11 @@ let res = await fetch(
   `${import.meta.env.BLOG_SITE}/wp-json/wp/v2/posts?slug=${slug}&_fields=id,title,tags,date,content,_links&_embed`
 );
 let [post] = await res.json();
+
+let allPostsRes = await fetch(
+  `${import.meta.env.BLOG_SITE}/wp-json/wp/v2/posts?per_page=3&order=desc&orderby=date&exclude=${post.id}&_fields=title,excerpt,slug,date,_links&_embed`
+);
+let posts = await allPostsRes.json();
 ---
 <meta name="description" content="Our informative blog highlights key considerations and helps you make the best choice for your travel needs in Orlando." />
 <Layout title={post.title.rendered}>
@@ -52,44 +57,34 @@ let [post] = await res.json();
         <div class="sm:w-5/12 md:w-4/12 sm:p-0 sm:pt-4 md:p-7 md:pt-1">
           <p class="font-semibold text-gray-800 capitalize text-2xl pb-1 border-b  mb-5  md:pt-0 sm:pt-4">From the blog</p>
 
-         
-          
-          <div class="w-100 mt-2 mb-3 border-b">
-            <img style="height: 120px;" class="object-cover w-full rounded-lg" src="https://images.unsplash.com/photo-1515378960530-7c0da6231fb1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" alt="">
-
+          {
+            posts.map((post) => (
+            <div class="w-100 mt-2 mb-3 border-b">
+            <Image
+                  src={
+                    post?._embedded["wp:featuredmedia"]?.[0]?.media_details
+                      ?.sizes?.full.source_url || banner1
+                  }
+                  alt={post.title.rendered}
+                  width="100"
+                  height="120"
+                  class="object-cover w-full rounded-lg"
+                />
             <div class="flex flex-col justify-between py-3 pt-1 ">
-                <a href="#" class="text-xl font-semibold text-gray-800 hover:underline dark:text-white ">
-                    How to use sticky note for problem solving
+                <a href={`/blog/${post.slug}`} class="text-xl font-semibold text-gray-800 hover:underline dark:text-white ">
+                  {post.title.rendered}
                 </a>
                 
-                <span class="text-sm text-gray-500 dark:text-gray-300">On: 20 October 2019</span>
+                <span class="text-sm text-gray-500 dark:text-gray-300">On: {new Date(post.date).toLocaleDateString("en-US", {
+                    dateStyle: "full",
+                  })}</span>
             </div>
-        </div>
-
-
-        
-          
-        <div class="w-100 mt-2 mb-3 border-b">
-          <img style="height: 120px;" class="object-cover w-full rounded-lg" src="https://images.unsplash.com/photo-1515378960530-7c0da6231fb1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" alt="">
-
-          <div class="flex flex-col justify-between py-3 pt-1 ">
-              <a href="#" class="text-xl font-semibold text-gray-800 hover:underline dark:text-white ">
-                  How to use sticky note for problem solving
-              </a>
-              
-              <span class="text-sm text-gray-500 dark:text-gray-300">On: 20 October 2019</span>
-          </div>
-      </div>
-
-
-        
-
+            </div>
+            ))
+          }
+           
         </div>
       </div>
-
-
-
-
     </div>
     
   </article>
